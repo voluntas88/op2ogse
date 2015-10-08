@@ -263,7 +263,7 @@ end
 
 --' а это рюкзачок для минигана на припяти
 function new_inventory15()
-local se_obj = alife():create("m_inventory_box15", vector():set(192.30499267578,28.663299560547,209.28273010254),260026,2219)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box15", vector():set(192.30499267578,28.663299560547,209.28273010254),260026,2219)
 end
 
 --' спавним наши патроны и миниган на крыше
@@ -480,7 +480,7 @@ end
 -- Akill begin
 --' спавним клад и микроба
 function klad_spawn()
-	alife():create("a_inventory_box56",vector():set(-91.327941894531,-2.0939588546753,-28.991931915283),18750,2875)
+	sak.set_mark_on_tajnik("a_inventory_box56",vector():set(-91.327941894531,-2.0939588546753,-28.991931915283),18750,2875)
 	alife():create("artifact_electro_crystal_thorn",vector():set(-89.472,-2.490,-21.391),19110,2875)
 	alife():create("af_eye_voron",vector():set(-89.772,-2.490,-21.691),19110,2875)
 	alife():create("scelet_strong",vector():set(-92.451225280762,2.7269945144653,5.9352955818176),18375,2870)
@@ -1700,7 +1700,7 @@ end
 
 --' а это рюкзачок тайника Пилигрима
 function new_inventory17()
-local se_obj = alife():create("m_inventory_box17", vector():set(144.712,-3.956,-313.140),1121536,2900)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box17", vector():set(144.712,-3.956,-313.140),1121536,2900)
 end
 
 --' проверим наличие вещей для Пилигрима
@@ -1807,7 +1807,7 @@ end
 
 --' рюкзачок тайника вора
 function new_inventory18()
-local se_obj = alife():create("m_inventory_box18", vector():set(195.210,-1.436,53.253),339324,384)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box18", vector():set(195.210,-1.436,53.253),339324,384)
 end
 
 function otshelnik_sms1()
@@ -2033,7 +2033,7 @@ end
 
 --' рюкзачок Химеры на Радаре
 function new_inventory19()
-local se_obj = alife():create("m_inventory_box19", vector():set(-17.792,0.198,-56.856),5019,1960)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box19", vector():set(-17.792,0.198,-56.856),5019,1960)
 local obj = alife():create("kolba_orand_poln", vector():set(-17.436,0.198,-56.755),5019,1960)
 local obj = alife():create("kolba_orand_poln", vector():set(-17.310,0.198,-56.975),5019,1960)
 local obj = alife():create("kolba_siniy_poln", vector():set(-17.374,0.198,-57.115),5018,1960)
@@ -2051,7 +2051,7 @@ end
 
 --' последний тайник Циклопа и спавн полного перфузора в виде рюкзака
 function new_inventory20()
-local se_obj = alife():create("m_inventory_box20", vector():set(-261.508,-22.589,211.521),74263,1789)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box20", vector():set(-261.508,-22.589,211.521),74263,1789)
 local se_obj = alife():create("m_inventory_box38", vector():set(-411.602,0.698,62.837),160046,2889)
 --local obj = alife():create("perfuzor_poln", vector():set(-411.602,0.698,62.837),160046,2889)
 end
@@ -2406,7 +2406,7 @@ end
 
 --' тайник Циклопа после Варлаба
 function new_inventory22()
-local se_obj = alife():create("m_inventory_box22", vector():set(-39.015,10.378,31.830),148276,295)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box22", vector():set(-39.015,10.378,31.830),148276,295)
 end
 
 function kanal_sms()
@@ -2559,7 +2559,7 @@ end
 
 --' тайник с телефоном Пантеры
 function new_inventory23()
-local se_obj = alife():create("m_inventory_box23", vector():set(7.256,-6.525,-12.801),5624,3202)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box23", vector():set(7.256,-6.525,-12.801),5624,3202)
 end
 
 --' получим танто и именной АК-74 от Клыка
@@ -4366,9 +4366,9 @@ end
 
 --' спавним тайники с эмбрионами на болотах
 function spawn_embrion_taynik()
-local se_obj = alife():create("m_inventory_box27", vector():set(-210.150,-0.397,392.077),29502,3361)
-local se_obj = alife():create("m_inventory_box28", vector():set(-176.410,0.787,390.441),53178,3361)
-local se_obj = alife():create("m_inventory_box29", vector():set(-216.538,-0.381,385.430),39492,3361)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box27", vector():set(-210.150,-0.397,392.077),29502,3361)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box28", vector():set(-176.410,0.787,390.441),53178,3361)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box29", vector():set(-216.538,-0.381,385.430),39492,3361)
 end
 
 --' проверим наличие эмбрионов
@@ -4741,7 +4741,7 @@ end
 function spawn_chaes_pilot_zapiska()
 local se_obj = alife():create("pilot_zapiska", vector():set(243.750,20.599,151.565),78081,2573)
 local se_obj = alife():create("samopisez", vector():set(152.873,70.873,121.853),69353,2573)
-local se_obj = alife():create("m_inventory_box30", vector():set(251.823,11.379,175.369),88107,2577)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box30", vector():set(251.823,11.379,175.369),88107,2577)
 end
 
 --' убираем Призрака с ЧАЭС1
@@ -4834,7 +4834,7 @@ end
 --' спавним ящик с верта военных на авере
 function spawn_general_prezent()
 	if not has_alife_info("spawn_general_prezent_info") then
-		local se_obj = alife():create("m_inventory_box31", vector():set(-320.174,-8.726,21.975),320365,2889)
+		local se_obj = sak.set_mark_on_tajnik("m_inventory_box31", vector():set(-320.174,-8.726,21.975),320365,2889)
 		db.actor:give_info_portion("spawn_general_prezent_info")
 	end
 end
@@ -4877,7 +4877,7 @@ end
 function gener_spawn_eye_voron()
 local obj = alife():create("af_eye_voron",vector():set(184.070,28.537,-565.312),548909,3137)
 local obj = alife():create("af_eye_voron",vector():set(195.765,35.845,-573.473),562425,3152)
-local obj = alife():create("m_inventory_box32",vector():set(190.773,35.842,-574.642),556868,3152)
+local obj = sak.set_mark_on_tajnik("m_inventory_box32",vector():set(190.773,35.842,-574.642),556868,3152)
 local obj = alife():create("mini_antenna1",vector():set(189.175,28.536,-566.536),554518,3137)
 local obj = alife():create("mini_antenna2",vector():set(195.494,28.630,-555.928),563238,3143)
 local obj = alife():create("mini_antenna3",vector():set(203.440,28.548,-565.897),571113,3143)
@@ -5808,7 +5808,7 @@ end
 
 --' мешок охотника на кордоне
 function sp_new_inventory33()
-local se_obj = alife():create("m_inventory_box33", vector():set(-11.449318885803,6.0457949638367,56.734508514404),265783,88)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box33", vector():set(-11.449318885803,6.0457949638367,56.734508514404),265783,88)
 end
 
 --' проверим наличие запчастей для Захара
@@ -5835,7 +5835,7 @@ dialogs.relocate_item_section(second_speaker, "wpn_crossbow","in")
 dialogs.relocate_item_section(second_speaker, "ammo_arbolt","in")
 dialogs.relocate_item_section(second_speaker, "ammo_arbolt","in")
 dialogs.relocate_item_section(second_speaker, "ammo_arbolt","in")
-local se_obj = alife():create("m_inventory_box33", vector():set(-8.776,7.324,57.807),267145,88)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box33", vector():set(-8.776,7.324,57.807),267145,88)
 end
 
 --' Захар дал арт, СВУ и патроны
@@ -6176,7 +6176,7 @@ end
 function spawn_globus_sadik()
 local obj = alife():create("izom_globus",vector():set(132.621,3.935,-52.783),235074,2245)
 local obj = alife():create("linza_fotik",vector():set(137.245,3.980,-51.995),238095,2245)
-local se_obj = alife():create("m_inventory_box34", vector():set(134.43992614746,3.9388103485107,-54.601131439209),236350,2245)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box34", vector():set(134.43992614746,3.9388103485107,-54.601131439209),236350,2245)
 end
 
 --' псевдыш после детс. садика
@@ -6731,7 +6731,7 @@ end
 function otdal_veschi(first_speaker, second_speaker)
 sak.out_item_namber("wpn_desert_eagle",1)
 sak.out_item_namber("pisma_stalka",1)
-local se_obj = alife():create("m_inventory_box35", vector():set(52.520462036133,-0.035371631383896,-295.6975402832),221820,253)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box35", vector():set(52.520462036133,-0.035371631383896,-295.6975402832),221820,253)
  end
 
 --' убираем запасного фото с кордона
@@ -6831,7 +6831,7 @@ sak.out_item_namber("kisluy",1)
 
 --' рюкзак Злобного
 function rukzak_zlobnogo()
-local se_obj = alife():create("m_inventory_box36", vector():set(-170.294,3.940,-148.568),66879,559)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box36", vector():set(-170.294,3.940,-148.568),66879,559)
  end
 
 --' убираем Злобного с Авера
@@ -7061,7 +7061,7 @@ end
 
 --' рюкзачок с арбалетом Нормана на чердаке
 function yzik_norman_spawn()
-local se_obj = alife():create("m_inventory_box37", vector():set(-129.12908935547,19.055564880371,83.090309143066),223303,3609)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box37", vector():set(-129.12908935547,19.055564880371,83.090309143066),223303,3609)
 end
 
 function metka_city_parfumer()
@@ -7745,7 +7745,7 @@ end
 
 --' тайник-ящик у бандосов 3 гулага МГ
 function spawn_yzik_3gulag()
-local se_obj = alife():create("m_inventory_box40", vector():set(-0.265,4.332,-0.748),357228,3633)
+local se_obj = sak.set_mark_on_tajnik("m_inventory_box40", vector():set(-0.265,4.332,-0.748),357228,3633)
 end
 
 --' отдадим бабки за пользование ПДА
