@@ -15,6 +15,7 @@ function set_mark_on_tajnik(section, pos, lv, gv)
 	local inv_obj = alife():create(section, pos, lv, gv)
 	level.map_add_object_spot_ser(inv_obj.id, "treasure", "Нужно проверить")
 	news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)
+	return inv_obj
 end
 
 function add_new_escape_100()
