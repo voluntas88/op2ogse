@@ -306,11 +306,11 @@ function foto_binder:check_creatures()
 		section = obj:section()
 		
 		-- монстры
-		if IAmAMonster[clsid] and obj:alive() and db.actor:see(obj) and not protected_items.is_monster_friend(section) then
+		if IAmAMonster[clsid] and db.actor:see(obj) and not protected_items.is_monster_friend(section) then
 			-- сначала смотрим тихую охоту
 			if  (has_alife_info("silent_hunt_start") and not has_alife_info("silent_hunt_done")) and
 				(silent_hunt_monsters[clsid] and not has_alife_info("monster_stealth_"..silent_hunt_monsters[clsid])) and
-				self:obj_in_shot(obj:bone_position("bip01_head"), 0, 2, 3.5, true, nil, true)
+				self:obj_in_shot(obj:bone_position("bip01_head"), 0, 10, 3.5, true, nil, false)
 			then
 				if monster_flag then
 				-- удачный снимок и такого еще не было
@@ -325,7 +325,7 @@ function foto_binder:check_creatures()
 			elseif 
 				foto_unique_monster[section] and 
 				has_alife_info(foto_unique_monster[section].has_info) and not has_alife_info(foto_unique_monster[section].info) and
-				self:obj_in_shot(obj:center(), 5, 10, 3.0, false, nil, false)
+				self:obj_in_shot(obj:center(), 0, 10, 3.0, true, nil, false)
 			then
 				if monster_flag then
 				-- удачный снимок и такого еще не было
@@ -338,7 +338,7 @@ function foto_binder:check_creatures()
 			-- затем обычную охоту
 			elseif (has_alife_info("foto_ohota_start") and not has_alife_info("foto_ohota_done")) and
 				foto_ohota_monsters[section] and not has_alife_info(foto_ohota_monsters[section]) and
-				self:obj_in_shot(obj:center(), 5, 10, 3.0, false, nil, false)
+				self:obj_in_shot(obj:center(), 0, 10, 3.0, true, nil, false)
 			then
 				if monster_flag then
 				-- удачный снимок и такого еще не было
@@ -363,7 +363,7 @@ function foto_binder:check_anomaly()
 		if not has_alife_info(info) then
 			-- такого снимка еще не было, смотрим аномалии
 			for _, anom in ipairs(anoms) do 	-- внутри это: {id=id,name=obj:name(),pos=o.pos,radius=o.radius}
-				if string.find(anom.name, anom_sect) and self:obj_in_shot(anom.pos, 5, 10, 3.5, false, nil, false) then
+				if string.find(anom.name, anom_sect) then
 					if anomaly_flag then
 					-- удачный снимок
 					news_manager.send_tip(db.actor, "Аномалия сфотографирована.".."\n", nil, nil, 10000)
