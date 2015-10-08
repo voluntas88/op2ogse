@@ -24,7 +24,6 @@ local function is_indoor(level_name)
             or level_name == "peshera"
             or level_name == "av_peshera"
             or level_name == "warlab"
-            or level_name == "marsh"
             or level_name == "jupiter_underground"
             or level_name == "labx8"
             or level_name == "l08u_brainlab"
