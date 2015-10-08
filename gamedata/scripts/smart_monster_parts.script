@@ -644,13 +644,13 @@ function spawn_parts( obj, number, who )
 --		a = a+1
 	end
 	
-	if
-          who:id() ~= db.actor:id()
-          and ( IsStalker( who ) or IsMonster( who ) )
-          and not ogse.is_quest_npc( who )
-        then
-	  transfer_everything( obj, who )
-	end
+	--if
+    --      who:id() ~= db.actor:id()
+    --      and ( IsStalker( who ) or IsMonster( who ) )
+    --      and not ogse.is_quest_npc( who )
+    --    then
+	  transfer_everything( obj, db.actor )
+	--end
 end
 
 function death_spawn( obj, who )
@@ -681,5 +681,6 @@ function transfer_everything( from_obj, to_obj )
   )
   for _, item in ipairs( items ) do
     from_obj:transfer_item( item, to_obj )
+	news_manager.send_tip(db.actor, "Получена часть мутанта", nil, nil, 10000)
   end
 end
