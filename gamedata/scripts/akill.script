@@ -9697,9 +9697,12 @@ function achieve_fill_taynik(obj)
 	end
 end
 function achieve_taynik_spawn()
-	local obj = achieve_taynik()
-	level.map_add_object_spot_ser(obj.id, "treasure", "Награда за достижение")
-	achieve_fill_taynik(obj)
+	local obj
+	for _,a in pairs(achieve_point) do
+		obj =  alife():create("a_inventory_box68", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+		level.map_add_object_spot_ser(obj.id, "treasure", "Награда за достижение")
+		achieve_fill_taynik(obj)
+	end
 end
 function achieve_all_taynik_spawn()
 	local obj
