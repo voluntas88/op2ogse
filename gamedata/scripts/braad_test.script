@@ -1044,7 +1044,7 @@ end
 -----------------------”Õ» ¿À‹Õ¿ﬂ ∆»¬Œ“»Õ¿-----------------------------------------------------------
 
 function kashei_spawn()
-local obj = alife():create("sveeblov_ruk",vector():set(406.22711181641,3.4233021736145,236.834),407402,3546)
+local obj = sak.set_mark_on_tajnik("sveeblov_ruk",vector():set(406.22711181641,3.4233021736145,236.834),407402,3546)
 end
 
 function set_kashei()
@@ -1758,7 +1758,7 @@ function test_kolmogor()
 end 
 
 function spawn_shadowman()
-local obj = alife():create("shadowman_ruk",vector():set(23.914667129517,3.9985284805298,26.488586425781),80890,3263)
+local obj = sak.set_mark_on_tajnik("shadowman_ruk",vector():set(23.914667129517,3.9985284805298,26.488586425781),80890,3263)
 end
 
 
@@ -2081,7 +2081,7 @@ db.actor:give_info_portion("mitya_dead_sms_sidor")
 end
 
 function spawn_green()
-local obj = alife():create("green_ruk",vector():set(228.335338,-7.298178,67.8218),143611,3319)
+local obj = sak.set_mark_on_tajnik("green_ruk",vector():set(228.335338,-7.298178,67.8218),143611,3319)
 end
 
 function clear_actor(npc)
@@ -2293,7 +2293,7 @@ level_new.create_level_changer(18112, vector():set(-45.602458953857,18.978830337
 end
 
 function BitvaKL_rukzak() 
-	local obj = alife():create("bitvakl_ruk",vector():set(201.8493347168,-2.1620719432831,-79.324325561523),129996,3316)
+	local obj = sak.set_mark_on_tajnik("bitvakl_ruk",vector():set(201.8493347168,-2.1620719432831,-79.324325561523),129996,3316)
 end
 
 function checking_taken_item60(obj)
