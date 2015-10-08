@@ -5500,8 +5500,10 @@ local volna_reid={
 function volna_reid_poisk(actor,npc,p1,p2)
 	db.actor:give_info_portion("volna_reid_have")
 	amk.start_timer("battle", 0, {"marsh", 35, 1})
-    local a = volna_reid[math.random(table.getn(volna_reid))]
-    local se_obj = sak.set_mark_on_tajnik("a_inventory_box48", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+    local se_obj
+	for _,a in pairs(volna_reid) do
+		se_obj = sak.set_mark_on_tajnik("a_inventory_box48", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	end
 end
 function volna_reid_heli()
 	amk_mod.spawn_military_tech_pack(alife():create("helicopter",vector():set(77.616012573242,48.0,69.834854125977),180810,3458),"helicopter", "scripts\\ohota\\ohota_vert1.ltx")
@@ -6699,8 +6701,10 @@ local taynik_golem={
     {position={x=142.19755554199,y=-21.060808181763,z=111.46785736084},gv=1205,lv=38289}
 }
 function taynik_golem_spawn(actor,npc,p1,p2)
-    local a = taynik_golem[math.random(table.getn(taynik_golem))]
-    local se_obj = sak.set_mark_on_tajnik("a_inventory_box52", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	local se_obj
+	for _,a in pairs(taynik_golem) do
+		se_obj = sak.set_mark_on_tajnik("a_inventory_box52", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	end
 end
 function taynik_golem_have()
 	if new_dialog.item_much("af_serpantin",1) then
@@ -8389,8 +8393,10 @@ local taynik_true={
     {position={x=194.48782348633,y=2.7177376747131,z=-30.121898651123},gv=3688,lv=1296260}
 }
 function taynik_podarok_spawn(actor,npc,p1,p2)
-    local a = taynik_true[math.random(table.getn(taynik_true))]
-    local se_obj = sak.set_mark_on_tajnik("taynik_podarok", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	local se_obj
+	for _,a in pairs(taynik_true) do
+		se_obj = sak.set_mark_on_tajnik("taynik_podarok", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	end
 	sak.create_items_actor("device_pda_npc",1)
 	amk.del_variable("chertez_dimak")
 end
