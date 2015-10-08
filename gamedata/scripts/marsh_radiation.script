@@ -3,7 +3,7 @@
 
 local marsh_intence = 0
 function update()
-  if level.name() ~= "marsh" or has_alife_info( "no_marsh_radiation" ) then
+  --[[if level.name() ~= "marsh" or has_alife_info( "no_marsh_radiation" ) then
     return
   end
   if db.actor:position().y < -0.02 then
@@ -43,5 +43,5 @@ function update()
     end
     marsh_intence = 0
     db.actor:disable_info_portion( "marsh_radiation" )
-  end
+  end]]
 end
