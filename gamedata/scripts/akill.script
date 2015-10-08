@@ -373,7 +373,7 @@ function koloda_kuznec_have_koloda()
 end
 function checking_taken_item70(obj)
  	if not has_alife_info("taynik_kuznec_bonus") and obj:section()=="kuznec_note_code" then
-	local obj = alife():create("a_inventory_box12",vector():set(1146.6832275391,-0.78347253799438,-30.555999755859),477896,2280)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box12",vector():set(1146.6832275391,-0.78347253799438,-30.555999755859),477896,2280)
 		db.actor:give_info_portion("taynik_kuznec_bonus")
 	end
 end
@@ -633,7 +633,7 @@ function hamster_kuznec3_done()
 end
 
 function hamster_kuznec4_spawn()
-	alife():create("a_inventory_box58",vector():set(-305.2099609375,-6.999785900116,115.04824066162),38102,1761)
+	sak.set_mark_on_tajnik("a_inventory_box58",vector():set(-305.2099609375,-6.999785900116,115.04824066162),38102,1761)
 	akill_start_sound()
 end
 function checking_taken_item86(obj)
@@ -718,10 +718,10 @@ function hamster_kuznec8_done()
 	sak.out_item_namber("liker_baileys",10)
 end
 function liker_spawn()
-	alife():create("a_inventory_box1",vector():set(220.44319152832,-4.4578404426575,137.14222717285),54929,1199)
-	alife():create("a_inventory_box1",vector():set(37.569343566895,1.021262049675,-51.432216644287),220626,1084)
-	alife():create("a_inventory_box1",vector():set(-27.043056488037,-6.4230637550354,-16.747678756714),285458,1593)
-	alife():create("a_inventory_box1",vector():set(-178.45097351074,3.5022687911987,-325.42401123047),50109,3365)
+	sak.set_mark_on_tajnik("a_inventory_box1",vector():set(220.44319152832,-4.4578404426575,137.14222717285),54929,1199)
+	sak.set_mark_on_tajnik("a_inventory_box1",vector():set(37.569343566895,1.021262049675,-51.432216644287),220626,1084)
+	sak.set_mark_on_tajnik("a_inventory_box1",vector():set(-27.043056488037,-6.4230637550354,-16.747678756714),285458,1593)
+	sak.set_mark_on_tajnik("a_inventory_box1",vector():set(-178.45097351074,3.5022687911987,-325.42401123047),50109,3365)
 end
 
 -- ТАЙНИКИ КУЗНЕЦОВА
@@ -985,7 +985,7 @@ end
 
 -- АРМЕЙСКИЕ ИНСТРУМЕНТЫ ДЛЯ ДОЛГОВЯЗОГО
 function plichko_toolkit()
-	alife():create("a_inventory_box49",vector():set(-78.037445068359,-12.398366928101,-108.93358612061),2914,785)
+	sak.set_mark_on_tajnik("a_inventory_box49",vector():set(-78.037445068359,-12.398366928101,-108.93358612061),2914,785)
 	dsh.create_free_monster("m_poltergeist_dd",vector():set(-94.667411804199,-4.3921389579773,-143.45478820801),2000,807)
 	dsh.create_free_monster("carlic",vector():set(-100.1869430542,-16.449365615845,-97.755973815918),1592,783)
 	dsh.create_free_monster("carlic_weak",vector():set(-88.597434997559,-16.467784881592,-79.627365112305),2236,746)
@@ -1743,7 +1743,7 @@ function sviblov_ugroza_done()
 	sak.out_item_namber("major_navigator",1)
 	sak.create_items_actor("ammo_7.62x51_fmj",2)
 	sak.create_items_actor("ammo_7.62x51_ap",2)
-	alife():create("a_inventory_box36",vector():set(172.45440673828,12.033090591431,529.86395263672),238546,3484)
+	sak.set_mark_on_tajnik("a_inventory_box36",vector():set(172.45440673828,12.033090591431,529.86395263672),238546,3484)
 	alife():create("major_kiselev",vector():set(178.68118286133,12.274962425232,532.15295410156),239674,3484)
 	alife():create("agro_elite_sniper1",vector():set(186.58837890625,13.594690322876,586.36590576172),249116,3487)
 	alife():create("agro_elite_sniper2",vector():set(164.94111633301,9.5983371734619,574.56854248047),232959,3487)
@@ -1921,8 +1921,8 @@ function new_radios_sms()
 	snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
 end
 function akill_radio_give()
-	local obj = alife():create("a_inventory_box13",vector():set(-347.76409912109,-12.440266609192,383.40518188477),7980,1847)
-	local sobj = alife():create("a_inventory_box13",vector():set(-101.33255767822,1.2451028823853,158.93103027344),44892,1317)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box13",vector():set(-347.76409912109,-12.440266609192,383.40518188477),7980,1847)
+	local sobj = sak.set_mark_on_tajnik("a_inventory_box13",vector():set(-101.33255767822,1.2451028823853,158.93103027344),44892,1317)
 	level.map_add_object_spot_ser(obj.id, "treasure", "Тайник наёмников")
 	level.map_add_object_spot_ser(sobj.id, "treasure", "Тайник наёмников")
 end
@@ -2003,7 +2003,7 @@ function kalinin_voen1_done()
 	sak.create_items_actor("ammo_7.62x39_ap",1)
 	sak.create_items_actor("ammo_7.62x39_fmj",1)
 	sak.create_items_actor("grenade_m61",5)
-	alife():create("a_inventory_box14",vector():set(11.591503143311,9.1839332580566,-40.820812225342),189889,1053)
+	sak.set_mark_on_tajnik("a_inventory_box14",vector():set(11.591503143311,9.1839332580566,-40.820812225342),189889,1053)
 end
 function taynik_bandit_td_have()
 	if new_dialog.item_much("af_pylesos",1) then
@@ -2016,7 +2016,7 @@ end
 
 -- УСЛУГА ЗА УСЛУГУ
 function sherstuk_mayak_spawn()
-	local obj = alife():create("a_inventory_box40",vector():set(-181.14698791504,7.2314772605896,86.747451782227),30672,1322)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box40",vector():set(-181.14698791504,7.2314772605896,86.747451782227),30672,1322)
 	dsh.create_free_monster("snork_jumper",vector():set(-206.22518920898,0.79953229427338,93.175064086914),25413,1373)
 	dsh.create_free_monster("snork_nosach",vector():set(-209.70092773438,1.3991112709045,119.49594116211),24633,1369)
 	dsh.create_free_monster("snork_jumper",vector():set(-184.12603759766,0.015335232019424,104.41861724854),29886,1324)
@@ -2192,7 +2192,7 @@ function zahar_knifes_done(first_speaker, second_speaker)
 	dialogs.relocate_item_section(second_speaker, "fake_wpn_knife_m","out")
 	dialogs.relocate_item_section(second_speaker, "fake_wpn_knife_n","out")
 	dialogs.relocate_item_section(second_speaker, "fake_wpn_knife_new","out")
-	local obj = alife():create("a_inventory_box15",vector():set(205.93951416016,9.9083366394043,-81.311653137207),351590,2884)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box15",vector():set(205.93951416016,9.9083366394043,-81.311653137207),351590,2884)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Тайник Захара")
 	sak.create_items_actor("ammo_12x70_buck",2)
 	kostya_dialog.give_ammo(2)
@@ -2209,7 +2209,7 @@ end
 -- ОХОТА НА БЮРЕРОВ
 function ohota_burer_spawn()
 	sak.create_items_actor("grenade_f1",3)
-	alife():create("a_inventory_box16",vector():set(-45.421314239502,-20.130048751831,2.2290256023407),1097,2787)
+	sak.set_mark_on_tajnik("a_inventory_box16",vector():set(-45.421314239502,-20.130048751831,2.2290256023407),1097,2787)
 	dsh.create_free_monster("burer_build",vector():set(-20.209642410278,-9.5499639511108,-62.3046875),3362,2664)
 	dsh.create_free_monster("burer_strong",vector():set(-22.558933258057,-9.5510425567627,-3.7865118980408),3040,2666)
 	dsh.create_free_monster("carlic",vector():set(-34.867771148682,-9.4181346893311,11.902038574219),1869,2779)
@@ -2423,7 +2423,7 @@ function fotograf_pobeg_done()
 	sak.out_item_namber("af_kol_4",1)
 	sak.create_items_actor("af_fontan",1)
 	sak.create_items_actor("wpn_sayga_al",1)
-	alife():create("a_inventory_box17",vector():set(-136.82847900391,-1.4783505344391,-58.367412567139),183239,1621)
+	sak.set_mark_on_tajnik("a_inventory_box17",vector():set(-136.82847900391,-1.4783505344391,-58.367412567139),183239,1621)
 end
 function taynik_fotograf_as_have()
 	if new_dialog.item_much("af_vinograd",1) then
@@ -2515,7 +2515,7 @@ local fotik_gigant={
 }
 function fotik_gigant_spawn()
 	local a, se_obj
-	se_obj = alife():create("a_inventory_box18",vector():set(324.58978271484,-6.4117212295532,-15.256425857544),1445175,2902)
+	se_obj = sak.set_mark_on_tajnik("a_inventory_box18",vector():set(324.58978271484,-6.4117212295532,-15.256425857544),1445175,2902)
 	se_obj = dsh.create_free_monster("gigant_jumper_normal",vector():set(361.50482177734,-1.4434212446213,14.408556938171),1515039,2902)
 	se_obj = dsh.create_free_monster("gigant_virus_strong",vector():set(361.50482177734,-1.4434212446213,14.408556938171),1515039,2902)
 		for i=1,table.getn(fotik_gigant) do
@@ -2606,7 +2606,7 @@ function klad_labirint_done()
 	aem_manager.manage_money(15000, "in")
 end
 function klad_labirint_spawn()
-	alife():create("a_inventory_box19",vector():set(-166.79165649414,28.24934387207,388.24057006836),138455,2971)
+	sak.set_mark_on_tajnik("a_inventory_box19",vector():set(-166.79165649414,28.24934387207,388.24057006836),138455,2971)
 	dsh.create_free_monster("carlic",vector():set(-182.0979309082,20.749319076538,389.13494873047),131547,2968)
 	dsh.create_free_monster("carlic_strong",vector():set(-179.65631103516,20.39778137207,445.51089477539),132531,2969)
 	dsh.create_free_monster("carlic_weak",vector():set(-101.86251831055,23.483583450317,472.60949707031),151722,2975)
@@ -2656,7 +2656,7 @@ function klad_op_done()
 	sak.create_items_actor("ammo_kumul_82",5)
 	sak.create_items_actor("wpn_ak109",1)
 	aem_manager.manage_money(30000, "in")
-	alife():create("a_inventory_box21",vector():set(-310.78189086914,35.633766174316,-155.2646484375),342190,3672)
+	sak.set_mark_on_tajnik("a_inventory_box21",vector():set(-310.78189086914,35.633766174316,-155.2646484375),342190,3672)
 	dsh.create_free_monster("karlito",vector():set(-303.94918823242,23.623178482056,-199.04792785645),339425,3671)
 	dsh.create_free_monster("bear",vector():set(-347.77029418945,22.674238204956,-171.49975585938),259278,3662)
 	dsh.create_free_monster("fracture_karlik",vector():set(-294.04278564453,20.550548553467,-132.43006896973),358459,3672)
@@ -2672,7 +2672,7 @@ function klad_op_done()
 	dsh.create_free_monster("zombie_hell",vector():set(-306.90948486328,12.077053070068,-163.10101318359),334194,3672)
 end
 function klad_op_spawn()
-	alife():create("a_inventory_box20",vector():set(56.983715057373,-13.500636100769,-183.79080200195),966743,2908)
+	sak.set_mark_on_tajnik("a_inventory_box20",vector():set(56.983715057373,-13.500636100769,-183.79080200195),966743,2908)
 end
 function taynik_sosnodub_have()
 	if new_dialog.item_much("wpn_oicw",1) and 
@@ -2755,7 +2755,7 @@ function docent_art_done()
 	sak.out_item_namber("device_pda_npc",30)
 	sak.out_item_namber("deshifrator",1)
 	sak.create_items_actor("wpn_kollim_sig",1)
-	alife():create("a_inventory_box22",vector():set(-118.96826171875,-1.28731471300125,-184.96755981445),96550,269)
+	sak.set_mark_on_tajnik("a_inventory_box22",vector():set(-118.96826171875,-1.28731471300125,-184.96755981445),96550,269)
 	alife():create("leshyi_bandit1",vector():set(-126.57862854004,-2.5450894832611,-223.10491943359),89213,269)
 	alife():create("leshyi_bandit2",vector():set(-99.513191223145,-2.5961546897888,-224.07862854004),112656,271)
 	alife():create("leshyi_bandit3",vector():set(-95.81356048584,-2.6014096736908,-215.65609741211),115175,268)
@@ -2794,7 +2794,7 @@ end
 function survival_quest_present()
 	if not has_alife_info("survival_quest_fail") then
 	return news_manager.send_tip(db.actor, "%c[255,160,160,160]".."ИСТОЧНИК НЕИЗВЕСТЕН:".."\\n".."%c[255,255,128,128]Можешь поздравить себя, ты прошёл испытание. Презент найдёшь на крыше фабрики. Не прощаюсь...".."".."\n", nil, "nodata", 15000) and
-		alife():create("a_inventory_box57",vector():set(2.3563969135284,20.731647491455,-6.8848581314087),40088,1525)
+		sak.set_mark_on_tajnik("a_inventory_box57",vector():set(2.3563969135284,20.731647491455,-6.8848581314087),40088,1525)
 	end
 		return false
 end
@@ -2890,9 +2890,9 @@ end
 -- ТАЙНИК ЛЕШЕГО
 function checking_taken_item75(obj)
  	if not has_alife_info("taynik_leshyi_start") and obj:section()=="docs_x7" then 
-		alife():create("a_inventory_box23",vector():set(106.04250335693,1.45752228307724,-5.2345976829529),530926,2826)
-		alife():create("taynik_liker_pusto",vector():set(106.04250335693,0.73452228307724,-5.2345976829529),530926,2826)
-		alife():create("taynik_liker_pusto",vector():set(106.04250335693,1.06452228307724,-5.2345976829529),530926,2826)
+		sak.set_mark_on_tajnik("a_inventory_box23",vector():set(106.04250335693,1.45752228307724,-5.2345976829529),530926,2826)
+		sak.set_mark_on_tajnik("taynik_liker_pusto",vector():set(106.04250335693,0.73452228307724,-5.2345976829529),530926,2826)
+		sak.set_mark_on_tajnik("taynik_liker_pusto",vector():set(106.04250335693,1.06452228307724,-5.2345976829529),530926,2826)
 		db.actor:give_info_portion("taynik_leshyi_start")
 	end
 end
@@ -3037,7 +3037,7 @@ end
 
 -- НЕИЗВЕСТНЫЙ ПРОТОТИП
 function unknown_gp_spawn()
-	alife():create("a_inventory_box25",vector():set(-11.105089187622,-1.564589381218,187.26519775391),88421,2195)
+	sak.set_mark_on_tajnik("a_inventory_box25",vector():set(-11.105089187622,-1.564589381218,187.26519775391),88421,2195)
 	alife():create("monolith_x8_master",vector():set(-5.4549088478088,-5.1615281105042,199.62127685547),95280,2195)
 	alife():create("tank_spawn_zasada3",vector():set(-20.254056930542,0.094709575176239,205.79547119141),78804,2195)
 	alife():create("monolith_x8_master",vector():set(-27.1100730896,4.6919727325439,182.5355682373),72230,2196)
@@ -3069,7 +3069,7 @@ end
 
 -- ТАЙНИК ВИРУСА
 function taynik_virus_spawn()
-	alife():create("a_inventory_box26",vector():set(44.535286712646,9.080931186676,-13.347667694092),5307,1538)
+	sak.set_mark_on_tajnik("a_inventory_box26",vector():set(44.535286712646,9.080931186676,-13.347667694092),5307,1538)
 	dsh.create_free_monster("m_poltergeist_dd",vector():set(131.6530456543,30.645900726318,-17.424798965454),7288,1543)
 	dsh.create_free_monster("controller_flame",vector():set(131.6530456543,30.645900726318,-17.424798965454),7288,1543)
 	dsh.create_free_monster("polter_xray",vector():set(131.6530456543,30.645900726318,-17.424798965454),7288,1543)
@@ -3105,7 +3105,7 @@ end
 
 -- ТАЙНИК ФАНТОМА
 function taynik_phantom_spawn()
-	alife():create("a_inventory_box27",vector():set(92.107612609863,3.3955521583557,-47.576251983643),42813,1952)
+	sak.set_mark_on_tajnik("a_inventory_box27",vector():set(92.107612609863,3.3955521583557,-47.576251983643),42813,1952)
 	alife():create("bw_killers1",vector():set(-30.950088500977,-0.67104947566986,-50.799564361572),1378,1961)
 	alife():create("bw_killers2",vector():set(2.4548625946045,0.10906511545181,-28.540210723877),11427,1991)
 	alife():create("bw_sniper",vector():set(89.905136108398,5.6282997131348,-71.794075012207),40213,1979)
@@ -3219,7 +3219,7 @@ function izumrud_electra_done()
 	sak.create_items_actor("ammo_7.62x54_7h14",1)
 	sak.create_items_actor("ammo_7.62x54_ap",1)
 	sak.create_items_actor("grenade_m61",3)
-	local obj = alife():create("a_inventory_box28",vector():set(433.66345214844,42.448131561279,1.3459589481354),1643588,3693)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box28",vector():set(433.66345214844,42.448131561279,1.3459589481354),1643588,3693)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Тайник Акилла")
 	dsh.create_free_monster("vypolzen",vector():set(380.93081665039,34.312866210938,-25.52170753479),1594410,3691)
 	dsh.create_free_monster("kikimora",vector():set(380.96740722656,34.311134338379,-49.323657989502),1594380,3691)
@@ -3597,7 +3597,7 @@ end
 
 -- ТАЙНИК ОРУЖЕЙНИКА
 function taynik_oruzeinik_spawn()
-	alife():create("a_inventory_box29",vector():set(324.62593164063,34.768546295166,-225.35032653809),1235592,3743)
+	sak.set_mark_on_tajnik("a_inventory_box29",vector():set(324.62593164063,34.768546295166,-225.35032653809),1235592,3743)
 end
 function taynik_oruzeinik_have()
 	if new_dialog.item_much("chertez_hostel",1) then
@@ -3696,7 +3696,7 @@ function delete_klesh_npc()
 	end
 end
 function hameleon_spawn()
-	alife():create("a_inventory_box62",vector():set(130.78228088379,3.8700365447998,210.7000213623),938498,3732)
+	sak.set_mark_on_tajnik("a_inventory_box62",vector():set(130.78228088379,3.8700365447998,210.7000213623),938498,3732)
 	alife():create("hameleon_npc",vector():set(160.15698242188,1.2625328302383,217.37896728516),989807,3732)
 	alife():create("leshyi_bandit1",vector():set(137.85934448242,2.8676948547363,190.57604980469),943326,3732)
 	alife():create("leshyi_bandit2",vector():set(121.26349639893,3.0832099914551,195.30030822754),922687,3732)
@@ -3753,7 +3753,7 @@ function taynik_gila_have()
 	sak.out_item_namber("player",1)
 	db.actor:disable_info_portion("biznes_remove_special_item")
 	news_manager.send_tip(db.actor, "%c[255,160,160,160]".."СИДОРОВИЧ:".."\\n".."%c[255,255,128,128]Меченый, есть новое задание. Если тебе интересно, то загляни ко мне в бункер.".."".."\n", nil, "trader", 15000)
-	alife():create("a_inventory_box30",vector():set(132.84297180176,10.013258934021,-182.93154907227),331000,926)
+	sak.set_mark_on_tajnik("a_inventory_box30",vector():set(132.84297180176,10.013258934021,-182.93154907227),331000,926)
 	dsh.create_free_monster("bloodsucker_mil",vector():set(97.995475769043,-2.1159904003143,-201.94618225098),293068,928)
 	dsh.create_free_monster("oboroten",vector():set(129.0484161377,0.16450992226601,-202.78294372559),325946,928)
 	dsh.create_free_monster("bloodsucker_effector",vector():set(166.98896789551,0.45414808392525,-205.57498168945),367959,927)
@@ -3937,7 +3937,7 @@ function is_yd_poison(first_speaker, second_speaker)
 	end
 end
 function clear_yd_poison(first_speaker, second_speaker)
-	alife():create("a_inventory_box31",vector():set(10.851037979126,-6.828094959259,-5.343409538269),4293,1135)
+	sak.set_mark_on_tajnik("a_inventory_box31",vector():set(10.851037979126,-6.828094959259,-5.343409538269),4293,1135)
 	dsh.create_free_monster("m_poltergeist_strong_flame",vector():set(21.456289291382,-10.829187393188,-3.260228395462),6011,1137)
 	dsh.create_free_monster("m_poltergeist_dd",vector():set(2.1404538154602,4.1847920417786,-4.4002332687378),3072,1124)
 	dsh.create_free_monster("burer_build",vector():set(2.1404538154602,4.1847920417786,-4.4002332687378),3072,1124)
@@ -3953,7 +3953,7 @@ function clear_yd_poison(first_speaker, second_speaker)
 		amk.del_variable("yd_poison")
 end
 function taynik_grom_spawn()
-	local obj = alife():create("a_inventory_box32",vector():set(13.077070236206,-4.9876756668091,-288.18237304688),194885,842)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box32",vector():set(13.077070236206,-4.9876756668091,-288.18237304688),194885,842)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Тайник Грома")
 end
 function delete_grom_npc()
@@ -3981,7 +3981,7 @@ function chertez_zagadka_have()
 		return false
 end
 function chertez_zagadka_spawn()
-	alife():create("a_inventory_box33",vector():set(47.25463104248,4.750563621521,-269.29449462891),260685,3756)
+	sak.set_mark_on_tajnik("a_inventory_box33",vector():set(47.25463104248,4.750563621521,-269.29449462891),260685,3756)
 end
 function checking_taken_item78(obj)
  	if not has_alife_info("pda_zagadka_take") and obj:section()=="hostel_teleport" then
@@ -4000,7 +4000,7 @@ function checking_taken_item78(obj)
 	dsh.create_free_monster("vodjanoj",vector():set(79.297271728516,-6.9217410087585,61.579040527344),1101555,3677)
 	dsh.create_free_monster("vodjanoj",vector():set(55.584808349609,-5.2141332626343,36.911991119385),1056201,3677)
 	alife():create("af_inferno",vector():set(18.298624038696,-0.73494809865952,68.956848144531),981115,3677)
-		  alife():create("a_inventory_box35",vector():set(5.6931066513062,-6.828727722168,-5.3527145385742),3531,1135)
+		  sak.set_mark_on_tajnik("a_inventory_box35",vector():set(5.6931066513062,-6.828727722168,-5.3527145385742),3531,1135)
 		  dsh.create_free_monster("m_poltergeist_strong_flame",vector():set(21.456289291382,-10.829187393188,-3.260228395462),6011,1137)
 		  dsh.create_free_monster("m_poltergeist_dd",vector():set(-9.4044857025146,-10.814796447754,28.027128219604),1749,1145)
 		  dsh.create_free_monster("burer_build",vector():set(-9.4044857025146,-10.814796447754,28.027128219604),1749,1145)
@@ -4116,7 +4116,7 @@ function sviblov_hostel_done()
 	sak.out_item_namber("anomaly_scaner",9)
 	sak.create_items_actor("wpn_ak9",1)
 	sak.create_items_actor("ammo_9x39_ap",3)
-	alife():create("a_inventory_box34",vector():set(8.4438180923462,9.4718999862671,29.567429733276),958182,3677)
+	sak.set_mark_on_tajnik("a_inventory_box34",vector():set(8.4438180923462,9.4718999862671,29.567429733276),958182,3677)
 	table_treasure_l.treasure()
 end
 
@@ -4435,9 +4435,9 @@ end
 -- ТАЙНИКИ ДРАГУНОВА
 function taynik_drag_spawn()
 	sak.create_items_actor("device_pda_npc",1)
-	alife():create("a_inventory_box37",vector():set(-100.44460296631,21.51549911499,-313.99038696289),554668,3710)
-	alife():create("a_inventory_box38",vector():set(-193.04254150391,-0.13674885034561,-265.44003295898),388009,3710)
-	alife():create("a_inventory_box39",vector():set(386.7077331543,15.243046379089,-136.55661499023),1346961,3744)
+	sak.set_mark_on_tajnik("a_inventory_box37",vector():set(-100.44460296631,21.51549911499,-313.99038696289),554668,3710)
+	sak.set_mark_on_tajnik("a_inventory_box38",vector():set(-193.04254150391,-0.13674885034561,-265.44003295898),388009,3710)
+	sak.set_mark_on_tajnik("a_inventory_box39",vector():set(386.7077331543,15.243046379089,-136.55661499023),1346961,3744)
 	dsh.create_free_monster("deathclaw_normal",vector():set(-120.22742462158,14.788041114807,-310.60046386719),518564,3710)
 	dsh.create_free_monster("zombie_hell15",vector():set(-88.800086975098,16.5159034729,-323.13031005859),572067,3710)
 	dsh.create_free_monster("deathclaw_weak",vector():set(-75.054008483887,17.071207046509,-315.67266845703),594128,3710)
@@ -4544,7 +4544,7 @@ local weapon_mono={
 }
 function weapon_mono_spawn(actor,npc,p1,p2)
     local a = weapon_mono[math.random(table.getn(weapon_mono))]
-    local obj = alife():create("a_inventory_box41", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+    local obj = sak.set_mark_on_tajnik("a_inventory_box41", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
 	xr_sound.get_safe_sound_object([[zwuk\pluton]]):play_at_pos(db.actor, obj.position, 0, sound_object.s3d+sound_object.looped)
 end
 function checking_taken_item82(obj)
@@ -4789,7 +4789,7 @@ function noi_dovod_done()
 	alife():create("volna_shron",vector():set(412.63165283203,40.346649169922,-4.0137867927551),1642588,3693)
 	alife():create("volna_shron",vector():set(342.39819335938,39.096652984619,-403.21624755859),1536174,3690)
 	alife():create("volna_shron",vector():set(295.75759887695,34.279689788818,-391.75210571289),1469740,3690)
-	alife():create("a_inventory_box2",vector():set(423.74859619141,44.588397979736,-50.858974456787),1661900,3693)
+	sak.set_mark_on_tajnik("a_inventory_box2",vector():set(423.74859619141,44.588397979736,-50.858974456787),1661900,3693)
 		amk.start_timer("battle", 0, {"zaton", 33, 1})
 end
 
@@ -4942,7 +4942,7 @@ local dimak_toolkit={
 }
 function dimak_toolkit_spawn()
 	local a, se_obj
-	alife():create("a_inventory_box43",vector():set(323.79251098633,38.033874511719,-309.02014160156),1233526,3745)
+	sak.set_mark_on_tajnik("a_inventory_box43",vector():set(323.79251098633,38.033874511719,-309.02014160156),1233526,3745)
 	alife():create("volna_barrel",vector():set(427.69488525391,26.604957580566,-282.55340576172),1391851,3747)
 	alife():create("volna_barrel",vector():set(427.65258789063,26.603830337524,-281.12725830078),1391853,3747)
 	alife():create("volna_barrel",vector():set(427.63903808594,26.62085723877,-279.63876342773),1391855,3747)
@@ -4996,7 +4996,7 @@ function dimak_toolkit_have()
 end
 function dimak_toolkit_done()
 	sak.out_item_namber("voen1_toolkit",1)
-	alife():create("a_inventory_box24",vector():set(120.23701477051,4.4170513153076,75.555992126465),344388,3762)
+	sak.set_mark_on_tajnik("a_inventory_box24",vector():set(120.23701477051,4.4170513153076,75.555992126465),344388,3762)
 	dsh.create_free_monster("zombie_hell15",vector():set(64.90510559082,-0.27349811792374,42.537487030029),283404,3762)
 	dsh.create_free_monster("zombie_plague_komar",vector():set(64.90510559082,-0.27349811792374,42.537487030029),283404,3762)
 	dsh.create_free_monster("bloodsucker_child",vector():set(64.90510559082,-0.27349811792374,42.537487030029),283404,3762)
@@ -5088,7 +5088,7 @@ local anomaly_grenade={
 }
 function anomaly_grenade_start()
 	local a, se_obj
-		  se_obj = alife():create("a_inventory_box44",vector():set(-455.57452392578,7.0373675346375,-355.4658203125),5511,3702)
+		  se_obj = sak.set_mark_on_tajnik("a_inventory_box44",vector():set(-455.57452392578,7.0373675346375,-355.4658203125),5511,3702)
 	for i=1,table.getn(anomaly_grenade) do
 		a = anomaly_grenade[i]
 		for i=1,1 do
@@ -5163,7 +5163,7 @@ end
 
 -- СТАРАЯ ИКОНА
 function volna_petrenko_start()
-	alife():create("a_inventory_box59",vector():set(-112.07481384277,0.99143302440643,-99.081878662109),81736,3759)
+	sak.set_mark_on_tajnik("a_inventory_box59",vector():set(-112.07481384277,0.99143302440643,-99.081878662109),81736,3759)
 	akill_start_sound()
 end
 function volna_petrenko_have_all()
@@ -5317,7 +5317,7 @@ end
 function volna_holod_done()
 	sak.out_item_namber("kogot_snotvornoe",5)
 	sak.create_items_actor("wpn_awm_new",1)
-	alife():create("a_inventory_box45",vector():set(23.818571090698,1.7220232486725,50.634128570557),79914,3263)
+	sak.set_mark_on_tajnik("a_inventory_box45",vector():set(23.818571090698,1.7220232486725,50.634128570557),79914,3263)
 end
 function volna_kogot_have()
 	if new_dialog.item_much("kogot_snotvornoe",15) then
@@ -5345,7 +5345,7 @@ function volna_darkness_start()
 	alife():create("volna_keis",vector():set(35.756320953369,4.0903921127319,35.704284667969),28729,3806)
 	alife():create("volna_keis",vector():set(-58.322334289551,5.211971282959,2.3678860664368),99,3775)
 	alife():create("volna_keis",vector():set(-13.897904396057,3.1403594017029,-12.869792938232),6494,3775)
-	alife():create("a_inventory_box42",vector():set(-64.041053771973,-13.337757110596,77.58854675293),5826,3840)
+	sak.set_mark_on_tajnik("a_inventory_box42",vector():set(-64.041053771973,-13.337757110596,77.58854675293),5826,3840)
 	alife():create("leshyi_bandit1",vector():set(51.982730865479,1.4089658260345,118.22806549072),267131,3758)
 	alife():create("leshyi_bandit2",vector():set(34.353908538818,1.4076274633408,118.14849090576),243363,3758)
 	alife():create("leshyi_bandit3",vector():set(42.192596435547,1.4057230949402,147.6197052002),254486,3761)
@@ -5501,7 +5501,7 @@ function volna_reid_poisk(actor,npc,p1,p2)
 	db.actor:give_info_portion("volna_reid_have")
 	amk.start_timer("battle", 0, {"marsh", 35, 1})
     local a = volna_reid[math.random(table.getn(volna_reid))]
-    local se_obj = alife():create("a_inventory_box48", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+    local se_obj = sak.set_mark_on_tajnik("a_inventory_box48", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
 end
 function volna_reid_heli()
 	amk_mod.spawn_military_tech_pack(alife():create("helicopter",vector():set(77.616012573242,48.0,69.834854125977),180810,3458),"helicopter", "scripts\\ohota\\ohota_vert1.ltx")
@@ -5573,11 +5573,11 @@ function volna_diversya_start()
 	sak.out_item_namber("detonator_2",5)
 	db.actor:disable_info_portion("biznes_remove_special_item")
 	sak.out_item_namber("diversya_pda",1)
-	alife():create("a_inventory_box46",vector():set(79.511016845703,0.0825085490942,150.30401611328),29990,1221)
-	alife():create("a_inventory_box46",vector():set(123.98241424561,-4.6939389705658,21.045143127441),35381,1238)
-	alife():create("a_inventory_box46",vector():set(236.07781982422,5.1635003089905,-3.928117275238),60459,1266)
-	alife():create("a_inventory_box46",vector():set(153.87519836426,8.4856491088867,75.010551452637),39679,1184)
-	alife():create("a_inventory_box46",vector():set(129.47862243652,2.7607295513153,66.569801330566),36097,1252)
+	sak.set_mark_on_tajnik("a_inventory_box46",vector():set(79.511016845703,0.0825085490942,150.30401611328),29990,1221)
+	sak.set_mark_on_tajnik("a_inventory_box46",vector():set(123.98241424561,-4.6939389705658,21.045143127441),35381,1238)
+	sak.set_mark_on_tajnik("a_inventory_box46",vector():set(236.07781982422,5.1635003089905,-3.928117275238),60459,1266)
+	sak.set_mark_on_tajnik("a_inventory_box46",vector():set(153.87519836426,8.4856491088867,75.010551452637),39679,1184)
+	sak.set_mark_on_tajnik("a_inventory_box46",vector():set(129.47862243652,2.7607295513153,66.569801330566),36097,1252)
 end
 
 -- ПОРОХОВАЯ БОЧКА
@@ -5643,7 +5643,7 @@ function skryga_taina_start()
  	end
 end
 function volna_plen_done()
-	alife():create("a_inventory_box47",vector():set(-67.988906860352,-16.380630493164,55.26863861084),5240,3847)
+	sak.set_mark_on_tajnik("a_inventory_box47",vector():set(-67.988906860352,-16.380630493164,55.26863861084),5240,3847)
 	dsh.create_free_monster("poltergeist_build",vector():set(-113.05842590332,-28.484710693359,69.480049133301),119,3833)
 	dsh.create_free_monster("m_poltergeist_normal_tele",vector():set(-113.11763763428,-28.484573364258,93.889068603516),153,3832)
 	dsh.create_free_monster("m_poltergeist_strong_flame",vector():set(-113.11763763428,-28.484573364258,93.889068603516),153,3832)
@@ -6364,8 +6364,8 @@ end
 
 -- ЛЦУ ДЛЯ МАКСА
 function max_gunsight_start()
-	alife():create("a_inventory_box63",vector():set(53.221542358398,18.741477966309,30.768152236938),8781,2462)
-	alife():create("a_inventory_box63",vector():set(13.133480072021,-4.0968990325928,7.8584852218628),4429,2424)
+	sak.set_mark_on_tajnik("a_inventory_box63",vector():set(53.221542358398,18.741477966309,30.768152236938),8781,2462)
+	sak.set_mark_on_tajnik("a_inventory_box63",vector():set(13.133480072021,-4.0968990325928,7.8584852218628),4429,2424)
 	alife():create("monolith_x8_regular",vector():set(-31.472162246704,-34.484912872314,-13.309116363525),644,2492)
 	alife():create("monolith_x8_master",vector():set(-15.808345794678,-34.497856140137,-23.121795654297),1198,2491)
 	alife():create("monolith_x8_regular",vector():set(17.887464523315,-34.494594573975,-23.812852859497),2954,2476)
@@ -6489,7 +6489,7 @@ end
 
 -- РЕЗЕРВНЫЙ СХРОН
 function shurup_shron_start()
-	local obj = alife():create("a_inventory_box51",vector():set(144.09243774414,3.9378991127014,-8.1140508651733),242451,2243)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box51",vector():set(144.09243774414,3.9378991127014,-8.1140508651733),242451,2243)
 	level.map_add_object_spot_ser(obj.id, "treasure", "Резервный схрон")
 	alife():create("monolith_x8_regular",vector():set(103.88446044922,-0.93622410297394,-46.540046691895),214296,2241)
 	alife():create("monolith_x8_veteran",vector():set(102.96759033203,3.951895236969,-21.197071075439),213646,2232)
@@ -6700,7 +6700,7 @@ local taynik_golem={
 }
 function taynik_golem_spawn(actor,npc,p1,p2)
     local a = taynik_golem[math.random(table.getn(taynik_golem))]
-    local se_obj = alife():create("a_inventory_box52", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+    local se_obj = sak.set_mark_on_tajnik("a_inventory_box52", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
 end
 function taynik_golem_have()
 	if new_dialog.item_much("af_serpantin",1) then
@@ -6939,7 +6939,7 @@ function ohota_tushkan_done()
 	sak.out_item_namber("wpn_p18",1)
 	sak.create_items_actor("vodka_a",30)
 	sak.create_items_actor("wpn_bizon1",1)
-	local obj = alife():create("a_inventory_box53",vector():set(66.562271118164,-7.2045879364014,-94.185256958008),472661,2818)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box53",vector():set(66.562271118164,-7.2045879364014,-94.185256958008),472661,2818)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Схрон с водкой")
 	alife():create("leshyi_bandit1",vector():set(71.055374145508,-6.9605917930603,-89.201988220215),481718,2819)
 	alife():create("leshyi_bandit2",vector():set(108.66797637939,-2.5568158626556,-7.7628765106201),533887,2826)
@@ -7160,7 +7160,7 @@ function volna_day0_lukash()
 	alife():create("amk_ballon",vector():set(10.98521900177,-5.2153468132019,41.330089569092),966825,3677)
 	alife():create("amk_ballon",vector():set(10.98521900177,-5.2153468132019,41.330089569092),966825,3677)
 	alife():create("amk_ballon",vector():set(10.98521900177,-5.2153468132019,41.330089569092),966825,3677)
-	alife():create("a_inventory_box50",vector():set(-2.1783237457275,-0.5108363032341,31.076219558716),939804,3677)
+	sak.set_mark_on_tajnik("a_inventory_box50",vector():set(-2.1783237457275,-0.5108363032341,31.076219558716),939804,3677)
 		amk.start_timer("battle", 0, {"l07_military", 31, 1})
 end
 
@@ -7319,7 +7319,7 @@ function clear_day1(first_speaker, second_speaker)
 	alife():create("gonta_volna",vector():set(425.23245239258,36.263259887695,-3.6440095901489),1661935,3691)
 	alife():create("gluhar_volna",vector():set(438.12075805664,36.369422912598,-52.189315795898),1685271,3693)
 	alife():create("medved_volna",vector():set(409.54824829102,36.261035919189,-22.16127204895),1638575,3693)
-	alife():create("a_inventory_box50",vector():set(411.50271606445,40.346813201904,-4.0832467079163),1641604,3693)
+	sak.set_mark_on_tajnik("a_inventory_box50",vector():set(411.50271606445,40.346813201904,-4.0832467079163),1641604,3693)
 	alife():create("volna_barrel",vector():set(437.5217590332,36.002296447754,-66.92667388916),1684116,3693)
 	alife():create("volna_barrel",vector():set(438.78927612305,36.017971038818,-66.93879699707),1686368,3693)
 	alife():create("volna_barrel",vector():set(439.96597290039,36.13646697998,-66.998229980469),1688592,3693)
@@ -7556,7 +7556,7 @@ function clear_day2(first_speaker, second_speaker)
 	news_manager.send_tip(db.actor, "%c[255,160,160,160]".."НАЗАР:".."\\n".."%c[255,255,128,128]Меченый, несколько моих старых друзей добрались до Затона. Я отправлю их на станцию на помощь Фениксу.".."".."\n", nil, nil, 30000)
 	local snd_obj = xr_sound.get_safe_sound_object([[device\pda\pda_tip]])
 	snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
-	alife():create("a_inventory_box50",vector():set(345.10076904297,39.377990722656,-402.22543334961),1538404,3690)
+	sak.set_mark_on_tajnik("a_inventory_box50",vector():set(345.10076904297,39.377990722656,-402.22543334961),1538404,3690)
 	alife():create("volna_barrel",vector():set(265.18579101563,33.140369415283,-437.65466308594),1419877,3690)
 	alife():create("volna_barrel",vector():set(264.21102905273,33.142913818359,-437.25054931641),1417459,3690)
 	alife():create("volna_barrel",vector():set(263.25335693359,33.154209136963,-436.78381347656),1416241,3690)
@@ -7751,7 +7751,7 @@ function volna_day4_filatov()
 end
 function volna_day4_done()
 	news_manager.send_tip(db.actor, "%c[255,160,160,160]".."СИДОРОВИЧ:".."\\n".."%c[255,255,128,128]Меченый, мне удалось вытащить результаты фотосъёмки с жёсткого диска беспилотника. Снимки тебя крайне заинтересуют.".."".."\n", nil, nil, 30000)
-	alife():create("a_inventory_box54",vector():set(92.937683105469,4.5230751037598,413.7197265625),204560,2265)
+	sak.set_mark_on_tajnik("a_inventory_box54",vector():set(92.937683105469,4.5230751037598,413.7197265625),204560,2265)
 	dsh.create_free_monster("gigant_jumper_normal",vector():set(80.848739624023,1.1983361244202,362.96994018555),192252,2157)
 	dsh.create_free_monster("gigant_jumper_normal",vector():set(12.451368331909,0.84441006183624,363.22637939453),117391,2260)
 	dsh.create_free_monster("gigant_jumper_normal",vector():set(-50.654155731201,0.69528865814209,334.28295898438),49231,2156)
@@ -7924,7 +7924,7 @@ end
 
 -- УДАЧНАЯ ШУТКА
 function tolik_robbed_spawn()
-	alife():create("a_inventory_box55",vector():set(17.276149749756,3.3777673244476,92.552307128906),297048,93)
+	sak.set_mark_on_tajnik("a_inventory_box55",vector():set(17.276149749756,3.3777673244476,92.552307128906),297048,93)
 	dsh.create_free_monster("pseudodog_big",vector():set(-56.7790184021,-4.4267454147339,62.647483825684),221747,79)
 	dsh.create_free_monster("pseudodog_strong",vector():set(-56.7790184021,-4.4267454147339,62.647483825684),221747,79)
 	dsh.create_free_monster("pseudodog_strong",vector():set(-56.7790184021,-4.4267454147339,62.647483825684),221747,79)
@@ -8390,7 +8390,7 @@ local taynik_true={
 }
 function taynik_podarok_spawn(actor,npc,p1,p2)
     local a = taynik_true[math.random(table.getn(taynik_true))]
-    local se_obj = alife():create("taynik_podarok", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+    local se_obj = sak.set_mark_on_tajnik("taynik_podarok", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
 	sak.create_items_actor("device_pda_npc",1)
 	amk.del_variable("chertez_dimak")
 end
@@ -8622,7 +8622,7 @@ function kontrik_vodka_have()
 end
 function kontrik_vodka_done()
 	snp.drink_vodka()
-	alife():create("a_inventory_box61",vector():set(266.86901855469,1.3188534975052,-87.449729919434),67181,1278)
+	sak.set_mark_on_tajnik("a_inventory_box61",vector():set(266.86901855469,1.3188534975052,-87.449729919434),67181,1278)
 	local obj
 	for a=1,65534,1 do
 	obj=alife():object(a)
@@ -8892,7 +8892,7 @@ function nazar_spider_start()
 	sak.create_items_actor("bomba_big",15)
 	sak.create_items_actor("detonator_2",1)
 	sak.create_items_actor("ammo_balon",1)
-	local obj = alife():create("a_inventory_box64",vector():set(-125.37658691406,-11.084630966187,-218.41932678223),690484,3673)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box64",vector():set(-125.37658691406,-11.084630966187,-218.41932678223),690484,3673)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Паучье логово")
 	dsh.create_free_monster("spider",vector():set(-56.009544372559,2.7465238571167,-208.35214233398),832735,3681)
 	dsh.create_free_monster("spider",vector():set(-59.989952087402,0.1158609688282,-195.37896728516),823560,3681)
@@ -9064,13 +9064,13 @@ function adrenalin_obves_start()
 	alife():create("perevert1_npc",vector():set(-289.95843505859,0.34447726607323,-182.8889465332),4400,3356)
 	alife():create("perevert2_npc",vector():set(-421.7939453125,23.744298934937,-332.78335571289),145084,3664)
 	alife():create("perevert3_npc",vector():set(-379.1643371582,4.2290143966675,396.7307434082),111766,3703)
-	local obj = alife():create("a_inventory_box66",vector():set(360.2610168457,-6.3284125328064,432.46984863281),1289287,3742)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box66",vector():set(360.2610168457,-6.3284125328064,432.46984863281),1289287,3742)
 	level.map_add_object_spot_ser(obj.id, "crlc_big", "Возможное местоположение курьера")
-	local sobj = alife():create("a_inventory_box65",vector():set(-290.65875244141,0.18712916970253,-182.35989379883),4230,3356) -- Болота
+	local sobj = sak.set_mark_on_tajnik("a_inventory_box65",vector():set(-290.65875244141,0.18712916970253,-182.35989379883),4230,3356) -- Болота
 	level.map_add_object_spot_ser(sobj.id, "crlc_big", "Возможное местоположение курьера")
-	local se_obj = alife():create("a_inventory_box65",vector():set(-421.82989501953,23.269790649414,-333.62600708008),145084,3664) -- Затон
+	local se_obj = sak.set_mark_on_tajnik("a_inventory_box65",vector():set(-421.82989501953,23.269790649414,-333.62600708008),145084,3664) -- Затон
 	level.map_add_object_spot_ser(se_obj.id, "crlc_big", "Возможное местоположение курьера")
-	local sr_obj = alife():create("a_inventory_box65",vector():set(-379.18218994141,4.2104773521423,396.30459594727),111766,3703) -- Юпитер
+	local sr_obj = sak.set_mark_on_tajnik("a_inventory_box65",vector():set(-379.18218994141,4.2104773521423,396.30459594727),111766,3703) -- Юпитер
 	level.map_add_object_spot_ser(sr_obj.id, "crlc_big", "Возможное местоположение курьера")
 end
 function adrenalin_obves_have_all()
@@ -9108,7 +9108,7 @@ function adrenalin_obves_done()
 	kostya_dialog.give_ammo(3)
 	spawn_restrictor.perevert_bar_sr1()
 	alife():create("perevert4_npc",vector():set(206.36891174316,-0.00026005506515503,90.401298522949),49970,1193)
-	local obj = alife():create("a_inventory_box67",vector():set(28.392078399658,21.045454025269,684.23913574219),307284,208)
+	local obj = sak.set_mark_on_tajnik("a_inventory_box67",vector():set(28.392078399658,21.045454025269,684.23913574219),307284,208)
 	level.map_add_object_spot_ser(obj.id, "treasure", "Тайник Адреналина")
 	snp.drink_vodka()
 end
@@ -9691,7 +9691,7 @@ local achieve_point={
 }
 function achieve_taynik()
 	local a = achieve_point[math.random(table.getn(achieve_point))]
-	return alife():create("a_inventory_box68", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+	return sak.set_mark_on_tajnik("a_inventory_box68", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
 end
 function achieve_fill_taynik(obj)
 	for i = 1, math.random(3,6) do
@@ -9766,7 +9766,7 @@ function kalinin_dog_start()
 	alife():create("girl_zombied3",vector():set(-96.711776733398,-6.1150856018066,33.775817871094),238241,2802)
 end
 function kalinin_dog_spawn_taynik()
-	alife():create("a_inventory_box69",vector():set(-12.821060180664,-2.0568410110474,-370.38354492188),357827,2807)
+	sak.set_mark_on_tajnik("a_inventory_box69",vector():set(-12.821060180664,-2.0568410110474,-370.38354492188),357827,2807)
 	dsh.create_free_monster("molerat",vector():set(-23.635328292847,-2.4124481678009,-334.673828125),343682,2807)
 	dsh.create_free_monster("molerat",vector():set(-37.661285400391,-3.0997562408447,-357.73843383789),323111,2807)
 	dsh.create_free_monster("molerat",vector():set(-8.3163452148438,-6.2824339866638,-313.49432373047),366071,2813)
@@ -10199,7 +10199,7 @@ end
 
 -- МАСКИРОВКА
 function max_camouflage_start()
-	alife():create("a_inventory_box70",vector():set(-59.461566925049,4.3548192977905,214.82347106934),622759,3719)
+	sak.set_mark_on_tajnik("a_inventory_box70",vector():set(-59.461566925049,4.3548192977905,214.82347106934),622759,3719)
 	alife():create("tactic_fonar",vector():set(-44.752843322754,4.4319157600403,176.49935913086),644283,3724)
 	alife():create("gunsight",vector():set(-44.61914932251,4.4467802619934,176.24812695313),643148,3724)
 	alife():create("bw_sniper",vector():set(-49.114120483398,28.061214447021,-443.38159179688),847047,3680) -- затон
