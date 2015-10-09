@@ -328,11 +328,11 @@ second_speaker:set_relation(game_object.friend, first_speaker)
 end
 -- спавним послание Шахматиста
 function blank_sheet_2_have ()
- alife():create ("taynik_chess",vector():set(448.761,31.1005,-455.823),1427937,3745)
+ sak.set_mark_on_tajnik ("taynik_chess",vector():set(448.761,31.1005,-455.823),1427937,3745)
 end
 -- спавним тайник Дока
 function spawn_rookery ()
- alife():create ("taynik_dok",vector():set(166.787,-3.478,-140.229),1259387,3688)
+ sak.set_mark_on_tajnik ("taynik_dok",vector():set(166.787,-3.478,-140.229),1259387,3688)
  alife():create ("yan_zombied_respawn_3",vector():set(165.848,-3.478,-140.519),1259387,3688)
  alife():create ("rad_zombied_respawn_1",vector():set(168.455,-3.482,-140.053),1259387,3688)
  alife():create ("rad_zombied_respawn_2",vector():set(166.743,1.592,-138.287),1259387,3688)
@@ -343,7 +343,7 @@ function spawn_rookery ()
 end
 -- спавним тайник с рисунком
 function backpack_drawing ()
- alife():create ("taynik_picture",vector():set(-73.638,-2.105,-129.015),3200,801)
+ sak.set_mark_on_tajnik ("taynik_picture",vector():set(-73.638,-2.105,-129.015),3200,801)
  alife():create ("note_3",vector():set(-67.025,-6.130,-66.896),3118,717)
 end
 -- спавним лежбище
@@ -543,7 +543,7 @@ alife():create ("tank_spawn_zasada1",vector():set(33.120,8.467,277.570),143481,2
 end
 -- спавним черную метку
 function black_tag ()
-alife():create ("taynik_black",vector():set(15.940,-5.863,-330.913),193071,841)
+sak.set_mark_on_tajnik ("taynik_black",vector():set(15.940,-5.863,-330.913),193071,841)
 end
 -- убираем Тень Монолита
 --[[function out_labirint_shade() 
