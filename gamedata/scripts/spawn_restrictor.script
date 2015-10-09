@@ -296,7 +296,8 @@ local custom = "[logic]\n"..
 "active = sr_idle\n"..
 "[sr_idle]\n"..
 "on_actor_inside = {+kartech_otdal_done} nil %=buusty_dialog.himik_prygorshnya_spawn =spawn_restrictor.babuin_bratva_spawn_sr%"
-rewrite_restrictor(se_obj, custom, 10.0)  
+rewrite_restrictor(se_obj, custom, 10.0) 
+level.map_add_object_spot_ser(se_obj.id, "crlc_big", "Последний выход на связь Химика") --// метка. Eugen81. 
 end
 
 function babuin_bratva_spawn_sr()
@@ -325,6 +326,7 @@ local custom = "[logic]\n"..
 "[sr_idle]\n"..
 "on_actor_inside = {+alexandrych_box_start} nil %=buusty_dialog.sahko_petrovich_spawn =spawn_restrictor.alexandrych_peshera_sr%"
 rewrite_restrictor(se_obj, custom, 6.0)  
+level.map_add_object_spot_ser(se_obj.id, "crlc_big", "Последний выход на связь Петровича") --// метка. Eugen81.
 end
 
 function alexandrych_peshera_sr()
@@ -354,6 +356,7 @@ local custom = "[logic]\n"..
 "[sr_idle]\n"..
 "on_actor_inside = {+alexandrych_box_have} nil %=buusty_dialog.hutor_nechist_spawn%"
 rewrite_restrictor(se_obj, custom, 3.0)  
+level.map_add_object_spot_ser(se_obj.id, "crlc_big", "Последний выход на связь Сашки") --// метка. Eugen81.
 end
 
 function x16_zombi_sr()
