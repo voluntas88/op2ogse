@@ -114,6 +114,9 @@ function actor_item_take(obj)
 	if obj ~= nil and RestrictionStock ~= nil then
 		restriction_stock.restriction_of_stock(obj,0)
 	end
+	if obj and level.map_has_object_spot(obj:id(),"crlc_big") then
+		level.map_remove_object_spot(obj:id(),"crlc_big")
+	end
 end
 
 --Callback на потерю предмета из инвенаря гг
