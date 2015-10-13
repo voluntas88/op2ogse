@@ -11,6 +11,13 @@ local string_find = string.find
 local string_format = string.format
 local string_gsub = string.gsub
 
+function set_mark_on_tajnik(section, pos, lv, gv)
+	local inv_obj = alife():create(section, pos, lv, gv)
+	level.map_add_object_spot_ser(inv_obj.id, "treasure", "Нужно проверить")
+	news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)
+	return inv_obj
+end
+
 function add_new_escape_100()
 add_new_lc(9100,4426,"На Кордон","info_way100a",3)
 end

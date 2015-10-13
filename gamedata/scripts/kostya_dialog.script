@@ -29,11 +29,11 @@ function tm_brother_2chaes_spawn()
 	snp.set_stalker_story_id(se_obj,9969)
 end
 function stealth2_done()
-	alife():create("s_inventory_box_stealth1",vector():set(157.05128479004,12.03516960144,82.391082763672),39526,1229)
-	alife():create("s_inventory_box_stealth2",vector():set(-73.545913696289,15.663717269897,2.5357427597046),129042,319)
-	alife():create("s_inventory_box_stealth3",vector():set(-136.37683105469,9.9986381530762,-196.55345275879),102496,629)
-	alife():create("s_inventory_box_stealth4",vector():set(3.6388249874115,-7.1780724525452,-17.246803207397),312192,1585)
-	alife():create("s_inventory_box_stealth5",vector():set(23.35853767395,0.18157379329205,-24.917425918579),209456,1046)
+	sak.set_mark_on_tajnik("s_inventory_box_stealth1",vector():set(157.05128479004,12.03516960144,82.391082763672),39526,1229)
+	sak.set_mark_on_tajnik("s_inventory_box_stealth2",vector():set(-73.545913696289,15.663717269897,2.5357427597046),129042,319)
+	sak.set_mark_on_tajnik("s_inventory_box_stealth3",vector():set(-136.37683105469,9.9986381530762,-196.55345275879),102496,629)
+	sak.set_mark_on_tajnik("s_inventory_box_stealth4",vector():set(3.6388249874115,-7.1780724525452,-17.246803207397),312192,1585)
+	sak.set_mark_on_tajnik("s_inventory_box_stealth5",vector():set(23.35853767395,0.18157379329205,-24.917425918579),209456,1046)
 end
 function stealth5_done()
 	sak.create_items_actor("arhara_seif",1)
@@ -604,19 +604,19 @@ function checking_taken_item63(obj)
 	end
 end
 function tm_spawn1()
-	alife():create("z_inventory_box01",vector():set(10.472078323364,49.034076690674,-15.613767623901),3388,2417)
-	alife():create("z_inventory_box02",vector():set(19.680177688599,48.432109832764,-4.1294741630554),4341,2417)
-	alife():create("z_inventory_box03",vector():set(3.4836528301239,56.036026000977,35.414047241211),2518,2405)
-	alife():create("z_inventory_box04",vector():set(60.87622833252,53.735683441162,26.076965332031),9266,2417)
-	alife():create("z_inventory_box05",vector():set(60.85319519043,53.796840667725,21.076036453247),9788,2417)
-	alife():create("z_inventory_box06",vector():set(61.789813995361,60.531970977783,41.451103210449),9966,2402)
-	alife():create("z_inventory_box07",vector():set(9.1720209121704,20.386127471924,-11.211741447449),6333,2453)
-	alife():create("z_inventory_box08",vector():set(44.268180847168,58.320827484131,-24.319999694824),8050,2417)
-	alife():create("z_inventory_box09",vector():set(-19.819829940796,64.045745849609,-31.615013122559),591,2417)
-	alife():create("z_inventory_box10",vector():set(80.993240356445,71.973617553711,-40.810508728027),6403,2417)
-	alife():create("z_inventory_box11",vector():set(42.494750976563,69.035263061523,38.658748626709),4591,2417)
-	alife():create("z_inventory_box12",vector():set(64.846755981445,67.564109802246,45.584968566895),4591,2417)
-	alife():create("z_inventory_box13",vector():set(51.092010498047,49.359004974365,-17.654895782471),8798,2416)
+	sak.set_mark_on_tajnik("z_inventory_box01",vector():set(10.472078323364,49.034076690674,-15.613767623901),3388,2417)
+	sak.set_mark_on_tajnik("z_inventory_box02",vector():set(19.680177688599,48.432109832764,-4.1294741630554),4341,2417)
+	sak.set_mark_on_tajnik("z_inventory_box03",vector():set(3.4836528301239,56.036026000977,35.414047241211),2518,2405)
+	sak.set_mark_on_tajnik("z_inventory_box04",vector():set(60.87622833252,53.735683441162,26.076965332031),9266,2417)
+	sak.set_mark_on_tajnik("z_inventory_box05",vector():set(60.85319519043,53.796840667725,21.076036453247),9788,2417)
+	sak.set_mark_on_tajnik("z_inventory_box06",vector():set(61.789813995361,60.531970977783,41.451103210449),9966,2402)
+	sak.set_mark_on_tajnik("z_inventory_box07",vector():set(9.1720209121704,20.386127471924,-11.211741447449),6333,2453)
+	sak.set_mark_on_tajnik("z_inventory_box08",vector():set(44.268180847168,58.320827484131,-24.319999694824),8050,2417)
+	sak.set_mark_on_tajnik("z_inventory_box09",vector():set(-19.819829940796,64.045745849609,-31.615013122559),591,2417)
+	sak.set_mark_on_tajnik("z_inventory_box10",vector():set(80.993240356445,71.973617553711,-40.810508728027),6403,2417)
+	sak.set_mark_on_tajnik("z_inventory_box11",vector():set(42.494750976563,69.035263061523,38.658748626709),4591,2417)
+	sak.set_mark_on_tajnik("z_inventory_box12",vector():set(64.846755981445,67.564109802246,45.584968566895),4591,2417)
+	sak.set_mark_on_tajnik("z_inventory_box13",vector():set(51.092010498047,49.359004974365,-17.654895782471),8798,2416)
 end
 function tm_done1()
  	amk.remove_item_from_inventory_by_name("tm_docs01",db.actor)
@@ -638,13 +638,13 @@ function checking_taken_item64(obj)
 		db.actor:give_info_portion("tm_find_done")
 		this.delete_teleport("tm_teleport_4")
 		news_manager.send_tip(db.actor, "Найдена информация.", nil, nil, 20000)
-		alife():create("z_inventory_box15",vector():set(84.50724029541,69.478454589844,-7.1580576896667),6048,2417)
+		sak.set_mark_on_tajnik("z_inventory_box15",vector():set(84.50724029541,69.478454589844,-7.1580576896667),6048,2417)
 		amk.drop_item(db.actor,obj)
 		amk.remove_item(obj)
 	end
 end
 function spawn_tm_taynik()
-	alife():create("z_inventory_box14",vector():set(23.798603057861,70.392623901367,45.316135406494),5395,2417)
+	sak.set_mark_on_tajnik("z_inventory_box14",vector():set(23.798603057861,70.392623901367,45.316135406494),5395,2417)
 end
 function remove_tm_taynik()
 	alife():release(snp.object_by_section_offline("z_inventory_box14"))
@@ -1928,7 +1928,7 @@ function checking_taken_item62(obj)
 	  if not has_alife_info("strelok_taynik_stop") then 
 	    db.actor:give_info_portion("strelok_taynik_pda1_have")
 	    if not has_alife_info("strelok_taynik_pda1_xvatit_spawn") then 
-		  local se_obj = alife():create("s_inventory_box1_2",vector():set(176.28475952148,17.963838577271,40.265209197998),256932,2145)
+		  local se_obj = sak.set_mark_on_tajnik("s_inventory_box1_2",vector():set(176.28475952148,17.963838577271,40.265209197998),256932,2145)
 		  se_obj = dsh.create_free_monster("m_controller_normal",vector():set(87.854019165039,-2.5235424041748,86.012077331543),199525,2143) 
 		  se_obj = dsh.create_free_monster("m_controller_normal_fat",vector():set(87.854019165039,-2.5235424041748,86.012077331543),199525,2143) 
 		  se_obj = dsh.create_free_monster("m_controller_old",vector():set(160.51348876953,-2.2140634059906,89.546524047852),249284,2177)		
@@ -1997,8 +1997,8 @@ function checking_taken_item62(obj)
   elseif obj_sect=="strelok_taynik_pda3" then
 	if not has_alife_info("strelok_taynik_stop") then 
 	  if not has_alife_info("strelok_taynik_pda3_have") then 
-	    local se_obj = alife():create("s_inventory_box3_1",vector():set(-99.41,1.37,-171.46),12046,3241)
-	    se_obj = alife():create("s_inventory_box3_2",vector():set(-155.51449584961,-4.6265954971313,-262.34503173828),5644,3238)
+	    local se_obj = sak.set_mark_on_tajnik("s_inventory_box3_1",vector():set(-99.41,1.37,-171.46),12046,3241)
+	    se_obj = sak.set_mark_on_tajnik("s_inventory_box3_2",vector():set(-155.51449584961,-4.6265954971313,-262.34503173828),5644,3238)
 	    this.spawn_s_teleport3_2()
 	    db.actor:give_info_portion("strelok_taynik_pda3_have")
 	  end
@@ -2006,7 +2006,7 @@ function checking_taken_item62(obj)
   elseif (obj_sect=="strelok_taynik_pda3_1" and db.actor:object("strelok_taynik_pda3_2") ~= nil) or (obj_sect=="strelok_taynik_pda3_2" and db.actor:object("strelok_taynik_pda3_1") ~= nil) then
 	if not has_alife_info("strelok_taynik_stop") then 
 	  if not has_alife_info("strelok_taynik_pda3_12_have") then 
-	    local se_obj = alife():create("s_inventory_box3_3",vector():set(73.26683807373,1.484278678894,241.13470458984),29207,1244)
+	    local se_obj = sak.set_mark_on_tajnik("s_inventory_box3_3",vector():set(73.26683807373,1.484278678894,241.13470458984),29207,1244)
 	    db.actor:give_info_portion("strelok_taynik_pda3_12_have")
 	  end
 	end
@@ -2085,26 +2085,26 @@ function checking_taken_item62(obj)
 end
 
 function s_inventory_box1()
-  local obj = alife():create("s_inventory_box1",vector():set(126.61811828613,15.248512268066,90.880737304688),225170,2143)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box1",vector():set(126.61811828613,15.248512268066,90.880737304688),225170,2143)
   this.create_teleport("s_teleport1_1",vector():set(122.58910369873,4.5209398269653,87.757598876953),229491,2143)
   spawn_restrictor.strelok_taynik_pda1_sr1()
 end
 
 function s_inventory_box2()
   taynik_spawn.s_new_inventory2_1()
-  local obj = alife():create("s_inventory_box2_2",vector():set(-77.04369354248,-7.4020524024963,-20.482629776001),90914,892)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box2_2",vector():set(-77.04369354248,-7.4020524024963,-20.482629776001),90914,892)
 end
 
 function s_inventory_box30()
-  local obj = alife():create("s_inventory_box30",vector():set(73.863845825195,-0.0094784200191498,121.16677093506),29686,1221)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box30",vector():set(73.863845825195,-0.0094784200191498,121.16677093506),29686,1221)
 end
 
 function s_inventory_box3()
-  local obj = alife():create("s_inventory_box3",vector():set(16.393283843994,37.914726257324,2.0604181289673),6342,2453)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box3",vector():set(16.393283843994,37.914726257324,2.0604181289673),6342,2453)
 end
 
 function s_inventory_box4()
-  local obj = alife():create("s_inventory_box4",vector():set(596.83740234375,-49.984550476074,-24.092365264893),214270,1899)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box4",vector():set(596.83740234375,-49.984550476074,-24.092365264893),214270,1899)
   this.spawn_s_teleport4_1()
   spawn_restrictor.strelok_taynik_pda4_sr1()
   obj = alife():create("af_dummy_spring_red",vector():set(664.32122802734,-44.515979766846,-37.01086807251),227163,1896)
@@ -2113,7 +2113,7 @@ function s_inventory_box4()
 end
 
 function s_inventory_box5()
-  local obj = alife():create("s_inventory_box5",vector():set(984.81433105469,11.019639015198,245.36875915527),261708,2646)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box5",vector():set(984.81433105469,11.019639015198,245.36875915527),261708,2646)
 end
 
 function s_inventory_box6()
@@ -2123,7 +2123,7 @@ function s_inventory_box6()
 end
 
 function s_inventory_box7()
-  local obj = alife():create("s_inventory_box7",vector():set(-17.708236694336,17.989824295044,-4.267804145813),5646,2026)
+  local obj = sak.set_mark_on_tajnik("s_inventory_box7",vector():set(-17.708236694336,17.989824295044,-4.267804145813),5646,2026)
   spawn_restrictor.strelok_taynik_pda7_sr1()
   spawn_restrictor.strelok_taynik_pda7_sr2()
 end
@@ -2339,7 +2339,7 @@ function checking_taken_item59(obj)
 	if has_alife_info("ktdt1_found") then 
       db.actor:give_info_portion("ktdt2")
       news_manager.send_tip(db.actor, "Найдена информация.", nil, nil, 20000)
-	  local se_obj = alife():create("x_inventory_box2",vector():set(-0.79496783018112,1.145513176918,10.266807556152),309442,1582)
+	  local se_obj = sak.set_mark_on_tajnik("x_inventory_box2",vector():set(-0.79496783018112,1.145513176918,10.266807556152),309442,1582)
       this.spawn_x_teleport2()
 	  this.delete_teleport("x_teleport1")
 	  se_obj = db.actor:object("ktdt_pda1")
@@ -2572,8 +2572,8 @@ end
 function t_inventory_box3()
   taynik_spawn.t_new_inventory3_1()
   taynik_spawn.t_new_inventory3_2()
-  local obj = alife():create("t_inventory_box3_3",vector():set(4.5460352897644,31.063150405884,67.978546142578),27143,2659)
-  obj = alife():create("t_inventory_box3_4",vector():set(242.60501098633,73.895149230957,138.61387634277),76288,2573)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box3_3",vector():set(4.5460352897644,31.063150405884,67.978546142578),27143,2659)
+  obj = sak.set_mark_on_tajnik("t_inventory_box3_4",vector():set(242.60501098633,73.895149230957,138.61387634277),76288,2573)
 end
 function kostya_taynik_pda3_have(task, objective)
 	if db.actor:object("kostya_taynik_pda3_1") ~= nil and db.actor:object("kostya_taynik_pda3_2") ~= nil and db.actor:object("kostya_taynik_pda3_3") ~= nil and db.actor:object("kostya_taynik_pda3_4") ~= nil then
@@ -2591,7 +2591,7 @@ function kostya_taynik_pda3_done(first_speaker, second_speaker)
 end
 
 function t_inventory_box4()
-  local obj = alife():create("t_inventory_box4",vector():set(316.57379150391,-12.273648262024,-261.89810180664),1431070,2903)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box4",vector():set(316.57379150391,-12.273648262024,-261.89810180664),1431070,2903)
 end
 function kostya_taynik_pda4_have(task, objective)
 	if db.actor:object("kostya_taynik_pda4") ~= nil then
@@ -2638,7 +2638,7 @@ function kostya_taynik_pda6_done(first_speaker, second_speaker)
 end
 
 function t_inventory_box7()
-  local obj = alife():create("t_inventory_box7",vector():set(94.308715820313,14.254689216614,50.491359710693),40199,3336)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box7",vector():set(94.308715820313,14.254689216614,50.491359710693),40199,3336)
 end
 function kostya_taynik_pda7_have(task, objective)
 	if db.actor:object("kostya_taynik_pda7") ~= nil then
@@ -2669,7 +2669,7 @@ end
 
 function t_inventory_box9()
   taynik_spawn.t_new_inventory9_1()
-  local obj = alife():create("t_inventory_box9_2",vector():set(-108.54,0.61,-244.63),11031,3241)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box9_2",vector():set(-108.54,0.61,-244.63),11031,3241)
   taynik_spawn.t_new_inventory9_3()
 end
 function kostya_taynik_pda9_have(task, objective)
@@ -2687,10 +2687,10 @@ function kostya_taynik_pda9_done(first_speaker, second_speaker)
 end
 
 function t_inventory_box10()
-  local obj = alife():create("t_inventory_box10_1",vector():set(-116.87435913086,4.8685846328735,-149.80033874512),89560,562)
-  obj = alife():create("t_inventory_box10_2",vector():set(-26.37,-0.58,-25.53),280608,1593)
-  obj = alife():create("t_inventory_box10_3",vector():set(27.953716278076,20.462240219116,684.33978271484),307284,208)
-  obj = alife():create("t_inventory_box10_4",vector():set(106.7265625,13.199247360229,153.22033691406),272568,374)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box10_1",vector():set(-116.87435913086,4.8685846328735,-149.80033874512),89560,562)
+  obj = sak.set_mark_on_tajnik("t_inventory_box10_2",vector():set(-26.37,-0.58,-25.53),280608,1593)
+  obj = sak.set_mark_on_tajnik("t_inventory_box10_3",vector():set(27.953716278076,20.462240219116,684.33978271484),307284,208)
+  obj = sak.set_mark_on_tajnik("t_inventory_box10_4",vector():set(106.7265625,13.199247360229,153.22033691406),272568,374)
   spawn_restrictor.kostya_taynik_pda10_sr1()
 end
 function kostya_taynik_pda10_have(task, objective)
@@ -2709,9 +2709,9 @@ function kostya_taynik_pda10_done(first_speaker, second_speaker)
 end
 
 function t_inventory_box11()
-  local obj = alife():create("t_inventory_box11_1",vector():set(192.18560791016,12.331077575684,101.35523986816),260351,2221)
+  local obj = sak.set_mark_on_tajnik("t_inventory_box11_1",vector():set(192.18560791016,12.331077575684,101.35523986816),260351,2221)
   taynik_spawn.t_new_inventory11_2()
-  obj = alife():create("t_inventory_box11_3",vector():set(6.5773458480835,8.061222076416,138.07514953613),109702,2147)
+  obj = sak.set_mark_on_tajnik("t_inventory_box11_3",vector():set(6.5773458480835,8.061222076416,138.07514953613),109702,2147)
 end
 function kostya_taynik_pda11_have(task, objective)
 	if db.actor:object("kostya_taynik_pda11_1") ~= nil and db.actor:object("kostya_taynik_pda11_2") ~= nil and db.actor:object("kostya_taynik_pda11_3") ~= nil then
@@ -2770,7 +2770,7 @@ function spawn_x_teleport3()
 	xr_logic.pstor_store(db.actor, "x_teleport3_2", se_obj.id)
     se_obj = alife():create("x_teleport3_3",vector():set(-67.088394165039,1.2463047504425,-154.01571655273),15216,1490)
 	xr_logic.pstor_store(db.actor, "x_teleport3_3", se_obj.id)
-    se_obj = alife():create("x_inventory_box3",vector():set(-27.107929229736,0.74637401103973,-160.10646057129),16808,1490)
+    se_obj = sak.set_mark_on_tajnik("x_inventory_box3",vector():set(-27.107929229736,0.74637401103973,-160.10646057129),16808,1490)
 	spawn_restrictor.ktdt3_sr1()
 end
 

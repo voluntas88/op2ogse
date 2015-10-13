@@ -26,32 +26,32 @@ function on_part_take(obj)
 	if not monster or not rx_utils.read_from_ini(nil, obj:section(), "monster_part", false, 0) then return end
 
 --	if actor_has_knife() then
-	  if ui_mm_opt_main.GetOption( "monster_parts_sound" ) then
-		local difficulty = level.get_game_difficulty()
-		if difficulty > 0 then
-			bind_stalker.hide_weapon()
+	 -- if ui_mm_opt_main.GetOption( "monster_parts_sound" ) then
+		--local difficulty = level.get_game_difficulty()
+		--if difficulty > 0 then
+			--bind_stalker.hide_weapon()
 			--snp.move_off() -- обездвиживание отключено
-			amk.remove_timer("monster_parts")
-			amk.start_timer("monster_parts", difficulty*2, 0)
+			--amk.remove_timer("monster_parts")
+			--amk.start_timer("monster_parts", difficulty*2, 0)
 			--amk.start_timer("move_on", difficulty, 0) -- обездвиживание отключено
-		end
+		--end
 		
-		level.start_stop_menu(level.main_input_receiver(), true)
-		if snd and snd:playing() then
-			snd:stop()
-		end
-		snd = xr_sound.get_safe_sound_object("zwuk\\inv_mutant_loot_"..math.random(1,9))
-		snd:play_at_pos(db.actor, vector(), 0, sound_object.s2d)
-	  else
-		level.start_stop_menu( level.main_input_receiver(), true )
-		if snd and snd:playing() then
-			snd:stop()
-		end
-		snd = xr_sound.get_safe_sound_object(
-                  "zwuk_short\\inv_mutant_loot_" .. math.random( 1, 9 )
-                )
-		snd:play_at_pos( db.actor, vector(), 0, sound_object.s2d )
-	  end
+		--level.start_stop_menu(level.main_input_receiver(), true)
+		--if snd and snd:playing() then
+		--	snd:stop()
+		--end
+		--snd = xr_sound.get_safe_sound_object("zwuk\\inv_mutant_loot_"..math.random(1,9))
+		--snd:play_at_pos(db.actor, vector(), 0, sound_object.s2d)
+	 -- else
+		--level.start_stop_menu( level.main_input_receiver(), true )
+		--if snd and snd:playing() then
+		--	snd:stop()
+		--end
+		--snd = xr_sound.get_safe_sound_object(
+          --        "zwuk_short\\inv_mutant_loot_" .. math.random( 1, 9 )
+          --      )
+		--snd:play_at_pos( db.actor, vector(), 0, sound_object.s2d )
+	 -- end
 		archievements.acv_count_event("acv_gvdr", 500, "Живодёр") 
 
 --	else

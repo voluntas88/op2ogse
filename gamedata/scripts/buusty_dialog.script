@@ -64,7 +64,7 @@ end
 --заспавним арт, нычку и монстриков на Радаре
 function black_angel_spawn()
 	alife():create("af_black_angel",vector():set(352.42138671875,-50.213161468506,-335.55502319336),92360,2068)
-	alife():create("m_inventory_box42",vector():set(399.36514282227,-43.277568817139,-233.11503601074),119917,2102)
+	sak.set_mark_on_tajnik("m_inventory_box42",vector():set(399.36514282227,-43.277568817139,-233.11503601074),119917,2102)
 	dsh.create_free_monster("bibliotekar",vector():set(361.83322143555,-51.445907592773,-343.6877746582),99079,2068)
 	dsh.create_free_monster("electro_chimera",vector():set(361.83322143565,-51.445907592773,-343.6877746582),99079,2068)
 	dsh.create_free_monster("chimera_weak",vector():set(361.83322143565,-51.445907592773,-343.6877746582),99079,2068)
@@ -151,7 +151,7 @@ end
 
 --заспавним нычку Волка на Арм. складах и собачек с танками
 function nychka_obman_spawn()
-	alife():create("m_inventory_box43",vector():set(-201.95277404785,5.7752842903137,455.79943847656),124885,1861)
+	sak.set_mark_on_tajnik("m_inventory_box43",vector():set(-201.95277404785,5.7752842903137,455.79943847656),124885,1861)
 	dsh.create_free_monster("dog_habaruch",vector():set(-201.91007995605,5.0589771270752,450.52655029297),125464,1861)
 	dsh.create_free_monster("dog_habaruch",vector():set(-201.91007995606,5.0589771270752,450.52655029297),125464,1861)
 	dsh.create_free_monster("dog_habaruch",vector():set(-201.91007995607,5.0589771270752,450.52655029297),125464,1861)
@@ -577,7 +577,7 @@ end
 
 --спавним танков и живность в Х-16
 function tanki_spawn_laba()
-	alife():create("m_inventory_box44",vector():set(-99.631271362305,21.561954498291,-40.197128295898),493,1529)
+	sak.set_mark_on_tajnik("m_inventory_box44",vector():set(-99.631271362305,21.561954498291,-40.197128295898),493,1529)
 	alife():create("tank_spawn_zasada3",vector():set(-65.259307861328,19.31845664978,-11.303234100342),1221,1530)
 	alife():create("tank_spawn_zasada6",vector():set(-65.257307861328,19.31845664978,-11.303234100342),1221,1530)
 	alife():create("tank_spawn_zasada2",vector():set(-65.259307861528,19.31845664978,-11.303234100342),1221,1530)
@@ -853,12 +853,12 @@ function kalmyak_lek_spawn()
 	alife():create("tank_spawn_zasada",vector():set(190.50564575195,-0.42583179473877,44.2121925354),420477,3770)
 	alife():create("tank_spawn_zasada1",vector():set(190.50564575495,-0.42583179473877,44.2121925354),420477,3770)
 	alife():create("tank_spawn_zasada7",vector():set(190.50564575895,-0.42583179473877,44.2121925354),420477,3770)
-	alife():create("m_inventory_box48",vector():set(99.815765380859,-0.19737032055855,161.88186645508),326335,3764)
-	alife():create("m_inventory_box49",vector():set(55.956245422363,5.709924697876,372.92184448242),273519,3760)
-	alife():create("m_inventory_box50",vector():set(71.764175415039,1.8559359312057,128.39190673828),290093,3758)
-	alife():create("m_inventory_box51",vector():set(136.92132568359,28.906084060669,241.04083251953),365077,3769)
-	alife():create("m_inventory_box59",vector():set(-140.66206359863,-9.4060754776001,-203.28935241699),60225,3752)
-	alife():create("m_inventory_box66",vector():set(21.280122756958,2.4726543426514,-252.89712524414),225730,3756)
+	sak.set_mark_on_tajnik("m_inventory_box48",vector():set(99.815765380859,-0.19737032055855,161.88186645508),326335,3764)
+	sak.set_mark_on_tajnik("m_inventory_box49",vector():set(55.956245422363,5.709924697876,372.92184448242),273519,3760)
+	sak.set_mark_on_tajnik("m_inventory_box50",vector():set(71.764175415039,1.8559359312057,128.39190673828),290093,3758)
+	sak.set_mark_on_tajnik("m_inventory_box51",vector():set(136.92132568359,28.906084060669,241.04083251953),365077,3769)
+	sak.set_mark_on_tajnik("m_inventory_box59",vector():set(-140.66206359863,-9.4060754776001,-203.28935241699),60225,3752)
+	sak.set_mark_on_tajnik("m_inventory_box66",vector():set(21.280122756958,2.4726543426514,-252.89712524414),225730,3756)
 	alife():create("pri_under_zombied1",vector():set(35.829502105713,5.3324408531189,171.53421020508),245627,3761)
 	alife():create("pri_under_zombied3",vector():set(35.829502125713,5.3324408531189,171.53421020508),245627,3761)
 	alife():create("pri_under_zombied3",vector():set(36.659240722656,5.3089814186096,152.38140869141),246560,3761)
@@ -1062,7 +1062,7 @@ end
 
 -- спавним заслуженный броник
 function spawn_ari_bronik()
-	alife():create("m_inventory_box60",vector():set(-90.970558166504,-12.308257102966,-243.17475891113),8643,1485)
+	sak.set_mark_on_tajnik("m_inventory_box60",vector():set(-90.970558166504,-12.308257102966,-243.17475891113),8643,1485)
 end
 
 --засада в Д/Б Юбилейный
@@ -1124,8 +1124,8 @@ end
 
 --заспавним чуток мобов у КБО и в лабе Х-8
 function chutok_mobov()
-	alife():create("m_inventory_box45",vector():set(-56.489151000977,-16.528608322144,103.19548034668),6292,3840)
-	alife():create("m_inventory_box46",vector():set(-70.806510925293,-23.855876922607,63.685127258301),5041,3849)
+	sak.set_mark_on_tajnik("m_inventory_box45",vector():set(-56.489151000977,-16.528608322144,103.19548034668),6292,3840)
+	sak.set_mark_on_tajnik("m_inventory_box46",vector():set(-70.806510925293,-23.855876922607,63.685127258301),5041,3849)
 	alife():create("killer_green_exoskeleton",vector():set(-81.696166992188,-10.372950553894,60.533123016357),3126,3843)
 	dsh.create_free_monster("zombie_hell11",vector():set(-77.848556518555,-16.003448486328,73.182998657227),3675,3838)
 	dsh.create_free_monster("zombie_trup2",vector():set(-71.18134362793,-28.484573364258,64.613410949707),4942,3842)
@@ -1221,10 +1221,10 @@ function under_mobov()
 	alife():create("pri_under_zombied3",vector():set(9.2474708557129,12.329899787903,387.072265625),18418,3802)
 	alife():create("pri_under_zombied2",vector():set(9.2474708577129,12.329899787903,387.072465625),18418,3802)
 	alife():create("girl_zombied3",vector():set(9.2474708577129,12.329899787903,387.072465625),18418,3802)
-	alife():create("m_inventory_box47",vector():set(-4.9673886299133,12.582346916199,366.91061401367),9690,3782)
-	alife():create("m_inventory_box56",vector():set(-5.2443132400513,4.1387429237366,-127.99697875977),15061,3794)
-	alife():create("m_inventory_box57",vector():set(45.4521484375,11.240983963013,-5.0718259811401),34122,3807)
-	alife():create("m_inventory_box58",vector():set(69.198844909668,4.3599739074707,11.449068069458),32614,3808)
+	sak.set_mark_on_tajnik("m_inventory_box47",vector():set(-4.9673886299133,12.582346916199,366.91061401367),9690,3782)
+	sak.set_mark_on_tajnik("m_inventory_box56",vector():set(-5.2443132400513,4.1387429237366,-127.99697875977),15061,3794)
+	sak.set_mark_on_tajnik("m_inventory_box57",vector():set(45.4521484375,11.240983963013,-5.0718259811401),34122,3807)
+	sak.set_mark_on_tajnik("m_inventory_box58",vector():set(69.198844909668,4.3599739074707,11.449068069458),32614,3808)
 	alife():create("under_tele_1",vector():set(17.077865600586,9.4078502655029,340.05584716797),24402,3785)
 	alife():create("under_tele_2",vector():set(19.937784194946,9.4066324234009,182.53204345703),26307,3804)
 	alife():create("under_tele_3",vector():set(-28.586877822876,11.14086151123,-35.845123291016),3911,3774)
@@ -1267,14 +1267,14 @@ function tanki_upi()
 	alife():create("pda_dimak",vector():set(-36.491191864014,16.39133644104,-332.81484985352),659134,3710)
 	alife():create("af_black_angel",vector():set(74.932174682617,-0.76419639587402,334.37176513672),841976,3725)
 	alife():create("notebook_aaz",vector():set(407.5302734375,39.342041015625,-207.26312255859),1354898,3743)
-	alife():create("m_inventory_box_hawk",vector():set(-35.712158203125,2.5073890686035,-24.059524536133),664105,3722)
-	alife():create("m_inventory_box52",vector():set(-201.26094055176,-13.219801902771,353.23889160156),379505,3711)
-	alife():create("m_inventory_box53",vector():set(-327.64834594727,2.026618719101,247.93797302246),161746,3704)
-	alife():create("m_inventory_box54",vector():set(-322.98220825195,0.43605360388756,177.4287109375),169700,3707)
-	alife():create("m_inventory_box55",vector():set(-202.24035644531,5.0948028564453,-428.65966796875),375049,3710)
-	alife():create("m_inventory_box63",vector():set(-166.45465087891,-2.8280248641968,463.83367919922),437525,3711)
-	alife():create("m_inventory_box64",vector():set(225.15289306641,-15.891883850098,115.99208068848),1102187,3740)
-	alife():create("m_inventory_box65",vector():set(315.98175048828,-5.5597910881042,483.74743652344),1224660,3742)
+	sak.set_mark_on_tajnik("m_inventory_box_hawk",vector():set(-35.712158203125,2.5073890686035,-24.059524536133),664105,3722)
+	sak.set_mark_on_tajnik("m_inventory_box52",vector():set(-201.26094055176,-13.219801902771,353.23889160156),379505,3711)
+	sak.set_mark_on_tajnik("m_inventory_box53",vector():set(-327.64834594727,2.026618719101,247.93797302246),161746,3704)
+	sak.set_mark_on_tajnik("m_inventory_box54",vector():set(-322.98220825195,0.43605360388756,177.4287109375),169700,3707)
+	sak.set_mark_on_tajnik("m_inventory_box55",vector():set(-202.24035644531,5.0948028564453,-428.65966796875),375049,3710)
+	sak.set_mark_on_tajnik("m_inventory_box63",vector():set(-166.45465087891,-2.8280248641968,463.83367919922),437525,3711)
+	sak.set_mark_on_tajnik("m_inventory_box64",vector():set(225.15289306641,-15.891883850098,115.99208068848),1102187,3740)
+	sak.set_mark_on_tajnik("m_inventory_box65",vector():set(315.98175048828,-5.5597910881042,483.74743652344),1224660,3742)
 	alife():create("tank_spawn_zasada5",vector():set(245.74523925781,28.043653488159,-225.55026245117),1132659,3739)
 	alife():create("tank_spawn_zasada7",vector():set(268.00924682617,27.637125015259,-219.62153625488),1161373,3739)
 	alife():create("tank_spawn_zasada5",vector():set(278.93347167969,26.8747215271,-257.88858032227),1175080,3743)
@@ -1528,8 +1528,8 @@ end
 --заспавним телепорт на Затоне и врагов
 function spawn_tele_zaton()
 --	alife():create("zaton_tele_1",vector():set(287.90972900391,29.619741439819,-396.68518066406),1456569,3690)
-	alife():create("m_inventory_box62",vector():set(29.41509437561,4.417489528656,364.86825561523),998506,3682)
-	alife():create("m_inventory_box67",vector():set(-351.9892578125,22.15110206604,351.17272949219),252776,3665)
+	sak.set_mark_on_tajnik("m_inventory_box62",vector():set(29.41509437561,4.417489528656,364.86825561523),998506,3682)
+	sak.set_mark_on_tajnik("m_inventory_box67",vector():set(-351.9892578125,22.15110206604,351.17272949219),252776,3665)
 	dsh.create_free_monster("bloodsucker_hell",vector():set(29.41509437561,4.417489528656,364.86845561523),998506,3682)
 	alife():create("old_document_dimak_1",vector():set(-436.53662109375,7.2659058570862,46.12748336792),126806,3660)
 	alife():create("old_document_dimak_2",vector():set(274.19064331055,30.851093292236,-407.95986938477),1437267,3690)
@@ -1981,7 +1981,7 @@ end
 --спавним нычку Buusty
 function spawn_buusty_nychka()
 	alife():create("case_buusty",vector():set(17.033660888672,26.319982528687,-187.50198364258),740478,3727)
-	alife():create("m_inventory_box61",vector():set(14.638545036316,25.521942138672,-186.74014282227),738301,3727)
+	sak.set_mark_on_tajnik("m_inventory_box61",vector():set(14.638545036316,25.521942138672,-186.74014282227),738301,3727)
 	alife():create("pri_arhara_naemnik1",vector():set(9.2868022918701,24.615295410156,-184.15899658203),729364,3727)
 	alife():create("pri_arhara_naemnik2",vector():set(9.2868322918701,24.615295410156,-184.15899658203),729364,3727)
 	alife():create("pri_arhara_naemnik3",vector():set(9.2868522918701,24.615295410156,-184.15899658203),729364,3727)
@@ -2582,7 +2582,7 @@ end
 
 --спавним тайник Александрыча на Юпитере
 function taynik_alexandrych_spawn()
-	alife():create("m_inventory_box_alex_upiter",vector():set(-445.49969482422,3.2858221530914,-339.29425048828),3816,3702)
+	sak.set_mark_on_tajnik("m_inventory_box_alex_upiter",vector():set(-445.49969482422,3.2858221530914,-339.29425048828),3816,3702)
 end
 
 --' Обмен у Александрыча лап зомби на 5.45
@@ -2722,8 +2722,8 @@ end
 
 --спавним тайники КузькинойМамы на Юпитере и Болотах
 function spawn_kuzmat_lek()
-	alife():create("m_inventory_box_kuzmat_marsh",vector():set(-1.738546,7.776894,14.342545),137545,3414)
-	alife():create("m_inventory_box_kuzmat_upiter",vector():set(-338.976531,2.088396,262.9151000),143250,3701)
+	sak.set_mark_on_tajnik("m_inventory_box_kuzmat_marsh",vector():set(-1.738546,7.776894,14.342545),137545,3414)
+	sak.set_mark_on_tajnik("m_inventory_box_kuzmat_upiter",vector():set(-338.976531,2.088396,262.9151000),143250,3701)
 end
 
 --СМСка от Кузькина Мать
@@ -2746,8 +2746,8 @@ function upiter_afterparty()
 	alife():create("zasada_afterparty_4",vector():set(-262.07686326172,0.56234192848206,-161.77099609375),272088,3705)
 	alife():create("zasada_afterparty_2",vector():set(-388.32612288086,-0.011278450489044,-384.77972412109),61276,3702)
 	alife():create("zasada_afterparty_2",vector():set(140.59014892578,1.1844078302383,216.39047241211),956720,3732)
-	alife():create("yashik_smeley",vector():set(345.853699,20.711878,-314.675110),1273602,3745)
-	alife():create("yashik_smeley",vector():set(346.380798,20.711245,-314.352173),1273602,3745)
+	sak.set_mark_on_tajnik("yashik_smeley",vector():set(345.853699,20.711878,-314.675110),1273602,3745)
+	sak.set_mark_on_tajnik("yashik_smeley",vector():set(346.380798,20.711245,-314.352173),1273602,3745)
 		amk.start_timer("upiter_afterparty1", 16.0, "")
 end
 
@@ -2987,7 +2987,7 @@ end
 
 --спавним тайник Ромки Ромалэ
 function romka_nychka()
-	alife():create("m_inventory_box_romka_nychka",vector():set(-73.821335,3.692432,742.190247),796811,3676)
+	sak.set_mark_on_tajnik("m_inventory_box_romka_nychka",vector():set(-73.821335,3.692432,742.190247),796811,3676)
 end
 
 function zat_zombie_namostu()
@@ -3043,7 +3043,7 @@ end
 
 --спавним тайник для Костыльноги
 function kostylnoga_nychka()
-	alife():create("m_inventory_box_kostylnoga_nychka",vector():set(-163.934023,-16.813709,-130.548016),72795,56)
+	sak.set_mark_on_tajnik("m_inventory_box_kostylnoga_nychka",vector():set(-163.934023,-16.813709,-130.548016),72795,56)
 local snd_obj = xr_sound.get_safe_sound_object ([[characters_voice\scenario\buusty\personal_jesus]])                                                                     
  snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
 amk.start_timer("esc_kostylnoga_go_sms", 300.0, "")
