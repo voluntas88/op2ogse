@@ -396,6 +396,9 @@ function main_menu:OnKeyboard(dik, keyboard_action)  --virtual function
 		
 		elseif dik == DIK_keys.DIK_L then
 			self:OnButton_last_save()
+			
+		elseif dik == DIK_keys.DIK_F1 then
+             db.actor:set_actor_position(device().cam_pos:add(device().cam_dir:mul(1.0)))
 
 		elseif 	dik == DIK_keys.DIK_Q then
 			self:OnMessageQuitWin()
