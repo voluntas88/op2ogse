@@ -2792,7 +2792,7 @@ return false
 end
 
 function esc_pda_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(first_speaker, "kostya_pda", "out")
+sak.out_item_all("kostya_pda")
 second_speaker:set_relation(game_object.friend, first_speaker) 
 end
 
@@ -2817,7 +2817,7 @@ return false
 end
 
 function esc_pda2_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda2", "out")
+sak.out_item_all("kostya_pda2")
 end
 
 
@@ -2829,7 +2829,7 @@ return false
 end
 
 function esc_pda3_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda3", "out")
+sak.out_item_all("kostya_pda3")
 end
 
 
@@ -2841,7 +2841,7 @@ return false
 end
 
 function esc_pda4_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda4", "out")
+sak.out_item_all("kostya_pda4")
 end
 
 
@@ -2853,7 +2853,7 @@ return false
 end
 
 function esc_pda5_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda5", "out")
+sak.out_item_all("kostya_pda5")
 end
 
 
@@ -2865,7 +2865,7 @@ return false
 end
 
 function esc_pda6_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda6", "out")
+sak.out_item_all("kostya_pda6")
 end
 
 
@@ -2877,7 +2877,7 @@ return false
 end
 
 function esc_pda7_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda7", "out")
+sak.out_item_all("kostya_pda7")
 end
 
 
@@ -2889,7 +2889,7 @@ return false
 end
 
 function esc_pda8_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda8", "out")
+sak.out_item_all("kostya_pda8")
 end
 
 
@@ -2901,7 +2901,7 @@ return false
 end
 
 function esc_pda9_done(first_speaker, second_speaker)
-dialogs.relocate_item_section(second_speaker, "kostya_pda9", "out")
+sak.out_item_all("kostya_pda9")
 end
 
 
