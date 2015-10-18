@@ -2908,7 +2908,7 @@ end
 function sacharov_pda_have(task, objective)
 if db.actor ~= nil then
 return db.actor:object("pda_vasilyev") ~= nil
-end
+end  
 return false
 end
 
