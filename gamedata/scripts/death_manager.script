@@ -482,7 +482,7 @@ function drop_manager:__init( npc, who )
   self.npc = npc
   self.who = who
 
-  if
+ --[[ if
     npc:character_community() ~= "zombied"
     and who and who:id() ~= db.actor:id() and who:id() ~= npc:id()
     and ( IsStalker( who ) or IsMonster( who ) )
@@ -507,9 +507,9 @@ function drop_manager:__init( npc, who )
         end
       end
     end
-  else
-    self.recipient = npc
-  end
+  else]]
+    self.recipient = db.actor --npc
+  --end
 end
 
 
@@ -576,6 +576,7 @@ function drop_manager:create_release_item()
   local spawn_items = item_by_community[ self.npc:character_community() ]
   local who         = self:get_recipient()
   if spawn_items and who then
+  news_manager.send_tip(db.actor, "Получены вещи сталкера с групировки "..self.npc:character_community(), nil, nil, 10000)
     for k, v in pairs( spawn_items ) do
       --' По каждому объекту необходимо получить зависимости
       if check_item_dependence( self.npc, k ) == true then
@@ -612,7 +613,9 @@ function drop_manager:create_release_item()
               break
             elseif v.npc_names then
               sect = v.npc_names[ npc_name ]
-              if sect then break end
+              if sect then
+                break
+              end
             end
           end
         end
