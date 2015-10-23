@@ -270,6 +270,7 @@ function se_stalker:on_register()
     amk.write_stalker_params( tbl, self )
   end
 
+
   cse_alife_human_stalker.on_register( self )
 
   xr_companion.is_companion_se( self )
