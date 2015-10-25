@@ -855,6 +855,9 @@ end
 
 function motivator_binder:death_callback(victim, who)
    if self.object == nil then return end
+   
+   treasure_manager:get_treasure_manager():use(self.object)
+   
   kostya_dialog.kuv_hit(who)
   xr_statistic.addKillCount(who, self.object)
   if who:id() == db.actor:id() then
