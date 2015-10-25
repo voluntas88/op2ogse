@@ -273,7 +273,7 @@ end
 
 
 -- Проверка на иммунитеты и удаление с пояса лишних артов
-local imm_limits = {100, 86, 73, 60}
+local imm_limits = {100, 100, 100, 100}
 local imm_limit, sobj, sect, imm_sect, bad_imm
 
 local immunities = {
