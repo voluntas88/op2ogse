@@ -14,8 +14,8 @@
 		<texture>ui_slots_armory</texture>
 	</belt_slots>
 	
-	<dragdrop_belt x="124" y="290" width="464" height="47"
-            cell_width = "33" cell_height="47" rows_num="1" cols_num="14"/>
+	<dragdrop_belt x="124" y="290" width="464" height="48"
+            cell_width = "24" cell_height="24" rows_num="2" cols_num="19"/>
 
 	<!-- расположение икони броника в инвентаре -->
     <dragdrop_outfit x="880" y="50" width="120" height="144" 
