@@ -21,6 +21,7 @@ function on_first_update()
     this.fix_prizrak_wpn,
     this.fix_val_rob_buying,
     this.fix_val_rob_buying,
+    this.start_dsh_walking_job,
   }
   local version = ogse.load_var( vname, 0 )
   if version < table.getn( fixes ) then
@@ -295,4 +296,14 @@ function cleanup_rats()
       dsh_respawn.on_release_npc( sobj.id )
     end
   end
+end
+
+
+function start_dsh_walking_job()
+  local next_m = math.random( 0, 59 )
+  dsh.start_gtimerDHMS(
+    "dsh_walking_stalkers.periodic_job",
+    0, 1, next_m, 0,
+    "dsh_walking_stalkers.periodic_job"
+  )
 end
