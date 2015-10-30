@@ -58,4 +58,7 @@ addons = {
   "ogse_anomaly_evader",
   "dsh_switch_distances",
   "dsh_respawn",
+  "xrs_battle_ai",
+  "xr_combat_ignore",
+  "dsh_enemies",
 }

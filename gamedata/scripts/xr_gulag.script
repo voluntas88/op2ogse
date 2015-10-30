@@ -397,21 +397,20 @@ function gulag:object_setup_online( obj_id, obj, need_setup_logic, need_setup_re
 	end
 end
 
+
 -- удалить объект из гулага.
 -- вызывается только из se_smart_terrain:unregister_npc() !
 -- если объект жив и он в онлайне, то переинициализировать логику.
 function gulag:removeObject( obj_id )
-	self:free_obj_and_reinit( obj_id )
-
-	self.Object[obj_id]      = nil
-
-	self:clear_restrictors_info( obj_id )
-
-	self.population = self.population - 1
-	if not ( self.npc_info[obj_id] and self.npc_info[obj_id].exclusive ) then
-		self.population_non_exclusive = self.population_non_exclusive - 1
-	end
+  self:free_obj_and_reinit( obj_id )
+  self.Object[ obj_id ]      = nil
+  self:clear_restrictors_info( obj_id )
+  self.population = self.population - 1
+  if not ( self.npc_info[ obj_id ] and self.npc_info[ obj_id ].exclusive ) then
+    self.population_non_exclusive = self.population_non_exclusive - 1
+  end
 end
+
 
 -- Обновление гулага.
 function gulag:update()
@@ -1008,10 +1007,10 @@ end
 -- установить объекту рестрикторы в онлайне.
 -- obj - game_object
 function gulag:set_restrictions(obj, r_out, r_in, r_info)
-	-- log3( "RESTR [%s] HAVE (IN)  : %s", obj:name(), obj:in_restrictions() )
-	-- log3( "RESTR [%s] HAVE (OUT) : %s", obj:name(), obj:out_restrictions() )
-	-- log3( "RESTR [%s] NEED (IN)  : %s", obj:name(), r_in )
-	-- log3( "RESTR [%s] NEED (OUT) : %s", obj:name(), r_out )
+--	log3( "RESTR [%s] HAVE (IN)  : %s", obj:name(), obj:in_restrictions() )
+--	log3( "RESTR [%s] HAVE (OUT) : %s", obj:name(), obj:out_restrictions() )
+--	log3( "RESTR [%s] NEED (IN)  : %s", obj:name(), r_in )
+--	log3( "RESTR [%s] NEED (OUT) : %s", obj:name(), r_out )
 	
 	-- узнать, какие рестрикторы уже были назначены этим гулагом
 	local restr = self.restrictors[obj:id()]
@@ -1038,6 +1037,8 @@ function gulag:set_restrictions(obj, r_out, r_in, r_info)
 	end
 
 	if change_r_in ~= "" or change_r_out ~= "" then
+		--log1("[XR GULAG] REMOVING IN RESTRICTION "..change_r_in.." FOR "..obj:name())
+		--log1("[XR GULAG] REMOVING OUT RESTRICTION "..change_r_out.." FOR "..obj:name())
 		obj:remove_restrictions( change_r_out, change_r_in )
 	end
 
@@ -1056,6 +1057,8 @@ function gulag:set_restrictions(obj, r_out, r_in, r_info)
 
 	if change_r_in ~= "" or change_r_out ~= "" then
 --		log3( "RESTR [%s] SET: %s, %s", obj:name(), change_r_out, change_r_in)
+		--log1("[XR GULAG] ADDING IN RESTRICTION "..change_r_in.." FOR "..obj:name())
+		--log1("[XR GULAG] ADDING OUT RESTRICTION "..change_r_out.." FOR "..obj:name())
 		obj:add_restrictions( change_r_out, change_r_in )
 	end
 
@@ -1224,10 +1227,10 @@ function gulag:dsh_get_gulag_switches( ini, sect )
       end
       if sys_ini:section_exist( sect ) then
         if sys_ini:line_exist( sect, "switch_0" ) then
-          switch_0 = get_string( sect, "switch_0", "" )
+          switch_0 = get_string( sect, "switch_0" ) or ""
         end
         if sys_ini:line_exist( sect, "switch_1" ) then
-          switch_1 = get_string( sect, "switch_1", "" )
+          switch_1 = get_string( sect, "switch_1" ) or ""
         end
       end
     else

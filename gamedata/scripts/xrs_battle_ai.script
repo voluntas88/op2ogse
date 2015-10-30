@@ -107,6 +107,10 @@ local forbidden_profiles = {		-- запретные профили и имена
 	["major_wounded"]				=	true,
 }
 
+function attach( sm )
+  sm:subscribe({ signal = "on_spawn", fun = this.on_spawn })
+end
+
 function init()
 	event("npc_hit"):register(hit_callback)
 	event("npc_death"):register(death_place)
@@ -441,34 +445,51 @@ function write_log(str)
 	end
 end
 
-function check_is_enemy(npc, enemy)
-	if not npc or not enemy then return false end
-	local is_engine_enemy = npc:relation(enemy) == game_object.enemy
-	if is_engine_enemy then
-		return true
-	end
-	return false
+
+local ignore_enemies = {}
+function check_is_enemy( npc, enemy )
+  if not npc or not enemy then return false end
+  local is_engine_enemy = npc:relation( enemy ) == game_object.enemy
+  if is_engine_enemy then
+    if ignore_enemies[ npc:name() ] then
+      for _, k in ipairs( ignore_enemies[ npc:name() ] ) do
+        if k == enemy:name() then return false end
+      end
+    end
+    return npc:binded_object():enemy_callback( npc, enemy )
+  end
+  return false
 end
 
-function is_combat_ignore(npc)
 
-	st = db.storage[npc:id()].combat_ignore
+function on_spawn()
+  local dsh_sect = "dsh.xrs_battle_ai.ignore_enemies"
+  if sys_ini:section_exist( dsh_sect ) then
+    for _, k in ipairs( get_section_keys( dsh_sect ) ) do
+      ignore_enemies[ k ] = parse_names( get_string( dsh_sect, k ) )
+    end
+  end
+end
 
-	if not st then
-		return false
-	end
 
-	if st.enabled then
-		local overrides = xr_logic.generic_scheme_overrides(npc)
-		if overrides and
-		   overrides.combat_ignore and
-		   db.actor and
-		   xr_logic.pick_section_from_condlist( db.actor, npc, overrides.combat_ignore.condlist ) ~= nil
-		then
-			return true
-		end
-	end
-	return false
+function is_combat_ignore( npc, enemy )
+  st = db.storage[npc:id()].combat_ignore
+  if not st then return false end
+  if st.enabled then
+    local overrides = xr_logic.generic_scheme_overrides( npc )
+    db.storage[ npc:id() ].enemy = enemy
+    if
+      overrides
+      and overrides.combat_ignore
+      and db.actor
+      and xr_logic.pick_section_from_condlist(
+        db.actor, npc, overrides.combat_ignore.condlist
+      ) ~= nil
+    then
+      return true
+    end
+  end
+  return false
 end
 
 
@@ -1510,9 +1531,10 @@ function hit_fx(e)
 	local exo_flag = false
 	
 	if obj then
-		local stalk = xrs_utils.read_stalker_params(obj)
-		local vis = tostring(stalk.visual)	
-		if string.find(vis,"exo") or string.find(vis,"tank") then exo_flag = true end
+		local vis = table.remove(
+		  amk.str_explode( "\\", e.victim:get_visual_name() )
+		)
+		if string.find(vis,"exo") then exo_flag = true end
 	end
 
 	local key_3 = nil
@@ -3941,6 +3963,7 @@ function process_restrictions(npc)
 		backup_restrictions_in[npc:id()] = restr_in
 		-- write_log("--XRS_BATTLE_AI: RESTRICTIONS_IN BACKUP FOR "..npc:name().." : "..restr_in)
 	end	
+	--log1("[XRS BATTLE AI] REMOVING ALL RESTRICTIONS FOR "..npc:name())
 	npc:remove_all_restrictions()
 end
 
@@ -3985,9 +4008,12 @@ function restore_restrictions(npc)
 	end
 
 	if backup_restrictions_out[npc:id()] or backup_restrictions_in[npc:id()] then
+		--log1("[XRS BATTLE AI] REMOVING ALL RESTRICTIONS FOR "..npc:name())
 		npc:remove_all_restrictions()
 		local restr_out = clean_restrictions(backup_restrictions_out[npc:id()])
 		local restr_in = clean_restrictions(backup_restrictions_in[npc:id()])
+		--log1("[XRS BATTLE AI] ADDING IN RESTRICTIONS "..restr_out.." FOR "..npc:name())
+		--log1("[XRS BATTLE AI] ADDING OUT RESTRICTIONS "..restr_out.." FOR "..npc:name())
 		npc:add_restrictions(restr_out, restr_in)
 		-- write_log("--XRS_BATTLE_AI: RESTRICTIONS RESTORED FOR "..npc:name().." OUT: ["..restr_out.."] IN: ["..restr_in.."]")
 		backup_restrictions_out[npc:id()] = nil
