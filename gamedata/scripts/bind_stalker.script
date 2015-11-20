@@ -65,7 +65,7 @@ function actor_binder:net_spawn(data)
   db.add_actor(self.object)
   self.am:call( "on_before_spawn" )
   zamok.restore()
-  babah.collectBombs()
+--  babah.collectBombs()
   level.show_indicators()
 
   self.bCheckStart = true
@@ -129,7 +129,7 @@ end]]
   -- kostya_level --
 	spawn_teleport.spawn_teleport_exit()
 	spawn_teleport.spawn_teleport_hospital()
-    bind_det_arts.start_update()
+--    bind_det_arts.start_update()
     netpacket_pda_id = netpacket_pda_create.create_pda()
 -- Akill begin
 	akill.akill_start_sound()
@@ -1124,6 +1124,7 @@ end
 
        inventory.update() 
 
+--[=[
   --' Вывод сообщения о большой радиации
   if self.object.radiation >= 0.7 then
     local hud = get_hud()
@@ -1139,6 +1140,7 @@ end
       hud:RemoveCustomStatic("cs_radiation_danger")
     end
   end
+--]=]
   amk.oau_watchdog=189
 --  if not self.object:is_talking() then 
 --	dunin_ammo.on_update()
@@ -1240,7 +1242,7 @@ end
       upd_time4 = time + 500
       doc_viewer.update()
       amk.oau_watchdog=179
-	  babah.update(delta)
+--	  babah.update(delta)
       amk.oau_watchdog=178
 	  marsh_radiation.update()
 	  danger.enemy_calmdown()
@@ -1256,7 +1258,7 @@ end
   end
 
   amk.oau_watchdog=184
-  bind_det_arts.update()
+--  bind_det_arts.update()
   
   amk.oau_watchdog=0
   amk.oau_reason=""    

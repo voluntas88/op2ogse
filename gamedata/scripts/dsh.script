@@ -758,3 +758,38 @@ function map_remove_treasure( id )
     level.map_remove_object_spot( id, "crlc_big_treasure" .. spot )
   end
 end
+
+
+function create_and_map_treasure( name, descr, sect, pos, lvid, gvid )
+  local sobj = alife():create( sect, pos, lvid, gvid )
+  if ui_mm_opt_main.GetOption( "map_some_treasures" ) then
+    local text = "%c[255,238,155,23]" .. name .. "\\n"
+      .. "%c[default]" .. descr
+    map_add_treasure( sobj.id, "treasure", text )
+  end
+  return sobj
+end
+
+
+function can_map_fraer()
+  local sobj = alife():object( "sim_stalker_fraer" )
+  if sobj then
+    if level.map_has_object_spot( sobj.id, "blue_location" ) == 0 then
+      return sobj
+    end
+  end
+  return false
+end
+
+function take_fraer_spot()
+  local sobj = can_map_fraer()
+  if sobj then
+    local pk = xs_netpk.stalker( sobj )
+    if pk:isOk() then
+      local data = pk:get()
+      level.map_add_object_spot_ser(
+        sobj.id, "blue_location", data.character_name
+      )
+    end
+  end
+end
