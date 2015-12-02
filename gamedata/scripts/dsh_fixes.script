@@ -2,6 +2,7 @@
 
 function attach( sm )
   sm:subscribe({ signal = "on_before_first_update", fun = this.on_first_update })
+  sm:subscribe({ signal = "on_before_spawn", fun = this.on_spawn })
 end
 
 
@@ -28,6 +29,7 @@ function on_first_update()
     this.fix_nevid_monolit,
     this.free_aver_otshelnik,
     this.free_aver_hunter,
+    this.fix_red_psy_dog_phantom,
   }
   local version = ogse.load_var( vname, 0 )
   if version < table.getn( fixes ) then
@@ -36,6 +38,11 @@ function on_first_update()
     end
     ogse.save_var( vname, table.getn( fixes ), "u32" )
   end
+end
+
+
+function on_spawn()
+  fix_bar_barman()
 end
 
 
@@ -339,7 +346,6 @@ function fix_gener_spawn_tvari()
     [ "red_m_poltergeist_strong_flame" ] = 14943,
     [ "red_m_poltergeist_normal_tele"  ] = 14945,
     [ "red_m_poltergeist_normal_tele_0000" ] = 14946,
-    [ "red_psy_dog_phantom"            ] = 14924,
   }
   for name, spawn_id in pairs( tvari ) do
     local sobj = alife():object( name )
@@ -405,4 +411,31 @@ end
 
 function free_aver_hunter()
   free_smart_terrain( "aver_hunter" );
+end
+
+
+function fix_red_psy_dog_phantom()
+  local sobj = alife():object( "red_psy_dog_phantom" )
+  if sobj then
+    log2( "dsh: deleting %s", sobj:name() )
+    smart_terrain.unregister_npc( sobj )
+    se_respawn.on_release_npc( sobj.id )
+    dsh_respawn.on_release_npc( sobj.id )
+    alife():release( sobj )
+  end
+end
+
+
+function fix_bar_barman()
+  if level.name() == "l05_bar" then
+    local sobj = alife():object( "bar_barman" )
+    if sobj then
+      local patrol = patrol( "bar_barman_hole_walk" )
+      alife():teleport_object(
+        "", patrol:point( 0 ),
+        patrol:level_vertex_id( 0 ), patrol:game_vertex_id( 0 ),
+        sobj.id
+      )
+    end
+  end
 end

@@ -164,6 +164,7 @@ local game_reloaded = true -- во время ЧУ после перезагрузки игры спецэффекты бу
 local last_sound_t
 function horortime()
 	if (meceniy_utils.hell == 0) or (not tabl_horror_by_level[level.name()]) then return end
+	if db.actor:has_info( "pre_blowout" ) then return end
 	
 	local timeh =level.get_time_hours()
 	local timem =level.get_time_minutes()
@@ -408,11 +409,14 @@ function remove_horror_mutant()
 	if not remove_horror then return end
 	
 	local horror_m
-	for k, v in pairs (db.storage) do
+	for k, is_npc in pairs (db.creature) do
+	  if not is_npc then
 		horror_m = level.object_by_id(k)
 		if horror_m and horror_m:alive() and string.find(horror_m:name(), "_hell") then
+			horror_m:kill( horror_m )
 			alife():release(alife():object(horror_m:id()))
 		end
+	  end
 	end
 end
 
