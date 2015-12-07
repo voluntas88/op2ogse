@@ -774,8 +774,7 @@
   
    <info_portion id="agr_krot_PDA_have">
 		<disable>agr_krot_PDA_start</disable>
-<!--                <action>buusty_dialog.specnaz_krot_sms</action> -->
-                <action>buusty_dialog.voyaki_zasada_krot</action>
+                <action>buusty_dialog.specnaz_krot_sms</action>
    </info_portion>
    
    <info_portion id="agr_krot_PDA_done">
