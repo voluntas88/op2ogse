@@ -8,8 +8,8 @@ dsh mod для ОП-2
 
 Ссылки для скачивания:
 
-- https://yadi.sk/d/tJRiGg6JmCaSj
-- https://drive.google.com/open?id=0B0h2HnCBW9H1LTBZOWVkWVp5OXM
+- https://yadi.sk/d/bAJAPCIPmLNFs
+- https://drive.google.com/open?id=0B0h2HnCBW9H1b2J6VVFaaVF5b2c
 - Что бы прицельные сетки круглые были: https://yadi.sk/d/1HZMZAn6gEp3W
 - Худ под меня: https://yadi.sk/d/5G_TkvICmB4ty
 - Некоторые текстуры на любителя: https://yadi.sk/d/jQCakrvFkQtk7
@@ -383,6 +383,10 @@ dsh mod для ОП-2
 - Удаляем или переименовываем gamedata, если есть
 
 - Копируем всё из архива в папку с игрой и соглашаемся на замену.
+
+  При использовании стороннего худа (т.е. не встроенного и не моего),
+  необходимо скопировать gamedata.dbw0 из папки compat. Иначе СМСки могут
+  отображаться не в том месте.
 
 - Всё.
 
