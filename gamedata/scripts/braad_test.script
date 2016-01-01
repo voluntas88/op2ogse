@@ -2068,9 +2068,20 @@ news_manager.send_tip(db.actor,"%c[255,160,160,160]".."СИДОРОВИЧ:".."\\n".."%c[2
 db.actor:give_info_portion("mitya_dead_sms_sidor")
 end
 
+
 function spawn_green()
+<<<<<<< HEAD
 local obj = sak.set_mark_on_tajnik("green_ruk",vector():set(228.335338,-7.298178,67.8218),143611,3319)
+=======
+  dsh.create_and_map_treasure(
+    "Документы для Клыка",
+    "...иди всё время прямо мимо кострища, до танка, вот возле него и поищи рюкзак, документы в нём.",
+    "green_ruk",
+    vector():set( 228.335338, -7.298178, 67.8218 ), 143611, 3319
+  )
+>>>>>>> 8f9ead06a1b03076cb0084bcdaed001165525b29
 end
+
 
 function clear_actor(npc)
     local npc = db.actor
@@ -2280,9 +2291,21 @@ level_new.create_level_changer(18112, vector():set(-45.602458953857,18.978830337
         end
 end
 
+
 function BitvaKL_rukzak() 
+<<<<<<< HEAD
 	local obj = sak.set_mark_on_tajnik("bitvakl_ruk",vector():set(201.8493347168,-2.1620719432831,-79.324325561523),129996,3316)
+=======
+  dsh.create_and_map_treasure(
+    "Тайник опытного сталкера",
+    "Наши все знают, где он лежит, но никто не отважился его взять. Потому, что главная трудность - остаться в живых. Если хочешь - можешь попробовать. Он где-то недалеко от аномалии, что в лесу.",
+    "bitvakl_ruk",
+    vector():set( 201.8493347168, -2.1620719432831, -79.324325561523 ),
+    129996, 3316
+  )
+>>>>>>> 8f9ead06a1b03076cb0084bcdaed001165525b29
 end
+
 
 function checking_taken_item60(obj)
   if obj:section()=="bitvakl_pda" then 

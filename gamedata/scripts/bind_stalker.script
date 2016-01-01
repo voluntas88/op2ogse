@@ -198,6 +198,7 @@ function actor_binder:net_destroy()
   self.object:set_callback(callback.death, nil)
   self.object:set_callback(callback_ex.entity_alive_before_hit, nil)
   self.object:set_callback(callback_ex.on_before_use_item, nil)
+  self.object:set_callback(callback_ex.on_after_save, nil)
 
   if sr_psy_antenna.psy_antenna then
     sr_psy_antenna.psy_antenna:destroy()
@@ -273,13 +274,14 @@ function actor_binder:reinit()
   --
   self.object:set_callback(callback_ex.entity_alive_before_hit, self.before_hit_callback, self)
   self.object:set_callback(callback_ex.on_before_use_item, self.before_use, self)
+  self.object:set_callback(callback_ex.on_after_save, self.after_save, self)
 
   self.am:call("on_reinit")
   event("actor_reinit"):trigger()
 end
 
 function actor_binder:hud_animation_end(a1, blend_addr)
-	local addr = sum_args(blend_addr, 56)
+	local addr = sum_args_ex(blend_addr, 56)
 	local value = db.actor:get_memory_int("", addr)
 
 	--log3("[actor_binder:hud_animation_end] blend_addr = %x, v = %d, a1 = %d", blend_addr, value, a1)
@@ -598,6 +600,7 @@ fly.returner_clear_pos(obj)
 	-- должен в итоге быть монолитовцем при определенных условиях
 	snp.join_monolith()
 
+--[=[
 	-- фикс переодевания гг при взятии броника
 	if obj:clsid() == clsid.equ_stalker_s then
 		local outfit = db.actor:get_current_outfit()
@@ -605,6 +608,8 @@ fly.returner_clear_pos(obj)
 			db.actor:transfer_item(outfit, db.actor)
 		end
 	end
+--]=]
+    buusty_dialog.use_money(obj)
 
         local sobj = sim:object(obj:id()) 
         if sobj then -- такое бывает, если до этого объект был удалён в on_ruck
@@ -1399,8 +1404,6 @@ function actor_binder:save(packet)
 	archievements.acv_count_event("acv_skit", 300, "Скиталец")
   end
 
-  collectgarbage("collect")
-  
   if rx_ai then rx_ai.actor_save(packet) end
 
   local pk1=fake_net_packet.fake_net_packet()
@@ -1591,6 +1594,12 @@ function actor_binder:rotting()
 		level.remove_pp_effector(5436)
 	end
 end
+
+
+function actor_binder:after_save()
+  self.am:call( "on_after_save" )
+end
+
 
 --старт префетча звуков
 --if string.find(command_line(), "-noprefetch") == nil then
