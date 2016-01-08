@@ -1,6 +1,7 @@
 -- -*- mode: lua; coding: windows-1251-dos -*-
 -- Биндер фотоаппарата
 
+local global_flag
 -- фото местности с указанных точек
 local territory_from_places = {
 	[1] = { -- Затон гаусс-установка
@@ -205,6 +206,10 @@ function foto_binder:update( delta )
     db.actor:active_item()
     and db.actor:active_item():id() == self.object:id()
   then -- активен фотоаппарат
+	if self:check_territory_from_places() or self:check_creatures() or self:check_anomaly() then
+		snd = xr_sound.get_safe_sound_object([[device\pda\pda_tip]])
+		snd:play_no_feedback(actor, sound_object.s2d, 0, vector(), 1.0)
+	end
     local state = db.actor:active_item():get_hud_item_state()
     if state ~= self.last_weapon_state then
       self.last_weapon_state = state
@@ -215,6 +220,7 @@ function foto_binder:update( delta )
           or self:check_anomaly()
           or self:check_territory_from_places()
         then
+			global_flag = true
         end
       end
     end
@@ -236,9 +242,11 @@ function foto_binder:check_territory_from_places()
 				b = territory_from_places[i].places[j]
 
 				if not has_alife_info(b.info) and db.actor:position():distance_to(vector():set(b.position.x,b.position.y,b.position.z)) < b.radius then
-					-- этого снимка еще не было и ракурс правильный - засчитываем фото.
-					news_manager.send_tip(db.actor, a.sms, nil, nil, 10000)
-					db.actor:give_info_portion(b.info)
+					if global_flag then
+						-- этого снимка еще не было и ракурс правильный - засчитываем фото.
+						news_manager.send_tip(db.actor, a.sms, nil, nil, 10000)
+						db.actor:give_info_portion(b.info)
+					end
 					return true
 				end
 			end
@@ -263,7 +271,7 @@ function foto_binder:check_creatures()
   local section = obj:section()
   -- монстры
   if
-    IsMonster( obj ) and obj:alive()
+    IsMonster( obj )
     and not protected_items.is_monster_friend( section )
   then
     local clsid = obj:clsid()
@@ -279,9 +287,10 @@ function foto_binder:check_creatures()
         and not has_alife_info( "monster_stealth_" .. silent_hunt_monsters[ clsid ] )
       )
       and self:obj_in_shot(
-        obj:bone_position( "bip01_head" ), 0, 2, 3.5, true, nil, true
+        obj:bone_position( "bip01_head" ), 0, 10, 3.5, true, nil, false
       )
     then
+		if global_flag then
       -- удачный снимок и такого еще не было
       news_manager.send_tip(
         db.actor,
@@ -298,6 +307,7 @@ function foto_binder:check_creatures()
       db.actor:give_info_portion(
         "monster_stealth_" .. silent_hunt_monsters[ clsid ]
       )
+	  end
       return true
 				
     -- затем фото уникальных монстров
@@ -305,14 +315,16 @@ function foto_binder:check_creatures()
       foto_unique_monster[ section ]
       and has_alife_info( foto_unique_monster[ section ].has_info )
       and not has_alife_info( foto_unique_monster[ section ].info )
-      and ( dist >= 5 and dist <= 10 )
+      and ( dist >= 0 and dist <= 10 )
     then
+		if global_flag then
       -- удачный снимок и такого еще не было
       news_manager.send_tip(
         db.actor,
         "Уникальный монстр сфотографирован." .. "\n", nil, nil, 10000
       )
       db.actor:give_info_portion( foto_unique_monster[ section ].info )
+	  end
       return true
 
     -- затем обычную охоту
@@ -323,13 +335,15 @@ function foto_binder:check_creatures()
       )
       and foto_ohota_monsters[ section ]
       and not has_alife_info( foto_ohota_monsters[ section ] )
-      and ( dist >= 5 and dist <= 10 )
+      and ( dist >= 0 and dist <= 10 )
     then
+	if global_flag then
       -- удачный снимок и такого еще не было
       news_manager.send_tip(
         db.actor, "Монстр сфотографирован." .. "\n", nil, nil, 10000
       )
       db.actor:give_info_portion( foto_ohota_monsters[ section ] )
+	  end
       return true
     end
   end
@@ -355,13 +369,14 @@ function foto_binder:check_anomaly()
         -- внутри это: {id=id,name=obj:name(),pos=o.pos,radius=o.radius}
         if
           string.find( anom.name, anom_sect )
-          and self:obj_in_shot( anom.pos, 5, 10, 7.0, false, nil, false )
         then
+		if global_flag then
           -- удачный снимок
           news_manager.send_tip(
             db.actor, "Аномалия сфотографирована." .. "\n", nil, nil, 10000
           )
           db.actor:give_info_portion( info )
+		  end
           return true
         end
       end
@@ -384,6 +399,7 @@ actor_danger - проверять ли данжер ГГ. Если true, то фото засчитывается только е
 function foto_binder:obj_in_shot(trg_pos, min_dist, max_dist, max_angle, use_scope, trg_loc, actor_danger)
 
 	-- территория цели задана, но загружена другая или неправильно использован прицел, или неправильный данжер - ничего не делаем
+	if not global_flag then actor_danger = nil end
   if
     ( trg_loc and trg_loc ~= level.name() ) or
     (     use_scope and not bind_stalker.scopeUsed ) or

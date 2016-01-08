@@ -729,12 +729,28 @@ function taynik_kuznec1_info()
 	db.actor:give_info_portion("taynik1_kuznec"..tostring(math.random(2)))
 end
 function taynik_kuznec1_1_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box3",vector():set(123.43962097168,6.6301230476379,341.17449951172),427963,233)
-	sak.set_mark_on_tajnik("a_inventory_box3",vector():set(32.637260437012,21.834377288818,156.37063598633),358866,97)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Кордоне", "a_inventory_box3",
+    vector():set( 123.43962097168, 6.6301230476379, 341.17449951172 ),
+    427963, 233
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Кордоне", "a_inventory_box3",
+    vector():set( 32.637260437012, 21.834377288818, 156.37063598633 ),
+    358866, 97
+  )
 end
 function taynik_kuznec1_2_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box3",vector():set(123.43962097168,6.6301230476379,341.17449951172),427963,233)
-	sak.set_mark_on_tajnik("a_inventory_box3",vector():set(32.637260437012,21.834377288818,156.37063598633),358866,97)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Кордоне", "a_inventory_box3",
+    vector():set( 123.43962097168, 6.6301230476379, 341.17449951172 ),
+    427963, 233
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Кордоне", "a_inventory_box3",
+    vector():set( 32.637260437012, 21.834377288818, 156.37063598633 ),
+    358866, 97
+  )
 end	
 function taynik_kuznec1_have()
 	if new_dialog.item_much("karta_8tref",2) then
@@ -759,7 +775,11 @@ function taynik_kuznec2_have()
 end
 function taynik_kuznec2_spawn(actor,npc,p1,p2)
 	for _,a in pairs(taynik_kuznec2) do
-		sak.set_mark_on_tajnik("a_inventory_box4", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+		dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Кордоне", "a_inventory_box4",
+    vector():set( a.position.x, a.position.y, a.position.z ),
+    a.lv, a.gv
+  )
 	end
 end
 
@@ -772,7 +792,11 @@ function taynik_kuznec3_have()
 	end
 end
 function taynik_kuznec3_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box5",vector():set(149.54742431641,3.76469373703,-223.22738647461),349173,927)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник в Тёмной Долине", "a_inventory_box5",
+    vector():set( 149.54742431641, 3.76469373703, -223.22738647461 ),
+    349173, 927
+  )
 end
 	
 function taynik_kuznec4_have()
@@ -784,19 +808,39 @@ function taynik_kuznec4_have()
 	end
 end
 function taynik_kuznec4_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box6",vector():set(-199.0694732666,8.1113412399292,-298.42422485352),36972,689)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box6",
+    vector():set( -199.0694732666, 8.1113412399292, -298.42422485352 ),
+    36972, 689
+  
 end
 
 function taynik_kuznec5_info()
 	db.actor:give_info_portion("taynik5_kuznec"..tostring(math.random(2)))
 end
 function taynik_kuznec5_1_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box7",vector():set(-114.99775695801,7.4299039840698,-222.6524810791),123678,552)
-	sak.set_mark_on_tajnik("a_inventory_box7",vector():set(-176.77235412598,10.016658782959,-155.35186767578),60327,560)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box7",
+    vector():set( -114.99775695801, 7.4299039840698, -222.6524810791 ),
+    123678, 552
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box7",
+    vector():set( -176.77235412598, 10.016658782959, -155.35186767578 ),
+    60327, 560
+  )
 end
 function taynik_kuznec5_2_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box7",vector():set(-114.99775695801,7.4299039840698,-222.6524810791),123678,552)
-	sak.set_mark_on_tajnik("a_inventory_box7",vector():set(-176.77235412598,10.016658782959,-155.35186767578),60327,560)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box7",
+    vector():set( -114.99775695801, 7.4299039840698, -222.6524810791 ),
+    123678, 552
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box7",
+    vector():set( -176.77235412598, 10.016658782959, -155.35186767578 ),
+    60327, 560
+  )
 end	
 function taynik_kuznec5_have()
 	if new_dialog.item_much("karta_6chervi",2) then
@@ -816,19 +860,39 @@ function taynik_kuznec6_have()
 	end
 end
 function taynik_kuznec6_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box8",vector():set(41.537700653076,9.9462509155273,54.984855651855),25247,2003)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Радаре", "a_inventory_box8",
+    vector():set( 41.537700653076, 9.9462509155273, 54.984855651855 ),
+    25247, 2003
+  )
 end
 
 function taynik_kuznec7_info()
 	db.actor:give_info_portion("taynik7_kuznec"..tostring(math.random(2)))
 end
 function taynik_kuznec7_1_spawn()
-	sak.set_mark_on_tajnik("taynik_kuznec7",vector():set(-128.86723327637,4.9985480308533,-204.93440246582),110680,621)
-	sak.set_mark_on_tajnik("taynik_kuznec7",vector():set(-149.107421875,9.9987936019897,-196.31205749512),88780,627)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "taynik_kuznec7",
+    vector():set( -128.86723327637, 4.9985480308533, -204.93440246582 ),
+    110680, 621
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "taynik_kuznec7",
+    vector():set( -149.107421875, 9.9987936019897, -196.31205749512 ),
+    88780, 627
+  )
 end
 function taynik_kuznec7_2_spawn()
-	sak.set_mark_on_tajnik("taynik_kuznec7",vector():set(-128.86723327637,4.9985480308533,-204.93440246582),110680,621)
-	sak.set_mark_on_tajnik("taynik_kuznec7",vector():set(-149.107421875,9.9987936019897,-196.31205749512),88780,627)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "taynik_kuznec7",
+    vector():set( -128.86723327637, 4.9985480308533, -204.93440246582 ),
+    110680, 621
+  )
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Агропроме", "taynik_kuznec7",
+    vector():set( -149.107421875, 9.9987936019897, -196.31205749512 ),
+    88780, 627
+  )
 end	
 function taynik_kuznec7_have()
 	if new_dialog.item_much("karta_8piki",2) then
@@ -848,7 +912,11 @@ function taynik_kuznec8_have()
 	end
 end
 function taynik_kuznec8_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box9",vector():set(-37.72583770752,-2.5012285709381,-24.188243865967),2036,1962)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на Радаре", "a_inventory_box9",
+    vector():set( -37.72583770752, -2.5012285709381, -24.188243865967 ),
+    2036, 1962
+  )
 end
 	
 function taynik_kuznec9_have()
@@ -860,7 +928,11 @@ function taynik_kuznec9_have()
 	end
 end
 function taynik_kuznec9_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box10",vector():set(1003.2965698242,0.90111553668976,-97.850746154785),449522,2395)
+	dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник на ЧАЭС-1", "a_inventory_box10",
+    vector():set( 1003.2965698242, 0.90111553668976, -97.850746154785 ),
+    449522, 2395
+  )
 end
 
 local taynik_kuznec10={
@@ -877,7 +949,11 @@ function taynik_kuznec10_have()
 end
 function taynik_kuznec10_spawn(actor,npc,p1,p2)
 	for _,a in pairs(taynik_kuznec10) do
-		sak.set_mark_on_tajnik("a_inventory_box11", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
+		dsh.create_and_map_treasure(
+    "Тайник Кузнецова", "Найти тайник в Красном лесу", "a_inventory_box11",
+    vector():set( a.position.x, a.position.y, a.position.z ),
+    a.lv, a.gv
+  )
 	end
 end
 
@@ -2515,7 +2591,7 @@ local fotik_gigant={
 }
 function fotik_gigant_spawn()
 	local a, se_obj
-	se_obj = sak.set_mark_on_tajnik("a_inventory_box18",vector():set(324.58978271484,-6.4117212295532,-15.256425857544),1445175,2902)
+	se_obj = dsh.create_and_map_treasure( "Запасной фотоаппарат", "Найти рюкзак с фотиком", "a_inventory_box18",vector():set(324.58978271484,-6.4117212295532,-15.256425857544),1445175,2902)
 	se_obj = dsh.create_free_monster("gigant_jumper_normal",vector():set(361.50482177734,-1.4434212446213,14.408556938171),1515039,2902)
 	se_obj = dsh.create_free_monster("gigant_virus_strong",vector():set(361.50482177734,-1.4434212446213,14.408556938171),1515039,2902)
 		for i=1,table.getn(fotik_gigant) do
@@ -2606,7 +2682,13 @@ function klad_labirint_done()
 	aem_manager.manage_money(15000, "in")
 end
 function klad_labirint_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box19",vector():set(-166.79165649414,28.24934387207,388.24057006836),138455,2971)
+	 dsh.create_and_map_treasure(
+    "Найти клад в Лабиринте",
+    "Приблизительное месторасположение - нижние уровни Лабиринта, где много аномалий 'Электра'.",
+    "a_inventory_box19",
+    vector():set( -166.79165649414, 28.24934387207, 388.24057006836 ),
+    138455, 2971
+  )
 	dsh.create_free_monster("carlic",vector():set(-182.0979309082,20.749319076538,389.13494873047),131547,2968)
 	dsh.create_free_monster("carlic_strong",vector():set(-179.65631103516,20.39778137207,445.51089477539),132531,2969)
 	dsh.create_free_monster("carlic_weak",vector():set(-101.86251831055,23.483583450317,472.60949707031),151722,2975)
@@ -2656,7 +2738,12 @@ function klad_op_done()
 	sak.create_items_actor("ammo_kumul_82",5)
 	sak.create_items_actor("wpn_ak109",1)
 	aem_manager.manage_money(30000, "in")
-	sak.set_mark_on_tajnik("a_inventory_box21",vector():set(-310.78189086914,35.633766174316,-155.2646484375),342190,3672)
+	dsh.create_and_map_treasure(
+	  "Тайна 'Соснодуба'", "...Ветви Соснодуба скроют что угодно...",
+	  "a_inventory_box21",
+	  vector():set( -310.78189086914, 35.633766174316, -155.2646484375 ),
+	  342190, 3672
+	)
 	dsh.create_free_monster("karlito",vector():set(-303.94918823242,23.623178482056,-199.04792785645),339425,3671)
 	dsh.create_free_monster("bear",vector():set(-347.77029418945,22.674238204956,-171.49975585938),259278,3662)
 	dsh.create_free_monster("fracture_karlik",vector():set(-294.04278564453,20.550548553467,-132.43006896973),358459,3672)
@@ -2672,7 +2759,12 @@ function klad_op_done()
 	dsh.create_free_monster("zombie_hell",vector():set(-306.90948486328,12.077053070068,-163.10101318359),334194,3672)
 end
 function klad_op_spawn()
-	sak.set_mark_on_tajnik("a_inventory_box20",vector():set(56.983715057373,-13.500636100769,-183.79080200195),966743,2908)
+	dsh.create_and_map_treasure(
+    "Найти клад в Огненной пещере", "",
+    "a_inventory_box20",
+    vector():set( 56.983715057373, -13.500636100769, -183.79080200195 ),
+    966743, 2908
+  )
 end
 function taynik_sosnodub_have()
 	if new_dialog.item_much("wpn_oicw",1) and 
