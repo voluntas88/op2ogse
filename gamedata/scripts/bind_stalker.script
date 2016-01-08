@@ -558,7 +558,6 @@ kostya_dialog.checking_taken_item61(obj)
 kostya_dialog.checking_taken_item62(obj)
 kostya_dialog.checking_taken_item63(obj)
 kostya_dialog.checking_taken_item64(obj)
-kostya_dialog.checking_taken_item_vzn(obj)
 kostya_dialog.peshera_go(obj)
 snp.checking_taken_item_snp(obj)
 archievements.on_receive_count_item(obj)
@@ -1241,7 +1240,7 @@ end
   elseif upd_time5 < time then
     upd_time5 = time + 120000
 	  fly_island.check_code()
-	  buusty_dialog.xo_repair_finished()
+	  -- buusty_dialog.xo_repair_finished()
   end
   if upd_time4 == nil then
       upd_time4 = time + 500

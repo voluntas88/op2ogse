@@ -3919,6 +3919,8 @@ end
 function otkr_perex_zaton_sms1()
 news_manager.send_tip(db.actor, "%c[255,160,160,160]".."СТРЕЛОК:".."\\n".."%c[255,255,128,128]Эй, Парфюмер, догоняй... похоже - здесь есть какой-то телепорт... Встретимся после портала.".."".."\n", nil, nil, 20000, nil, [[characters_voice\ozvuchka\strelok_dcity3]])
 end
+
+
 function otkr_perex_zaton_sms2()
   news_manager.send_tip(
     db.actor,
@@ -3930,6 +3932,8 @@ function otkr_perex_zaton_sms2()
   amk.start_timer( "run2", 7, "oksana_spawn.akim_panic()" )
   dsh.black_doc_exo_start_sms_delayed()
 end
+
+
 function acv_sol()
 db.actor:give_info_portion("acv_sol")
 end
@@ -4384,6 +4388,7 @@ local se_obj = alife():object("zvezd_after_warl")
   end
 end
 
+
 --' спавним тайники с эмбрионами на болотах
 function spawn_embrion_taynik()
   dsh.create_and_map_treasure(
@@ -4405,6 +4410,7 @@ function spawn_embrion_taynik()
     vector():set( -216.538, -0.381, 385.430 ), 39492, 3361
   )
 end
+
 
 --' проверим наличие эмбрионов
 function boloto_provod_vstrecha_have()
