@@ -812,7 +812,7 @@ function taynik_kuznec4_spawn()
     "Тайник Кузнецова", "Найти тайник на Агропроме", "a_inventory_box6",
     vector():set( -199.0694732666, 8.1113412399292, -298.42422485352 ),
     36972, 689
-  
+  )
 end
 
 function taynik_kuznec5_info()
