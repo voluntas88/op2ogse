@@ -2313,7 +2313,7 @@ if game_options.run_blowout_pp == 1 then
 		end
 		amk.start_timer("blowout_ss",math_random(5,15),0)
 		amk.start_timer("blowout",11,0)
-		blowout_modif_arts()
+		dsh.blowout_modif_arts()
 	end
 	start_blow_timer()
 end
@@ -2537,43 +2537,6 @@ function initial_spawn(action)
 		end
 	end
 	if fr==1 then create_anoms() end
-end
-
-function blowout_modif_arts()
-	local arts = {
-		["af_cry_2"] = true,
-		["af_cry_3"] = true,
-		["af_babka_3"] = true,
-		["af_babka_4"] = true,
-		["af_dik_3"] = true,
-		["af_dik_4"] = true,
-		["af_spirit_3"] = true,
-		["af_spirit_4"] = true,
-		["af_armor_3"] = true,
-		["af_armor_4"] = true,
-		["af_pudd_3"] = true,
-		["af_pudd_4"] = true,
-		["af_kol_3"] = true,
-		["af_kol_4"] = true,
-		["af_caterpillar"] = true,
-		["af_simbion"] = true,
-		["af_dummy_battery_red"] = true,
-		["af_dummy_spring_red"] = true,
-		["af_dummy_pellicle_red"] = true,
-	}
-	
-	local obj
-	for i=1,65534 do
-		obj = alife():object(i)
-		if obj and arts[obj:section_name()] and math.random() < 0.05 then
-			if obj.parent_id == 65535 then
-				alife():create("af_buliz", obj.position, obj.m_level_vertex_id, obj.m_game_vertex_id)
-			else
-				alife():create("af_buliz", obj.position, obj.m_level_vertex_id, obj.m_game_vertex_id, obj.parent_id)
-			end
-			alife():release(obj)
-		end
-	end
 end
 
 --'*******************************************************************************
@@ -3424,66 +3387,6 @@ function repair_armor(val)
 		last_condition=val
 		armor:set_condition(val)
 	end
-end
-
-function check_armor()
-	local armor = db.actor:item_in_slot(6)
-	local weapon = db.actor:item_in_slot(2)
-	
-	if db.actor:active_slot()==2 and weapon then
-		local tmp
-		if armor then 
-			tmp = armor:section()
-		else
-			tmp = "none"
-		end
-
-		if (not string_find(tmp, "exo")) and weapon:section()=="wpn_m_134" then 
-			db.actor:drop_item(weapon)
-			local tmpw = amk.spawn_item_in_inv("wpn_m_134")
-			db.actor:transfer_item(weapon,db.actor)
-			alife():release(tmpw)
-			news_manager.send_tip(db.actor, game.translate_string("wpn-m_134-no_exo_message"), nil, "nano", 5000)
-		end
-		if (not string_find(tmp, "exo")) and weapon:section()=="wpn_m_134_baty" then 
-			db.actor:drop_item(weapon)
-			local tmpw = amk.spawn_item_in_inv("wpn_m_134_baty")
-			db.actor:transfer_item(weapon,db.actor)
-			alife():release(tmpw)
-			news_manager.send_tip(db.actor, game.translate_string("wpn-m_134-no_exo_message"), nil, "nano", 5000)
-		end
-		if (not string_find(tmp, "exo")) and weapon:section()=="wpn_kord" then 
-			db.actor:drop_item(weapon)
-			local tmpw = amk.spawn_item_in_inv("wpn_kord")
-			db.actor:transfer_item(weapon,db.actor)
-			alife():release(tmpw)
-			news_manager.send_tip(db.actor, game.translate_string("wpn-m_134-no_exo_message"), nil, "nano", 5000)
-		end
-		if (not string_find(tmp, "exo")) and weapon:section()=="wpn_kord_m1" then 
-			db.actor:drop_item(weapon)
-			local tmpw = amk.spawn_item_in_inv("wpn_kord_m1")
-			db.actor:transfer_item(weapon,db.actor)
-			alife():release(tmpw)
-			news_manager.send_tip(db.actor, game.translate_string("wpn-m_134-no_exo_message"), nil, "nano", 5000)
-	  end
-	end
-	
---[[
-	if not armor then
-		last_armor_id=0
-		return
-	end
-	if armor:id()~=last_armor_id then
-		last_armor_id=armor:id()
-		last_condition=armor:condition()
-		return
-	end
-	if last_condition<armor:condition() then
-		armor:set_condition(last_condition)
-	else
-		last_condition=armor:condition()
-	end
-]]
 end
 
 --[[

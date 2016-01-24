@@ -72,7 +72,7 @@ cam_step_angle_horz		= 0.25;0.4	;(degree) size of step camera moved in horizonta
 fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.00075 ;вероятность осечки при максимальном износе
 misfire_condition_k			= 0.05 
-condition_shot_dec 			= 0.0001 ;увеличение износа при каждом выстреле
+condition_shot_dec 		= 0.00015	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction                	= 0, 0, 1
@@ -177,6 +177,9 @@ silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
 silencer_light_time 		= 0.2
 
+dsh.requires_exo = true
+
+
 [wpn_kord_hud]
 
 shell_point			= -0.0,-0.005,-0.6
@@ -202,6 +205,7 @@ zoom_rotate_x			= 0.0010
 zoom_rotate_y			= 0.034750
 
 zoom_hide_crosshair	= true
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Корд-Уник ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------
