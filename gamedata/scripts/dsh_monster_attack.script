@@ -80,7 +80,7 @@ function bloodsucker_hit( obj )
       ) then
         binder.phantom_spawned_id = nil
         if math.random() < 0.4 then
-          need_phantom = true
+          need_phantom = false
         end
       end
     end
@@ -120,7 +120,7 @@ function dog_attack( obj )
       binder.phantom_spawned_id = nil
       local distance = obj:position():distance_to( enemy:position() )
       if distance > 2 and math.random() < 0.3 then
-        need_phantom       = true
+        need_phantom       = false
       else
         need_telepatic_hit = true
       end
