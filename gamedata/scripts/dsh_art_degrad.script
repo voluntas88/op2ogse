@@ -11,56 +11,56 @@
 
 local our_hits = {              -- какие типы хита будут обрабатываться
   [ hit.explosion ] = {
-    [ "max"  ] = 10,           -- порог поглощения
+    [ "max"  ] = 10000000,           -- порог поглощения
     [ "sect" ] = "explosion_immunity",
   },
   [ hit.fire_wound ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "fire_wound_immunity",
     [ "ignored_outfit_protection" ] = true,
   },
   [ hit.strike ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "strike_immunity",
   },
   [ hit.wound ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "wound_immunity",
   },
   [ hit.burn ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 100000000,
     [ "sect" ] = "burn_immunity",
   },
   [ hit.chemical_burn ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "chemical_burn_immunity",
   },
   [ hit.shock ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "shock_immunity",
   },
   [ hit.radiation ] = {
-    [ "max"  ] = 100,
+    [ "max"  ] = 100000000,
     [ "sect" ] = "radiation_immunity",
   },
   [ hit.telepatic ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "telepatic_immunity",
   },
   [ "bleeding" ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 10000000,
     [ "sect" ] = "bleeding_restore_speed",
   },
   [ "health" ] = {
-    [ "max"  ] = 10,
+    [ "max"  ] = 100000000,
     [ "sect" ] = "health_restore_speed",
   },
   [ "power" ] = {
-    [ "max"  ] = 1000,
+    [ "max"  ] = 1000000000,
     [ "sect" ] = "power_restore_speed",
   },
   [ "radiation" ] = {
-    [ "max"  ] = 1000,
+    [ "max"  ] = 5000000000,
     [ "sect" ] = "radiation_restore_speed",
   },
 }
