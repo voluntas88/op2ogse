@@ -1,6 +1,7 @@
+; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;; Автоматический гладкоствольный карабин Сайга12К ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-----------------------------------------------------------------------------------------------------
-[wpn_sayga12_sk1]:identity_immunities
+[wpn_sayga12_sk1]:identity_immunities,scope.1x,hud_wpn_fx.saiga
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\sayga12_sk1"					; option for Level Editor
@@ -157,7 +158,6 @@ silencer_light_var_range	= 0.5
 silencer_light_time 		= 0.2
 
 zoom_enabled		= true
-scope_zoom_factor	      = 50
 
 ;------------------------------ O.G.S.E. sound remake -----------------------
 ;звуки
@@ -169,6 +169,7 @@ snd_reload			        = weapons\sayga_sk1\sayga12k_reload, 0.5
 snd_shoot_grenade		= weapons\gen_grenshoot
 snd_reload_grenade	= weapons\gen_grenload
 snd_switch			= weapons\groza_switch
+
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;----------------------------------------------------------------------------- 
@@ -243,7 +244,7 @@ zoom_hide_crosshair	= true
 ;----------------------------------------------------------------------------------------------------------------------
 ;;;;;;;;;;;;;;;;;;;;;;;;; Полуавтоматический гладкоствольный карабин Сайга-12K «Самопал» ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;----------------------------------------------------------------------------------------------------------------------
-[wpn_sayga_un]:wpn_sayga12_sk1
+[wpn_sayga_un]:wpn_sayga12_sk1,scope.8x
 description		= enc_arsenal_sayga_un
 inv_name				= ars-sayga_un       
 inv_name_short			= ars-sayga_un 
@@ -292,7 +293,6 @@ scope_status			= 1
 silencer_status			= 2	
 grenade_launcher_status		= 1	
 
-scope_zoom_factor	 	      = 15
 scope_texture		= Arsenal_Mod\Crosshairs\scope_hunter.dds  ;wpn\wpn_crosshair_l85
 scope_name 					= wpn_addon_scope_hanter	
 scope_x 					= 72		
@@ -406,7 +406,7 @@ inv_grid_y         = 54
 grenade_vel		= 120
 
 ;;;;;;;;;;;;;;;;;;;;;;;; "Охотничий прицел" для некоторых дробовиков ОП-2 ;;;;;;;;;;;;;;;;;;;;;
-[wpn_addon_scope_hanter]:identity_immunities
+[wpn_addon_scope_hanter]:identity_immunities,scope.4x
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope_susat" ; option for Level Editor
@@ -426,5 +426,4 @@ inv_grid_height    = 1
 inv_grid_x         = 39
 inv_grid_y         = 58
 scope_texture	 = Arsenal_Mod\Crosshairs\scope_hunter.dds   ;Aaz\Sayga12K\scope_s1
-scope_zoom_factor	 = 20
 belt = true

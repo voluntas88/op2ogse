@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; –учной вариант шестиствольного пулемета "миниган" ’ћ-134 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;---------------------------------------------------------------------------------------------------------------------
-[wpn_m_134]:identity_immunities
+[wpn_m_134]:identity_immunities,scope.1x,hud_wpn_fx.pkm
 GroupControlSection		 	= spawn_group
 discovery_dependency 	 	= 
 $spawn                   	= "weapons\m_134"					; option for Level Editor
@@ -60,7 +60,7 @@ kill_msg_height		= 25
 ;-----------------------------------------------------------------------------------
 ;базова€ дисперси€
 fire_dispersion_base		= 1.0	;угол (в градусах) базовой дисперсии оружи€ (оружи€ зажатого в тисках)
-control_inertion_factor		= 1.04f
+control_inertion_factor		= 2.5
 disp_rate = 1.5
 
 ;отдача
@@ -143,8 +143,6 @@ zoom_enabled				= false
 ;zoom_enabled				= true
 
 scope_texture				= wpn\wpn_crosshair_g36
-
-scope_zoom_factor	    	= 45
 
 ;звуки
 snd_draw					= weapons\minigun_draw

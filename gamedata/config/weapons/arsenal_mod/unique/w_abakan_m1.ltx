@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Автомат Никонова АН-94 "снайперский" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;----------------------------------------------------------------------------------------------------------
-[wpn_abakan_m1]:identity_immunities
+[wpn_abakan_m1]:identity_immunities,scope.8x,hud_wpn_fx.abakan
 GroupControlSection		= spawn_group
 discovery_dependency	= 
 $spawn              	= "weapons\abakan"	; name and section in level editor
@@ -134,7 +134,6 @@ silencer_status			= 2							; 1 - permanent
 grenade_launcher_status		= 0							; 2 - attachable
 
 zoom_enabled			= true						; (on,off)zoom mode (right mouse button)
-scope_zoom_factor	    	      = 15 ;12						; fov for zoom mode
 scope_texture				= arsenal_mod\crosshairs\pso_3_new.dds
 
 scope_name 					= wpn_addon_scope			; section name for the attachable scope
@@ -168,6 +167,7 @@ snd_shoot_grenade			      = weapons\gp30\GP30_grenshoot
 snd_reload_grenade			= weapons\gp30\gp30_grenload, 1.0, 0.8
 snd_switch					= weapons\gp30\gp30_switch, 1.0, 0.5
 snd_silncer_shot			      = weapons\abakan_m2\shot_sil, 0.8  ;weapons\abakan\abakan_shoot_sil
+
 ;-----------------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------------

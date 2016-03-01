@@ -2,6 +2,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;; "инклуды" оружия;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#include "scope.ltx"
+#include "wpn_fx.ltx"
 #include "delayed_action_fuse.ltx"
 ;;;;;;;;;;;;;;;;;;;     Пистолеты        ;;;;;;;;;;;;;;;;;;;;
 #include "w_Raging_Bull.ltx"
@@ -1141,11 +1143,11 @@ inv_grid_x			= 4
 inv_grid_y			= 14
 
 k_dist			= 1
-k_disp			= 0.4
+k_disp			= 1
 k_hit			= 8
 k_impulse		= 3
 k_pierce		= 8
-impair			= 0.3
+impair			= 1
 buck_shot		= 1
 tracer			= off
 wm_size         = 0.02
@@ -1159,11 +1161,9 @@ cost			= 2700 ;1550
 box_size		= 3
 inv_name		= super_gauss
 inv_name_short	= super_gauss
-inv_weight		= .5
-k_dist			= 1.0
-k_hit			= 20
+k_hit			= 16
 k_impulse		= 0
-hit_fx_particle		= hit_fx\hit_gauss
+impair			= 2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;не править! Это для бинокля!
 [ammo_super_gauss1]:ammo_gauss
@@ -1771,7 +1771,7 @@ inv_weight				= 0
 cost				= 150
 
 blast				= 2.75 ;150
-blast_r			= 12
+blast_r			= 4 ;12
 blast_impulse		= 250
 ;delete
 blast_impulse_factor = 1
@@ -1780,7 +1780,7 @@ blast_impulse_factor = 1
 frags				= 30
 frags_r			= 18
 frag_hit			= 2.75
-frag_hit_impulse	= 300
+frag_hit_impulse	= 1 ;300
 
 hit_type_blast		= explosion
 hit_type_frag		= fire_wound
@@ -1839,6 +1839,8 @@ engine_present		= false		;присутствует ли в ракете двигатель
 lights_enabled		= false		;свет вокруг ракеты, во время полета
 force_explode_time  = 10000
 
+hit_fx_particle = hit_fx\hit_expl
+
 [wpn_fake_missile1]:identity_immunities
 $prefetch 		= 32
 visual                  = weapons\ammo\ammo_vog-25p.ogf
@@ -1850,7 +1852,7 @@ inv_weight				= 0
 cost					 = 150
 
 blast				= 2.85;150
-blast_r			= 12
+blast_r			= 5 ;12
 blast_impulse		= 250
 ;delete
 blast_impulse_factor    = 1
@@ -1859,7 +1861,7 @@ blast_impulse_factor    = 1
 frags				= 40
 frags_r			= 20
 frag_hit			= 3.0
-frag_hit_impulse	= 300
+frag_hit_impulse	= 1 ;300
 
 hit_type_blast		= explosion
 hit_type_frag		= fire_wound
@@ -1920,6 +1922,8 @@ trail_light_color 	= 0.6,0.5,0.3
 trail_light_range 	= 8.0
 force_explode_time  = 10000
 
+hit_fx_particle = hit_fx\hit_expl
+
 ; для полетов
 [wpn_fake_missile_fly]:wpn_fake_missile1
 blast				= 5.0
@@ -1935,7 +1939,7 @@ inv_weight				= 0
 cost					 = 150
 
 blast				= 2.7 ;150
-blast_r			= 12
+blast_r			= 4 ;12
 blast_impulse		= 250
 ;delete
 blast_impulse_factor = 1
@@ -1944,7 +1948,7 @@ blast_impulse_factor = 1
 frags				= 32
 frags_r			= 18
 frag_hit			= 2.75
-frag_hit_impulse	= 300
+frag_hit_impulse	= 1 ;300
 
 hit_type_blast		= explosion
 hit_type_frag		= fire_wound
@@ -2003,6 +2007,8 @@ lights_enabled 		= true			;свет вокруг ракеты, во время полета
 trail_light_color 	= 0.6,0.5,0.3
 trail_light_range 	= 8.0
 force_explode_time  = 10000
+
+hit_fx_particle = hit_fx\hit_expl
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Explosive Inventory Items
@@ -2528,7 +2534,7 @@ fire_wound_immunity		= 1.2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	WEAPON ADDON
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[wpn_addon_scope]:identity_immunities
+[wpn_addon_scope]:identity_immunities,scope.4x
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope" ; option for Level Editor
@@ -2551,12 +2557,11 @@ inv_grid_height		= 1
 inv_grid_x			= 18
 inv_grid_y			= 2
 scope_texture		= wpn\wpn_crosshair
-scope_zoom_factor	      = 20		;4.26666	;4.5	;Kahles CSX 1.1-4x24, 2x
 belt = true
 scope_sights_lighting	= wpn\wpn_crosshair_light
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[wpn_addon_scope_susat]:identity_immunities
+[wpn_addon_scope_susat]:identity_immunities,scope.4x
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope_susat" ; option for Level Editor
@@ -2581,7 +2586,6 @@ inv_grid_height		= 1
 inv_grid_x			= 19
 inv_grid_y			= 1
 scope_texture		= wpn\SUSAT-AMK-N
-scope_zoom_factor	= 20		;4.27	;4.5	;30		;SUSAT 2X 
 belt = true
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3356,6 +3360,8 @@ explosive		= on
 
 ;могут ли боеприпасы быть неограниченными : 1 - могут, 0 - не могут
 can_be_unlimited = true ;false
+
+hit_fx_particle = damage_fx\burn_creatures00
 
 ;Подствольный дробовик
 [wpn_addon_shotgun]:identity_immunities

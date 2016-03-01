@@ -1,6 +1,7 @@
+; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;; Винтовка AR-F (АК-203) ;;;;;;;;;;;;;;;;;;;;;;;
 ;---------------------------------------------------------------------
-[wpn_ak203]:identity_immunities
+[wpn_ak203]:identity_immunities,scope.1x,hud_wpn_fx.aek973
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\wpn_ak203"					; option for Level Editor
@@ -164,7 +165,6 @@ silencer_light_var_range	= 0.5
 silencer_light_time 		= 0.2
 
 zoom_enabled			= true
-scope_zoom_factor	            = 50
 
 ;звуки
 snd_draw			= weapons\generic_draw, 0.5
@@ -270,12 +270,13 @@ scope_y 				= 2
 snd_shoot			= weapons\ak10x_arma\ak100_shoot
 hud                     = wpn_akm203_pso_hud
 visual                  = weapons-new\akm203\wpn_ak203_lep.ogf
+
 [wpn_akm203_pso_hud]:wpn_ak203_hud
 visual                  = weapons-new\akm203\wpn_ak203_lep_hud.ogf
 
 ;;;;;;;;;;;;;;;;; Прицел «Leupold» ;;;;;;;;;;;;;;;;;;;
 ;-----------------------------------------------------
-[wpn_scope_lepoid]:identity_immunities
+[wpn_scope_lepoid]:identity_immunities,scope.8x
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope_susat" ; option for Level Editor
@@ -296,5 +297,4 @@ inv_grid_height		= 1
 inv_grid_x			= 39
 inv_grid_y			= 52
 scope_texture		= Arsenal_Mod\crosshairs\wpn_crosshair1
-scope_zoom_factor	      = 15	
 belt = true
