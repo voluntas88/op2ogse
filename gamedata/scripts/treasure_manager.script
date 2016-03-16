@@ -188,11 +188,28 @@ local rare_list = {
     "wpn_protecta",
     "wpn_g3_otdaca_ves",
     "wpn_scar_792",
-    "mutant_krovosos_jaw",
-    "mutant_burer_hand",
-    "mutant_hand_kontroler",
-    "mutant_psevdogigant_hand",
-    "mutant_chimera_kogot",
+    "wpn_m79_m1",
+    "wpn_k98",
+    "wpn_rpk74_sk1",
+    "wpn_g41",
+    "wpn_sr25_mk11_mod0_sk1",
+    "wpn_zastava_m76",
+    "wpn_sayga_un",
+    "wpn_m1891_30_scope",
+    "wpn_rg-6",
+    "wpn_rg6_m1",
+    "wpn_peceneg",
+    "wpn_m16a2_sk12",
+    "wpn_pps43",
+    "wpn_usas12",
+    "wpn_winch1887",
+    "wpn_mkb_42",
+    "wpn_svt40",
+    "wpn_mg42",
+    "wpn_kedr",
+    "wpn_awm",
+    "wpn_glock18",
+    "wpn_ump45",
     "mutant_deathclaw_antler",
     "mutant_raptor_kogot",
     "mutant_plague_hand",
@@ -202,34 +219,62 @@ local rare_list = {
     "mutant_zanoza_leg",
     "mutant_carlic_hand",
     "part_digitis_biblio",
+    "part_tarakan_strong",
     "bezoar",
     "mozg",
     "red_mozg",
     "mutant_burer_red_hand",
     "mutant_krovosos_red_jaw",
+    "mutant_gigant_cocoon",
+    "mutant_controller_cocoon",
+    "mutant_tushkano_cocoon",
+    "mutant_cat_cocoon",
+    "mutant_dog_cocoon",
+    "mutant_flesh_cocoon",
+    "mutant_psevdodog_cocoon",
+    "mutant_poltergeist_cocoon",
+    "mutant_krovosos_cocoon",
+    "mutant_chimera_cocoon",
+    "mutant_snork_cocoon",
+    "mutant_boar_cocoon",
+    "mutant_burer_cocoon",
+    "mutant_zombie_cocoon",
+    "mutant_rat_cocoon",
     "ammo_7.62x54_7h1",
     "ammo_7.62x54_ap",
     "ammo_7.62x54_7h14",
-    "ammo_12x70_buck",
-    "ammo_og-7b",
-    "grenade_rgd5",
     "ammo_7.62x54_izomorf",
-    "ammo_7.62x39_k",
-    "ammo_7.62x54r",
-    "ammo_357_ap_mag",
-    "ammo_12.7x108r",
+    "ammo_12x76_zhekan",
+    "ammo_12x76_dart",
+    "ammo_zhekan_izomorf",
+    "ammo_og-7b",
+    "grenade_m61",
     "ammo_balon",
     "ammo_12.7x108",
+    "ammo_gauss",
     "ammo_super_gauss",
+    "ammo_5.45x39_ap",
+    "ammo_5.45x39_izomorf",
+    "ammo_9x39_pab9",
+    "ammo_9x39_ap",
+    "ammo_9x39_sp5",
+    "ammo_9x39_izomorf",
     "svoboda_exoskeleton",
     "nebo_exo_outfit",
+    "nebo_scientific_outfit",
+    "nebo_heavy_outfit",
     "exo_bandit_outfit",
     "voen_exo_outfit",
     "exo_scientist_outfit",
     "exo_outfit",
     "dolg_black_exoskeleton",
     "killer_green_exoskeleton",
+    "killer_outfit",
     "seva_scient_outfit",
+    "broken_exoskeleton",
+    "killer_blue_exoskeleton",
+    "outfit_lethalspeed_exo_m1",
+    "outfit_lethalspeed_exo_m2",
     "af_simbion",
     "af_spirit_2",
     "af_cry_2",
@@ -241,20 +286,19 @@ local rare_list = {
     "af_kol_3",
     "af_armor_2",
     "af_armor_3",
+    "af_pero",
+    "caps_ameba",
+    "caps_electra",
+    "caps_gravi",
+    "caps_mosquito_bald",
+    "caps_mincer",
+    "caps_ice",
+    "caps_zharka",
+    "maz",
     "suvorotka",
-    "medkit_army",
+    "antizombie",
     "medkit_scientic",
-    "mutant_gigant_cocoon",
-    "mutant_controller_cocoon",
-    "wpn_m79_m1",
-    "wpn_k98",
-    "wpn_rpk74_sk1",
-    "wpn_g41",
-    "wpn_sr25_mk11_mod0_sk1",
-    "wpn_zastava_m76",
-    "wpn_sayga_un",
-    "wpn_m1891_30_scope",
-    "wpn_rg-6",
+    "treasure_item",
   }
 }
 
@@ -394,8 +438,9 @@ function CTreasure:use( npc )
     end
   end
 
-  if tr_sum == 0 or
-    dsh.get_next_random( script_name() .. ".rnd", 100 ) < 50
+  if
+    tr_sum == 0
+--    or dsh.get_next_random( script_name() .. ".rnd", 100 ) < 50
   then
     return
   end
@@ -455,11 +500,7 @@ function CTreasure:give_treasure( k )
 
     --' Пометить на карте
     local text = "%c[255,238,155,23]" .. game.translate_string( v.name ) .. "\\n" .. "%c[default]" .. game.translate_string( utils.cfg_get_string( self.ini, "treasure_manager." .. k, "description", nil, true, "" ) )
-    if ui_mm_opt_main.GetOption( "classic_treasure_icons" ) then
-      level.map_add_object_spot_ser( obj.id, "treasure", text )
-    else
-      dsh.map_add_treasure( obj.id, "treasure", text )
-    end
+    dsh.map_add_treasure( obj.id, "treasure", text )
 
     -- проверка, какой тип тайника выбран
     -- если тайник не именной, то заменим содержимое
@@ -608,7 +649,10 @@ function CTreasure:give_item_list()
    then
      -- броники, оружие
      cnt = 1
-   elseif string.find( s, "af" ) or string.find( s, "mutant" ) then
+   elseif
+     string.find( s, "^af_" )
+     or string.find( s, "^mutant_" ) or string.find( s, "^part_" )
+   then
      cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 2 )
    else
      cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 5 )

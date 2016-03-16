@@ -200,7 +200,6 @@ inv_name						= wpn-fort_m
 inv_name_short					= wpn-fort_m
 description						= enc_weapons1_wpn-fort_m1
 ammo_mag_size		 			= 14
-condition_shot_dec 				= 0.0001
 inv_grid_x						= 10
 inv_grid_y						= 21
 
@@ -217,7 +216,6 @@ ammo_class				= ammo_5.45x39_fmj, ammo_5.45x39_ap, ammo_5.45x39_izomorf
 inv_weight				= 3.75
 
 fire_dispersion_base			= 0.18		;0.000001 ;0.23		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-control_inertion_factor			= 1.25f
 
 ;--отдача
 cam_relax_speed         		= 9.5 		;скорость возврата в исходное положение
@@ -327,7 +325,6 @@ ammo_elapsed		 	= 8
 ammo_mag_size		 	= 8
 
 fire_dispersion_base			= 0.23	
-control_inertion_factor          	= 1.0f
 handling_factor				= 1.00
 cam_relax_speed         		= 15.0	
 cam_dispersion          		= 0.33	
@@ -545,7 +542,7 @@ position                = -0.021, -0.075, -0.0065
 ;addons
 scope_status			= 0
 zoom_enabled			= true
-fov for zoom mode 		= 35.0
+control_inertion_factor		= 1.0
 
 scope_name 				= wpn_addon_scope
 hud                      	= wpn_dark_gauss_hud
@@ -678,7 +675,6 @@ description						= enc_weapons1_wpn-colt_m1
 inv_name						= wpn-colt_m1
 inv_name_short					= wpn-colt_m1
 silencer_status					= 1
-condition_shot_dec 				= 0.0001
 inv_grid_x						= 18
 inv_grid_y						= 20
 ammo_mag_size			= 10
@@ -771,7 +767,6 @@ cam_dispersion          	= 0.15
 cam_dispertion_frac		= 0.25
 cam_max_angle			= 5.0
 misfire_probability 		= 0.0005
-condition_shot_dec 		= 0.0001
 
 hit_power               = 0.66
 hit_impulse		 	= 57
@@ -820,7 +815,6 @@ inv_grid_x						= 43
 inv_grid_y						= 63
 
 fire_dispersion_base			= 0.18
-control_inertion_factor			= 1.25f
 cam_relax_speed         		= 9.5
 cam_dispersion          	      = 0.06
 cam_dispersion_inc			= 0.08
@@ -892,7 +886,6 @@ description						= enc_weapons1_wpn-rg6_m1
 inv_name						= wpn-rg6_m1
 inv_name_short					= wpn-rg6_m1
 ammo_class		 				= ammo_m209
-condition_shot_dec 				= 0.0001
 inv_grid_x						= 5
 inv_grid_y						= 28
 ;-------------- S.T.A.L.K.E.R`s sound remake ------------------
@@ -908,7 +901,6 @@ inv_name	        			      = wpn-walther_m1
 inv_name_short					= wpn-walther_m1
 ammo_class		 				= ammo_9x18_fmj, ammo_9x18_pmm
 cost					 	= 1000
-condition_shot_dec 				= 0.0001
 inv_grid_x						= 24
 inv_grid_y						= 7
 hit_power               = 0.65
@@ -1460,7 +1452,6 @@ cost					 	= 7200
 [wpn_sig550_otdaca]:wpn_sig550
 $spawn             		     = "weapons\uniq\wpn_sig550_otdaca"
 fire_dispersion_base         = 0.075
-control_inertion_factor	     = 1.02f
 cam_relax_speed              = 15.25
 cam_dispersion               = 0.15	
 cam_dispersion_inc	     = 0.095	
