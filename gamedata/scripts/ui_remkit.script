@@ -139,7 +139,7 @@ else
 		self.message_box:Init("message_box_item_not_wanted")
 		self:GetHolder():start_stop_menu(self.message_box, true)
 		return
-	elseif self.rem_sect == "repair_item_outfit" and rep_item_cond < 0.75 then
+	elseif self.rem_sect == "repair_item_outfit" and rep_item_cond < 0.2 then
 --		ogse.send_tip("Это уже не починить.")
 		self.msgbox_id = 1
 		self.message_box:Init("message_box_item_not_repaireble")

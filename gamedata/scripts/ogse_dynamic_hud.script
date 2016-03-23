@@ -37,7 +37,8 @@ function on_spawn()
     script_name() .. ".helmet_on_off.status", true
   )
   if have_helmet then
-    suithud, suithud_enable = true,  false
+   -- suithud, suithud_enable = true,  false
+	suithud, suithud_enable = false,  false
   else
     suithud, suithud_enable = false, false
   end
@@ -490,13 +491,13 @@ function configure_outfit_helmet( obj )
     "radiation_protection",
     "telepatic_protection",
   }
-  if have_helmet then
+ -- if have_helmet then
     for _, k in ipairs( protections ) do
       set_outfit_protection( obj, k, get_float( obj:section(), k, 0 ) )
     end
-  else
-    for _, k in ipairs( protections ) do
-      set_outfit_protection( obj, k, 0 )
-    end
-  end
+ -- else
+    --for _, k in ipairs( protections ) do
+     -- set_outfit_protection( obj, k, 0 )
+    --end
+  --end
 end

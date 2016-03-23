@@ -95,18 +95,7 @@ ph_snd_themes["zaton_radio_fricev"] = {"music\\Deutsch\\Deutsch_1",
                               }
 
 
-ph_snd_themes["radio_music"] = {"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_12"
+ph_snd_themes["radio_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
 -- -------------------------------------------------------------ARENA_EXTENSION_MOD------------------------------------------------------------------
@@ -142,242 +131,46 @@ ph_snd_themes["dolg_matugalnik"]		= {[[characters_voice\scenario\bar\barman_mega
 
 -- -------------------------------------------------------------ARENA_EXTENSION_MOD------------------------------------------------------------------
 
-ph_snd_themes["radio_music_rock"] = {"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_10"
+ph_snd_themes["radio_music_rock"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
-ph_snd_themes["radio_music_rockn"] = {"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_10"
+ph_snd_themes["radio_music_rockn"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
-ph_snd_themes["radio_music_modern"] = {"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_12",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_13",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_14",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_15",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_16",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_17",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_18",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_19",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_20"
+ph_snd_themes["radio_music_modern"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
-ph_snd_themes["radio_music_smile"] = {"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_12",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_13",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_14",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_15",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_16",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_17",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_18",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_19",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_20",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_21",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_22",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_23",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_24"
+ph_snd_themes["radio_music_smile"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
-ph_snd_themes["radio_music_random"] = {"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\retro\\megafon_music_12",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\rock\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\rock_n_roll\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_12",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_13",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_14",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_15",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_16",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_17",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_18",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_19",
-								"characters_voice\\scenario\\bar\\radio_music\\modern\\megafon_music_20",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_10",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_11",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_12",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_13",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_14",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_15",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_16",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_17",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_18",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_19",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_20",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_21",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_22",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_23",
-								"characters_voice\\scenario\\bar\\radio_music\\smile\\megafon_music_24"
+ph_snd_themes["radio_music_random"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 
-ph_snd_themes["radio_music_sidor"] = {"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_1",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_2",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_3",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_4",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_5",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_6",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_7",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_8",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_9",
-								"characters_voice\\scenario\\bar\\radio_music\\sidor\\megafon_music_10"
+ph_snd_themes["radio_music_sidor"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 }
 ph_snd_themes["sidor_tush"] = {"characters_voice\\scenario\\trader\\tush"}
 
-ph_snd_themes["radio_music_bandit"] = {"characters_voice\\scenario\\dv\\borov_music_1",
-									"characters_voice\\scenario\\dv\\borov_music_2",
-									"characters_voice\\scenario\\dv\\borov_music_3",
-									"characters_voice\\scenario\\dv\\borov_music_4",
-									"characters_voice\\scenario\\dv\\borov_music_5",
-									"characters_voice\\scenario\\dv\\borov_music_6",
-									"characters_voice\\scenario\\dv\\borov_music_7",
-									"characters_voice\\scenario\\dv\\borov_music_8",
-									"characters_voice\\scenario\\dv\\borov_music_9",
-									"characters_voice\\scenario\\dv\\borov_music_10",
-									"characters_voice\\scenario\\dv\\borov_music_11"
+ph_snd_themes["radio_music_bandit"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 									}
 									
-ph_snd_themes["sak_music"] = {"characters_voice\\scenario\\sak\\sak_music_1",
-									"characters_voice\\scenario\\sak\\sak_music_2",
-									"characters_voice\\scenario\\sak\\sak_music_3",
-									"characters_voice\\scenario\\sak\\sak_music_4",
-									"characters_voice\\scenario\\sak\\sak_music_5",
-									"characters_voice\\scenario\\sak\\sak_music_6",
-									"characters_voice\\scenario\\sak\\sak_music_7",
-									"characters_voice\\scenario\\sak\\sak_music_8",
-									"characters_voice\\scenario\\sak\\sak_music_9",
-									"characters_voice\\scenario\\sak\\sak_music_10",
-									"characters_voice\\scenario\\sak\\sak_music_11"
+ph_snd_themes["sak_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 									}
-ph_snd_themes["forest_music"] = {"characters_voice\\scenario\\bandits\\ban_d_treck1",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck2",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck3",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck4",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck5",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck6",
-                                           "characters_voice\\scenario\\bandits\\ban_d_treck7"
+ph_snd_themes["forest_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
                                            	}									
 
-ph_snd_themes["arhara_music"] = {"characters_voice\\scenario\\arhara\\arhara_music_1",
-                                           "characters_voice\\scenario\\arhara\\arhara_music_2",
-                                           "characters_voice\\scenario\\arhara\\arhara_music_3",
-                                           "characters_voice\\scenario\\arhara\\arhara_music_4",
-                                           "characters_voice\\scenario\\arhara\\arhara_music_5",
-                                           "characters_voice\\scenario\\arhara\\arhara_music_6"
+ph_snd_themes["arhara_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
                                            	}
 
-ph_snd_themes["dcity_bandits_radio_music"] = {"characters_voice\\scenario\\arhara_dead_city\\sektor_noch_pered_rozhd",
-                                           "characters_voice\\scenario\\arhara_dead_city\\sektor_vzyal_vinu",
-                                           "characters_voice\\scenario\\arhara_dead_city\\novikov_pomnish_devochka",
-                                           "characters_voice\\scenario\\arhara_dead_city\\rozik_likho_moe_likho",
-                                           "characters_voice\\scenario\\arhara_dead_city\\rozik_rano_po_utry"
+ph_snd_themes["dcity_bandits_radio_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
                                            	}
 
-ph_snd_themes["arhara_music_warlab"] = {"characters_voice\\scenario\\arhara_warlab\\arhara_tans_minus",
-                                           "characters_voice\\scenario\\arhara_warlab\\arhara_bi2_serebro",
-                                           "characters_voice\\scenario\\arhara_warlab\\arhara_np_gibraltar",
-                                           "characters_voice\\scenario\\arhara_warlab\\arhara_scorpions",
-                                           "characters_voice\\scenario\\arhara_warlab\\arhara_bi2_moy_r_n_r",
-                                           "characters_voice\\scenario\\arhara_warlab\\arhara_bi2_polkovnik"
+ph_snd_themes["arhara_music_warlab"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
                                            	}
 
-ph_snd_themes["arhara_music_hospital"] = {"characters_voice\\scenario\\arhara_hospital\\zlaya_princessa",
-                                           "characters_voice\\scenario\\arhara_hospital\\mihaylov_voyna",
-                                           "characters_voice\\scenario\\arhara_hospital\\makar_perekrestok"
+ph_snd_themes["arhara_music_hospital"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
                                            	}
 									
-ph_snd_themes["prapor_music"] = {"characters_voice\\scenario\\prapor\\prapor_music_1",
-									"characters_voice\\scenario\\prapor\\prapor_music_2",
-									"characters_voice\\scenario\\prapor\\prapor_music_3",
-									"characters_voice\\scenario\\prapor\\prapor_music_4",
-									"characters_voice\\scenario\\prapor\\prapor_music_5",
-									"characters_voice\\scenario\\prapor\\prapor_music_6",
-									"characters_voice\\scenario\\prapor\\prapor_music_7",
-									"characters_voice\\scenario\\prapor\\prapor_music_8",
-									"characters_voice\\scenario\\prapor\\prapor_music_9",
-									"characters_voice\\scenario\\prapor\\prapor_music_10",
-									"characters_voice\\scenario\\prapor\\prapor_music_11"
+ph_snd_themes["prapor_music"] = {"songs\\radio_music_1","songs\\radio_music_2","songs\\radio_music_3","songs\\radio_music_4","songs\\radio_music_5","songs\\radio_music_6","songs\\radio_music_7","songs\\radio_music_8","songs\\radio_music_9","songs\\radio_music_10","songs\\radio_music_11","songs\\radio_music_12","songs\\radio_music_13","songs\\radio_music_14","songs\\radio_music_15","songs\\radio_music_16","songs\\radio_music_17","songs\\radio_music_18","songs\\radio_music_19","songs\\radio_music_20","songs\\radio_music_21","songs\\radio_music_22","songs\\radio_music_23","songs\\radio_music_24","songs\\radio_music_25","songs\\radio_music_26","songs\\radio_music_27","songs\\radio_music_28","songs\\radio_music_29","songs\\radio_music_30","songs\\radio_music_31","songs\\radio_music_32","songs\\radio_music_33","songs\\radio_music_34","songs\\radio_music_35","songs\\radio_music_36","songs\\radio_music_37","songs\\radio_music_38","songs\\radio_music_39","songs\\radio_music_40","songs\\radio_music_41","songs\\radio_music_42","songs\\radio_music_43","songs\\radio_music_44","songs\\radio_music_45","songs\\radio_music_46","songs\\radio_music_47","songs\\radio_music_48","songs\\radio_music_49","songs\\radio_music_50","songs\\radio_music_51","songs\\radio_music_52","songs\\radio_music_53","songs\\radio_music_54","songs\\radio_music_55","songs\\radio_music_56","songs\\radio_music_57","songs\\radio_music_58","songs\\radio_music_59","songs\\radio_music_60","songs\\radio_music_61","songs\\radio_music_62","songs\\radio_music_63","songs\\radio_music_64","songs\\radio_music_65","songs\\radio_music_66","songs\\radio_music_67","songs\\radio_music_68","songs\\radio_music_69","songs\\radio_music_70","songs\\radio_music_71","songs\\radio_music_72","songs\\radio_music_73","songs\\radio_music_74","songs\\radio_music_75","songs\\radio_music_76","songs\\radio_music_77","songs\\radio_music_78","songs\\radio_music_79","songs\\radio_music_80","songs\\radio_music_81","songs\\radio_music_82","songs\\radio_music_83","songs\\radio_music_84","songs\\radio_music_85","songs\\radio_music_86","songs\\radio_music_87","songs\\radio_music_88","songs\\radio_music_89","songs\\radio_music_90","songs\\radio_music_91","songs\\radio_music_92","songs\\radio_music_93","songs\\radio_music_94"
 									}
 
 ph_snd_themes["dolg_speech"]		= {[[characters_voice\scenario\bar\barman_megafon\megaphone_barman_1]],
