@@ -31,6 +31,9 @@ end
 function give_2kolbasa(first_speaker, second_speaker)
 	sak.out_item_namber("kolbasa",2)
 end
+function give_4kolbasa(first_speaker, second_speaker)
+	sak.out_item_namber("kolbasa",4)
+end
 function give_2drink(first_speaker, second_speaker)
 	db.actor:give_info_portion("biznes_remove_special_item")
 	sak.out_item_namber("energy_drink",2)
@@ -52,6 +55,9 @@ function conserva2_have()
 end
 function kolbasa2_have()
   	return sak.have_item_namber("kolbasa",2) ~= false 
+end
+function kolbasa4_have()
+  	return sak.have_item_namber("kolbasa",4) ~= false 
 end
 function drink2_have()
   	return sak.have_item_namber("energy_drink",2) ~= false 
@@ -137,6 +143,12 @@ function add_1ammo_762x54_ap(first_speaker, second_speaker)
 	sak.create_items_actor("ammo_7.62x54_ap",1)
 end
 -- Proper70 end
+function add_2ammo_762x51_fmj(first_speaker, second_speaker)
+	sak.create_items_actor("ammo_7.62x51_fmj",2)
+end
+function add_1ammo_762x51_ap(first_speaker, second_speaker)
+	sak.create_items_actor("ammo_7.62x51_ap",1)
+end
 function add_3ammo_7_62_fmj(first_speaker, second_speaker)
 	sak.create_items_actor("ammo_7.62x39_fmj",3)
 end
@@ -157,6 +169,9 @@ function add_3medkit_army(first_speaker, second_speaker)
 end
 function add_2medkit_army(first_speaker, second_speaker)
 	sak.create_items_actor("medkit_army",2)
+end
+function add_medkit_army(first_speaker, second_speaker)
+	sak.create_items_actor("medkit_army",1)
 end
 function add_ammo_f1(first_speaker, second_speaker)
 	sak.create_items_actor("grenade_f1",1)
@@ -221,7 +236,7 @@ function add_protection_outfit(first_speaker, second_speaker)
 	dialogs.relocate_item_section(first_speaker, "protection_outfit", "in")
 end
 function add_ammo_super_gauss(first_speaker, second_speaker)
-	sak.create_items(db.actor,"ammo_super_gauss",2)
+--	sak.create_items(db.actor,"ammo_super_gauss",2)
 	dialogs.relocate_item_section(first_speaker, "ammo_super_gauss", "in")
 end
 function add_ammo_gauss(first_speaker, second_speaker)
@@ -892,8 +907,6 @@ local skryga_flash={
 function take_mil_Svoboda_trader_ammo(actor,npc,p1,p2)
     local a = skryga_flash[math.random(table.getn(skryga_flash))]
     local obj = alife():create("pda_flash", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
-level.map_add_object_spot_ser(obj.id, "treasure", "Данные для Скряги")	-- метка. Eugen81.
-news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
 end
 function give_mil_Svoboda_trader_ammo()
 	sak.out_item_namber("flash_pda", 1)
@@ -1089,8 +1102,6 @@ local sak_flash={
 function take_sak_reward_outfit(actor,npc,p1,p2)
     local a = sak_flash[math.random(table.getn(sak_flash))]
     local obj = alife():create("disk_flash", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
-level.map_add_object_spot_ser(obj.id, "treasure", "Данные для Сяка")	-- метка. Eugen81.
-news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
 end
 function give_sak_reward_outfit()
 	sak.out_item_namber("flash_disk", 1)
@@ -1153,8 +1164,6 @@ local kruglov_flash={
 function take_yan_kruglov_art(actor,npc,p1,p2)
     local a = kruglov_flash[math.random(table.getn(kruglov_flash))]
     local obj = alife():create("notebook_flash", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
-level.map_add_object_spot_ser(obj.id, "treasure", "Данные для Круглова")	-- метка. Eugen81.
-news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
 end
 function give_yan_kruglov_art()
 	sak.out_item_namber("flash_notebook", 1)
@@ -1189,8 +1198,6 @@ local ivancov_flash={
 function take_bar_ivancov_rg6(actor,npc,p1,p2)
     local a = ivancov_flash[math.random(table.getn(ivancov_flash))]
     local obj = alife():create("computer_flash", vector():set(a.position.x,a.position.y,a.position.z), a.lv, a.gv)
-level.map_add_object_spot_ser(obj.id, "treasure", "Данные для Иванцова")	-- метка. Eugen81.
-news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
 end
 function give_bar_ivancov_rg6(first_speaker, second_speaker)
 	sak.out_item_namber("flash_computer", 1)
@@ -1431,17 +1438,20 @@ end
 function mica_have()
 	return sak.have_item_namber("af_ameba_mica",1) ~= false
 end
+function actor_2000_have() return db.actor:money() >= 2000 end
 function actor_2500_have()
   return db.actor:money()>=2500
 end
+function actor_3000_have() return db.actor:money() >= 3000 end
+function actor_5000_have()
+  return db.actor:money()>=5000
+end
+function actor_6000_have() return db.actor:money() >= 6000 end
 function actor_9000_have()
   return db.actor:money()>=9000
 end
 function actor_20000_have()
   return db.actor:money()>=20000
-end
-function actor_5000_have()
-  return db.actor:money()>=5000
 end
 function actor_15000_have()
   return db.actor:money()>=15000
@@ -1470,12 +1480,40 @@ end
 function give_mica(first_speaker, second_speaker)
 	sak.out_item_namber("af_ameba_mica", 1)
 end
+function give_2000_money(t1,t2) 
+	local npc=t1
+	if npc:id()==db.actor:id() then
+		npc=t2
+	end
+	relocate_money(npc,2000,1)
+end
 function give_2500_money(t1,t2) 
   local npc=t1
   if npc:id()==db.actor:id() then
     npc=t2
   end
   relocate_money(npc,2500,1)
+end
+function give_3000_money(t1,t2) 
+	local npc=t1
+	if npc:id()==db.actor:id() then
+		npc=t2
+	end
+	relocate_money(npc,3000,1)
+end
+function give_5000_money(t1,t2) 
+  local npc=t1
+  if npc:id()==db.actor:id() then
+    npc=t2
+  end
+  relocate_money(npc,5000,1)
+end
+function give_6000_money(t1,t2) 
+  local npc=t1
+  if npc:id()==db.actor:id() then
+    npc=t2
+  end
+  relocate_money(npc,6000,1)
 end
 function give_10000_money(t1,t2) 
   local npc=t1
@@ -1490,13 +1528,6 @@ function give_15000_money(t1,t2)
     npc=t2
   end
   relocate_money(npc,15000,1)
-end
-function give_5000_money(t1,t2) 
-  local npc=t1
-  if npc:id()==db.actor:id() then
-    npc=t2
-  end
-  relocate_money(npc,5000,1)
 end
 function give_20000_money(t1,t2) 
   local npc=t1

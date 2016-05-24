@@ -22,7 +22,8 @@ local satiety_health_factor = get_float("actor_script_condition", "satiety_healt
 ASSERT(satiety_health_factor, "ogse_actor_conditions_mgr: 'satiety_health_factor' parameter not found!")
 local max_stand_power = get_float("actor_condition", "stand_power")
 ASSERT(max_stand_power, "ogse_actor_conditions_mgr: 'stand_power' parameter not found!")
-local satiety_k = max_stand_power * (1 - satiety_power_factor) / light_hunger_limit
+local satiety_k = max_stand_power
+  * ( 1 - satiety_power_factor ) / light_hunger_limit
 
 local engine_satiety_v = get_float("actor_condition", "satiety_v")
 ASSERT(engine_satiety_v, "ogse_actor_conditions_mgr: 'actor_condition:engine_satiety_v' parameter not found!")
@@ -43,7 +44,7 @@ ASSERT(
   walk_accel,
   "ogse_actor_conditions_mgr: 'actor:walk_accel' parameter not found!"
 )
-local min_walk_accel = 3
+local min_walk_accel = 4
 local override_walk_accel
 
 local def_jump_power = get_float( "actor_condition", "jump_power" )
@@ -131,6 +132,9 @@ local function get_item_cond_effect( item )
     ef.additional_inventory_weight2 = get_float(
       section, "additional_inventory_weight2", 0
     )
+    ef.psy_health_restore_speed = get_float(
+      section, "psy_health_restore_speed", 0
+    )
     cached_item_cond_effects[ section ] = ef
   end
   return ef
@@ -153,24 +157,26 @@ function on_update()
   if dt == 0 then return end
   pt = { current_time:get() }
   local ext = {
-    [ "bleeding_restore_speed"  ] = 0,
-    [ "health_restore_speed"    ] = 0,
-    [ "power_restore_speed"     ] = 0,
-    [ "radiation_restore_speed" ] = 0,
-    [ "satiety_restore_speed"   ] = 0,
-    [ "sprint_koef_add"         ] = 0,
+    [ "bleeding_restore_speed"   ] = 0,
+    [ "health_restore_speed"     ] = 0,
+    [ "power_restore_speed"      ] = 0,
+    [ "psy_health_restore_speed" ] = 0,
+    [ "radiation_restore_speed"  ] = 0,
+    [ "satiety_restore_speed"    ] = 0,
+    [ "sprint_koef_add"          ] = 0,
   }
   ogse_signals.get_mgr():call( "on_before_actor_conditions_update", ext )
   -- учитываем здесь естественное оголодание, а также
   -- движковое(обнулять его нельзя, на нем основан показ свойств
   -- артефактов)
-  local cur_satiety_v = satiety_v + ( satiety_v * ( 1 - act.power ) )
+  local cur_satiety_v = satiety_v + (
+    satiety_v * ( 1 - math.min( act.health, act.power ) )
+  )
   local satiety_custom_k = 1
-  if override_power < 1 then
-    satiety_custom_k = 3
-  elseif
-    act:is_actor_sprinting() or act:is_actor_climbing()
-    or act.power < 0.9 or act:get_bleeding() > 0.1
+  if
+    override_power < 1
+    or act:is_actor_sprinting() or act:is_actor_climbing()
+    or act:get_bleeding() > 0.1
   then
     satiety_custom_k = 2
   end
@@ -182,6 +188,7 @@ function on_update()
   local summary_power_effect   = - engine_satiety_power_v
     + ext.power_restore_speed
   local summary_bleeding_restore_effect  = ext.bleeding_restore_speed
+  local summary_psy_health_effect        = ext.psy_health_restore_speed
   local summary_radiation_restore_effect = ext.radiation_restore_speed
   local af_additional_inventory_weight   = 0
   local af_additional_inventory_weight2  = 0
@@ -198,6 +205,8 @@ function on_update()
         + ef.additional_inventory_weight
       af_additional_inventory_weight2 = af_additional_inventory_weight2
         + ef.additional_inventory_weight2
+      summary_psy_health_effect = summary_psy_health_effect
+        + ef.psy_health_restore_speed
     end
   end
   -- эффекты от брони
@@ -213,6 +222,8 @@ function on_update()
       summary_power_effect   = summary_power_effect + ef.power_restore_speed
       summary_bleeding_restore_effect = summary_bleeding_restore_effect
         + ef.bleeding_restore_speed
+      summary_psy_health_effect = summary_psy_health_effect
+        + ef.psy_health_restore_speed
     end
   end
   -- эффекты, связанные c голодом
@@ -222,7 +233,8 @@ function on_update()
   end
 
   if act.satiety < critical_hunger_limit then
-    local hadd = ( act.satiety - critical_hunger_limit ) * satiety_health_factor
+    local hadd = ( act.satiety - critical_hunger_limit )
+      * satiety_health_factor
     summary_health_effect = summary_health_effect + hadd
   end
 
@@ -237,11 +249,22 @@ function on_update()
   if not ogse_sleep_mgr.is_sleep_active() then
     act.power = summary_power_effect * dt
   end
-  if act:get_bleeding() > 0.1 and summary_bleeding_restore_effect > 0.0 then
-    act:heal_wounds( summary_bleeding_restore_effect * dt )
+  if
+    summary_bleeding_restore_effect > 0
+    or summary_bleeding_restore_effect < 0
+  then
+    if act:get_bleeding() > 0 then
+      act:heal_wounds( summary_bleeding_restore_effect * dt )
+    end
   end
   act.radiation = summary_radiation_restore_effect * dt
   --if act.satiety < 0.1 then act.satiety = 1 end
+  if
+    summary_psy_health_effect > 0
+    or summary_psy_health_effect < 0
+  then
+    act.psy_health = summary_psy_health_effect * dt
+  end
 
   local cur_sprint_koef = override_sprint_koef or (
     sprint_koef + ext.sprint_koef_add
@@ -274,6 +297,9 @@ function on_update()
     walk_weight = walk_weight + get_float(
       armor:section(), "additional_inventory_weight", 0
     )
+    if armor:condition() < 0.8 then
+      cur_walk_accel = cur_walk_accel * ( armor:condition() / 0.8 )
+    end
   end
   local new_cam_inert
   if inv_weight > max_weight then

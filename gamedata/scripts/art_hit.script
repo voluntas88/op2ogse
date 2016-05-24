@@ -110,8 +110,12 @@ local particles = {
     [ "s" ] = [[anomaly\pux_blast]],
   },
   {
-    [ "p" ] = "amk\\snow_blow",
-    [ "s" ] = [[anomaly\anomaly_mincer_blowout]],
+    [ "p" ] = "amk\\snow",
+    [ "s" ] = [[anomaly\ice_idle]],
+  },
+  {
+    [ "p" ] = "anomaly2\\snow\\blow_snow_01",
+    [ "s" ] = [[anomaly\\anomaly_mincer_blowout]],
   },
 }
 
@@ -142,7 +146,7 @@ function hit_by_art( obj )
   h.direction = vector():set( 0, 0, 0 )
   h.impulse   = tonumber( i )
   h.type      = hit[ t ]
-  h.power     = tonumber( p )
+  h.power     = tonumber( p ) * obj:condition()
   h:bone( "bip01_spine" ) -- чтобы учитывалась броня
   db.actor:hit( h )
   local eff   = cameffs[ math.random( table.getn( cameffs ) ) ]

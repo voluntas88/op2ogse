@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;; Двухствольное охотничье ружье ТОЗ-34 с вертикальным расположением стволов и оптическим прицелом ;;;;;;;;;;;
 ;---------------------------------------------------------------------------------------------------------------------
-[hunters_toz]:identity_immunities,class_sg_long,scope.10x,hud_wpn_fx.toz34
+[hunters_toz]:class_sg_long,scope.10x,hud_wpn_fx.toz34
 GroupControlSection	      = spawn_group
 discovery_dependency     = 
 $spawn                   = "weapons\toz-34"					; option for Level Editor
@@ -40,7 +40,6 @@ cam_max_angle			= 6.0	;максимальный угол отдачи
 cam_max_angle_horz		= 5.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 1.0	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor  = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		     = 0.003	;вероятность осечки при максимальном износе 
 misfire_condition_k		     = 0.05
 ;-----------------------------------------------------------------------------------
@@ -73,12 +72,6 @@ fire_point2              = 0.0, 0.160, 0.730
 flame_particles		   = weapons\generic_weapon05
 smoke_particles		   = weapons\generic_shoot_00
 rpm_empty_click 	         = 200
-
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 	= 2.0
-PDM_disp_accel_factor 	= 2.0
-PDM_crouch	 		= 1.0
-PDM_crouch_no_acc 		= 1.0
 
 ;;;;;;;  Для Народной солянки 2010
 hit_rate	        = 2.0

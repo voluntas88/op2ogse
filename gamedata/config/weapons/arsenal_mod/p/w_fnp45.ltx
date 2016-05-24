@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;; FNP-45 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;------------------------------------------------------------
-[wpn_fnp45]:identity_immunities,class_pistol,hud_wpn_fx.usp45
+[wpn_fnp45]:class_pistol,hud_wpn_fx.usp45
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\walther"					; option for Level Editor
@@ -46,9 +46,6 @@ kill_msg_width		= 27
 kill_msg_height		= 23
 
 ;-----------------------------------------------------------------------------------
-;базовая дисперсия
-fire_dispersion_base		= 0.14 	;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-
 ;отдача
 cam_relax_speed         	= 8.5	;скорость возврата в исходное положение
 cam_dispersion          	= 0.25	;увеличения угла (в градусах) с каждым выстрелом
@@ -58,10 +55,8 @@ cam_max_angle			= 20.0	;максимальный угол отдачи
 cam_max_angle_horz		= 10.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.2	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.00035	;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
-condition_shot_dec 		= 0.00026 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction           	 = 0, 0, 1
@@ -75,20 +70,11 @@ shell_particles	 			= weapons\arsenal_shells1
 
 rpm_empty_click 	 		= 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 0.5
-PDM_disp_accel_factor 		= 0.5
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	            = 1.9
 bullet_speed		= 360 
 rpm                     = 315
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 0.5	
 
 silencer_hit_power       	= 0.63
 silencer_hit_impulse	 	= 46
@@ -250,7 +236,6 @@ inv_grid_y					= 7
 silencer_name  				= wpn_addon_sil_57
 silencer_x 					= 71			
 silencer_y 					= -13
-fire_dispersion_base		= 0.12
 silencer_hit_power     	= 0.67
 silencer_fire_distance  = 65
 hud                      	= wpn_br1935_hud

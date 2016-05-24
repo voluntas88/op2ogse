@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ¬епрь "Aimpoint" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------------------------------------------------------------------------
-[wpn_vepr12_col]:identity_immunities,class_sg_hi_rpm,hud_wpn_fx.saiga
+[wpn_vepr12_col]:class_sg_hi_rpm,hud_wpn_fx.saiga
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn                   	= "weapons\lr-300"					; option for Level Editor
@@ -51,7 +51,6 @@ animation_slot				= 2		; type of the animation that will be used
 
 ;отдача
 cam_relax_speed        		= 8.5 ;0.15	;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 360
 cam_dispersion         		= 0.15	;увеличени€ угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.15	;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 1	;ствол будет подыматьс€ на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -59,7 +58,6 @@ cam_max_angle			= 5	;максимальный угол отдачи
 cam_max_angle_horz		= 6	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.35;0.4	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.0003 ;веро€тность осечки при максимальном износе
 misfire_condition_k			= 0.05 
 ;-----------------------------------------------------------------------------------
@@ -78,19 +76,10 @@ shell_dir		 			= 0.0, 1.0, 0.0
 
 rpm_empty_click 	 		= 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.2
-PDM_disp_accel_factor 		= 1.2
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	            = 2.2
 rpm                    	= 600
 ; end ttc	
-
-use_aim_bullet				= true		;ѕоддерживаетс€ ли перва€ суппер пул€
-time_to_aim					= 1.0	
 
 hud                      = wpn_vepr12_col_hud
 normal                   = 0, 1, 0

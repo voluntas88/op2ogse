@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; —найперска€ винтовка —¬” ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------
-[wpn_svu]:identity_immunities,scope.8x,hud_wpn_fx.svd
+[wpn_svu]:class_sr,scope.8x
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn                  = "weapons\svu"		; option for Level Editor
@@ -10,12 +10,7 @@ $prefetch 		 		= 8
 scheduled               = off              	; option for ALife Simulator
 cform                   = skeleton
 class                   = WP_SVU
-min_radius              = 0
-max_radius              = 50
 description			= enc_weapons1_wpn-svu
-
-ef_main_weapon_type		 = 3
-ef_weapon_type			 = 8
 
 ;--- scope weapons -----------------------------------------------------------------
 holder_range_modifier	= 2.15               ; во сколько раз увеличиваетс€ eye_range 
@@ -38,12 +33,10 @@ sprint_allowed			= true;  false
 ;-----------------------------------------------------------------------------------
 ;базова€ дисперси€
 fire_dispersion_base		= 0.02 ;0.051	;угол (в градусах) базовой дисперсии оружи€ (оружи€ зажатого в тисках)
-control_inertion_factor		= 1.2f
 disp_rate = 1.85
 
 ;отдача
 cam_relax_speed         	= 8.5	;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 360	;скорость возврата в исходное положение
 cam_dispersion          	= 1.25	;увеличени€ угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.5	;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 1.0	;ствол будет подыматьс€ на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -51,16 +44,13 @@ cam_max_angle			= 12.0	      ;максимальный угол отдачи
 cam_max_angle_horz		= 3.0 	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.25	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 1.5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	         = 0.0006	;веро€тность осечки при максимальном износе 
 misfire_condition_k		= 0.05
-condition_shot_dec 		= 0.0001 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 hand_dependence 		      = 1
 single_handed			= 0
 
-slot 			 		= 2		; // secondary
 animation_slot			= 8		; type of the animation that will be used
 
 inv_name		 		= wpn-svu
@@ -89,23 +79,11 @@ shell_point		 		= 0.0, 0.128, 0.0
 shell_dir		 		= 0.0, 0.0, 0.4
 ;shell_particles	 		= weapons\generic_shells
 
-PDM_disp_base 			= 4.0
-PDM_disp_vel_factor 		= 1.8
-PDM_disp_accel_factor 		= 1.0
-PDM_crouch	 		= 2.0
-PDM_crouch_no_acc 		= 4.0
-
 ;;;;;;  ƒл€ Ќародной сол€нки 2010
-hit_power           = 0.92
-hit_impulse	        = 82
-hit_type 	        = fire_wound
 hit_rate	        = 1.95
 fire_distance       = 680
 bullet_speed	  = 840  
 rpm                 = 250
-
-use_aim_bullet				= true		;ѕоддерживаетс€ ли перва€ суппер пул€
-time_to_aim					= 1.0	
 
 hud                     = wpn_svu_hud
 normal                  = 0, 1, 0
@@ -134,6 +112,7 @@ grenade_launcher_status	      = 0
 zoom_enabled			= true
 
 scope_texture			= wpn\wpn_crosshair
+scope_sights_lighting	= sights_pso-1_light
 zoom_enabled			= true
 
 ;------------------------------ S.T.A.L.K.E.R`s sound remake ------------------------------
@@ -146,7 +125,7 @@ snd_reload				= weapons\svu\svu_reload
 snd_close				= weapons\svu\svu_holster
 ;------------------------------------------------------------------------------------------
  
-[wpn_svu_hud]
+[wpn_svu_hud]:hud_sr
 
 shell_point          	= 0,0,-0.6
 shell_dir		 	= 0.0, 1.0, 0.0

@@ -5513,6 +5513,7 @@
 	</dialog>
 
 	<dialog id="strelok_taynik_pda1">
+		<has_info>strelok_taynik_pda0_start</has_info>
 		<has_info>sahar_sumka_done</has_info>
 		<dont_has_info>strelok_taynik_pda1_start</dont_has_info>
 		<phrase_list>
@@ -6731,6 +6732,7 @@
             <phrase id="4">
                 <text>svalka_yurik_4</text>
 				<give_info>svalka_yurik</give_info>
+				<give_info>gar_dm_novice_change_st</give_info>
 			</phrase>
 		</phrase_list>
     </dialog>

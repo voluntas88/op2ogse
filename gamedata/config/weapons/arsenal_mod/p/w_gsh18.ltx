@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ГШ-18 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------
-[wpn_gsh18]:identity_immunities,class_pistol,hud_wpn_fx.beretta
+[wpn_gsh18]:class_pistol,hud_wpn_fx.beretta
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\gsh18"					; option for Level Editor
@@ -46,12 +46,8 @@ kill_msg_width		= 27
 kill_msg_height		= 23
 
 ;-----------------------------------------------------------------------------------
-;базовая дисперсия
-fire_dispersion_base		= 0.18 	;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-
 ;отдача
 cam_relax_speed         	= 17.5	;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 360.70
 cam_dispersion          	= 0.14	;увеличения угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.0	;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 0.12	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -59,10 +55,8 @@ cam_max_angle			= 4.0	;максимальный угол отдачи
 cam_max_angle_horz		= 6.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.25	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	         = 0.00055	;вероятность осечки при максимальном износе 
 misfire_condition_k		   = 0.05
-condition_shot_dec 		   = 0.00026 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 flame_particles				= weapons\generic_weapon03
@@ -74,20 +68,11 @@ shell_particles	 			= weapons\arsenal_shells1
 
 rpm_empty_click 	 		= 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 0.5
-PDM_disp_accel_factor 		= 0.5
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	            = 1.98
 bullet_speed		= 570
 rpm                     = 350
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 0.5	
 
 silencer_hit_power       	= 0.66
 silencer_hit_impulse	 	= 50

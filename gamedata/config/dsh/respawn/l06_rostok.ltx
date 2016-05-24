@@ -4,46 +4,64 @@
 xyzlg      = -165.79,-0.00,146.82,33953,1325
 respawn_section = snork_normal,30,chimera_weak,15,cat_normal,50
 max_count  = 1
-min_spawn  = 1
 max_spawn  = 1
-cond = {+bar_rescue_research_done}, {+bar_rescue_research_fail}
+min_count  = 1
+conditions = {+bar_rescue_research_done} 100, {+bar_rescue_research_fail} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false
 
 [dsh.respawn.ros_random2]:dsh.respawn.default_values
 xyzlg      = -220.99,-2.10,74.25,21561,1374
-respawn_section = dog_normal,16,dog_weak,16,dog_strong,16,tushkano_normal,16,boar_normal,16,gigant_normal,16
-max_count  = 1
-min_spawn  = 1
-max_spawn  = 1
-cond = {+bar_rescue_research_done}, {+bar_rescue_research_fail}
-
-[dsh.respawn.ros_random3]:dsh.respawn.default_values
-xyzlg      = -217.68,-0.00,34.59,22570,1386
-respawn_section = boar_normal,50,snork_normal,50
-max_count  = 1
-min_spawn  = 1
-max_spawn  = 1
-cond = {+bar_rescue_research_done}, {+bar_rescue_research_fail}
-
-[dsh.respawn.ros_ways]:dsh.respawn.default_values
-xyzlg      = -284.24938964844,-6.0005259513855,108.42559814453,912,1379
-respawn_section = dog_normal,16,dog_weak,16,dog_strong,16,tushkano_normal,16,boar_normal,16,bloodsucker_weak,16
-max_count  = 1
-min_spawn  = 1
-max_spawn  = 1
-cond = {+bar_rescue_research_done}, {+bar_rescue_research_fail}
-
-[dsh.respawn.ros_hl]:dsh.respawn.default_values
-xyzlg      = -264.97,-5.80,97.71,5510,1359
-respawn_section = bloodsucker_strong,burer_weak,burer_normal,burer_strong,m_poltergeist_normal_flame,m_poltergeist_strong_flame,m_controller_act
+respawn_section = dog_normal,dog_weak,dog_strong,tushkano_normal,boar_normal,gigant_normal
 max_count  = 1
 max_spawn  = 1
 min_count  = 1
-conditions = {+yan_kill_brain_done} 90, 0
+conditions = {+bar_rescue_research_done} 100, {+bar_rescue_research_fail} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false
+
+[dsh.respawn.ros_random3]:dsh.respawn.default_values
+xyzlg      = -217.68,-0.00,34.59,22570,1386
+respawn_section = boar_normal,snork_normal
+max_count  = 1
+max_spawn  = 1
+min_count  = 1
+conditions = {+bar_rescue_research_done} 100, {+bar_rescue_research_fail} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false
+
+[dsh.respawn.ros_ways]:dsh.respawn.default_values
+xyzlg      = -284.24938964844,-6.0005259513855,108.42559814453,912,1379
+respawn_section = dog_normal,dog_weak,dog_strong,tushkano_normal,boar_normal,bloodsucker_weak
+max_count  = 1
+max_spawn  = 1
+min_count  = 1
+conditions = {+bar_rescue_research_done} 100, {+bar_rescue_research_fail} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false
+
+[dsh.respawn.ros_hl]:dsh.respawn.default_values
+xyzlg      = -264.97,-5.80,97.71,5510,1359
+respawn_section = bloodsucker_strong,burer_weak,burer_normal,burer_strong,m_poltergeist_normal_flame,m_poltergeist_strong_flame,m_controller_act,m_poltergeist_dd,electro_polter,controller_flame,controller_electro,controller_senator,chimera_black,bloodsucker_mil
+max_count  = 1
+max_spawn  = 1
+min_count  = 1
+conditions = {+yan_kill_brain_done} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false
 
 [dsh.respawn.ros_ros_smart_snork1]:dsh.respawn.default_values
 xyzlg      = -171.854095458984, 0, 91.9512634277344,32230,1322
-respawn_section = bloodsucker_strong,5,snork_weak,20,snork_normal,30,snork_strong,45
+respawn_section = bloodsucker_strong,snork_weak,snork_normal,snork_strong
 max_count  = 2
-min_spawn  = 2
 max_spawn  = 2
+min_count  = 2
 conditions = {+yan_kill_brain_done} 100, 0
+dsh_moveable = true
+dsh_walk_on_location = true
+dsh_walk_together    = false

@@ -14,6 +14,20 @@ end
 function on_before_spawn()
   db.actor:disable_info_portion( "biznes_remove_special_item" )
   build_ru_upper_to_lower()
+  load_kbd_keys()
+end
+
+
+local kbd_keys = {}
+function load_kbd_keys()
+  local kv = get_section_keys_and_values( "dsh.kbd.keys" )
+  for k, v in pairs( kv ) do
+    kbd_keys[ k ] = DIK_keys[ v ]
+  end
+end
+
+function get_kbd_key( k )
+  return kbd_keys[ k ]
 end
 
 
@@ -154,8 +168,7 @@ end
 function is_artefact( sect )
   return (
     string.find( sect, "^af_" )
-    or
-    get_bool( sect, "dsh_is_artefact", false )
+    or get_bool( sect, "dsh_is_artefact", false )
   )
 end
 
@@ -165,21 +178,21 @@ function get_creatable_arts()
   local arts = {}
   for anomaly, info in pairs( amk_mod.anom_recept_komp.anomalii ) do
     for info_key, recept in pairs( info.recepti ) do
-      if recept.cel and recept.komp then
+      if recept.cel and recept.komp and not recept.remove_anomaly then
         local targets = {}
         local parts   = {}
         for k, _ in pairs( recept.cel  ) do
+          ASSERT( not recept.komp[ k ], "found cel %s in komp", k )
           table.insert( targets, k )
         end
         for k, _ in pairs( recept.komp ) do
+          ASSERT( not recept.cel[ k ], "found komp %s in cel", k )
           table.insert( parts, k   )
         end
         if
           table.getn( targets ) == 1
-          and
-          is_artefact( targets[ 1 ] )
-          and
-          table.getn( parts ) > 0
+          and is_artefact( targets[ 1 ] )
+          and table.getn( parts ) > 0
         then
           local tgt = targets[ 1 ]
           arts[ tgt ] = {
@@ -207,6 +220,7 @@ function get_art_levels()
     local process   = { data.prev[ 1 ] }
     while table.getn( process ) > 0 do
       local af_prev = table.remove( process, 1 )
+      ASSERT( af ~= af_prev, "loop found: %s == %s", af, af_prev )
       if arts[ af_prev ] then
         for _, k in ipairs( next_arts ) do
           table.insert( arts[ af_prev ].next, k )
@@ -244,6 +258,222 @@ function change_inv_item_weight( id, weight )
     local cur_weight = obj:get_inventory_item_float( 164 )
     set_inv_item_weight( obj, cur_weight + weight )
   end
+end
+
+
+function actor_get_art_nsimpliest( n )
+  local arts = {}
+  db.actor:iterate_inventory(
+    function( npc, obj )
+      if get_bool( obj:section(), script_name() .. ".simpliest_art", false ) then
+        if db.actor:is_in_ruck( obj ) then
+          table.insert( arts, obj )
+        end
+      end
+    end,
+    db.actor
+  )
+  if table.getn( arts ) >= n then
+    return arts
+  end
+end
+
+function actor_has_art_nsimpliest( n )
+  if actor_get_art_nsimpliest( n ) then return true else return false end
+end
+
+function actor_give_art_nsimpliest( n )
+  local arts = actor_get_art_nsimpliest( n )
+  if arts then
+    for i = 1, n do
+      local obj = table.remove( arts, 1 )
+      ogse.remove_item_from_inventory( obj )
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+    end
+  end
+end
+
+
+function actor_has_art_simpliest()
+  if actor_get_art_nsimpliest( 1 ) then return true else return false end
+end
+
+function actor_give_art_simpliest()
+  return actor_give_art_nsimpliest( 1 )
+end
+
+
+function is_zone_bio_art( obj )
+  local props = db.artefacts[ obj:id() ]
+  if ( not props ) or props.handmade then
+    return false
+  else
+    return true
+  end
+end
+
+
+function actor_get_art_nsimpliest_bio( n )
+  local arts = actor_get_art_nsimpliest( n )
+  if arts then
+    local bio = {}
+    for _, obj in ipairs( arts ) do
+      if is_zone_bio_art( obj ) then
+        table.insert( bio, obj )
+      end
+    end
+    if table.getn( bio ) >= n then
+      return bio
+    end
+  end
+end
+
+function actor_has_art_nsimpliest_bio( n )
+  if actor_get_art_nsimpliest_bio( n ) then return true else return false end
+end
+
+function actor_give_art_nsimpliest_bio( n )
+  local arts = actor_get_art_nsimpliest_bio( n )
+  if arts then
+    for i = 1, n do
+      local obj = table.remove( arts, 1 )
+      ogse.remove_item_from_inventory( obj )
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+    end
+  end
+end
+
+
+function actor_has_art_simpliest_bio()
+  return actor_has_art_nsimpliest_bio( 1 )
+end
+
+function actor_give_art_simpliest_bio()
+  return actor_give_art_nsimpliest_bio( 1 )
+end
+
+
+function actor_has_art_2simpliest_bio()
+  return actor_has_art_nsimpliest_bio( 2 )
+end
+
+function actor_give_art_2simpliest_bio()
+  return actor_give_art_nsimpliest_bio( 2 )
+end
+
+
+function actor_has_art_3simpliest_bio()
+  return actor_has_art_nsimpliest_bio( 3 )
+end
+
+function actor_give_art_3simpliest_bio()
+  return actor_give_art_nsimpliest_bio( 3 )
+end
+
+
+function actor_get_art_nl0( n )
+  local l0_arts = {}
+  for k, v in pairs( get_art_levels() ) do
+    if table.getn( v.prev ) == 1 and table.getn( v.next ) > 0 then
+      l0_arts[ v.prev[ 1 ] ] = true
+    end
+  end
+  local arts = {}
+  db.actor:iterate_inventory(
+    function( npc, obj )
+      if l0_arts[ obj:section() ] then
+        if db.actor:is_in_ruck( obj ) then
+          table.insert( arts, obj )
+        end
+      end
+    end,
+    db.actor
+  )
+  if table.getn( arts ) >= n then
+    return arts
+  end
+end
+
+function actor_has_art_nl0( n )
+  if actor_get_art_nl0( n ) then return true else return false end
+end
+
+function actor_give_art_nl0( n )
+  local arts = actor_get_art_nl0( n )
+  if arts then
+    for i = 1, n do
+      local obj = table.remove( arts, 1 )
+      ogse.remove_item_from_inventory( obj )
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+    end
+  end
+end
+
+
+function actor_has_art_l0()
+  return actor_has_art_nl0( 1 )
+end
+
+function actor_give_art_l0()
+  return actor_give_art_nl0( 1 )
+end
+
+
+function actor_get_art_nl0_bio( n )
+  local arts = actor_get_art_nl0( n )
+  if arts then
+    local bio = {}
+    for _, obj in ipairs( arts ) do
+      if is_zone_bio_art( obj ) then
+        table.insert( bio, obj )
+      end
+    end
+    if table.getn( bio ) >= n then
+      return bio
+    end
+  end
+end
+
+function actor_has_art_nl0_bio( n )
+  if actor_get_art_nl0_bio( n ) then return true else return false end
+end
+
+function actor_give_art_nl0_bio( n )
+  local arts = actor_get_art_nl0_bio( n )
+  if arts then
+    for i = 1, n do
+      local obj = table.remove( arts, 1 )
+      ogse.remove_item_from_inventory( obj )
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+    end
+  end
+end
+
+
+function actor_has_art_l0_bio()
+  return actor_has_art_nl0_bio( 1 )
+end
+
+function actor_give_art_l0_bio()
+  return actor_give_art_nl0_bio( 1 )
+end
+
+
+function actor_has_art_2l0_bio()
+  return actor_has_art_nl0_bio( 2 )
+end
+
+function actor_give_art_2l0_bio()
+  return actor_give_art_nl0_bio( 2 )
+end
+
+
+function actor_has_art_3l0_bio()
+  return actor_has_art_nl0_bio( 3 )
+end
+
+function actor_give_art_3l0_bio()
+  return actor_give_art_nl0_bio( 3 )
 end
 
 
@@ -503,6 +733,10 @@ function actor_change_1vodka_2medkit_army()
   actor_change_items( "vodka", 1, "medkit_army", 2 )
 end
 
+function actor_change_2vodka_1medkit_army()
+  actor_change_items( "vodka", 2, "medkit_army", 1 )
+end
+
 
 function actor_change_1vodka_1grenade_f1()
   actor_change_items( "vodka", 1, "grenade_f1", 1 )
@@ -519,9 +753,19 @@ function actor_has_kolbasa_ge_4()
   )
 end
 
+function actor_has_kolbasa_ge_8()
+  return actor_has_cnt_items(
+    "kolbasa", function( cnt ) return cnt >= 8 end
+  )
+end
+
 
 function actor_change_2kolbasa_1grenade_rgd()
   actor_change_items( "kolbasa", 2, "grenade_rgd5", 1 )
+end
+
+function actor_change_4kolbasa_1grenade_rgd()
+  actor_change_items( "kolbasa", 4, "grenade_rgd5", 1 )
 end
 
 
@@ -645,6 +889,22 @@ function begin_af_transform( d, h, m, t )
     t.remove_anomaly_id,
     level.name()
   )
+  if table.getn( result ) > 0 and t.udacha and not t.remove_anomaly then
+    local cnt = ogse.load_var( script_name() .. ".begin_af_transform.cnt", 0 )
+    ogse.save_var( script_name() .. ".begin_af_transform.cnt", cnt + 1, "u32" )
+    local tname = script_name() .. ".begin_af_transform.cnt.reset"
+    if ogse_st_mgr.timer_exists( tname ) then
+      ogse_st_mgr.get_timer( tname ):stop()
+    end
+    ogse_st_mgr.delayed_fun_start( tname )
+      :set_gdelayDHMS( d, h + math.random( 20 ), m, 0 )
+      :init( script_name() .. ".reset_af_transform_cnt" )
+      :start()
+  end
+end
+
+function reset_af_transform_cnt()
+  ogse.delete_var( script_name() .. ".begin_af_transform.cnt" )
 end
 
 
@@ -673,7 +933,24 @@ function end_af_transform( result, udacha, x, y, z, gv, lv, info, komp, rm_anom,
   else
     t.komp = {}
   end
-  amk_mod.af_transform_universal_end( t )
+  local sobj = amk_mod.af_transform_universal_end( t )
+  if sobj and udacha and not rm_anom then
+    local pk = xs_netpk.net_alife_item( sobj )
+    if pk:isOk() then
+      local data = pk:get()
+      local cond = data.condition
+      local step = ( 1 + level.get_game_difficulty() ) / 10
+      local rnd  = get_next_random(
+        script_name() .. ".end_af_transform.rnd"
+      )
+      cond = cond - rnd * step
+      local cnt = ogse.load_var(
+        script_name() .. ".begin_af_transform.cnt", 1
+      )
+      data.condition = cond / cnt
+      pk:set( data )
+    end
+  end
 end
 
 
@@ -947,7 +1224,7 @@ function get_next_random( vname, ... )
   end
   local cur_num = tonumber( table.remove( nums, 1 ) )
   table.insert( nums, math.random() )
-  ogse.save_var( vname, nums, "array" )
+  ogse.save_var( vname, nums, "array", "float" )
   if table.getn( args ) > 0 then
     cur_num = min + round( cur_num * ( max - min ) )
   end
@@ -987,4 +1264,416 @@ function say_blin()
     "scripts\\nlc6\\matches_no_light_" .. math.random( 3 )
   )
   snd:play( db.actor, 0, sound_object.s2d )
+end
+
+
+function actor_can_move( status )
+  ogse_actor_conditions_mgr.change_walk_accel(   )
+  ogse_actor_conditions_mgr.change_jump_speed(   )
+end
+function actor_cant_move()
+  ogse_actor_conditions_mgr.change_walk_accel( 0 )
+  ogse_actor_conditions_mgr.change_jump_speed( 0 )
+end
+
+
+function get_cur_wpn_ammo( wpn )
+  local ammo_sect
+  local gl_status, has_gl = 0, false
+  if wpn:is_weapon_gl() then
+    if
+      ogse_wpn_utils.get_grenade_launcher_status( wpn ) == 2
+      and ogse_wpn_utils.get_grenade_launcher_flag( wpn )
+    then
+      gl_status = 1
+    end
+    has_gl = (
+      ogse_wpn_utils.get_grenade_launcher_status( wpn ) == 1
+      or gl_status == 1
+    )
+  end
+  if wpn:is_weapon() then
+    local cur_weapon_sec = wpn:section()
+    local ammo1_t, ammo1_n, ammo2_t, ammo2_n =
+      dsh_rukzak.parse_weapon_info_str( dsh_rukzak.get_wpn_info( wpn ) )
+    if has_gl and ogse_wpn_utils.get_gl_mode( wpn ) then
+      if ammo2_n > 0 then
+        local ammo_sections = get_names( cur_weapon_sec, "grenade_class" )
+        ammo_sect = ammo_sections[ ammo2_t + 1 ]
+      end
+    else
+      local ammo_sections = get_names( cur_weapon_sec, "ammo_class" )
+      ammo_sect = ammo_sections[ ammo1_t + 1 ]
+    end
+  end
+  return ammo_sect
+end
+
+
+function find_capsule()
+  local obj = db.actor:object( "af_capsule" )
+  if not obj then
+    db.actor:iterate_inventory(
+      function( npc, item )
+        if not obj and item:section() == "arc_art_box_1basic" then
+          local idx  = arc_1containers.get_inv_index( item:id() )
+          local arts = arc_1containers.get_inv_container_arts( idx )
+          for _, n in pairs( arts ) do
+            if n > 0 then
+              local sect = arc_arts.get_art_section( n )
+              if sect == "af_capsule" then
+                obj = item
+                break
+              end
+            end
+          end
+        end
+      end,
+      db.actor
+    )
+  end
+  return obj
+end
+
+function have_capsule()
+  return find_capsule() ~= nil
+end
+
+function transfer_any_capsule( info, minutes )
+  local obj = find_capsule()
+  if obj then
+    if obj:section() == "arc_art_box_1basic" then
+      news_manager.relocate_item( db.actor, "out", "af_capsule" )
+      ogse.remove_item_from_inventory( obj )
+      ogse.spawn_item_in_inv( "arc_art_box_1basic" )
+    else
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+      ogse.remove_item_from_inventory( obj )
+    end
+    local tname = script_name() .. "." .. info
+    start_gtimerDHMS(
+      script_name() .. "." .. info,
+      0, 0, minutes, 0,
+      script_name() .. ".transfer_any_capsule_done",
+      info
+    )
+  end
+end
+
+function transfer_any_capsule_done( info )
+  db.actor:give_info_portion( info )
+end
+
+function transfer_any_capsule_barman()
+  transfer_any_capsule( "barman_capsule_ready", 50 )
+end
+
+function transfer_any_capsule_sidor()
+  transfer_any_capsule( "capsule_ready", 65 )
+end
+
+function transfer_any_capsule_sakharov()
+  transfer_any_capsule( "sakharov_capsule_ready", 15 )
+end
+
+
+function mark_art_as_handmade( sobj, flag )
+  if not sobj then return end
+  local pk
+  if IsStalker( sobj ) then
+    pk = xs_netpk.stalker( sobj )
+  elseif IsMonster( sobj ) then
+    pk = xs_netpk.monster( sobj )
+  else
+    pk = xs_netpk.net_alife_item( sobj )
+  end
+  if not pk:isOk() then return end
+  local data = pk:get()
+  local cd   = data.custom_data:getTable()
+  if not cd.dsh then
+    cd.dsh = {}
+  end
+  cd.dsh[ "handmade" ] = ( flag and "true" or "false" )
+  data.custom_data:setTable( cd )
+  pk:set( data )
+end
+
+
+function add_art_capsule()
+  local arts = get_art_levels()
+  local possible_arts = {}
+  for sect, v in pairs( arts ) do
+    if table.getn( v.prev ) > 0 and table.getn( v.next ) == 0 then
+      table.insert( possible_arts, sect )
+    end
+  end
+  local rnd  = get_next_random(
+    script_name() .. ".add_art_capsule.rnd", table.getn( possible_arts )
+  )
+  local sect = possible_arts[ rnd ]
+  local sobj = ogse.spawn_item_in_inv( sect )
+  mark_art_as_handmade( sobj, false )
+  news_manager.relocate_item( db.actor, "in",  sect )
+end
+
+
+function has_trade_dialog( k )
+  local tname = script_name() .. ".has_trade_dialog." .. k
+  local res   = ogse_st_mgr.timer_exists( tname )
+  if res then
+    res = ogse.load_var( tname .. ".cnt", 10 ) > 0
+  end
+  return res
+end
+
+function start_trade_dialog_timer( k, hours, cnt )
+  if not hours then hours = math.random( 24, 72 ) end
+  local tname = script_name() .. ".has_trade_dialog." .. k
+  start_gtimerDHMS(
+    tname, 0, hours, 0, 0,
+    script_name() .. ".stop_trade_dialog_timer", k
+  )
+  if not cnt then cnt = math.random( 10 ) end
+  ogse.save_var( tname .. ".cnt", cnt, "u8" )
+end
+
+function stop_trade_dialog_timer( k )
+  start_gtimerDHMS(
+    script_name() .. ".hasnt_trade_dialog." .. k,
+    0, math.random( 24, 168 ), 0, 0,
+    script_name() .. ".start_trade_dialog_timer", k
+  )
+end
+
+function dec_trade_dialog_cnt( k )
+  local n   = script_name() .. ".has_trade_dialog." .. k .. ".cnt"
+  local cnt = ogse.load_var( n, 10 )
+  if cnt > 0 then
+    ogse.save_var( n, cnt - 1, "u8" )
+  end
+end
+
+function has_trade_dialog_sidor()
+  return has_trade_dialog( "sidor" )
+end
+function on_trade_dialog_sidor()
+  return dec_trade_dialog_cnt( "sidor" )
+end
+
+function has_trade_dialog_barman()
+  return has_trade_dialog( "barman" )
+end
+function on_trade_dialog_barman()
+  return dec_trade_dialog_cnt( "barman" )
+end
+
+function has_trade_dialog_petrenko()
+  return has_trade_dialog( "petrenko" )
+end
+function on_trade_dialog_petrenko()
+  return dec_trade_dialog_cnt( "petrenko" )
+end
+
+function has_trade_dialog_skraga()
+  return has_trade_dialog( "skraga" )
+end
+function on_trade_dialog_skraga()
+  return dec_trade_dialog_cnt( "skraga" )
+end
+
+function has_trade_dialog_sakharov()
+  return has_trade_dialog( "sakharov" )
+end
+function on_trade_dialog_sakharov()
+  return dec_trade_dialog_cnt( "sakharov" )
+end
+
+function has_trade_dialog_sak()
+  return has_trade_dialog( "sak" )
+end
+function on_trade_dialog_sak()
+  return dec_trade_dialog_cnt( "sak" )
+end
+
+function has_trade_dialog_kuznezov()
+  return has_trade_dialog( "kuznezov" )
+end
+function on_trade_dialog_kuznezov()
+  return dec_trade_dialog_cnt( "kuznezov" )
+end
+
+function has_trade_dialog_jlob()
+  return has_trade_dialog( "jlob" )
+end
+function on_trade_dialog_jlob()
+  return dec_trade_dialog_cnt( "jlob" )
+end
+
+function has_trade_dialog_sherstyk()
+  return has_trade_dialog( "sherstyk" )
+end
+function on_trade_dialog_sherstyk()
+  return dec_trade_dialog_cnt( "sherstyk" )
+end
+
+function has_trade_dialog_voron()
+  return has_trade_dialog( "voron" )
+end
+function on_trade_dialog_voron()
+  return dec_trade_dialog_cnt( "voron" )
+end
+
+function has_trade_dialog_maks()
+  return has_trade_dialog( "maks" )
+end
+function on_trade_dialog_maks()
+  return dec_trade_dialog_cnt( "maks" )
+end
+
+
+function actor_get_art_bio( sect, n )
+  local arts = {}
+  db.actor:iterate_inventory(
+    function( npc, obj )
+      if obj:section() == sect and is_zone_bio_art( obj ) then
+        if db.actor:is_in_ruck( obj ) then
+          table.insert( arts, obj )
+        end
+      end
+    end,
+    db.actor
+  )
+  if table.getn( arts ) >= n then
+    return arts
+  end
+end
+
+function actor_has_art_bio( sect, n )
+  if actor_get_art_bio( sect, n ) then return true else return false end
+end
+
+function actor_give_art_bio( sect, n )
+  local arts = actor_get_art_bio( sect, n )
+  if arts then
+    for i = 1, n do
+      local obj = table.remove( arts, 1 )
+      ogse.remove_item_from_inventory( obj )
+      news_manager.relocate_item( db.actor, "out", obj:section() )
+    end
+  end
+end
+
+function actor_has_art_bio_af_soul()
+  return actor_has_art_bio( "af_soul", 1 )
+end
+
+function actor_give_art_bio_af_soul()
+  return actor_give_art_bio( "af_soul", 1 )
+end
+
+function has_art_bio_cristall()
+  return actor_has_art_bio( "af_cristall", 1 )
+end
+
+function give_art_bio_cristall()
+  return actor_give_art_bio( "af_cristall", 1 )
+end
+
+function has_art_bio_5cristall()
+  return actor_has_art_bio( "af_cristall", 5 )
+end
+
+function give_art_bio_5cristall()
+  return actor_give_art_bio( "af_cristall", 5 )
+end
+
+function has_art_bio_moonlight()
+  return actor_has_art_bio( "af_electra_moonlight", 1 )
+end
+
+function give_art_bio_moonlight()
+  return actor_give_art_bio( "af_electra_moonlight", 1 )
+end
+
+function has_art_bio_mica()
+  return actor_has_art_bio( "af_ameba_mica", 1 )
+end
+
+function give_art_bio_mica()
+  return actor_give_art_bio( "af_ameba_mica", 1 )
+end
+
+function has_art_bio_gravi()
+  return actor_has_art_bio( "af_gravi", 1 )
+end
+
+function give_art_bio_gravi()
+  return actor_give_art_bio( "af_gravi", 1 )
+end
+
+function has_art_bio_medusa()
+  return actor_has_art_bio( "af_medusa", 1 )
+end
+
+function give_art_bio_medusa()
+  return actor_give_art_bio( "af_medusa", 1 )
+end
+
+
+function get_handmade_cost( sect )
+  local cost = get_u32( sect, "dsh.handmade.cost" )
+  if not cost then
+    cost = get_u32( sect, "cost" ) / 10
+  end
+  return cost
+end
+
+
+function is_handmade_artefact( sobj )
+  local handmade = true
+  local pk = xs_netpk.net_alife_item( sobj )
+  if pk:isOk() then
+    local data = pk:get()
+    local cd   = data.custom_data:getString()
+    if cd and cd ~= "" then
+      local ini = create_ini_file( cd )
+      if ini:section_exist( "dsh" ) then
+        handmade = ( get_bool( "dsh", "handmade", nil, ini ) ~= false )
+      end
+    end
+  end
+  return handmade
+end
+
+
+function find_random_lvid_in_radius( lname, lvid, radius )
+  local dir = vector():set(
+    math.random( -1000, 1000 ) / 1000, 0, math.random( -1000, 1000 ) / 1000
+  )
+  dir:normalize()
+  local found_lv
+  for i = 1, 359 do
+    local new_lvid = level.vertex_in_direction( lvid, dir, radius )
+    if new_lvid ~= lvid then
+      found_lv = new_lvid
+      break
+    end
+    dir = vector_rotate_y( dir, 1 )
+  end
+  if found_lv then
+    local pos  = level.vertex_position( found_lv )
+    local gvid = amk_anoms.find_gvid( lname, pos )
+    if gvid then
+      return pos, found_lv, gvid
+    end
+  end
+end
+
+
+function get_this_level_difficulty()
+  local val = get_float(
+    level.name(), script_name() .. ".this_level_difficulty", nil, game_ini()
+  )
+  ASSERT( val, "this_level_difficulty not defined for %s", level.name() )
+  return val - 0.79
 end

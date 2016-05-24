@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Армейский пистолет Colt M1911 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------------------
-[wpn_colt1911]:identity_immunities,class_pistol,hud_wpn_fx.colt1911
+[wpn_colt1911]:class_pistol,hud_wpn_fx.colt1911
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
 $spawn 				= "weapons\colt1911"	; option for Level Editor
@@ -44,10 +44,6 @@ inv_grid_y			= 4
 ;auto_spawn_ammo		= false
 
 ;-----------------------------------------------------------------------------------
-;базовая дисперсия
-dispersion_start		= 0
-fire_dispersion_base		= 0.18		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-
 ;отдача
 cam_relax_speed 		= 15.33		;скорость возврата в исходное положение
 cam_dispersion 			= 0.15		;увеличения угла (в градусах) с каждым выстрелом
@@ -57,10 +53,8 @@ cam_max_angle			= 4.0		;максимальный угол отдачи
 cam_max_angle_horz		= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.12		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor= 5		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		= 0.001		;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
-condition_shot_dec		= 0.00034 	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction           	      = 0, 0, 1
@@ -72,21 +66,12 @@ shell_point		 	= 0.0, 0.220, 0.044
 shell_dir		 	= 0.0, 0.0, 0.4
 shell_particles	 		= weapons\arsenal_shells1
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.4
-PDM_disp_accel_factor 		= 1.6
-PDM_crouch	 		= 0.8
-PDM_crouch_no_acc 		= 0.6
-
 ;;;;;;;  Для Народной солянки 2010
 hit_rate	            = 1.88
 bullet_speed			= 315		;начальная скорость пули
 rpm 				= 250
 rpm_empty_click 	 	= 100
 ; end ttc
-
-use_aim_bullet			= true		;Поддерживается ли первая суппер пуля
-time_to_aim			= 1.0	
 
 hud 				= wpn_colt1911_hud
 normal 				= 0, 1, 0

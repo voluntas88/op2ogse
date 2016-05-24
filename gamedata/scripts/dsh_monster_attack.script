@@ -1,7 +1,21 @@
 -- -*- mode: lua; coding: windows-1251-dos -*-
 
 function attach( sm )
+  sm:subscribe({ signal = "on_monster_hit",    fun = this.on_hit    })
   sm:subscribe({ signal = "on_monster_update", fun = this.on_update })
+  sm:subscribe({ signal = "on_update",         fun = this.on_actor_update })
+end
+
+
+local update_t
+function on_actor_update()
+  if update_t and update_t > time_global() then return end
+  local s_nd = level.get_snd_volume()
+  if s_nd < 1 then
+    s_nd = s_nd + 0.1
+    level.set_snd_volume( s_nd )
+  end
+  update_t = time_global() + 8538
 end
 
 
@@ -10,11 +24,31 @@ function on_update( obj )
     -- в Волне все эффекты отключаем
     if not has_alife_info( "volna_goodwill" ) then
       if obj:clsid() == clsid.bloodsucker_s then
-        bloodsucker_hit( obj )
+        bloodsucker_attack( obj )
+      elseif obj:clsid() == clsid.cat_s then
+        cat_attack( obj )
       elseif obj:clsid() == clsid.dog_s then
         dog_attack( obj )
+      elseif obj:clsid() == clsid.poltergeist_s then
+        poltergeist_attack( obj )
+      elseif obj:clsid() == clsid.tushkano_s then
+        tushkano_attack( obj )
+      elseif obj:clsid() == clsid.zombie_s then
+        zombie_attack( obj )
       end
     end
+  end
+end
+
+
+function on_hit( obj, amount, local_direction, who, bone_index )
+  if obj:alive() then
+    local chk_dist = obj:position():distance_to( who:position() )
+    if chk_dist > obj:range() then
+      obj:set_range( chk_dist * 1.1 )
+    end
+    obj:set_fov( 270 )
+    obj:make_object_visible_somewhen( who )
   end
 end
 
@@ -24,49 +58,37 @@ function master_koef()
 end
 
 
-function bloodsucker_hit( obj )
-  if obj.health < 0.52 then return end
+function bloodsucker_attack( obj )
+  if obj.health < 0.05 then return end
   local enemy = obj:get_enemy()
-  if not (
-    enemy and enemy:id() == db.actor:id() and obj:see( enemy )
-  ) then
+  if
+    not (
+      enemy and enemy:id() == db.actor:id() and obj:see( enemy )
+    )
+  then
     return
   end
   local binder = obj:binded_object()
-  --/ если у кровососа есть враг/цель и кровосос его видит то ...
+  if binder.attack2_t and binder.attack2_t > time_global() then return end
   local distance = obj:position():distance_to( enemy:position() )
+  local attack_dist = 15
+  binder.attack2_t  = time_global() + 1000
   local need_phantom = false
-  if distance < 2.5 then --/ дистанция для анимации 'засоса'
-    local timer = time_global()
-    if ( binder.timer_anim or 0 ) < timer then
-      binder.timer_anim = timer + 2000 --/ таймер анимации ~ 2 сек
-      if obj:animation_count() > 0 then
-        obj:clear_animations()
-      end
-      obj:add_animation( "vampire_0", true ) --/ варианты: "vampire_0" | "idle"
-      --/ озвучка 'засоса'
-      local sound = sound_object( "monsters\\bloodsucker\\vimpire_sucking" )
-      sound:play_at_pos( obj, obj:position() )
-      --/ хит жертве (притягиваем)
-      if
-        ( binder.timer_hit or 0 ) < timer
-        and ( binder.timer_anim and binder.timer_anim + 2000 >= timer )
-      then
-        binder.timer_hit = timer + 800 --/ таймер хита ~ 0.5 сек
-        local h = hit()
-        local vDir    = obj:direction() --/ вектор кровососа
-        local vDirHit = vector_rotate_y( vDir, 179.0 )
-        h:bone( "bip01_spine" ) --/ для учета 'брони'
-        h.draftsman = obj
-        h.direction = vDirHit --/ направление хита
-        h.power     = 0.10
-        h.impulse   = 120 / distance --/ чем ближе - тем сильнее 'засос'
-        h.type      = hit.wound --hit.strike
-        level.add_pp_effector( "fire_hit.ppe", 3000, false )
-        -- db.actor:set_actor_position( obj:position() )
-        -- db.actor:set_actor_direction( vDirHit:getH() )
-        enemy:hit( h ) --/ наносим хит жертве
-      end
+  if distance < attack_dist then
+    if math.random() < 0.5 then
+      local snd_obj = xr_sound.get_safe_sound_object(
+        "monsters\\bloodsucker\\bloodsucker_attack"
+      )
+      snd_obj:play_no_feedback( enemy, sound_object.s2d, 0, vector(), 5.0 )
+      local h = hit()
+      h.type      = hit.explosion
+      h.direction = vector():set( 0, 0, 0 )
+      h.power     = 0.05 + 0.02 * level.get_game_difficulty()
+      h.impulse   = 0
+      h.draftsman = obj
+      enemy:hit( h )
+      h.type      = hit.wound
+      enemy:hit( h )
     end
   else
     if binder.attack_t and binder.attack_t > time_global() then return end
@@ -74,10 +96,12 @@ function bloodsucker_hit( obj )
       obj:section() == "bloodsucker_strong"
       or obj:section() == "bloodsucker_effector"
     then
-      if not (
-        binder.phantom_spawned_id
-        and level.object_by_id( binder.phantom_spawned_id )
-      ) then
+      if
+        not (
+          binder.phantom_spawned_id
+          and level.object_by_id( binder.phantom_spawned_id )
+        )
+      then
         binder.phantom_spawned_id = nil
         if math.random() < 0.4 then
           need_phantom = false
@@ -94,6 +118,48 @@ function bloodsucker_hit( obj )
     )
     binder.phantom_spawned_id = sobj.id
   end
+  set_custom_panic( obj, binder, enemy )
+end
+
+
+function boar_body_attack( obj )
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  local dist = obj:position():distance_to( db.actor:position() )
+  local attack_dist = 3
+  binder.attack_t   = time_global() + (
+    dist < ( attack_dist * 2 ) and 0 or 1000
+  )
+  if ( not binder.attack_step ) or binder.attack_step == 1 then
+    if dist < attack_dist then
+      local h = hit()
+      h.type      = hit.radiation
+      h.power     = 0.0005 + 0.0002 * level.get_game_difficulty()
+        + 0.008 * dsh.get_this_level_difficulty()
+      h.impulse   = 0.0
+      h.draftsman = obj
+      h.direction = obj:direction()
+      db.actor:hit( h )
+    end
+    binder.attack_step = 2
+  else
+    binder.attack_step = 1
+  end
+end
+
+
+function cat_attack( obj )
+  if obj.health < 0.05 then return end
+  local enemy = obj:get_enemy()
+  if
+    not (
+      enemy and enemy:id() == db.actor:id() and obj:see( enemy )
+    )
+  then
+    return
+  end
+  local binder = obj:binded_object()
+  set_custom_panic( obj, binder, enemy )
 end
 
 
@@ -155,4 +221,109 @@ function dog_attack( obj )
     end
   end
   binder.attack_t = time_global() + 5000
+end
+
+
+function poltergeist_attack( obj )
+  local enemy = obj:best_enemy()
+  if not ( enemy and obj:see( enemy ) ) then return end
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  local dist = obj:position():distance_to( enemy:position() )
+  local attack_dist = 3
+  binder.attack_t   = time_global() + (
+    dist < ( attack_dist * 2 ) and 0 or 1000
+  )
+  if dist > attack_dist then return end
+  charge_tushkano( obj, enemy )
+end
+
+
+function set_custom_panic( obj, binder, enemy )
+  if binder.panic_t and binder.panic_t > time_global() then return end
+  local dist = obj:position():distance_to( enemy:position() )
+  local panic_dist = 6
+  binder.panic_t   = time_global() + (
+    dist < ( panic_dist * 2 ) and 0 or 1000
+  )
+  if enemy:active_slot() == 0 and enemy:see( obj ) and dist < panic_dist then
+    obj:set_custom_panic_threshold( 1 )
+  else
+    obj:set_custom_panic_threshold( 0 )
+  end
+end
+
+
+function tushkano_attack( obj )
+  if string.find( obj:section(), "rat_", 1, true ) then return end
+  local enemy = obj:best_enemy()
+  if not ( enemy and obj:see( enemy ) ) then return end
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  local dist = obj:position():distance_to( enemy:position() )
+  local attack_dist = 2
+  binder.attack_t   = time_global() + (
+    dist < ( attack_dist * 2 ) and 0 or 1000
+  )
+  if dist > attack_dist then return end
+  if math.random() > 0.25 then return end
+  local h = hit()
+  h.type      = hit.chemical_burn
+  h.direction = vector():set( 0, 0, 0 )
+  h.power     = 0.03 + 0.015 * level.get_game_difficulty()
+  h.impulse   = 0
+  h.draftsman = enemy
+  enemy:hit( h )
+end
+
+
+function zombie_attack( obj )
+  if obj.health < 0.05 then return end
+  local enemy = obj:get_enemy()
+  if
+    not (
+      enemy and enemy:id() == db.actor:id() and obj:see( enemy )
+    )
+  then
+    return
+  end
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  local dist = obj:position():distance_to( enemy:position() )
+  local attack_dist = 35
+  binder.attack_t   = time_global() + 1000
+  if dist > attack_dist then return end
+  if math.random() < 0.2 + 0.1 * level.get_game_difficulty() then
+    if math.random() < 0.4 then 
+      local snd_obj=xr_sound.get_safe_sound_object(
+        "monsters\\zombie\\zombi_attack2"
+      )
+      snd_obj:play_no_feedback( enemy, sound_object.s2d, 0, vector(), 5.0 )
+      level.set_snd_volume( 0.1 )
+    end
+    if db.actor.satiety >= 0.1 then
+      db.actor.satiety = -0.1
+    end
+  end
+end
+
+
+local tushkano_particle = particles_object( "anomaly2\\electra_entrance_big" )
+local tushkano_sound    = sound_object( [[monsters\tushkano\tushkano_spark]] )
+
+function charge_tushkano( obj, enemy )
+  if not tushkano_particle:playing() then
+    tushkano_particle:play_at_pos( obj:position() )
+  end
+  if not tushkano_sound:playing() then
+    tushkano_sound:play_at_pos( obj, obj:position(), 0 )
+    local zh = hit()
+    zh.draftsman = enemy
+    zh.type      = hit.shock
+    zh.direction = obj:position():sub( enemy:position() )
+    zh:bone( "pelvis" )
+    zh.power     = 0.075 + 0.025 * level.get_game_difficulty()
+    zh.impulse   = 0.05
+    enemy:hit(zh)
+  end
 end

@@ -2695,19 +2695,27 @@ function get_inventory_icon_rect(sect)
 	return 50*sys_ini:r_u32(sect, "inv_grid_x"), 50*sys_ini:r_u32(sect, "inv_grid_y"), 50*sys_ini:r_u32(sect, "inv_grid_width"), 50*sys_ini:r_u32(sect, "inv_grid_height")
 end
 -- получить номер локации по номеру глобального вертекса
-function location_id_by_gvid(gvid)
-	return game_graph():vertex(gvid):level_id()
+function location_id_by_gvid( gvid )
+  if gvid and game_graph():valid_vertex_id( gvid ) then
+    return game_graph():vertex( gvid ):level_id()
+  end
 end
 -- получить номер локации для клиентского объекта
-function object_location_id(obj)
-	local gvid = obj.game_vertex_id and obj:game_vertex_id() or obj.m_game_vertex_id
-	return location_id_by_gvid(gvid)
+function object_location_id( obj )
+  local gvid = obj.game_vertex_id
+    and obj:game_vertex_id() or obj.m_game_vertex_id
+  return location_id_by_gvid( gvid )
 end
 function object_level_name(obj)
-	return level_system_name_by_lid(object_location_id(obj))
+  local lid = object_location_id( obj )
+  if lid then
+    return level_system_name_by_lid( lid )
+  end
 end
-function level_system_name_by_lid(lid)
-	return alife():level_name(lid)
+function level_system_name_by_lid( lid )
+  if lid then
+    return alife():level_name( lid )
+  end
 end
 function level_name_by_level_system_name(lname)
 	return game.translate_string(lname)
@@ -3391,3 +3399,43 @@ function zero_outfit_protection( obj )
     set_outfit_protection( obj, k, 0 )
   end
 end
+
+
+function set_outfit_power_loss( obj, val )
+  obj:set_go_float( nil, val, 480 )
+end
+
+
+function set_inv_item_cost( obj, cost )
+  obj:set_inventory_item_int( 160, cost )
+end
+
+
+-- http://www.amk-team.ru/forum/topic/10538-x-ray-extensions/?p=1002890
+function normal_triangle( element ) -- нормаль треугольника
+  local n = vector()
+  local a = level.get_tri_vertex1( element )
+  local b = level.get_tri_vertex2( element )
+  local c = level.get_tri_vertex3( element )
+  n.x = ( ( b.z - a.z ) * ( c.y - a.y ) ) - ( ( b.y - a.y ) * ( c.z -a.z ) )
+  n.y = ( ( b.x - a.x ) * ( c.z - a.z ) ) - ( ( b.z - a.z ) * ( c.x -a.x ) )
+  n.z = ( ( b.y - a.y ) * ( c.x - a.x ) ) - ( ( b.x - a.x ) * ( c.y -a.y ) )
+  return n:normalize()
+end
+
+
+--[=[
+От Malandrinus отсюда: http://www.amk-team.ru/forum/topic/10538-x-ray-extensions/?p=1006978
+
+Проиграть произвольную анимацию худовой модели:
+
+db.actor:set_hud_animation_channel(2)
+db.actor:set_use_hud_animation_callback(true)
+db.actor:set_hud_animation_callback_param(12345)
+wpn:play_hud_animation("reload", true)
+
+Колбек на окончание анимации вызывается для актора, код колбека 157.
+В колбек передаётся один целый аргумент - то число, которое было установлено
+вызовом db.actor:set_hud_animation_callback_param(<целое число>).
+Так можно в колбеке различать, какая именно анимация закончилась.
+--]=]

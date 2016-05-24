@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Обрез охотничего ружья БМ-16 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;---------------------------------------------------------------------------------------------
-[wpn_bm16]:identity_immunities,class_obrez
+[wpn_bm16]:class_obrez
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\bm16"					; option for Level Editor
@@ -41,7 +41,6 @@ cam_max_angle			= 8.0	;максимальный угол отдачи
 cam_max_angle_horz		= 20.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 2.5	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		= 0.003	;вероятность осечки при максимальном износе
 misfire_condition_k			= 0.05 
 ;-----------------------------------------------------------------------------------
@@ -79,12 +78,6 @@ rpm_empty_click 	   		= 200
 hit_rate	      = 1.85
 rpm                 = 200
 ; end ttc
-
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.1
-PDM_disp_accel_factor 		= 1.1
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
 
 hud                      	= wpn_bm16_hud
 normal                   	= 0, 1, 0

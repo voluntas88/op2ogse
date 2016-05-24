@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Снайперская винтовка укороченная СВУ-А "Малыш" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------------------------------------
-[wpn_svu_m1]:identity_immunities,scope.1x,hud_wpn_fx.svd
+[wpn_svu_m1]:class_sr,scope.1x
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
 $spawn 				= "weapons\wpn_svu_m1"		; option for Level Editor
@@ -10,12 +10,7 @@ $prefetch 			= 8
 scheduled 			= off 			; option for ALife Simulator
 cform 				= skeleton
 class 				= WP_VINT ;WP_SVU
-min_radius 			= 5
-max_radius 			= 200
 description			= enc_weapons1_wpn-svu_m1  ;enc_arsenal_svu_as  
-
-ef_main_weapon_type		= 3
-ef_weapon_type			= 8
 
 ;--- scope weapons -----------------------------------------------------------------
 holder_range_modifier	= 2.15               ; во сколько раз увеличивается eye_range 
@@ -38,7 +33,6 @@ f_mode				= 1
 hand_dependence 		= 2
 single_handed		= 0
 
-slot 				= 2			; secondary
 animation_slot		= 2			; type of the animation that will be used
 
 inv_name			      = wpn-svu_m1           
@@ -58,12 +52,10 @@ sprint_allowed			= true
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
 fire_dispersion_base		= 0.025 ;0.051	;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-control_inertion_factor		= 1.6f
 disp_rate = 1.85
 
 ;отдача
 cam_relax_speed         	= 8.25	;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 120.75	;скорость возврата в исходное положение для НПС
 cam_dispersion          	= 0.79	;увеличения угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.15	;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 1.0	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -71,10 +63,8 @@ cam_max_angle			= 6.0	;максимальный угол отдачи
 cam_max_angle_horz		= 0.1	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 1.1	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.0005	;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
-condition_shot_dec 		= 0.0001 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction 			= 0, 0, 1
@@ -88,24 +78,12 @@ shell_point		 		= 0.0, 0.23, -0.119 ;shell_point		 	= 0.0, 0.128, 0.0
 shell_dir		 	      = 0.0, 0.0, 0.4
 shell_particles	 		= weapons\arsenal_shells1 
 
-PDM_disp_base 			= 4.0
-PDM_disp_vel_factor 		= 1.7
-PDM_disp_accel_factor 		= 1.8
-PDM_crouch	 		= 0.9
-PDM_crouch_no_acc 		= 0.8
-
 ; ttc
-hit_power               = 0.94
-hit_impulse		 	= 80
-hit_type 		 	    = fire_wound
 fire_distance           = 680   ;КОЭФФИЦИЕНТ максимальной дистанции выстрела (АМК-мод)
 bullet_speed		= 840	;КОЭФФИЦИЕНТ начальной скорости пули (АМК-мод)
 rpm                     = 600  ;150
 rpm_empty_click 	 	= 325
 ; end ttc
-
-use_aim_bullet			= true			; Поддерживается ли первая суппер пуля
-time_to_aim			= 1.0	
 
 hud 				= wpn_svu_as_hud
 normal 			= 0, 1, 0
@@ -150,7 +128,6 @@ snd_close				= weapons\svu\holster
 ;silencer_flame_particles 	= weapons\generic_weapon_svu
 silencer_smoke_particles 	= weapons\generic_shoot_00
 
-hit_power           = 0.85, 0.89, 0.96, 1.02
 silencer_hit_impulse	 	= 0.9
 silencer_fire_distance 		= 320
 silencer_bullet_speed	 	= 820
@@ -164,7 +141,7 @@ silencer_light_time 		= 0.2
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
-[wpn_svu_as_hud]
+[wpn_svu_as_hud]:hud_sr
 
 allow_inertion			= true
 
@@ -195,6 +172,3 @@ zoom_rotate_y		= 0.036000
 ;-----------------------------------------------------------------------------
 ;прячем перекрестие прицела в зуме
 zoom_hide_crosshair		= true
-;время поворота HUD (сек)
-zoom_rotate_time			= 0.3
-rotate_time				= 0.3

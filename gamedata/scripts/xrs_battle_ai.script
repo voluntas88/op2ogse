@@ -13,7 +13,8 @@ local time_to_hide = 5000			-- время, сколько примерно сидеть в укрытии, миллисс
 local time_to_maneuver = 2500		-- время, сколько стоять на точке маневрирования, миллиссекунд
 local close_combat_distance = 15	-- дистанция ближнего боя
 local distant_combat_distance = 35	-- дистанция когда бой уже не считается ближним
-local maximum_firefight_dist = 50	-- максимальная адекватная дистанция огневого боя
+-- максимальная адекватная дистанция огневого боя
+local maximum_firefight_dist = ( level.get_game_difficulty() + 1 ) * 50
 local sound_prob = 0.1				-- вероятность сказать фразу
 local cooldown_time = 20000			-- время запрета лута после боя
 local reprioritize_timeout = 1500 	-- интервал реприоретизации, мсек - нельзя делать слишком низким - будет судорожно метаться между целями
@@ -62,10 +63,10 @@ local game_difficulty = level.get_game_difficulty()
 local diff_level = game_difficulty_by_num[game_difficulty]	
 
 -- рестрикшены, которые нельзя восстанавливать если они были сняты, находятся в скриптe _g
-local restrictions_off = false
+local restrictions_off = true --false
 
 local low_range_npc_aggr = 30
-local far_range_mon_aggr = 25
+local far_range_mon_aggr = 50 --25
 local low_range_mon_aggr = 5
 
 local combat_mult_npc = 0.5			-- множитель веса ближней цели неписей
@@ -105,6 +106,18 @@ local forbidden_profiles = {		-- запретные профили и имена
 	["bandit_trader_spawn"]			=	true,	
 	["dik_the_drifter"]				=	true,
 	["major_wounded"]				=	true,
+	["gen_monolit_sniper"]			=	true,
+	["aes_Monolit_rpg"]				=	true,
+	["hohol"]						=	true,
+	["esc_lekar"]					=	true,
+	["first_neutral"]				=	true,
+	["esc_buharik"]					=	true,
+	["esc_guns_remontnik"]			=	true,
+	-- пацаны в саркофаге должны быть под движковой боевкой
+	["sar_monolith_exo"]			=	true,
+	["sar_monolith_exo_crystal"]	=	true,
+	["sar_monolith_specnaz"]		=	true,
+	["sar_monolith_commander"]		=	true,
 }
 
 function attach( sm )
@@ -156,28 +169,28 @@ local intros = intros_by_diff[diff_level]
 
 local times_to_aim_by_diff = {
 	["gd_novice"] = {
-		["novice"]		= {shotgun = 300, sniper = 2000, other = 550, rpg = 5500},
+		["novice"]		= {shotgun = 550, sniper = 2000, other = 550, rpg = 5500},
 		["experienced"]	= {shotgun = 500, sniper = 1500, other = 500, rpg = 5000},
-		["veteran"]		= {shotgun = 800, sniper = 1100, other = 450, rpg = 4500},
-		["master"]		= {shotgun = 800, sniper = 800, other = 400, rpg = 4000}
+		["veteran"]		= {shotgun = 450, sniper = 1100, other = 450, rpg = 4500},
+		["master"]		= {shotgun = 400, sniper = 800, other = 400, rpg = 4000}
 	},
 	["gd_stalker"] = {
-		["novice"]		= {shotgun = 300, sniper = 1800, other = 500, rpg = 4500},
-		["experienced"]	= {shotgun = 500, sniper = 1200, other = 450, rpg = 4000},
-		["veteran"]		= {shotgun = 800, sniper = 1000, other = 400, rpg = 3500},
-		["master"]		= {shotgun = 800, sniper = 700, other = 350, rpg = 3000}
+		["novice"]		= {shotgun = 500, sniper = 1800, other = 500, rpg = 4500},
+		["experienced"]	= {shotgun = 450, sniper = 1200, other = 450, rpg = 4000},
+		["veteran"]		= {shotgun = 400, sniper = 1000, other = 400, rpg = 3500},
+		["master"]		= {shotgun = 350, sniper = 700, other = 350, rpg = 3000}
 	},
 	["gd_veteran"] = {
-		["novice"]		= {shotgun = 300, sniper = 1700, other = 450, rpg = 4000},
-		["experienced"]	= {shotgun = 500, sniper = 1100, other = 400, rpg = 3500},
-		["veteran"]		= {shotgun = 800, sniper = 900, other = 350, rpg = 3000},
-		["master"]		= {shotgun = 800, sniper = 600, other = 300, rpg = 2500}
+		["novice"]		= {shotgun = 450, sniper = 1700, other = 450, rpg = 4000},
+		["experienced"]	= {shotgun = 400, sniper = 1100, other = 400, rpg = 3500},
+		["veteran"]		= {shotgun = 350, sniper = 900, other = 350, rpg = 3000},
+		["master"]		= {shotgun = 300, sniper = 600, other = 300, rpg = 2500}
 	},
 	["gd_master"] = {
-		["novice"]		= {shotgun = 300, sniper = 1500, other = 350, rpg = 3500},
-		["experienced"]	= {shotgun = 500, sniper = 1000, other = 300, rpg = 3000},
-		["veteran"]		= {shotgun = 800, sniper = 800, other = 250, rpg = 2500},
-		["master"]		= {shotgun = 800, sniper = 500, other = 200, rpg = 2000}
+		["novice"]		= {shotgun = 350, sniper = 1500, other = 350, rpg = 3500},
+		["experienced"]	= {shotgun = 300, sniper = 1000, other = 300, rpg = 3000},
+		["veteran"]		= {shotgun = 250, sniper = 800, other = 250, rpg = 2500},
+		["master"]		= {shotgun = 200, sniper = 500, other = 200, rpg = 2000}
 	}
 }
 
@@ -208,7 +221,7 @@ local deviation_by_diff = {
 		["novice"]		= {x = 0.06, y = 0.06, z = 0.06},
 		["experienced"]	= {x = 0.04, y = 0.04, z = 0.04},
 		["veteran"]		= {x = 0.02, y = 0.02, z = 0.02},
-		["master"]		= {x = 0.00, y = 0.00, z = 0.00}
+		["master"]		= {x = 0.01, y = 0.01, z = 0.01}
 	}
 }
 
@@ -342,6 +355,7 @@ local sniper_rifles = {
 
 local grenade_launchers = {
 
+[ "wpn_m79" ]   = true,
 ["wpn_rg-6"]	= true,
 ["wpn_rpg7"]	= true,
 ["wpn_shmel"]	= true,
@@ -557,7 +571,7 @@ function evaluator_check_altcombat:evaluate()
 		bw = act_item
 	end
 	local npc_rank = ranks.get_obj_rank_name(self.object)
---[[	if not bw then
+	if not bw then
 		local knife = self.object:object("wpn_knife")
 		if not knife then
 			if not need_knife[self.object:id()] then
@@ -573,11 +587,11 @@ function evaluator_check_altcombat:evaluate()
 	end
 	if bw and isKnife(bw) and (npc_rank == "veteran" or npc_rank == "master") then
 		knife_scheme[self.object:id()] = true
+		self.object:set_mental_state(anim.danger)
 	else	
 		knife_scheme[self.object:id()] = nil
-	end]]
-	-- ножевой бой временно отключен
-	knife_scheme[self.object:id()] = nil
+	end
+
 	if self.st.script_combat_type == "zombied"  then
 		-- monolith[self.object:id()] = true
 		campers[self.object:id()] = nil
@@ -869,17 +883,15 @@ function action_altcombat:execute()
 	end
 	
 	if npc:see(be) and not is_armor(be) and knife_scheme[npc:id()] then
-		write_log("!!XRS_BATTLE_AI: NPC_WITH_KNIFE!!! "..npc:name())
+		npc:set_mental_state(anim.danger)
 		assist_point = select_enemy_pos_fanatic(npc, be)
+		write_log("!!XRS_BATTLE_AI: NPC_WITH_KNIFE!!! "..npc:name().." SENT ["..tostring(assist_point).."]")		
 		last_algorythm = "enemy_vertex"
 		if assist_point then
 			xr_sound.set_sound(npc, nil)
 			set_combat_sight(npc, be, bw)
 			set_escape_state(npc, be)
-			set_weapons_fire( npc, be, bw, false, npc_rank )
-			if npc:level_vertex_id() == assist_point then
-				-- self.object:movement_enabled(false)
-			else
+			if npc:level_vertex_id() ~= assist_point then
 				if hit_timeout[npc:id()] and hit_timeout[npc:id()] > time_global() then
 					self.object:movement_enabled(false)
 				elseif hit_timeout[npc:id()] then	
@@ -1273,7 +1285,7 @@ function action_altcombat:check_npc_on_fire_line(obj)
 			
 			local friend_pos = obj:bone_position("bip01_spine")
 			local radius = 3
-			local friend_dist=npc_pos:distance_to(be_pos)-radius
+	--		local friend_dist=npc_pos:distance_to(be_pos)-radius
 			
 			if IsRPG(weapon) then
 				local effective_radius = be_pos:distance_to(friend_pos)
@@ -1286,14 +1298,27 @@ function action_altcombat:check_npc_on_fire_line(obj)
 
 			if be_dist > 5 then --and friend_dist < be_dist then -- убрано чтобы не стреляли не только когда непись между врагом но и за ним непосредственно
 				local dir_aim = utils.vector_copy_by_val(be_pos):sub(npc_pos)
-				--считаем попадает ли текущий солдат в сектор обстрела
 				local dir_obj = utils.vector_copy_by_val(friend_pos):sub(npc_pos)
-				local x=dir_obj.x*dir_aim.x+dir_obj.z*dir_aim.z
+				
+				-- половинный угловой размер друга
+				local friend_dist = npc_pos:distance_to(friend_pos)
+				local cos_angle = 1/sqrt(1 + radius*radius/(friend_dist*friend_dist*4))
+				
+				-- угол между направлениями на врага и друга
+				dir_aim:normalize()
+				dir_obj:normalize()
+				local cos_aim_obj = dir_aim:dotproduct(dir_obj)
+				
+				-- проверяем попадание в друга
+				if cos_aim_obj > cos_angle then
+					return true
+				end
+	--[[			local x=dir_obj.x*dir_aim.x+dir_obj.z*dir_aim.z
 				local y=-dir_obj.z*dir_aim.x+dir_obj.x*dir_aim.z -- повернули систему координат     
 				local angle=math.atan2(y,x) -- угол доворота от -180 до 180   
 				
 				local div=radius/friend_dist
-				if angle >= -div and angle <= div then return true end
+				if angle >= -div and angle <= div then return true end]]
 			end
 		end
 	
@@ -1313,66 +1338,82 @@ end
 -- Служебные функции для ведения реестра врагов
 ----------------------------------------------------------------------------------------------------
 
-function check_friends_enemy(npc, enemy_id)
-	
-	local enemy_match = false
 
-	local function check_enemy(npc, obj)
-		if obj 
-		and obj.clsid 
-		and IsStalker(obj) 
-		and obj:alive() 
-		and npc:id() ~= obj:id() 
-		and obj:id() ~= db.actor:id() then
-			if npc:relation(obj) == game_object.friend 
-			or (radio_comms[npc:character_community()] and npc:character_community() == obj:character_community())
-			then
-				if primary_target[obj:id()] and primary_target[obj:id()] == enemy_id then
-					enemy_match = true
-				end				
-			end			
-		end	
-	end
-
-	for o in npc:memory_visible_objects() do
-		check_enemy(npc, o:object())
-	end
-	
-	for o in npc:memory_sound_objects() do
-		check_enemy(npc, o:object())
-	end
-	
-	return (enemy_match == true)
-
+function check_friends_enemy( npc, enemy_id )
+  local function check_enemy( npc, obj )
+    if
+      obj and obj.clsid  and IsStalker( obj ) and obj:alive()
+      and npc:id() ~= obj:id() and obj:id() ~= db.actor:id()
+    then
+      if
+        npc:relation( obj ) == game_object.friend
+        or (
+          radio_comms[ npc:character_community() ]
+          and npc:character_community() == obj:character_community()
+        )
+        or (
+          npc:relation( obj ) ~= game_object.enemy
+          and npc:position():distance_to( obj ) < 25
+        )
+      then
+        if
+          primary_target[ obj:id() ]
+          and primary_target[ obj:id() ] == enemy_id
+        then
+          return true
+        end
+      end
+    end
+    return false
+  end
+  for o in npc:memory_visible_objects() do
+    if check_enemy( npc, o:object() ) then return true end
+  end
+  for o in npc:memory_sound_objects() do
+    if check_enemy( npc, o:object() ) then return true end
+  end
+  return false
 end
 
-function notify_friends(npc, enemy)
-	
-	local function notify_friend(npc, obj)
-		if obj 
-		and obj.clsid 
-		and IsStalker(obj) 
-		and obj:alive() 
-		and npc:id() ~= obj:id() 
-		and not xr_wounded.is_wounded(obj) 
-		and obj:id() ~= db.actor:id() then
-			if npc:relation(obj) == game_object.friend 
-			or (radio_comms[npc:character_community()] and npc:character_community() == obj:character_community())
-			then
-				process_enemy(obj, enemy)
-			end			
-		end	
-	end
 
-	for o in npc:memory_visible_objects() do
-		notify_friend(npc, o:object())
-	end
-	
-	for o in npc:memory_sound_objects() do
-		notify_friend(npc, o:object())
-	end	
-
+function notify_friends( npc, enemy )
+  local function notify_friend( npc, obj )
+    if
+      obj and obj.clsid and IsStalker( obj ) and obj:alive()
+      and npc:id() ~= obj:id()
+      and obj:id() ~= db.actor:id()
+      and not xr_wounded.is_wounded( obj )
+    then
+      if
+        npc:relation(obj) == game_object.friend
+        or (
+          radio_comms[ npc:character_community() ]
+          and npc:character_community() == obj:character_community()
+        )
+        or (
+          npc:relation( obj ) ~= game_object.enemy
+          and npc:position():distance_to( obj ) < 25
+        )
+      then
+        process_enemy( obj, enemy )
+      end
+    end
+  end
+  local notified = {}
+  for o in npc:memory_visible_objects() do
+    if not notified[ o:object():id() ] then
+      notify_friend( npc, o:object() )
+      notified[ o:object():id() ] = true
+    end
+  end
+  for o in npc:memory_sound_objects() do
+    if not notified[ o:object():id() ] then
+      notify_friend( npc, o:object() )
+      notified[ o:object():id() ] = true
+    end
+  end
 end
+
 
 function disable_object(npc, enemy) -- забыть объект
 	if npc and enemy then
@@ -1523,7 +1564,7 @@ function hit_fx(e)
 		local vis = table.remove(
 		  amk.str_explode( "\\", e.victim:get_visual_name() )
 		)
-		if string.find(vis,"exo") then exo_flag = true end
+		if string.find( vis, "exo" ) or string.find( vis, "tank" ) then exo_flag = true end
 	end
 
 	local key_3 = nil
@@ -1801,7 +1842,7 @@ function we_are_under_attack(npc, enemy)
 		local danger_by_engine = enemy:best_danger()
 		local best_danger_object = nil
 		local bd_type = nil
-		if danger_by_engine and check_is_enemy(npc, enemy) then
+		if danger_by_engine and check_is_enemy(npc, enemy) and xr_danger.check_in_danger(npc) then
 			best_danger_object = danger_by_engine:object()
 		end
 		if not target and best_danger_object then
@@ -1815,7 +1856,9 @@ function we_are_under_attack(npc, enemy)
 			(IsStalker(target) and 
 			target:alive() and
 			(npc:relation(target) == game_object.friend or 
-			npc:character_community() == target:character_community()))
+			npc:character_community() == target:character_community()) and
+			(npc:see(target) or target:see(npc))
+			)
 			then
 				return true
 			else	
@@ -1826,17 +1869,27 @@ function we_are_under_attack(npc, enemy)
 		end
 	else
 		if check_is_enemy(npc, db.actor) then
+		
+			local raytrace_see = false
+			local see_actor = npc:see(db.actor)
+			local fps_check = ogse_benchmark.get_fps()
+			if use_raytrace and fps_check > raytrace_fps_limit then
+				raytrace_see = actor_see_raytrace(npc)
+			else
+				raytrace_see = actor_see(npc)
+			end		
+		
 			local be 		= npc:best_enemy()
 			local bd 		= npc:best_danger()
 			local bd_obj 	= nil
-			if bd then
+			if bd and xr_danger.check_in_danger(npc) then
 				bd_obj = bd:object()
 			end
-			if be and be:id() == db.actor:id() then
+			if be and be:id() == db.actor:id() and (raytrace_see or see_actor) then
 				return true
 			elseif bd_obj and bd_obj:id() == db.actor:id() then
 				local bd_type = bd:type()
-				if needed_dangers[bd_type] then
+				if needed_dangers[bd_type] and (raytrace_see or see_actor) then
 					return true
 				end
 			else	
@@ -2132,7 +2185,7 @@ function refresh_targets(npc)
 	end
 	-- добавление нападающего денжера
 	local danger_by_engine = npc:best_danger()
-	if danger_by_engine then
+	if danger_by_engine and xr_danger.check_in_danger(npc) then
 		local best_danger_object = danger_by_engine:object()
 		if best_danger_object then
 			local bd_type = danger_by_engine:type()		
@@ -2406,9 +2459,7 @@ function get_max_weapon_range(npc)
 		local ini = system_ini()
 		if act_item then
 			local sect = act_item:section()
-			if ini:section_exist(sect) and ini:line_exist(sect, "fire_distance") then
-				return ini:r_float(sect, "fire_distance") * 0.7
-			elseif ini:section_exist(sect) and ini:line_exist(sect, "max_radius") then
+			if ini:section_exist(sect) and ini:line_exist(sect, "max_radius") then
 				return ini:r_float(sect, "max_radius")
 			elseif not ini:section_exist(sect) then	
 				write_log("!!XRS_COMBAT_AI: WEAPON SECTION NOT EXIST ["..tostring(sect).."]")
@@ -2818,47 +2869,38 @@ function get_target(npc)
 	return target
 end
 
+
 function has_full_weapon(npc, object)
-	if object then
-		local id = get_clsid(object)
-		if id and short_weapons[id] then
-			return false
-		else	
-			return true
-		end
-	end
-	return true
+  if object then
+    return get_u32( object:section(), "ef_weapon_type" ) ~= 5
+  end
+  return true
 end
 
-function IsShotgun(object)
-	if object then
-		local id = object:section()
-		if shotguns[id] then
-			return true
-		end
-	end
-	return false
+
+function IsShotgun( object )
+  if object then
+    return get_u32( object:section(), "ef_weapon_type" ) == 7
+  end
+  return false
 end
 
-function IsSniperRifle(object)
-	if object then
-		local id = object:section()
-		if sniper_rifles[id] then
-			return true
-		end
-	end
-	return false
+
+function IsSniperRifle( object )
+  if object then
+    return get_u32( object:section(), "ef_weapon_type" ) == 8
+  end
+  return false
 end
+
 
 function IsRPG(object)
-	if object then
-		local id = object:section()
-		if grenade_launchers[id] then
-			return true
-		end
-	end
-	return false
+  if object then
+    return get_u32( object:section(), "ef_weapon_type" ) == 9
+  end
+  return false
 end
+
 
 function in_hideout(npc)
 	if npc and last_hideout[npc:id()] then
@@ -3004,7 +3046,7 @@ function set_weapons_fire( npc, enemy, weapon, override_vis, npc_rank )
 		if IsShotgun(weapon) then
 			npc:set_item( type_of_fire, weapon, 1, time_aim.other )
 		elseif IsSniperRifle(weapon) then
-			npc:set_item(type_of_fire, weapon, 1, time_aim.sniper)
+			npc:set_item( type_of_fire, weapon, 1, time_aim.other )
 		elseif IsRPG(weapon) then
 			npc:set_item(type_of_fire, weapon, 1, time_aim.rpg)			
 		else
@@ -3149,7 +3191,7 @@ function add_deviation(npc, position, weapon, distance)
 	local npc_comm = npc:character_community()
 	local deviations = deviation_table[npc_rank]
 	local dev_coeff = community_deviation_coeff[npc_comm] or 1
-	if distance > distant_combat_distance then
+	if distance > 50 then
 	  return position
 	end
 	if deviations then
@@ -3200,7 +3242,7 @@ function set_combat_sight(npc, enemy, weapon)
 				end
 			end
 		elseif IsSniperRifle(weapon) then
-			look_pos = add_deviation(npc, enemy:bone_position("eyelid_1"), weapon, distance)
+			look_pos = enemy:bone_position("eyelid_1")
 		else
 			if distance < 25 then
 				if bodystate == move.crouch then
@@ -3242,7 +3284,9 @@ function set_combat_sight(npc, enemy, weapon)
 		end
 	end
 	
-	if (npc:see(enemy) and enemy:alive()) or (is_armor(enemy) and armor_alive(enemy)) then
+	if (npc:see(enemy) and enemy:alive()) or (is_armor(enemy) and armor_alive(enemy))
+	or knife_scheme[npc:id()]
+	then
 		npc:set_desired_direction()
 		if weapon then
 			npc:set_sight(look.fire_point,look_pos)
@@ -3737,7 +3781,7 @@ function select_enemy_pos_fanatic(npc, enemy)
 	local known_enemy_vtx = enemy:level_vertex_id()
 	
 	if not known_enemy_vtx then
-		known_enemy_vtx = npc:level_vertex_id()	
+		known_enemy_vtx = randomize_position(npc)
 	end	
 	
 	local dist_to_point = npc:position():distance_to(level.vertex_position(known_enemy_vtx))
@@ -3996,7 +4040,7 @@ function restore_restrictions(npc)
 		backup_restrictions_out[npc:id()] = nil
 		backup_restrictions_in[npc:id()] = nil
 		
-		ogse.fix_restrictors(npc)
+--		ogse.fix_restrictors(npc)
 	end
 end
 

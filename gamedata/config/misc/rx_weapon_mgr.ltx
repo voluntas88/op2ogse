@@ -3,7 +3,7 @@
 ; Модуль weapon manager
 ; Rulix aka Bak
 ;--------------------------------------
-#include "rx_weapon_mgr_ws.ltx"
+;#include "rx_weapon_mgr_ws.ltx"
 [rx_weapon_mgr.main]
 ; технические параметры:
 enabled = true
@@ -15,7 +15,7 @@ return_period = 400000 ; максимальное время между возвращениями, для профилактик
 sees_time = 4000       ; сколько помнить врага, для mode2 = 2
 forbidden_weapons = none ; запрещенное к использованию оружие
 min_condition = 0.2    ; минимальное состояние, при котором можно использовать
-weapon_minmaxr = false ; брать параметры min_radius и max_radius из конфига оружия
+weapon_minmaxr = true ; брать параметры min_radius и max_radius из конфига оружия
 ;
 [rx_weapon_mgr.types] ; типы
 list = 1,5,6,7,8,9 ; список типов - только целые числа
@@ -24,11 +24,11 @@ line = ef_weapon_type ; параметр в конфиге ствола, который будет считаться его т
 ; для динамического режима выбора
 
 ; min_radius,max_radius ; для типа, если weapon_minmaxr = false
-minmaxr_5 = 0,50
-minmaxr_6 = 1,300
-minmaxr_7 = 0,35
-minmaxr_8 = 25,1025
-minmaxr_9 = 10,900
+minmaxr_5 = 0,35   ;0,50
+minmaxr_6 = 5,300  ;1,300
+minmaxr_7 = 0,40   ;0,35
+minmaxr_8 = 10,300 ;25,1025
+minmaxr_9 = 50,150 ;10,900
 
 ; модификоторы расстояния
 rsec_5 = 50,45,30,30,30,25,20,20,20,15,10,5
@@ -52,7 +52,7 @@ enemy_9 = tushkano:20,giant:10,zombie:5,burer:5,actor:10
 
 ; определение приоритета оружия:
 ; 0 - отключено, 1 - по цене, 2 - по параметрам, 3 - заданный вручную
-mode1 = 3
+mode1 = 2 ;3
 
 ;+++++++++++
 
@@ -84,8 +84,8 @@ priors = priors_def ; секция в этом файле
 ;++++++++++++
 
 ; увеличение приоритета при наличии обвеса, %
-scope = 10 ; оптический прицел
-silencer = 15 ; глушитель
+scope           =  0 ;10 ; оптический прицел
+silencer        =  0 ;15 ; глушитель
 grenadelauncher = 20 ; гранатомет
 
 ;++++++++++++
@@ -109,19 +109,19 @@ disabled = false
 
 ; секции группировок, рангов
 
-[rx_weapon_mgr.stalker_veteran]
-mag_lowering_fc = 45
+;[rx_weapon_mgr.stalker_veteran]
+;mag_lowering_fc = 45
 
-[rx_weapon_mgr.zombied]
-mode2	= 1
+;[rx_weapon_mgr.zombied]
+;mode2	= 1
 
-[rx_weapon_mgr.dolg]
-mode1	= 2
+;[rx_weapon_mgr.dolg]
+;mode1	= 2
 
-[rx_weapon_mgr.novice]
+;[rx_weapon_mgr.novice]
 
-[rx_weapon_mgr.master]
-scope = 15
+;[rx_weapon_mgr.master]
+;scope = 15
 
 ;++++++++++++
 [rx_weapon_mgr.koefs_def]

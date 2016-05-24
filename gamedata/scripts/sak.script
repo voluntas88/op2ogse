@@ -476,22 +476,33 @@ local itemin=nil
 function have_item_namber(itm,need_namber)
 	return amk_utils.inventory_search(itm, need_namber)
 end
-function create_items(npc,section,number)
-        for i=1,number do
-			alife():create(section, 
-            npc:position(),
-            npc:level_vertex_id(),  
-            npc:game_vertex_id(),
-            npc:id())
-        end 
+
+
+function create_items( npc, section, number )
+  local created_items = {}
+  for i = 1, number do
+    local sobj = alife():create(
+      section, 
+      npc:position(),
+      npc:level_vertex_id(), npc:game_vertex_id(),
+      npc:id()
+    )
+    table.insert( created_items, sobj )
+  end
+  return created_items
 end
+
+
+-- Спавн в инвентарь гг с выдачей сообщения.
+function create_items_actor( itm_section, number )
+  local items = this.create_items( db.actor, itm_section, number )
+  news_manager.relocate_item( db.actor, "in", itm_section )
+  return items
+end
+
+
 local reloc_params={}
 local stalk
--- Спавн в инвентарь гг с выдачей сообщения.
-function create_items_actor(itm_section,number)
-	this.create_items(db.actor,itm_section,number)
-	news_manager.relocate_item(db.actor, "in", itm_section)
-end
 -- функция удаления всех itm_section из инвентаря ГГ. Полезна, когда количество неизвестно
 function out_item_all(itm_section)
 	reloc_params.itm_section=itm_section
@@ -504,18 +515,28 @@ function out_items_all_count(actor,item)
 		amk.remove_item_from_inventory(item, actor)
 	end
 end
-function out_item_namber(itm_section,need_number)
-	reloc_params.itm_section=itm_section
-	reloc_params.itm_cnt=need_number
-	reloc_params.itm_cnt_found=0
-	db.actor:iterate_inventory(checkout_items_count,db.actor)
-	reloc_params.itm_cnt_found=0
-	if reloc_params.itm_cnt_found<=reloc_params.itm_cnt then
-		db.actor:iterate_inventory(out_items_count,db.actor)
-	end
-	news_manager.relocate_item(db.actor, "out", itm_section)
-	reloc_params={}
+
+
+function out_item_namber( itm_section, need_number )
+  local items = {}
+  db.actor:iterate_inventory(
+    function( npc, item )
+      if item:section() == itm_section then
+        table.insert( items, item )
+      end
+    end,
+    db.actor
+  )
+  if table.getn( items ) > 0 then
+    news_manager.relocate_item( db.actor, "out", itm_section )
+  end
+  while need_number > 0 and table.getn( items ) > 0 do
+    ogse.remove_item_from_inventory( table.remove( items, 1 ) )
+    need_number = need_number - 1
+  end
 end
+
+
 function relocate_item_namber(stalker,itm_section,need_number)
 	stalk=stalker
 	reloc_params.itm_section=itm_section
@@ -1405,42 +1426,51 @@ function have_trasure_delayed() end
 
 
 function zombie_checkup()
-	if db.actor ~= nil then
-		if math_random() > 0.7 	and not inventory.on_belt("af_serpantin") then
-		local a=math_random()
-		local h = hit()
-		h.draftsman = db.actor
-		h.direction = vector():set(0,0,0)
-		h:bone("bip01_spine") -- чтобv учитvвалась броня
-		h.type = hit.telepatic
-		h.power = 0.3+a/2
-		h.impulse = 1.0
-		db.actor:hit(h)
-		h.type = hit.strike
-		db.actor:hit(h)
-		h.type = hit.radiation
-		db.actor:hit(h)
-		level.add_pp_effector("alcohol.ppe", 100, false)
-		local rnd=math_random(1,6)
-		local snd_obj
-			if rnd==1 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_1]])
-			elseif rnd==2 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_2]])
-			elseif rnd==3 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_3]])
-			elseif rnd==4 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_6]])
-			elseif rnd==5 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_7]])
-			elseif rnd==6 then
-			snd_obj = 	xr_sound.get_safe_sound_object([[characters_voice\human_01\stalker\fight\hit\hit_8]])
-			end
-			snd_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
-		end
-		archievements.acv_count_event("acv_fzom", 100, "Друг зомби")
-	end
+  if not db.actor then return end
+  archievements.acv_count_event( "acv_fzom", 100, "Друг зомби" )
+  local rnd = dsh.get_next_random( script_name() .. ".zombie_checkup" )
+  if rnd < 0.7 then return end
+  local af_serpantin = inventory.on_belt_obj( "af_serpantin" )
+  if af_serpantin then
+    for _, af in ipairs( af_serpantin ) do
+      if af:condition() > 0 then
+        if af:condition() > 0.01 then
+          dsh.set_condition( af, af:condition() - 0.01 )
+        else
+          dsh_art_degrad.degrade_artefact( af )
+        end
+        return
+      end
+    end
+  end
+  local h = hit()
+  h:bone( "bip01_spine" )   -- чтобv учитvвалась броня
+  h.draftsman = db.actor
+  h.direction = vector():set( 0, 0, 0 )
+  h.type      = hit.telepatic
+  h.power     = 0.3 + math.random() / 2
+  h.impulse   = 1.0
+  db.actor:hit( h )
+  h.type      = hit.strike
+  db.actor:hit( h )
+  h.type      = hit.radiation
+  db.actor:hit( h )
+  level.add_pp_effector( "alcohol.ppe", 100, false )
+  local sounds = {
+    [[characters_voice\human_01\stalker\fight\hit\hit_1]],
+    [[characters_voice\human_01\stalker\fight\hit\hit_2]],
+    [[characters_voice\human_01\stalker\fight\hit\hit_3]],
+    [[characters_voice\human_01\stalker\fight\hit\hit_6]],
+    [[characters_voice\human_01\stalker\fight\hit\hit_7]],
+    [[characters_voice\human_01\stalker\fight\hit\hit_8]],
+  }
+  local snd_obj = xr_sound.get_safe_sound_object(
+    sounds[ math.random( table.getn( sounds ) ) ]
+  )
+  snd_obj:play_no_feedback( db.actor, sound_object.s2d, 0, vector(), 1.0 )
 end
+
+
 function add_spot_of_docent(a)
 local old_spot=amk.load_variable("spot_of_nps", 0)
 	if old_spot~=0 then
@@ -1457,66 +1487,38 @@ local obj = alife():story_object(a)
 	end
 end
 
-local levelsIgnoreArts = {
-    ["l03u_agr_underground"]    = true,
-    ["l04u_labx18"]             = true,
-    ["l08u_brainlab"]           = true,
-    ["l10u_bunker"]             = true,
-    ["l12u_control_monolith"]   = true,
-    ["l12u_sarcofag"]           = true,
-    ["l12_stancia_2"]           = true,
-    ["av_peshera"]              = true,
-    ["warlab"]                  = true,
-    ["peshera"]                 = true,
-    ["jupiter_underground"]     = true,
-    ["labx8"]                   = true
-}
+
 function add_tail()
-if level.name()=="l04_darkvalley" then	
-	local obj=alife():story_object(425)
-    	if obj and IAmAStalker[obj:clsid()] and obj:alive() then
-		if db.actor:has_info("val_bandit_talk") then
-			db.actor:set_character_community("stranger", 0, 0)
-		end
-	else
-		db.actor:set_character_community("actor", 0, 0)
-	end
-else
-	db.actor:set_character_community("actor", 0, 0)
+  if level.name() == "l04_darkvalley" then	
+    local obj = alife():story_object( 425 )
+    if obj and IAmAStalker[ obj:clsid() ] and obj:alive() then
+      if db.actor:has_info( "val_bandit_talk" ) then
+        db.actor:set_character_community( "stranger", 0, 0 )
+      end
+    else
+      db.actor:set_character_community( "actor", 0, 0 )
+    end
+  else
+    db.actor:set_character_community( "actor", 0, 0 )
+  end
+
+  if
+    ( level.name() == "l05_bar" or level.name() == "zaton" )
+    and not has_alife_info( "bar_random" )
+    and not has_alife_info( "bar_smile"  )
+    and not has_alife_info( "bar_rock"   )
+    and not has_alife_info( "bar_rockn"  )
+    and not has_alife_info( "bar_modern" )
+    and not has_alife_info( "bar_retro"  )
+  then
+    db.actor:give_info_portion( "bar_random" )
+  end
+  if level.name() == "l01_escape" then
+    db.actor:give_info_portion( "sidor_music" )
+  end
 end
 
-	-- переделано на поршни - при выбросе снимаем все поршни, при спавне артов на локе выдаем
-	if not levelsIgnoreArts[level.name()] and not has_alife_info("testsak_"..level.name()) then
-		amk_anoms.generate_arts()
-		db.actor:give_info_portion("testsak_"..level.name())
-	end
 
---[[ старый код
-    local levelName = level.name()
-local testobj=0
-    local sim = alife()
-    local obj
-    for a = 1, 65534 do
-        obj = sim:object(a)
-    	if obj and string_find(obj:name(),"testsak_"..levelName) then
-		--dbglog("Vot on: "..obj:name())
-		testobj=1
-            break
-		end
-	end
-	if not levelsIgnoreArts[level.name()] then
-		if testobj==0 then
-		amk_anoms.generate_arts()
-		end
-	end
-]]
-	if (level.name()=="l05_bar" or level.name()=="zaton") and not has_alife_info("bar_random") and not has_alife_info("bar_smile") and not has_alife_info("bar_rock") and not has_alife_info("bar_rockn") and not has_alife_info("bar_modern") and not has_alife_info("bar_retro") then
-		db.actor:give_info_portion("bar_random")
-	end
-	if level.name()=="l01_escape" then
-		db.actor:give_info_portion("sidor_music")
-	end
-end
 function off_testobj()
 	-- переделано на поршни - при выбросе снимаем все поршни, при спавне артов на локе выдаем
 	db.actor:disable_info_portion("testsak_l01_escape")

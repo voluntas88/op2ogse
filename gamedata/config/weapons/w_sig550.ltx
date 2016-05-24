@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Штурмовая винтовка SIG SG 550 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;------------------------------------------------------------------------------------------------------
-[wpn_sig550]:identity_immunities,scope.1x,hud_wpn_fx.fn2000
+[wpn_sig550]:class_ar,class_m209,hud_wpn_fx.fn2000
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\sig550"					; option for Level Editor
@@ -10,12 +10,7 @@ $prefetch 		 		= 8
 scheduled               = off              ; option for ALife Simulator
 cform                   = skeleton
 class                   = WP_AK74
-min_radius              = 30
-max_radius              = 100
 description				= enc_weapons1_wpn-sig550 
-
-ef_main_weapon_type		= 2
-ef_weapon_type			= 6
 
 ;-----------------------------------------------------------------------------------
 holder_range_modifier	= 1.0		       ; во сколько раз увеличивается eye_range 
@@ -33,7 +28,6 @@ ammo_elapsed		 	= 30
 
 ammo_mag_size		 	= 30
 ammo_class		 		= ammo_5.56x45_ss190, ammo_5.56x45_ap, ammo_5.56x45_gd
-grenade_class			= ammo_m209
 fire_modes				= 1, 3, -1
 launch_speed                  = 0
 
@@ -54,7 +48,6 @@ kill_msg_y			= 0
 kill_msg_width		= 82
 kill_msg_height		= 28
 
-slot 					= 2		; // secondary
 animation_slot			= 2		; type of the animation that will be used
 
 ;-----------------------------------------------------------------------------------
@@ -62,19 +55,17 @@ animation_slot			= 2		; type of the animation that will be used
 fire_dispersion_base			= 0.15		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 
 ;отдача
-cam_relax_speed         		= 7.5		;скорость возврата в исходное положение
-cam_relax_speed_ai         	      = 360
-cam_dispersion          		= 0.35		;увеличения угла (в градусах) с каждым выстрелом
-cam_dispersion_inc			= 0.15		;увеличениe cam_dispersion с каждым выстрелом
-cam_dispertion_frac			= 0.15		;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
-cam_max_angle				= 6.0	    	;максимальный угол отдачи
+cam_relax_speed         		= 8.5 	;скорость возврата в исходное положение
+cam_relax_speed_ai        	      = 360       ;скорость возврата в исходное положение у АИ
+cam_dispersion          	      = 0.15	;0.98		;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc			= 0.12	;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac			= 0.15	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			      = 4.0		;максимальный угол отдачи
 cam_max_angle_horz			= 6.0		;(degree) maximum shot horizontal degree 
-cam_step_angle_horz			= 0.25 ;1		;(degree) size of step camera moved in horizontal position while shooting
+cam_step_angle_horz			= 0.18	;0.98		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 1.5	    	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		      = 0.001	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
-condition_shot_dec 			= 0.0001	;увеличение износа при каждом выстреле
 ;--------------------------------------------------------------------------------
 
 direction                     = 0, 0, 1
@@ -89,24 +80,12 @@ shell_dir		 		= 0.0, 1.0, 0.0
 
 rpm_empty_click 	 	  = 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 0.8
-PDM_disp_accel_factor 		= 0.8
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ;;;;;;;  Для Народной солянки 2010
-hit_power        	      = 0.75
-hit_impulse		 	= 62
-hit_type 			      = fire_wound
 hit_rate	            = 1.95
 fire_distance          	= 500
 bullet_speed		= 980 ;начальная скорость пули
 rpm                     = 700
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 0.5
 
 silencer_hit_power       	= 0.71
 silencer_hit_impulse	 	= 52
@@ -171,7 +150,7 @@ snd_shoot1			= weapons\sig550\sg550_1
 snd_shoot2			= weapons\sig550\sg550_0
 snd_shoot3			= weapons\sig550\sg550_1
 snd_empty			= weapons\gen_empty, 0.5
-snd_reload			= weapons\sig550\reload, 3.5
+snd_reload			= weapons\sig550\reload
 snd_shoot_grenade		= weapons\m203\m203_grenshoot
 snd_reload_grenade	= weapons\m203\m203_grenload_sig ;weapons\m203\m203_grenload
 snd_switch			= weapons\m203\m203_switch
@@ -183,7 +162,7 @@ snd_silncer_shot		= weapons\sig550\sg550_silent
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
 
-[wpn_sig550_hud]
+[wpn_sig550_hud]:hud_ar
 shell_point          		= 0,-0.025,-0.675
 shell_dir			 	= 0.0, 0.0, 0.0
 
@@ -223,7 +202,6 @@ anim_holster_gl				= holster_w_gl
 anim_shoot_gl				= shoot_w_gl
 
 zoom_hide_crosshair			= true
-zoom_rotate_time			      = 0.30
 
 zoom_offset					= -0.10,0.06,-0.07
 zoom_rotate_x				= 0.00125

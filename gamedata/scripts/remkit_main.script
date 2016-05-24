@@ -139,14 +139,14 @@ end
 
 function create_repair_kit( sect )
 -- -- log1("Спавним в инвентарь новый ремкит")
-	local new_rep_kit = ogse.spawn_item_in_inv( sect )
+--	local new_rep_kit = ogse.spawn_item_in_inv( sect )
 -- -- log1("Запускаем таймер для ожидания появления предмета")
 --	ogse.start_timer("rkc", 0.05)
 
 end
 
 
-function call_menu_repair_kit( sect )
+function call_menu_repair_kit( obj )
 
 	local is_enemy_around = false
 	for id in pairs(db.creature) do
@@ -167,7 +167,6 @@ function call_menu_repair_kit( sect )
 		ogse.autohiding_msg("remkit_main_msg_1_text", 1500)
 		-- ogse.send_tip("Вы не можете заниматься ремонтом, когда рядом враги.","Сообщение",nil,5)
 -- log1("Рядом враги - ремонт невозможен")
-		ogse.spawn_item_in_inv( sect )
 --[[
 		create_repair_kit()
 	elseif db.cond_rk < 0.15 then
@@ -176,7 +175,7 @@ function call_menu_repair_kit( sect )
 		create_repair_kit()
 ]]
 	else
-		local spwn=ui_remkit.remkit(get_hud(), sect )
+		local spwn=ui_remkit.remkit(get_hud(), obj )
 		level.start_stop_menu(spwn,true)
 	end
 end

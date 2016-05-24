@@ -633,8 +633,6 @@ function actor_binder:on_item_drop (obj)
   sak.check_droped_item(obj)
   braad_test.drop_actor(obj)
   braad_test.drop_lim(obj)
-  --Избавляемся от Зомбирования--
-  meceniy_work.on_item_use(obj)
   -------------------------------
   kostya_dialog.peshera_drink(obj)
 --[[spawn_level_changer.checking_droped_item(obj)
@@ -939,7 +937,6 @@ end
     amk.oau_watchdog=19392
     braad_test.forest_info()
     amk.oau_watchdog=19393
-    braad_test.grib_respawn()
     amk.oau_watchdog=19394
     braad_test.update_new()
     amk.oau_watchdog=19395
@@ -1109,7 +1106,6 @@ end
 --  braad_test.new_info()
 --  braad_test.kot_info()
 --  braad_test.forest_info()
---  braad_test.grib_respawn()
 --  braad_test.update_new()
 --  braad_test.kot_update()
 --  amk.oau_watchdog=183
@@ -1479,13 +1475,7 @@ function actor_binder:load(reader)
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:on_use_object(obj)
-	--medkit_use.lose_item(obj)
---	if repair_check.repair_can_be_done(obj) then
---		repair_check.actor_repair(obj)
-		zvuki.use_snd(obj)
---	end
 	archievements.on_use_item(obj)
-	meceniy_outfit.on_item_drop(obj)
     fly.start(obj)
 	amk_alcohol.drink_vodka(obj)
     buusty_dialog.use_money(obj)

@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Гаусс-пистолет Сяка ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;------------------------------------------------------------------------------------------
-[wpn_gungauss]:identity_immunities,class_pistol,hud_wpn_fx.desert_eagle
+[wpn_gungauss]:class_pistol,hud_wpn_fx.desert_eagle
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn                  = "weapons\gungauss"	; option for Level Editor
@@ -27,8 +27,6 @@ ammo_class		 			= ammo_super_gauss
 
 sprint_allowed				= true
 f_mode				= 1
-;базовая дисперсия
-fire_dispersion_base		= 0.06 ;0.01 ;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 
 ;отдача
 cam_dispertion_frac 		= 1.0; 
@@ -38,7 +36,6 @@ cam_max_angle				= 1.0	;максимальный угол отдачи
 cam_max_angle_horz			= 5.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.5	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 0.1	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.0001 ;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 condition_shot_dec 			= 0.0006 ;увеличение износа при каждом выстреле

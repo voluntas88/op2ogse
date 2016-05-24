@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Ќ  ћ–-5 под 7.62x25мм ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------------------------------------------
-[wpn_mp5_m3]:identity_immunities,class_smg
+[wpn_mp5_m3]:class_smg
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\mp5"					; option for Level Editor
@@ -49,9 +49,6 @@ kill_msg_height		= 23
 animation_slot			= 8		; type of the animation that will be used
 
 ;-----------------------------------------------------------------------------------
-;базова€ дисперси€
-fire_dispersion_base		= 0.18   ;0.33 	;угол (в градусах) базовой дисперсии оружи€ (оружи€ зажатого в тисках)
-
 ;отдача
 cam_relax_speed        		= 6.5   ;0.2	;скорость возврата в исходное положение
 cam_dispersion         		= 0.2	  ;увеличени€ угла (в градусах) с каждым выстрелом
@@ -61,7 +58,6 @@ cam_max_angle			= 6.0	  ;максимальный угол отдачи
 cam_max_angle_horz		= 8.0	  ;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.35   ;0.3	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.003	;веро€тность осечки при максимальном износе 
 misfire_condition_k		   = 0.05
 ;-----------------------------------------------------------------------------------
@@ -79,21 +75,12 @@ shell_particles	 		= weapons\generic_shells
 
 rpm_empty_click 	 	     = 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 0.8
-PDM_disp_accel_factor 		= 0.8
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	            = 1.95
 fire_distance          	= 230
 bullet_speed		= 450      ;300	;начальна€ скорость пули
 rpm                     = 800
 ; end ttc
-
-use_aim_bullet				= true		;ѕоддерживаетс€ ли перва€ суппер пул€
-time_to_aim					= 1.0	
 
 silencer_hit_power       	= 0.68
 silencer_hit_impulse	 	= 50
@@ -178,7 +165,6 @@ anim_shoot			= shoot
 anim_idle_sprint		= idle_sprint
 
 zoom_hide_crosshair		= false
-zoom_rotate_time			= 0.25
 
 ;смещени€ HUD дл€ режима приближени€
 zoom_offset		= -0.16305,0.0832,0.0

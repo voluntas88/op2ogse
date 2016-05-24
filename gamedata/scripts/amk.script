@@ -577,13 +577,6 @@ local func_by_string = {}
 			nightvision.pnv_removed(tbl.obj_sect)
 		end
  	end
-	-- битва
-	func_by_string["battle"] = function (params_string)
-		battle.show_must_go_on(params_string)
-	end
-	func_by_string["battle_rest"] = function (params_string)
-		battle.reinforcement(params_string)
-	end
 	func_by_string["monster_parts"] = function (params_string)
 		bind_stalker.restore_weapon()
 	end
@@ -857,26 +850,6 @@ local func_by_string = {}
 			news_main.check_news()
 		end
  	end
-        func_by_string[ "healing_enemies" ] = function( params_string )
-          local arr     = unpack_array_from_string( params_string )
-          local npc_id  = arr[ 1 ]
-          local npc_com = arr[ 2 ]
-          local npc     = level.object_by_id( npc_id )
-          if npc and npc:alive() and not npc:wounded() then
-            if math_random( 100 ) < 80 then
-              if math_random() < 0.35 then
-                npc:set_character_community( npc_com )
-              end
-              if math_random() < 0.85 then
-                xr_wounded.custom_change( npc )
-              end
-            else
-              npc:set_character_community( npc_com )
-              npc:set_relation( game_object.enemy, db.actor )
-            end
-          end
-          xr_wounded.custom_change( npc )
-        end
 	func_by_string["timer_drop_obj_varka"] = function (params_string)
 		local tbl = unpack_array_from_string(params_string)
 		local sobj = alife():object(tbl.obj_id)
@@ -1075,13 +1048,15 @@ end
 end
 --------------------------------------------------------------------------------------------------------------------
 
+
 --спавним объекты на карту
 --для спавна неписей смотрим config\creatures\spawn_sections.ltx - там написаны имена секций для разных типов неписей
-function spawn_item(spawn_item, pos, gv,lv)
-  if gv==nil then gv=db.actor:game_vertex_id() end
-  if lv==nil then lv=db.actor:level_vertex_id() end
-  return alife():create(spawn_item, pos, lv, gv)
+function spawn_item( spawn_item, pos, gv, lv )
+  if not gv then gv = db.actor:game_vertex_id()  end
+  if not lv then lv = db.actor:level_vertex_id() end
+  return alife():create( spawn_item, pos, lv, gv )
 end
+
 
 --для спавна патронов используем spawn_ammo_in_inv
 function spawn_item_in_inv(spawn_item,npc)
@@ -1334,11 +1309,14 @@ function sub(v1,v2)
 end
 ----------------------------
 
+
 --инвентарное название объекта
-function get_inv_name(section)
-  --return sys_ini:r_string(section,"inv_name")
-  return getIniValueString(section,"inv_name","",nil)
+function get_inv_name( sect )
+  return _G[ "get_string" ](
+    sect, "inv_name", _G[ "get_string" ]( sect, "inv_name_short" )
+  )
 end
+
 
 -- Внимание! Строки в структуре не должны содержать символов с кодами 0-31.
 function pack_array_to_string(array)
@@ -1439,7 +1417,7 @@ function parse_new(str,idx)
     if vtype==pack_type_num then
       key,idx=get_num(str,idx)
     elseif vtype==pack_type_string then
-      key,idx=get_string(str,idx)
+      key,idx=this.get_string(str,idx)
     elseif vtype==pack_val_endtable then
       return ret,idx
     else
@@ -1449,9 +1427,9 @@ function parse_new(str,idx)
     if vtype==pack_type_num then
       value,idx=get_num(str,idx)
     elseif vtype==pack_type_string then
-      value,idx=get_string(str,idx)
+      value,idx=this.get_string(str,idx)
     elseif vtype==pack_type_bool then
-      value,idx=get_bool(str,idx)
+      value,idx=this.get_bool(str,idx)
     elseif vtype==pack_type_table then
       value,idx=parse_new(str,idx)
     else
@@ -1477,12 +1455,12 @@ function get_string(str,idx)
 end
 
 function get_num(str,idx)
-  local st,idx1=get_string(str,idx)
+  local st,idx1=this.get_string(str,idx)
   return st+0,idx1
 end
 
 function get_bool(str,idx)
-  local st,idx1=get_string(str,idx)
+  local st,idx1=this.get_string(str,idx)
   return st=="1",idx1
 end
 

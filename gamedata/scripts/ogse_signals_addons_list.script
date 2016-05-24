@@ -3,6 +3,7 @@
 -- здесь надо регистрировать модули, которые не будут подключаться автоматически
 -- например те, у которых имя модуля не начинается на ogse
 addons = {
+  "amk_mod",
   "dsh",
   "ogse_ui_item_effects",
   "ogse_unist",
@@ -77,6 +78,11 @@ addons = {
   "bind_fot",
   "marsh_radiation",
   "dsh_medkit",
+  "zvuki",
+  "meceniy_outfit",
+  "dsh_story_agro_final",
+  "dsh_ammo",
+  "meceniy_in_hell",
 
   "dsh_memuse",
 }

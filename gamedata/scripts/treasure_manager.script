@@ -184,11 +184,12 @@ local rare_list = {
   master_section = {
     "wpn_spas12",
     "wpn_groza",
+    "wpn_val",
     "wpn_val_m1",
+    "wpn_vintorez",
     "wpn_protecta",
     "wpn_g3_otdaca_ves",
     "wpn_scar_792",
-    "wpn_m79_m1",
     "wpn_k98",
     "wpn_rpk74_sk1",
     "wpn_g41",
@@ -212,6 +213,13 @@ local rare_list = {
     "wpn_ump45",
     "wpn_m93r",
     "wpn_oc33_sk1",
+    "wpn_svu",
+    "wpn_p90",
+    "wpn_fn2000",
+    "wpn_mp153",
+    "wpn_mp153pract",
+    "wpn_browningauto5",
+    "mutant_burer_red_hand",
     "mutant_deathclaw_antler",
     "mutant_raptor_kogot",
     "mutant_plague_hand",
@@ -220,28 +228,45 @@ local rare_list = {
     "mutant_rotan_heart",
     "mutant_zanoza_leg",
     "mutant_carlic_hand",
+    "mutant_krovosos_red_jaw",
+    "mutant_zombie_hand",
     "part_digitis_biblio",
     "part_tarakan_strong",
     "bezoar",
     "mozg",
     "red_mozg",
-    "mutant_burer_red_hand",
-    "mutant_krovosos_red_jaw",
-    "mutant_gigant_cocoon",
-    "mutant_controller_cocoon",
-    "mutant_tushkano_cocoon",
-    "mutant_cat_cocoon",
-    "mutant_dog_cocoon",
-    "mutant_flesh_cocoon",
-    "mutant_psevdodog_cocoon",
-    "mutant_poltergeist_cocoon",
-    "mutant_krovosos_cocoon",
-    "mutant_chimera_cocoon",
-    "mutant_snork_cocoon",
+    "rudiment_big",
+    "mutant_babka_cocoon",
+    "mutant_bibliotekar_cocoon",
+    "mutant_big_cocoon",
+    "mutant_bloodsucker_cocoon",
+    "mutant_bloodsucker2_cocoon",
     "mutant_boar_cocoon",
     "mutant_burer_cocoon",
-    "mutant_zombie_cocoon",
+    "mutant_cat_cocoon",
+    "mutant_chimera_cocoon",
+    "mutant_controller_cocoon",
+    "mutant_deathclaw_cocoon",
+    "mutant_dog_cocoon",
+    "mutant_electro_cocoon",
+    "mutant_flesh_cocoon",
+    "mutant_fracture_cocoon",
+    "mutant_ghost_cocoon",
+    "mutant_gigant_cocoon",
+    "mutant_jumper_cocoon",
+    "mutant_kachok_cocoon",
+    "mutant_krovosos_cocoon",
+    "mutant_mono_cocoon",
+    "mutant_poltergeist_cocoon",
+    "mutant_psevdodog_cocoon",
+    "mutant_psydog_cocoon",
     "mutant_rat_cocoon",
+    "mutant_snork_cocoon",
+    "mutant_tarakan_cocoon",
+    "mutant_tarakan2_cocoon",
+    "mutant_tushkano_cocoon",
+    "mutant_x_ray_cocoon",
+    "mutant_zombie_cocoon",
     "ammo_7.62x54_7h1",
     "ammo_7.62x54_ap",
     "ammo_7.62x54_7h14",
@@ -278,6 +303,7 @@ local rare_list = {
     "killer_blue_exoskeleton",
     "outfit_lethalspeed_exo_m1",
     "outfit_lethalspeed_exo_m2",
+    "scientist_suit_white",
     "af_simbion",
     "af_spirit_2",
     "af_cry_2",
@@ -290,6 +316,7 @@ local rare_list = {
     "af_armor_2",
     "af_armor_3",
     "af_pero",
+    "artifact_electro_crystal_thorn",
     "caps_ameba",
     "caps_electra",
     "caps_gravi",
@@ -302,6 +329,18 @@ local rare_list = {
     "antizombie",
     "medkit_scientic",
     "treasure_item",
+    "playboy1",
+    "playboy2",
+    "playboy3",
+    "playboy4",
+    "playboy5",
+    "playboy6",
+    "playboy7",
+    "playboy8",
+    "playboy9",
+    "playboy11",
+    "playboy12",
+    "playboy13",
   }
 }
 
@@ -520,10 +559,14 @@ function CTreasure:give_treasure( k )
     --' Сгенерить вещи
     for kk, vv in pairs( v.items ) do
       for i = 1, vv.prob do
-        alife():create(
-          vv.section, obj.position, obj.m_level_vertex_id, obj.m_game_vertex_id,
+        local sobj = alife():create(
+          vv.section,
+          obj.position, obj.m_level_vertex_id, obj.m_game_vertex_id,
           obj.id
         )
+        if dsh.is_artefact( vv.section ) and math.random() < 0.5 then
+          dsh.mark_art_as_handmade( sobj, false )
+        end
       end
     end
 
@@ -561,11 +604,9 @@ end
 --' Сохранение
 local dsh_save_var_name = "treasure_manager.treasure_info"
 function CTreasure:save( p )
-  if not db.op2_save_compat then
-    p = net_packet()
-    p:w_begin( 123 )
-    p:r_seek( 2 )
-  end
+  p = net_packet()
+  p:w_begin( 123 )
+  p:r_seek( 2 )
   --' Сохраняем размер таблицы
   local size = 0
   for k, v in pairs( self.treasure_info ) do
@@ -582,9 +623,7 @@ function CTreasure:save( p )
       p:w_bool( v.done )
     end
   end
-  if not db.op2_save_compat then
-    ogse.save_var( dsh_save_var_name, p, "chunk")
-  end
+  ogse.save_var( dsh_save_var_name, p, "chunk")
 end
 
 
@@ -603,69 +642,74 @@ end
 
 
 function CTreasure:give_item_list()
- local rank  = 1
- local tabla = {}
- -- сколько наименований предметов будет в тайнике
- local i     = dsh.get_next_random( script_name() .. ".rnd", 1, 4 )
+  local rank  = 1
+  local tabla = {}
+  -- сколько наименований предметов будет в тайнике
+  local i     = dsh.get_next_random( script_name() .. ".rnd", 1, 4 )
 
- -- определим ранг непися
- if n_rank == nil then
-   n_rank = dsh.get_next_random( script_name() .. ".rnd", 1, 12 ) * 100
- end
- if n_rank <= 300 then
-   rank = 1
- elseif n_rank <=600 then
-   rank = 2
- elseif n_rank <= 900 then
-   rank = 3
- else
-   rank = 4
- end
+  -- определим ранг непися
+  if n_rank == nil then
+    n_rank = dsh.get_next_random( script_name() .. ".rnd", 1, 12 ) * 100
+  end
+  if n_rank <= 300 then
+    rank = 1
+  elseif n_rank <=600 then
+    rank = 2
+  elseif n_rank <= 900 then
+    rank = 3
+  else
+    rank = 4
+  end
 
- -- определим, из какой секции брать предметы, и какие именно
- local sect
- if rank == 1 then
-   sect = rare_list.novice_section
- elseif rank == 2 then
-   sect = rare_list.experienced_section
- elseif rank == 3 then
-   sect = rare_list.veteran_section
- else
-   sect = rare_list.master_section
- end
+  -- определим, из какой секции брать предметы, и какие именно
+  local sect
+  if rank == 1 then
+    sect = rare_list.novice_section
+  elseif rank == 2 then
+    sect = rare_list.experienced_section
+  elseif rank == 3 then
+    sect = rare_list.veteran_section
+  else
+    sect = rare_list.master_section
+  end
 
- for j = 1, i, 1 do
-   local cnt   = 0
-   local spawn = {}
-   spawn.section = sect[
-     dsh.get_next_random( script_name() .. ".rnd", table.getn( sect ) )
-   ]
-   -- установка кол-ва предметов в зависимости от секции
-   local s   = tostring( spawn.section )
-   local cls = get_string( s, "class" )
-   if ammo_section( s ) then
-     -- патроны
-     cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 3 )
-   elseif
-     cls == "E_STLK" or cls == "W_SILENC" or cls == "W_GLAUNC"
-     or string.find( cls, "WP_" )
-   then
-     -- броники, оружие
-     cnt = 1
-   elseif
-     string.find( s, "^af_" )
-     or string.find( s, "^mutant_" ) or string.find( s, "^part_" )
-   then
-     cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 2 )
-   else
-     cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 5 )
-   end
-   -- сохраняем инфу о текущем предмете
-   spawn.prob = cnt
-   table.insert( tabla, spawn )
- end
+  for j = 1, i, 1 do
+    local cnt   = 0
+    local spawn = {}
+    spawn.section = sect[
+      dsh.get_next_random( script_name() .. ".rnd", table.getn( sect ) )
+    ]
+    -- установка кол-ва предметов в зависимости от секции
+    local s   = tostring( spawn.section )
+    local cls = get_string( s, "class" )
+    if ammo_section( s ) then
+      -- патроны
+      cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 3 )
+    elseif
+      cls == "E_STLK" or cls == "W_SILENC" or cls == "W_GLAUNC"
+      or string.find( cls, "WP_" )
+    then
+      -- броники, оружие
+      cnt = 1
+    elseif
+      string.find( s, "^mutant_" ) or string.find( s, "^part_" )
+    then
+      cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 2 )
+    elseif
+      dsh.is_artefact( s )
+      or get_string( s, script_name() .. ".item_is", "" ) == "unique"
+    then
+      -- уникальные предметы
+      cnt = 1
+    else
+      cnt = dsh.get_next_random( script_name() .. ".rnd", 1, 5 )
+    end
+    -- сохраняем инфу о текущем предмете
+    spawn.prob = cnt
+    table.insert( tabla, spawn )
+  end
 
- return tabla
+  return tabla
 end
 
 

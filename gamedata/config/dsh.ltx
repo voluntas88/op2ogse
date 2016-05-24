@@ -74,6 +74,12 @@ val_smart_monster_lair_8 = true
 
 ; Снорки в X-18
 dar_smart_snork          = true
+; псевдогигант внизу
+dar_angar                = true
+dar_poltergeist_tele     = false
+dar_poltergeist_tele_round = false
+dar_poltergeist_ring     = false
+dar_control_poltergeist  = false
 
 ; Свалка
 ; собаки на Свалке у дерева, где будет тайник в корнях.
@@ -86,6 +92,8 @@ gar_smart_monster_lair4  = true
 gar_smart_monster_lair6  = true
 ; собаки в лесу у перехода в ЗЛ
 gar_smart_monster_lair5  = true
+; кабаны и плоти у поста Долга
+gar_smart_boars          = true
 
 ; Болота
 bloodsuker_mar2          = true
@@ -162,6 +170,7 @@ ros_smart_snork1         = true
 ; Янтарь
 ; зомбированные на территории завода
 yantar_zombies           = true
+yan_st_zombie4           = true
 ; снорки у трубы, рядом с переходом в Лабиринт
 yantar2_snork_small      = true
 ; снорки у выхода из подземелья
@@ -239,19 +248,38 @@ generators_snork          = true
 gener_kaban_two           = true
 generators_chimera        = true
 
+; Госпиталь
+after_doctor_blood        = true
+
 
 ; Дальность зрения обитателей гулагов
 [dsh.gulag.range]
 
 ; костёр на Кордоне, где Шустрый сидит, недалеко от насыпи
-esc2_bandit_les = 50
+esc2_bandit_les    =  50
 ; костер у тепловоза, у насыпи.
-sak_esc_lager   = 50
+sak_esc_lager      =  50
 
 ; военные на насыпи
-amk_embankment  = 50
+amk_embankment     =  50
 ; военные под мостом, группа Кузнецова
-esc_bridge      = 50
+esc_bridge         =  50
+
+
+; Максимальная дальность зрения
+[dsh.gulag.range.max]
+
+; Наемники на АС, у перехода на ДТ.
+mil_mercs          = 200
+
+; бандиты на АТП, на Кордоне
+esc2_st_fabric     = 200
+
+; Наёмники на ДТ, у костра, у перехода на Янтарь
+rost_naem_koster   = 200
+
+; бандиты на АТП
+atp_fabrika_bandit = 200
 
 
 ; Гулаги, обитатели которых будут друг к другу нейтральными.
@@ -303,11 +331,19 @@ aes_helicopter_0009 = dsh\logic\aes_helicopter_0009.ltx
 ; прилетевший за Боцманом.
 marsh_atakker_vert_bandit8 = dsh\logic\marsh_atakker_vert_bandit8.ltx
 
+; Рестриктор на Агропроме управляющий озвучкой во время сходки
+final_agro_boltobny_restrictor = dsh\logic\final_agro_boltobny_restrictor.ltx
 
+
+#include "dsh\ammo.ltx"
 #include "dsh\atp_for_test22.ltx"
+#include "dsh\artefacts.ltx"
 #include "dsh\aver.ltx"
 #include "dsh\enemies.ltx"
 #include "dsh\generators.ltx"
+#include "dsh\hand_made_arts.ltx"
+#include "dsh\hospital.ltx"
+#include "dsh\kbd.ltx"
 #include "dsh\l01_escape.ltx"
 #include "dsh\l02_garbage.ltx"
 #include "dsh\l03_agroprom.ltx"
@@ -330,6 +366,8 @@ marsh_atakker_vert_bandit8 = dsh\logic\marsh_atakker_vert_bandit8.ltx
 #include "dsh\respawn\av_peshera.ltx"
 #include "dsh\respawn\aver.ltx"
 #include "dsh\respawn\dead_city.ltx"
+#include "dsh\respawn\generators.ltx"
+#include "dsh\respawn\hospital.ltx"
 #include "dsh\respawn\l01_escape.ltx"
 #include "dsh\respawn\l02_garbage.ltx"
 #include "dsh\respawn\l03_agroprom.ltx"
@@ -351,6 +389,7 @@ marsh_atakker_vert_bandit8 = dsh\logic\marsh_atakker_vert_bandit8.ltx
 #include "dsh\respawn\marsh.ltx"
 #include "dsh\respawn\peshera.ltx"
 #include "dsh\respawn\puzir.ltx"
+#include "dsh\respawn\red_forest.ltx"
 #include "dsh\se_stalker.ltx"
 #include "dsh\switch_distances.ltx"
 #include "dsh\xrs_battle_ai.ltx"

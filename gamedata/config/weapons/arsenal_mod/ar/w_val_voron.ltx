@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;; Винторез генерала Воронина /Автор Александрыч/;;;;;;;;;;;;;;;;;;;;;            
 ;-----------------------------------------------------------------------------------------
-[wpn_val_voron]:identity_immunities,class_val,scope.10x
+[wpn_val_voron]:class_val,scope.10x
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
 $spawn                  	= "weapons\val_voron"					; option for Level Editor
@@ -47,7 +47,6 @@ kill_msg_height		= 21
 
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
-dispersion_start		      = 0
 fire_dispersion_base		= 0.015		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 
 ;отдача
@@ -59,7 +58,6 @@ cam_max_angle			= 4.0		;максимальный угол отдачи
 cam_max_angle_horz		= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.015		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 3		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		= 0.00015		;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.3
 ;-----------------------------------------------------------------------------------
@@ -75,20 +73,11 @@ shell_point		 			= 0.0, 0.186, 0.082
 shell_dir		 			= 0.0, 1.0, 0.0
 shell_particles	 			= weapons\arsenal_shells1
 
-PDM_disp_base 			= 1.2
-PDM_disp_vel_factor 		= 1.2
-PDM_disp_accel_factor 		= 1.2
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate			= 1.95
 rpm                     = 850
 rpm_empty_click 		            = 400
 ; end ttc
-
-use_aim_bullet			= true			;Поддерживается ли первая суппер пуля
-time_to_aim				= 1.0	
 
 hud             	        = wpn_val_voron_hud
 normal          	        = 0, 1, 0
@@ -130,7 +119,7 @@ snd_reload					= weapons\val\val_reload_1
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
-[wpn_val_voron_hud]
+[wpn_val_voron_hud]:hud_val
 
 allow_inertion			= true
 

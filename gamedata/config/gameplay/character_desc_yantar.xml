@@ -33,6 +33,9 @@
 		<actor_dialog>saharov_need_kurier</actor_dialog>
 		<actor_dialog>saharov_est_kurier</actor_dialog>
 		<start_dialog>yantar_general_ucheniy_talk_start</start_dialog>
+		<actor_dialog>sakharov_capsule_dialog</actor_dialog>
+		<actor_dialog>sakharov_capsule_already_dialog</actor_dialog>
+		<actor_dialog>sakharov_capsule_have_dialog</actor_dialog>
 		<actor_dialog>kostya_sacharov</actor_dialog>
 		<actor_dialog>kostya_sacharov_pda</actor_dialog>
 		<actor_dialog>kostya_sacharov_teleport</actor_dialog>
@@ -52,7 +55,6 @@
 		<actor_dialog>teleport_02_dialog</actor_dialog>
 		<actor_dialog>teleport_03_dialog</actor_dialog>
 		<actor_dialog>trade_dialog_sakharov</actor_dialog>
-		<actor_dialog>dsh_trade_dialog_sakharov</actor_dialog>
 		<actor_dialog>tm_ecolog_dialog</actor_dialog>
 		<actor_dialog>tm_ecolog_reward</actor_dialog>
          <actor_dialog>sahar_sumka_dost</actor_dialog>
@@ -86,7 +88,7 @@
           <actor_dialog>sakharov_biznes1</actor_dialog>
           <actor_dialog>sakharov_biznes1_done</actor_dialog>
           <actor_dialog>snp_sakharov1</actor_dialog>
-          <actor_dialog>emb_sakharov1</actor_dialog>
+<!--          <actor_dialog>emb_sakharov1</actor_dialog>-->
           <actor_dialog>emb_sakharov2</actor_dialog>
           <actor_dialog>gena_sakharov1</actor_dialog>
           <actor_dialog>gena_sakharov2</actor_dialog>

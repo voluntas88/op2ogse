@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; АК-9 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------
-[wpn_ak9]:identity_immunities,class_val
+[wpn_ak9]:class_val
 GroupControlSection		= spawn_group
 discovery_dependency	= 
 $spawn              	= "weapons\ak9"	; name and section in level editor
@@ -62,7 +62,6 @@ cam_max_angle				= 6.0	    	;максимальный угол отдачи
 cam_max_angle_horz			= 8.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.35;1		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 1.5	    	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		      = 0.00085	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -77,18 +76,9 @@ grenade_flame_particles		= weapons\generic_shoot_00
 shell_point		 			= 0,0.216,0.154
 shell_particles	 			= weapons\arsenal_shells1  
 
-PDM_disp_base 				= 4.3
-PDM_disp_vel_factor 		      = 1.3
-PDM_disp_accel_factor 		      = 1.3
-PDM_crouch	 				= 1.0
-PDM_crouch_no_acc 			= 1.0
-
 ; ttc
 hit_rate	                  = 1.88
 rpm                      	= 750
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 1.0	
 
 silencer_hit_power       	= 0.76
 silencer_hit_impulse	 	= 58
@@ -155,7 +145,7 @@ silencer_smoke_particles 	= weapons\generic_shoot_00
 ;-- HUD DESCRIPTION
 ;------------------------------------------------------------------------
  
-[wpn_ak9_hud]
+[wpn_ak9_hud]:hud_val
 allow_inertion			= true
 
 shell_point				= 0.0, 0.075, -0.115

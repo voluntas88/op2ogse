@@ -17,21 +17,28 @@ local cfg = {
     [ "item_offset"   ] = "health_influence",
     [ "restore_speed" ] = "health_restore_speed",
   },
+  [ "eat_psy_health"  ] = {
+    [ "restore_speed" ] = "psy_health_restore_speed",
+  },
   [ "eat_radiation" ] = {
     [ "item_offset"   ] = "radiation_influence",
     [ "negative"      ] = true,
     [ "restore_speed" ] = "radiation_restore_speed",
   },
 }
-local how_long = 120
+local how_long = 60
 local snd_in_use_name = "affects\\heartbeat"
 
 local restore_speeds = {
-  [ "health_restore_speed"    ] = {
+  [ "health_restore_speed"     ] = {
     [ "apply" ] = false,
     [ "value" ] = 0,
   },
-  [ "radiation_restore_speed" ] = {
+  [ "psy_health_restore_speed" ] = {
+    [ "apply" ] = false,
+    [ "value" ] = 0,
+  },
+  [ "radiation_restore_speed"  ] = {
     [ "apply" ] = false,
     [ "value" ] = 0,
   },
@@ -66,8 +73,7 @@ function on_spawn()
 end
 
 
-function on_actor_before_use( obj, sobj )
-  if not sobj then return true end
+function on_actor_before_use( obj )
   local sect = obj:section()
   for k, v in pairs( cfg ) do
     local val = get_float( sect, k )
@@ -78,17 +84,20 @@ function on_actor_before_use( obj, sobj )
         or ( val < 0  and v.negative )
       )
     then
-      obj:set_inventory_item_float(
-        nil, 0.0, inventory_item_offsets[ v.item_offset ]
-      )
-      process( val, v.restore_speed, v.negative )
+      if v.item_offset then
+        obj:set_inventory_item_float(
+          nil, 0.0, inventory_item_offsets[ v.item_offset ]
+        )
+      end
+      process( sect, val, v.restore_speed, v.negative )
     end
   end
 end
 
 
-function process( v, rs_name, use_negative )
-  local restore_speed = v / how_long
+function process( sect, v, rs_name, use_negative )
+  local hl = get_float( sect, script_name() .. ".how_long", how_long )
+  local restore_speed = v / hl
   local tname         = script_name() .. "." .. rs_name
   if ogse_st_mgr.timer_exists( tname ) then
     local cur = ogse.load_var( tname )
@@ -130,4 +139,9 @@ function on_timer_end( rs_name )
   if stop_snd then
     snd_in_use:stop()
   end
+end
+
+
+function restoring( rs_name )
+  return restore_speeds[ rs_name ].apply
 end

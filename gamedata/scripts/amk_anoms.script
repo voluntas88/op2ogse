@@ -13,64 +13,71 @@ local anoms_classes = {
   [ clsid.zone_mincer_s  ] = true,
   [ clsid.zone_zharka_s  ] = true,
 }
-local anoms_difficulty_koef={
-  [0]=0.75,
-  [1]=1.0,
-  [2]=1.25,
-  [3]=1.5
+
+local anoms_difficulty_koef = {
+  [0] = 0.75,
+  [1] = 1.0,
+  [2] = 1.25,
+  [3] = 1.5,
 }
+
 local anoms_sections = {
   buzz      = {
-    "buzz",
-    { shtype = 0, radius = 1.5, center = { 0, 0, 0 } }
+    [ "zone"  ] = "buzz",
+    [ "shape" ] = { shtype = 0, radius = 1.5, center = { 0, 0, 0 } },
   },
   electra   = {
-    "witches_galantine",
-    { shtype = 0, radius = 4, center ={ 0, 0, 0 } }
+    [ "zone"  ] = "witches_galantine",
+    [ "shape" ] = { shtype = 0, radius = 4,   center = { 0, 0, 0 } },
   },
   fountain  = {
-    "fountain",
-    { shtype = 0, radius = 2.5, center = { 0, 0, 0 } }
+    [ "zone"  ] = "fountain",
+    [ "shape" ] = { shtype = 0, radius = 2.5, center = { 0, 0, 0 } },
   },
   gravi     = {
-    "gravi_zone",
-    { shtype = 0, radius = 3, center = { 0, 0, 0 } }
+    [ "zone"  ] = "gravi_zone",
+    [ "shape" ] = { shtype = 0, radius = 3,   center = { 0, 0, 0 } },
   },
   mincer    = {
-    "mincer",
-    { shtype = 0, radius = 3.5, center = { 0, 0, 0 } }
+    [ "zone"  ] = "mincer",
+    [ "shape" ] = { shtype = 0, radius = 3.5, center = { 0, 0, 0 } },
   },
   mosquito_bald = {
-    "mosquito_bald",
-    { shtype = 0, radius = 3, center = { 0, 0, 0 } }
+    [ "zone"  ] = "mosquito_bald",
+    [ "shape" ] = { shtype = 0, radius = 3,   center = { 0, 0, 0 } },
   },
   sakbuzz   = {
-    "sakbuzz",
-    { shtype = 0, radius = 4, center = { 0, 0, 0 } }
+    [ "zone"  ] = "sakbuzz",
+    [ "shape" ] = { shtype = 0, radius = 4,   center = { 0, 0, 0 } },
+  },
+  sakbuzz_nlc = {
+    [ "zone"  ] = "sakbuzz_nlc",
+    [ "shape" ] = { shtype = 0, radius = 3,   center = { 0, 0, 0 } },
   },
   smallrain = {
-    "smallrain",
-    { shtype = 0, radius = 4, center = { 0, 0, 0 } }
+    [ "zone"  ] = "smallrain",
+    [ "shape" ] = { shtype = 0, radius = 4,   center = { 0, 0, 0 } },
   },
   sphere    = {
-    "sphere",
-    { shtype = 0, radius = 2.8, center = { 0, 0, 0 } }
+    [ "zone"  ] = "sphere",
+    [ "shape" ] = { shtype = 0, radius = 2.8, center = { 0, 0, 0 } },
   },
   zavesa    = {
-    "zavesa",
-    { shtype = 0, radius = 3, center = { 0, 0, 0 } }
+    [ "zone"  ] = "zavesa",
+    [ "shape" ] = { shtype = 0, radius = 3,   center = { 0, 0, 0 } },
   },
   zharka_static = {
-    "zharka_static",
-    {
-      shtype = 1, v1 = { 1, 0, 0 }, v2 ={ 0, 5, 0 }, v3 = { 0, 0, 1 },
-      offset = { 0, 0, 0 }
+    [ "zone"  ] = "zharka_static",
+    [ "shape" ] = {
+      shtype = 1,
+      v1     = { 1, 0, 0 }, v2 ={ 0, 5, 0 }, v3 = { 0, 0, 1 },
+      offset = { 0, 0, 0 },
     }
   },
 }
 local anti_spawn_zones = {}
 local arts_sections = {
-  acumm = "art_acumm",
+  acumm       = "art_acumm",
   balb_1      = "af_medusa",
   balb_2      = "af_cristall_flower",
   balb_3      = "af_night_star",
@@ -103,32 +110,33 @@ local arts_sections = {
 -- небольшой спавн модификатов
   af_cry_1    = "af_cry_1",
   af_cry_2    = "af_cry_2",
-  af_cry_3    = "af_cry_3",
+  af_cry_3    = "af_capsule",
   af_babka_1  = "af_babka_1",
   af_babka_2  = "af_babka_2",
   af_babka_3  = "af_babka_3",
-  af_babka_4  = "af_babka_4",
+  af_babka_4  = "af_capsule",
   af_dik_1    = "af_dik_1",
   af_dik_2    = "af_dik_2",
   af_dik_3    = "af_dik_3",
-  af_dik_4    = "af_dik_4",
+  af_dik_4    = "af_capsule",
   af_spirit_1 = "af_spirit_1",
   af_spirit_2 = "af_spirit_2",
   af_spirit_3 = "af_spirit_3",
-  af_spirit_4 = "af_spirit_4",
+  af_spirit_4 = "af_capsule",
   af_armor_1  = "af_armor_1",
   af_armor_2  = "af_armor_2",
   af_armor_3  = "af_armor_3",
-  af_armor_4  = "af_armor_4",
+  af_armor_4  = "af_capsule",
   af_pudd_1   = "af_pudd_1",
   af_pudd_2   = "af_pudd_2",
   af_pudd_3   = "af_pudd_3",
-  af_pudd_4   = "af_pudd_4",
+  af_pudd_4   = "af_capsule",
   af_kol_1    = "af_kol_1",
   af_kol_2    = "af_kol_2",
   af_kol_3    = "af_kol_3",
-  af_kol_4    = "af_kol_4",
+  af_kol_4    = "af_capsule",
   af_buliz    = "af_buliz",
+  af_capsule  = "af_capsule",
 }
 
 -- Здесь перечислены все интервалы game_vertex для каждого
@@ -213,7 +221,7 @@ level_vertexes={
 }
 level_anoms={
   l01_escape = {
-    50, 75, 400,
+    90, 120, 400,
     {
       buzz          =  0,
       electra       = 12,
@@ -222,13 +230,14 @@ level_anoms={
       mincer        =  0,
       mosquito_bald =  0,
       sakbuzz       =  2,
+      sakbuzz_nlc   =  5,
       smallrain     =  6,
       sphere        =  4,
       zavesa        =  2,
     }
   },
   l02_garbage = {
-    50, 75, 400,
+    90, 120, 400,
     {
       buzz          = 12,
       electra       = 15,
@@ -237,28 +246,30 @@ level_anoms={
       mincer        =  2,
       mosquito_bald = 12,
       sakbuzz       =  3,
+      sakbuzz_nlc   = 15,
       smallrain     =  5,
       sphere        =  3,
       zavesa        =  3,
     }
   },
   l03_agroprom = {
-    10, 14, 100,
+    90, 120, 100,
     {
-      buzz          = 12,
+      buzz          =  5, --12,
       electra       =  0,
       fountain      =  2,
       gravi         = 10,
       mincer        =  3,
       mosquito_bald = 12,
       sakbuzz       =  3,
+      sakbuzz_nlc   = 17,
       smallrain     =  4,
       sphere        =  3,
       zavesa        =  2,
     }
   },
   l04_darkvalley = {
-    11, 15, 100,
+    90, 120, 100,
     {
       buzz          = 10,
       electra       =  0,
@@ -267,14 +278,15 @@ level_anoms={
       mincer        =  3,
       mosquito_bald = 12,
       sakbuzz       =  5,
+      sakbuzz_nlc   = 17,
       smallrain     =  5,
       sphere        =  4,
       zavesa        =  3,
       zharka_static =  8,
     }
   },
-  l05_bar={
-    35, 45, 150,
+  l05_bar = {
+    60, 80, 150,
     {
       buzz          =  5,
       electra       =  1,
@@ -283,6 +295,7 @@ level_anoms={
       mincer        =  2,
       mosquito_bald =  8,
       sakbuzz       =  2,
+      sakbuzz_nlc   =  5,
       smallrain     =  4,
       sphere        =  2,
       zavesa        =  3,
@@ -290,7 +303,7 @@ level_anoms={
     }
   },
   l06_rostok = {
-    10, 50, 300,
+    20, 30, 300,
     {
       buzz          = 10,
       electra       =  2,
@@ -299,6 +312,7 @@ level_anoms={
       mincer        =  3,
       mosquito_bald =  7,
       sakbuzz       =  3,
+      sakbuzz_nlc   = 25,
       smallrain     =  2,
       sphere        =  2,
       zavesa        =  2,
@@ -306,23 +320,24 @@ level_anoms={
     }
   },
   l08_yantar = {
-    80, 110, 400,
+    80, 120, 400,
     {
-      buzz          =  8,
-      electra       =  2,
-      fountain      =  1,
-      gravi         =  8,
-      mincer        =  8,
-      mosquito_bald =  8,
-      sakbuzz       =  3,
-      smallrain     =  4,
-      sphere        =  3,
-      zavesa        =  3,
-      zharka_static =  5,
+      buzz          =   8,
+      electra       =   2,
+      fountain      =   1,
+      gravi         =   8,
+      mincer        =   8,
+      mosquito_bald =   8,
+      sakbuzz       =   3,
+      sakbuzz_nlc   =  15,
+      smallrain     =   4,
+      sphere        =   3,
+      zavesa        =   3,
+      zharka_static =   5,
     }
   },
   l07_military = {
-    11, 15, 100,
+    80, 120, 400,
     {
       buzz          = 10,
       electra       = 12,
@@ -331,6 +346,7 @@ level_anoms={
       mincer        =  4,
       mosquito_bald = 15,
       sakbuzz       =  3,
+      sakbuzz_nlc   = 20,
       smallrain     =  4,
       sphere        =  4,
       zavesa        =  3,
@@ -338,7 +354,7 @@ level_anoms={
     }
   },
   l10_radar = {
-    12, 14, 100,
+    90, 120, 100,
     {
       buzz          = 10,
       electra       =  2,
@@ -347,6 +363,7 @@ level_anoms={
       mincer        =  6,
       mosquito_bald = 11,
       sakbuzz       =  5,
+      sakbuzz_nlc   = 20,
       smallrain     =  6,
       sphere        =  4,
       zavesa        =  3,
@@ -354,7 +371,7 @@ level_anoms={
     }
   },
   l11_pripyat = {
-    11, 15, 90,
+    90, 120, 90,
     {
       buzz          = 10,
       electra       = 10,
@@ -363,6 +380,7 @@ level_anoms={
       mincer        = 10,
       mosquito_bald = 10,
       sakbuzz       =  2,
+      sakbuzz_nlc   = 10,
       smallrain     =  1,
       sphere        =  3,
       zavesa        =  3,
@@ -370,7 +388,7 @@ level_anoms={
     }
   },
   l12_stancia = {
-    70, 90, 700,
+    50, 90, 700,
     {
       buzz          = 10,
       electra       =  0,
@@ -379,6 +397,7 @@ level_anoms={
       mincer        =  2,
       mosquito_bald = 10,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 15,
       smallrain     =  6,
       sphere        =  4,
       zavesa        =  3,
@@ -395,6 +414,7 @@ level_anoms={
       mincer        = 12,
       mosquito_bald = 15,
       sakbuzz       =  3,
+      sakbuzz_nlc   = 25,
       smallrain     =  6,
       sphere        =  4,
       zavesa        =  3,
@@ -402,7 +422,7 @@ level_anoms={
     }
   },
   aver = {
-    18, 19, 75,
+    150, 170, 450,
     {
       buzz          = 15,
       electra       =  0,
@@ -411,6 +431,7 @@ level_anoms={
       mincer        = 14,
       mosquito_bald = 12,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 25,
       smallrain     =  5,
       sphere        =  5,
       zavesa        =  4,
@@ -418,7 +439,7 @@ level_anoms={
     }
   },
   marsh = {
-    10, 20, 100,
+    120, 180, 100,
     {
       buzz          = 15,
       electra       =  0,
@@ -427,6 +448,7 @@ level_anoms={
       mincer        =  8,
       mosquito_bald = 12,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 25,
       smallrain     =  9,
       sphere        =  5,
       zavesa        =  4,
@@ -434,7 +456,7 @@ level_anoms={
     }
   },
   limansk = {
-    5, 6, 30,
+    15, 25, 30,
     {
       buzz          = 10,
       electra       =  0,
@@ -443,6 +465,7 @@ level_anoms={
       mincer        = 12,
       mosquito_bald = 10,
       sakbuzz       =  2,
+      sakbuzz_nlc   = 15,
       smallrain     =  2,
       sphere        =  3,
       zavesa        =  2,
@@ -450,22 +473,23 @@ level_anoms={
     }
   },
   hospital = {
-    10, 20, 100,
+    5, 10, 100,
     {
-      buzz          =  8,
-      electra       =  7,
-      fountain      =  1,
-      gravi         =  5,
-      mincer        =  8,
-      mosquito_bald =  8,
-      sakbuzz       =  2,
-      sphere        =  2,
-      zavesa        =  2,
-      zharka_static =  5,
+      buzz          =   8,
+      electra       =   7,
+      fountain      =   1,
+      gravi         =   5,
+      mincer        =   8,
+      mosquito_bald =   8,
+      sakbuzz       =   2,
+      sakbuzz_nlc   =  15,
+      sphere        =   2,
+      zavesa        =   2,
+      zharka_static =   5,
     }
   },
   red_forest = {
-    11, 15, 40,
+    90, 120, 40,
     {
       buzz          = 10,
       electra       =  3,
@@ -474,6 +498,7 @@ level_anoms={
       mincer        =  8,
       mosquito_bald = 10,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 25,
       smallrain     =  6,
       sphere        =  5,
       zavesa        =  4,
@@ -481,7 +506,7 @@ level_anoms={
     }
   },
   lost_village = {
-    8, 10, 25,
+    20, 30, 25,
     {
       buzz          =  5,
       electra       = 10,
@@ -490,6 +515,7 @@ level_anoms={
       mincer        =  8,
       mosquito_bald =  8,
       sakbuzz       =  2,
+      sakbuzz_nlc   = 15,
       smallrain     =  1,
       sphere        =  3,
       zavesa        =  3,
@@ -497,7 +523,7 @@ level_anoms={
     }
   },
   generators = {
-    0, 0, 0,
+    150, 170, 450,
     {
       buzz          = 16,
       electra       = 15,
@@ -506,6 +532,7 @@ level_anoms={
       mincer        = 15,
       mosquito_bald = 11,
       sakbuzz       =  6,
+      sakbuzz_nlc   = 25,
       smallrain     =  2,
       sphere        =  4,
       zavesa        =  5,
@@ -513,7 +540,7 @@ level_anoms={
     }
   },
   atp_for_test22 = {
-    16, 18, 40,
+    150, 170, 450,
     {
       buzz          = 20,
       electra       = 15,
@@ -522,6 +549,7 @@ level_anoms={
       mincer        = 13,
       mosquito_bald = 10,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 25,
       smallrain     =  2,
       sphere        =  4,
       zavesa        =  4,
@@ -529,7 +557,7 @@ level_anoms={
     }
   },
   dead_city = {
-    11, 15, 90,
+    130, 180, 90,
     {
       buzz          = 10,
       electra       = 10,
@@ -538,6 +566,7 @@ level_anoms={
       mincer        = 10,
       mosquito_bald = 10,
       sakbuzz       =  1,
+      sakbuzz_nlc   = 25,
       smallrain     =  2,
       sphere        =  4,
       zavesa        =  3,
@@ -545,7 +574,7 @@ level_anoms={
     }
   },
   zaton = {
-    18, 19, 100,
+    150, 170, 450,
     {
       buzz          = 15,
       electra       = 25,
@@ -554,6 +583,7 @@ level_anoms={
       mincer        = 15,
       mosquito_bald = 15,
       sakbuzz       =  8,
+      sakbuzz_nlc   = 25,
       smallrain     =  3,
       sphere        = 12,
       zavesa        =  6,
@@ -561,7 +591,7 @@ level_anoms={
     }
   },
   jupiter = {
-    18, 19, 100,
+    150, 170, 450,
     {
       buzz          = 25,
       electra       = 25,
@@ -570,13 +600,14 @@ level_anoms={
       mincer        = 15,
       mosquito_bald = 20,
       sakbuzz       =  5,
+      sakbuzz_nlc   = 25,
       smallrain     =  3,
       sphere        = 12,
       zavesa        =  4,
     }
   },
   pripyat = {
-    14, 16, 100,
+    90, 120, 100,
     {
       buzz          = 15,
       electra       = 15,
@@ -585,6 +616,7 @@ level_anoms={
       mincer        = 15,
       mosquito_bald = 18,
       sakbuzz       =  4,
+      sakbuzz_nlc   = 25,
       smallrain     =  1,
       sphere        = 10,
       zavesa        =  4,
@@ -592,7 +624,7 @@ level_anoms={
   },
 }
 
-local level_arts={
+local level_arts = {
   l01_escape = {
     2, 4,
     {
@@ -604,6 +636,7 @@ local level_arts={
       af_kol_1    =  1,
       af_pudd_1   =  1,
       af_spirit_1 =  1,
+      af_capsule  =  0.1,
       balb_1      = 22,
       balb_2      =  2,
       electra_1   =  9,
@@ -625,6 +658,7 @@ local level_arts={
       af_kol_1    =  1,
       af_pudd_1   =  1,
       af_spirit_1 =  1,
+      af_capsule  =  0.1,
       balb_1      = 18,
       balb_2      =  5,
       electra_1   = 10,
@@ -651,6 +685,7 @@ local level_arts={
       af_pudd_2   =  1,
       af_spirit_1 =  1,
       af_spirit_2 =  1,
+      af_capsule  =  0.1,
       balb_1      = 11,
       balb_2      =  5,
       buzz_1      = 10,
@@ -666,7 +701,7 @@ local level_arts={
     }
   },
   l04_darkvalley = {
-    2, 4,
+    1, 2,
     {
       acumm       =  2,
       af_armor_1  =  1,
@@ -681,6 +716,7 @@ local level_arts={
       af_pudd_2   =  1,
       af_spirit_1 =  1,
       af_spirit_2 =  1,
+      af_capsule  =  0.1,
       balb_1      =  1,
       balb_2      =  8,
       buzz_1      =  9,
@@ -699,7 +735,7 @@ local level_arts={
     }
   },
   l05_bar = {
-    2, 4,
+    0, 1,
     {
       acumm       =  4,
       af_armor_1  =  1,
@@ -730,7 +766,7 @@ local level_arts={
     }
   },
   l06_rostok = {
-    2, 4,
+    1, 2,
     {
       acumm       =  2,
       af_armor_1  =  1,
@@ -753,6 +789,7 @@ local level_arts={
       af_spirit_1 =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  0.5,
+      af_capsule  =  0.1,
       balb_2      =  2,
       balb_3      =  2,
       buzz_1      =  5,
@@ -772,7 +809,7 @@ local level_arts={
     }
   },
   l08_yantar = {
-    2, 4,
+    1, 2,
     {
       af_armor_1  =  1,
       af_armor_2  =  1,
@@ -794,6 +831,7 @@ local level_arts={
       af_spirit_1 =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  0.5,
+      af_capsule  =  0.1,
       balb_1      =  1,
       balb_2      =  3,
       balb_3      =  2,
@@ -818,7 +856,7 @@ local level_arts={
     }
   },
   l07_military = {
-    2, 4,
+    1, 2,
     {
       acumm       =  2,
       af_armor_1  =  1,
@@ -841,6 +879,7 @@ local level_arts={
       af_spirit_1 =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  0.5,
+      af_capsule  =  0.1,
       balb_1      =  2,
       balb_2      =  4,
       balb_3      =  2,
@@ -871,25 +910,25 @@ local level_arts={
     {
       af_armor_2  =  1,
       af_armor_3  =  1,
-      af_armor_4  =  0.5,
+      af_armor_4  =  1, --0.5,
       af_babka_2  =  1,
       af_babka_3  =  1,
-      af_babka_4  =  0.5,
+      af_babka_4  =  1, --0.5,
       af_buliz    =  1,
       af_cry_2    =  1,
-      af_cry_3    =  0.5,
+      af_cry_3    =  1, --0.5,
       af_dik_1    =  1,
       af_dik_2    =  0.5,
       af_dik_3    =  0.5,
       af_kol_2    =  1,
       af_kol_3    =  1,
-      af_kol_4    =  0.5,
+      af_kol_4    =  1, --0.5,
       af_pudd_2   =  1,
       af_pudd_3   =  1,
-      af_pudd_4   =  0.5,
+      af_pudd_4   =  1, --0.5,
       af_spirit_2 =  1,
       af_spirit_3 =  1,
-      af_spirit_4 =  0.5,
+      af_spirit_4 =  1, --0.5,
       balb_1      =  3,
       balb_2      =  5,
       balb_3      =  4,
@@ -1019,7 +1058,7 @@ local level_arts={
     }
   },
   puzir = {
-    4, 6,
+    2, 4,
     {
       af_armor_1  =  1,
       af_armor_2  =  1,
@@ -1034,6 +1073,7 @@ local level_arts={
       af_pudd_2   =  1,
       af_spirit_1 =  1,
       af_spirit_2 =  1,
+      af_capsule  =  1,
       balb_1      =  3,
       balb_2      =  3,
       buzz_1      = 10,
@@ -1069,6 +1109,7 @@ local level_arts={
       af_pudd_3   =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  1,
+      af_capsule  =  1,
       balb_1      =  2,
       balb_2      =  3,
       balb_3      =  3,
@@ -1114,6 +1155,7 @@ local level_arts={
       af_pudd_3   =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  1,
+      af_capsule  =  1,
       balb_1      =  2,
       balb_2      =  3,
       balb_3      =  3,
@@ -1143,7 +1185,7 @@ local level_arts={
     }
   },
   limansk = {
-    1, 2,
+    2, 4,
     {
       af_armor_2  =  1,
       af_armor_3  =  1,
@@ -1287,7 +1329,7 @@ local level_arts={
     }
   },
   lost_village = {
-    1, 2,
+    0, 1,
     {
       af_armor_2  =  1,
       af_armor_3  =  1,
@@ -1404,6 +1446,7 @@ local level_arts={
       af_spirit_1 =  1,
       af_spirit_2 =  1,
       af_spirit_3 =  0.5,
+      af_capsule  =  0.1,
       balb_1      =  2,
       balb_2      =  3,
       balb_3      =  2,
@@ -1484,7 +1527,7 @@ local level_arts={
     }
   },
   zaton = {
-    4, 6,
+    2, 4,
     {
       acumm       =  2,
       af_armor_2  =  1,
@@ -1537,7 +1580,7 @@ local level_arts={
     }
   },
   jupiter = {
-    4, 6,
+    2, 4,
     {
       af_armor_2  =  1,
       af_armor_3  =  1,
@@ -1654,9 +1697,8 @@ function init()
   if not level_anoms[ lname ] then return end
   local anoms_sect = "amk_anoms." .. lname
   if sys_ini:section_exist( anoms_sect ) then
-    local result, id, value = nil, nil, nil 
     for a = 0, sys_ini:line_count( anoms_sect ) - 1 do
-      result, id, value = sys_ini:r_line( anoms_sect, a, "", "" )
+      local result, id, value = sys_ini:r_line( anoms_sect, a, "", "" )
       if id and amk.trim( id ) ~= "" and amk.trim( id ) then
         local s = amk.str_explode( ",", id, true )
         if s[ 1 ] == nil or s[ 2 ] == nil or s[ 3 ] == nil or s[ 4 ] == nil then 
@@ -1677,40 +1719,58 @@ function init()
     end
   end
   if blow > 0 and blow < 4 then return end
+  -- Не менять аномалии в Госпитале, пока не сварен Камень Удачи. Иначе
+  -- удаляется та аномалия, в которой он должен вариться и все, тупик.
+  if
+    lname == "hospital"
+    and db.actor:has_info( "spawnim_3otsek" )
+    and not db.actor:has_info( "spawn_kamen_udachy" )
+  then
+    return
+  end
   pre_blow_off()
+  randomize_arts()
+  ogse_signals.get_mgr():subscribe({
+    signal = "on_before_first_update", fun = this.on_before_first_update
+  })
+end
+
+
+function on_before_first_update()
   generate_anoms()
+  generate_new_arts()
+end
+
+
+function generate_new_arts()
+  if
+    level_arts[ level.name() ]
+    and not has_alife_info( "testsak_" .. level.name() )
+  then
+    generate_arts()
+    db.actor:give_info_portion( "testsak_" .. level.name() )
+  end
 end
 
 
 function after_blow_on()
+  sak.off_testobj()
   local lname = level.name()
-  if not level_vertexes[ lname ] then return end
-  if not level_anoms[ lname ] then return end
-  generate_anoms()
-  move_mgr.invalidate_pp_accessibility()
+  if level_vertexes[ lname ] and level_anoms[ lname ] then
+    generate_anoms()
+    move_mgr.invalidate_pp_accessibility()
+  end
+  generate_new_arts()
 end
 
 
---[=[
-function pre_blow_off()
--- уточнить нужна ли проверка на существование гейм вертекса по гейм вертексу объекта, который уже заспавнен и готовится к удалению
-local sim=alife()
-local ggraph=game_graph()
-        for i=0,65534 do
-local sobj=sim:object(i)
-                if sobj then
-if is_anomaly(sobj:clsid()) and ggraph:valid_vertex_id(sobj.m_game_vertex_id) then
-local map=sim:level_name(ggraph:vertex(sobj.m_game_vertex_id):level_id())
-                                if not check_exclusion(sobj,map) then
-                                local status=get_anomaly_status(sobj)
-if status=="" or status=="on" then set_anomaly_status(sobj,"del") alife():release(sobj,true) end
-end end end end end
---]=]
-
+local forbidden_lvids, forbidden_pos
 
 function pre_blow_off()
-  for i = 0, 65534 do
-    local sobj = alife():object(i)
+  forbidden_lvids = {}
+  forbidden_pos   = {}
+  for id = 1, 65534 do
+    local sobj = alife():object( id )
     if sobj then
       if is_anomaly( sobj:clsid() ) then
         local map = alife():level_name(
@@ -1746,15 +1806,18 @@ function cleanup_arts()
       end
     end
   end
-  for i = 0, 65534 do
-    local sobj = alife():object( i )
+  for id = 1, 65534 do
+    local sobj = alife():object( id )
     if sobj and sobj.parent_id == 65535 then
       local sect = sobj:section_name()
       if known_sects[ sect ] then
         local lname = object_level_name( sobj )
         if
           sect == "af_buliz"
-          or ( known_arts[ lname ] and known_arts[ lname ][ sect ] )
+          or (
+            known_arts[ lname ] and known_arts[ lname ][ sect ]
+            and not dsh.is_handmade_artefact( sobj )
+          )
         then
           alife():release( sobj, true )
         end
@@ -1768,139 +1831,326 @@ end
 
 
 function generate_anoms()
+  for id, is_npc in pairs( db.creature ) do
+    local obj = level.object_by_id( id )
+    if obj then
+      local lvid = obj:level_vertex_id()
+      if lvid then
+        forbidden_lvids[ lvid ] = true
+        table.insert( forbidden_pos, obj:position() )
+      end
+    end
+  end
   local lname = level.name()
   local v     = level_anoms[ lname ]
   if v then
     local cnt = 0
-    local mxx = math_random( v[ 1 ], v[ 2 ] ) * anoms_difficulty_koef[ level.get_game_difficulty() ]
+    local mxx = math.random( v[ 1 ], v[ 2 ] )
+      * anoms_difficulty_koef[ level.get_game_difficulty() ]
     while cnt < mxx do
-      if generate_anomaly() then cnt = cnt + 1 end
+      local res = generate_anomaly()
+      if res then
+        cnt = cnt + 1
+      elseif res == false then
+        log2(
+          "dsh: [%s]: I give up here: %s, %s / %s anomalies generated",
+          script_name(), lname, cnt, mxx
+        )
+        break
+      end
     end
   end
 end
 
 
-function generate_arts()
+function generate_arts( need_cnt )
   local lname = level.name()
   if not level_vertexes[ lname ] then return end
   local v = level_arts[ lname ]
   if v then
-    local cnt, mxx = 0, math_random( v[ 1 ], v[ 2 ] )
+    local cnt, mxx
+    if need_cnt then
+      cnt, mxx = 0, need_cnt
+    else
+      local min_cnt, max_cnt = v[ 1 ], v[ 2 ]
+      local blowout_count    = ogse_surge_mgr.get_blowout_count()
+      min_cnt = min_cnt - math.floor(
+        blowout_count / ( 5 * ( 4 - level.get_game_difficulty() ) )
+      )
+      if min_cnt < 0 then min_cnt = 0 end
+      cnt, mxx = 0, math.random( min_cnt, max_cnt )
+    end
     while cnt < mxx do
-      if generate_art( lname ) then cnt = cnt + 1 end
+      local res = generate_art( lname )
+      if res then
+        cnt = cnt + 1
+      elseif res == false then
+        log2(
+          "dsh: [%s]: I give up here: %s, %s / %s artefacts generated",
+          script_name(), lname, cnt, mxx
+        )
+        break
+      end
     end
  end
--- переделано на поршни - при выбросе снимаем все поршни, при спавне
--- артов на локе выдаем - это больше не нужно
-  --generate_test(lname)
+end
+
+
+function find_gvid( lname, pos )
+  local gvn, gvx =
+    game_vertexes[ lname ][ 1 ],
+    game_vertexes[ lname ][ 2 ]
+  local new_gv   = 0
+  local min_dist = 100000
+  for a = gvn, gvx do
+    local tmp = game_graph():vertex( a ):level_point()
+    if tmp:distance_to( pos ) < min_dist then
+      min_dist = tmp:distance_to( pos )
+      new_gv   = a
+    end
+  end
+  if game_graph():valid_vertex_id( new_gv ) then
+    return new_gv
+  end
+end
+
+
+function calc_new_free_pos( lname, pre_check_coords_func )
+  local lvx    = level_vertexes[ lname ]
+  local new_lv = math.random( lvx )
+  if forbidden_lvids[ new_lv ] then
+    local found
+    if new_lv < lvx then
+      for i = new_lv + 1, lvx do
+        if not forbidden_lvids[ i ] then
+          found = i
+          break
+        end
+      end
+    end
+    if not found and new_lv > 1 then
+      for i = 1, new_lv - 1 do
+        if not forbidden_lvids[ i ] then
+          found = i
+          break
+        end
+      end
+    end
+    if not found then
+      log2(
+        "dsh: [%s]: can't find any free level vertex for %s",
+        script_name(), lname
+      )
+      return false
+    end
+    new_lv = found
+  end
+  forbidden_lvids[ new_lv ] = true
+  local pos = level.vertex_position( new_lv )
+  if
+    check_coordinates( pos, lname )
+    and (
+      ( not pre_check_coords_func )
+      or pre_check_coords_func( pos )
+    )
+  then
+    local new_gv = find_gvid( lname, pos )
+    if new_gv then
+      return pos, new_gv, new_lv
+    end
+  end
 end
 
 
 function generate_anomaly()
-  local lname = level.name()
-  local gvn, gvx, lvx =
-    game_vertexes[ lname ][ 1 ],
-    game_vertexes[ lname ][ 2 ],
-    level_vertexes[ lname ]
-  local new_lv = math_random( 1, lvx )
-  local actor_pos = db.actor:position()
-  local pos = level.vertex_position( new_lv )
-  if actor_pos:distance_to( pos ) < 5 then return false end
-  if not check_coordinates( pos, lname ) then return false end
-  local new_gv = 0
-  local min_dist = 100000
-  for a = gvn, gvx do
-    g1 = game_graph():vertex( a ):game_point()
-    if g1:distance_to( pos ) < min_dist then
-      min_dist = g1:distance_to( pos )
-      new_gv = a
+  local pos, new_gv, new_lv = calc_new_free_pos( level.name() )
+  if pos then
+    table.insert( forbidden_pos, pos )
+    return spawn_rand_anom( pos, new_gv, new_lv )
+  elseif pos == false then
+    return false
+  end
+end
+
+
+function randomize_arts()
+  local known_arts = {}
+  for lname, alist in pairs( level_arts ) do
+    if not known_arts[ lname ] then
+      known_arts[ lname ] = {}
+    end
+    for k, v in pairs( alist[ 3 ] ) do
+      local sect = arts_sections[ k ]
+      if sect then
+        known_arts[ lname ][ sect ] = true
+      end
     end
   end
-  if game_graph():valid_vertex_id( new_gv ) then
-    return spawn_rand_anom( pos, new_gv, new_lv )
+  local is_relocating = true
+  for id = 1, 65534 do
+    local sobj = alife():object( id )
+    if sobj and sobj.parent_id == 65535 then
+      local sect  = sobj:section_name()
+      local lname = object_level_name( sobj )
+      if lname and lname == level.name() then
+        if
+          known_arts[ lname ] and known_arts[ lname ][ sect ]
+          and not dsh.is_handmade_artefact( sobj )
+        then
+          local orig_dist = sobj.position:distance_to( db.actor:position() )
+          local cur_lv  = sobj.m_level_vertex_id
+          local cur_pos = sobj.position
+          if is_relocating then
+            for i = 1, 100 do
+              local pos, new_gv, new_lv = calc_new_free_pos(
+                lname,
+                function( np )
+                  return (
+                    np:distance_to( db.actor:position() ) >= orig_dist
+                    and np:distance_to( sobj.position   ) >= 10
+                  )
+                end
+              )
+              if pos then
+                alife():teleport_object( "", pos, new_lv, new_gv, sobj.id )
+                cur_lv  = new_lv
+                cur_pos = pos
+                break
+              elseif pos == false then
+                log2(
+                  "dsh: [%s]: stop relocation process here: %s, current art is %s",
+                  script_name(), lname, sobj:name()
+                )
+                is_relocating = false
+                break
+              end
+            end
+          end
+          forbidden_lvids[ cur_lv ] = true
+          table.insert( forbidden_pos, cur_pos )
+        elseif dsh.is_artefact( sobj:section_name() ) then
+          forbidden_lvids[ sobj.m_level_vertex_id ] = true
+          table.insert( forbidden_pos, sobj.position )
+        end
+      end
+    end
   end
 end
 
 
 function generate_art( lname, section, pre_check_coords_func )
-  local gvn, gvx, lvx = game_vertexes[ lname ][ 1 ], game_vertexes[ lname ][ 2 ], level_vertexes[ lname ]
-  local new_lv = math_random( 1, lvx )
-  local pos = level.vertex_position( new_lv )
-  if not check_coordinates( pos, lname ) then return false end
-  if pre_check_coords_func then
-    if not pre_check_coords_func( pos ) then return false end
-  end
-  local new_gv = 0
-  local min_dist = 100000
-  for a = gvn, gvx, 1 do
-    g1 = game_graph():vertex( a ):game_point()
-    if g1:distance_to( pos ) < min_dist then
-      min_dist = g1:distance_to( pos )
-      new_gv = a
-    end
-  end
-  if game_graph():valid_vertex_id( new_gv ) then
+  local pos, new_gv, new_lv = calc_new_free_pos( lname, pre_check_coords_func )
+  if pos then
+    local sobj
     if section then
-        return spawn_art( section, pos, gv, lv )
+      sobj = spawn_art( section, pos, new_gv, new_lv )
     else
-      return spawn_rand_arts( pos, new_gv, new_lv, lname )
+      sobj = spawn_rand_arts( pos, new_gv, new_lv, lname )
     end
+    dsh.mark_art_as_handmade( sobj, false )
+    table.insert( forbidden_pos, pos )
+    return sobj
   end
 end
 
 
-function spawn_rand_anom(pos,gv,lv)
-  local lname=level.name()
-  local shapes,shape1={},{}
-  local section
-  section = "zone_ice"
-  local rnd=math_random()*100
-  if 5>rnd then
-    shape1={shtype=0,radius=4,center={0,0,0}}
+function spawn_rand_anom( pos, gv, lv )
+  local shapes, shape1 = {}, {}
+  local section = "zone_ice"
+  if math.random( 100 ) < 5 then
+    shape1 = { shtype = 0, radius = 4,center = { 0, 0, 0 } }
   else
-    local rnd_max = 0
-    for k,v in pairs(level_anoms[lname][4]) do
-      rnd_max = rnd_max + v
-    end
-    rnd=math_random(1,rnd_max)
-    for k,v in pairs(level_anoms[lname][4]) do
-      if rnd<=v then section=anoms_sections[k] break end
-      rnd=rnd-v
-    end
-    local anom_prefix="amk_zone_"
-    local suffix_num=math_random(1,3)
-    local suffix=anom_suffix(suffix_num)
-    shape1=section[2]
-    section=anom_prefix..section[1]..suffix
+    section, shape1 = get_random_anomaly_sect( level.name() )
+    ASSERT(
+      section, "got nil from get_random_anomaly_sect( %s )", level.name()
+    )
   end
-  shapes[1]={}
-  shapes[1].shtype=shape1.shtype
+  shapes[ 1 ] = {}
+  shapes[ 1 ].shtype = shape1.shtype
   if shape1.shtype == 0 then
-    shapes[1].radius = shape1.radius
-    shapes[1].center = vector():set(shape1.center[1],shape1.center[2],shape1.center[3])
+    shapes[ 1 ].radius = shape1.radius
+    shapes[ 1 ].center = vector():set(
+      shape1.center[ 1 ], shape1.center[ 2 ], shape1.center[ 3 ]
+    )
   else
-    shapes[1].v1 = vector():set(shape1.v1[1],shape1.v1[2],shape1.v1[3])
-    shapes[1].v2 = vector():set(shape1.v2[1],shape1.v2[2],shape1.v2[3])
-    shapes[1].v3 = vector():set(shape1.v3[1],shape1.v3[2],shape1.v3[3])
-    shapes[1].offset = vector():set(shape1.offset[1],shape1.offset[2],shape1.offset[3])
+    shapes[ 1 ].v1     = vector():set(
+      shape1.v1[ 1 ], shape1.v1[ 2 ], shape1.v1[ 3 ]
+    )
+    shapes[ 1 ].v2     = vector():set(
+      shape1.v2[ 1 ], shape1.v2[ 2 ], shape1.v2[ 3 ]
+    )
+    shapes[ 1 ].v3     = vector():set(
+      shape1.v3[ 1 ], shape1.v3[ 2 ], shape1.v3[ 3 ]
+    )
+    shapes[ 1 ].offset = vector():set(
+      shape1.offset[ 1 ], shape1.offset[ 2 ], shape1.offset[ 3 ]
+    )
   end
-  local status="on"
-  return spawn_anomaly(section,pos,gv,lv,shapes,status)
+  return spawn_anomaly( section, pos, gv, lv, shapes, "on" )
 end
 
 
-function spawn_rand_arts(pos,gv,lv,lname)
-  local rnd_max=0
-  for k,v in pairs(level_arts[lname][3]) do
-    rnd_max=rnd_max+v*10
+function get_random_anomaly_sect( lname )
+  local rnd_max   = 0
+  local anomalies = {}
+  for k, w in pairs( level_anoms[ lname ][ 4 ] ) do
+    rnd_max = rnd_max + w
+    local t = {
+      [ "sect"   ] = k,
+      [ "weight" ] = w,
+    }
+    table.insert( anomalies, t )
   end
-  local rnd=0
-  rnd=math_random(1,rnd_max)
-  for k,v in pairs(level_arts[lname][3]) do
-    if rnd<=v*10 then section=arts_sections[k] break end
-    rnd=rnd-v*10
+  table.sort(
+    anomalies,
+    function( a, b ) return a.weight > b.weight end
+  )
+  local rnd = math.random( 0, rnd_max )
+  local params
+  for _, v in ipairs( anomalies ) do
+    rnd = rnd - v.weight
+    if rnd <= 0 then
+      params = anoms_sections[ v.sect ]
+      local suffixes = { "_weak", "_average", "_strong" }
+      local section  = "amk_zone_" .. params.zone
+        .. suffixes[ math.random( table.getn( suffixes ) ) ]
+      return section, params.shape
+    end
   end
-  return spawn_art(section,pos,gv,lv)
+end
+
+
+function get_random_art_sect( lname )
+  if not level_arts[ lname ] then return end
+  local rnd_max = 0
+  local arts    = {}
+  for k, v in pairs( level_arts[ lname ][ 3 ] ) do
+    local w = v * 10
+    rnd_max = rnd_max + w
+    local t = {
+      [ "sect"   ] = k,
+      [ "weight" ] = w,
+    }
+    table.insert( arts, t )
+  end
+  table.sort(
+    arts,
+    function( a, b ) return a.weight > b.weight end
+  )
+  local rnd = dsh.get_next_random(
+    script_name() .. ".get_random_art_sect", 0, rnd_max
+  )
+  for _, v in ipairs( arts ) do
+    rnd = rnd - v.weight
+    if rnd <= 0 then
+      return arts_sections[ v.sect ]
+    end
+  end
+end
+
+
+function spawn_rand_arts( pos, gv, lv, lname )
+  return spawn_art( get_random_art_sect( lname ), pos, gv, lv )
 end
 
 
@@ -1917,10 +2167,10 @@ function spawn_anomaly(section,pos,gv,lv,shape,status)
 end
 
 
-function spawn_art(section,pos,gv,lv)
-  local sobj
-  sobj=amk.spawn_item(section,pos,gv,lv)
-  if sobj then return sobj end
+function spawn_art( section, pos, gv, lv )
+  if section then
+    return amk.spawn_item( section, pos, gv, lv )
+  end
 end
 
 
@@ -1928,47 +2178,52 @@ end
 function check_exclusion( obj, map )
   local obj_name = obj:name()
   if
-    string_find( obj_name, "amk_" )     or
-    string_find( obj_name, "zone_ice" ) or
-    string_find( obj_name, "caps_" )
+       string.find( obj_name, "amk_"     )
+    or string.find( obj_name, "zone_ice" )
+    or string.find( obj_name, "caps_"    )
   then
     return false
   end
   if not level_vertexes[ map ] then return true end
   if not level_anoms[ map ] then return true end
   return
-       string_find( obj_name, "zone_tuman" )                                            -- Острова туман 
-    or string_find( obj_name, "zone_fly_island" )                                       -- Острова парение
-    or string_find( obj_name, "_snp" )                                                          -- Снайпер
-    or string_find( obj_name, "anim_ph_" )                                                      -- Аномальные объекты
-    or string_find( obj_name, "propeller" )                                             -- Пропеллер
-    or string_find( obj_name, "sky_anomaly" )                                           -- Sky_Anomaly
-    or string_find( obj_name, "esc_zone_witches" )                                      -- перемещающаяся электра (Кордон)
-    or string_find( obj_name, "pri_zone_witches" )                                      -- электра на колесе обозрения (ЦП)
-    or string_find( obj_name, "zone_topolinypuh" )                                      -- пух (Радар)
-    or string_find( obj_name, "red_zone_acidic" )                                       -- холодцы в шахте (Красный Лес)
-    or string_find( obj_name, "podval_tornado_strong" )                 -- торнадо в подвале (Лиманск)
-    or string_find( obj_name, "dcity_fontan_fountain_average" ) -- фонтан в фонтане (МГ)
-    or string_find( obj_name, "rostok_zone_witches" )                           -- электры везде (Росток)
-    or string_find( obj_name, "rostok_zone_zharka_static" )             -- жарки в тоннеле (Росток)
-    or string_find( obj_name, "tutorial" )                                                      -- эпичная смерть псевдоплоти (Кордон)
+       string.find( obj_name, "zone_tuman" )       -- Острова туман 
+    or string.find( obj_name, "zone_fly_island" )  -- Острова парение
+    or string.find( obj_name, "_snp" )             -- Снайпер
+    or string.find( obj_name, "anim_ph_" )         -- Аномальные объекты
+    or string.find( obj_name, "propeller" )        -- Пропеллер
+    or string.find( obj_name, "sky_anomaly" )      -- Sky_Anomaly
+    -- перемещающаяся электра (Кордон)
+    or string.find( obj_name, "esc_zone_witches" )
+    -- электра на колесе обозрения (ЦП)
+    or string.find( obj_name, "pri_zone_witches" )
+    or string.find( obj_name, "zone_topolinypuh" ) -- пух (Радар)
+    -- холодцы в шахте (Красный Лес)
+    or string.find( obj_name, "red_zone_acidic" )
+    -- торнадо в подвале (Лиманск)
+    or string.find( obj_name, "podval_tornado_strong" )
+    -- фонтан в фонтане (МГ)
+    or string.find( obj_name, "dcity_fontan_fountain_average" )
+    -- электры везде (Росток)
+    or string.find( obj_name, "rostok_zone_witches" )
+    -- жарки в тоннеле (Росток)
+    or string.find( obj_name, "rostok_zone_zharka_static" )
+    -- эпичная смерть псевдоплоти (Кордон)
+    or string.find( obj_name, "tutorial" )
     or (
-      string_find( obj_name, "_mincer" ) and map ~= "l11_pripyat"
-    ) -- почему именно там?
-end
-
-
-function anom_suffix(suffix_num)
-  local suffix=""
-  if suffix_num==1 then suffix="_weak"
-  elseif suffix_num==2 then suffix="_average"
-  else suffix="_strong"
-  end
-  return suffix
+      -- почему именно там?
+      string.find( obj_name, "_mincer" ) and map ~= "l11_pripyat"
+    )
 end
 
 
 function check_coordinates( pos, lname )
+  for k, v in ipairs( anti_spawn_zones ) do
+    if pos:distance_to( v[ 1 ] ) <= v[ 2 ] then return false end
+  end
+  for _, fp in ipairs( forbidden_pos ) do
+    if pos:distance_to( fp ) <= 5 then return false end
+  end
   local hides = amk_hideouts.hide[ lname ]
   if hides then
     for i, o in ipairs( hides ) do
@@ -1993,9 +2248,6 @@ function check_coordinates( pos, lname )
         end
       end
     end
-  end
-  for k, v in ipairs( anti_spawn_zones ) do
-    if pos:distance_to( v[ 1 ] ) <= v[ 2 ] then return false end
   end
   return true
 end

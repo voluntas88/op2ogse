@@ -235,17 +235,13 @@ function worker(index)
 		-- рюкзак
 		obj = embs[idx].rukzak
 		if obj then
-			local inv_obj = alife():create(obj.section, vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv)
-			level.map_add_object_spot_ser(inv_obj.id, "treasure", "Невидимый тайник")	-- метка на тайник.
-		news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
+			alife():create(obj.section, vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv)
 		end
 
 		-- рестриктор
 		obj = embs[idx].restrictor
 		if obj then
-			local inv_obj = snp.create_restrictor(vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv, obj.radius, obj.func)
-			level.map_add_object_spot_ser(inv_obj.id, "crlc_big", "Предполагаемое метонахождение тайника")	-- метка на тайник.
-			news_manager.send_tip(db.actor, "Получена наводка на тайник", nil, nil, 10000)	-- СМС. Eugen81.
+			snp.create_restrictor(vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv, obj.radius, obj.func)
 		end
 
 		-- телепорт
@@ -254,9 +250,7 @@ function worker(index)
 			if obj.position == "actor" then
 				kostya_dialog.create_teleport(obj.section, db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
 			else
-				local inv_obj = kostya_dialog.create_teleport(obj.section, vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv)
-				level.map_add_object_spot_ser(inv_obj.id, "crlc_big", "Предполагаемое метонахождение телепорта")	-- метка на тайник.
-				news_manager.send_tip(db.actor, "Получена наводка на телепорт", nil, nil, 10000)	-- СМС. Eugen81.
+				kostya_dialog.create_teleport(obj.section, vector():set(obj.position.x, obj.position.y, obj.position.z), obj.lv, obj.gv)
 			end
 		end
 

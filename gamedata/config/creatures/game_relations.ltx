@@ -1,3 +1,4 @@
+; -*- mode: conf-windows; coding: windows-1251-dos -*-
 [game_relations]
 ;реальное разделение на группы репутаций на шкалы
 rating			= novice, 300, experienced, 600, veteran, 900, master
@@ -116,17 +117,17 @@ killer		 = 0.2
 ecolog		 = 0.4
 dolg		      = 0.2
 freedom		 = 0.2
-bandit		 = 0.2
+bandit		 = 0.0
 zombied		 = 0.0
 trader		 = 0.2
 stranger	      = 0.0
 arena_enemy    = 0.0
-sniper         = 0.2
+sniper         = 0.0
 green          = 0.2
 nebo           = 0.2
-lastday        = 0.2
+lastday        = 0.0
 fotoman        = 0.0
-vermaht        = 0.2
+vermaht        = 0.0
 
 ;очки рейтинга, получаемые за убийство персонажа
 ;с определенным статусом
@@ -144,15 +145,15 @@ community_goodwill_limits		= -9000, 9000
 ;-------------------------------------------------------
 free_friend_attack_goodwill		= -1000 ;-500
 free_neutral_attack_goodwill		= -500 ;-250
-free_enemy_attack_goodwill		= -50 ;0
+free_enemy_attack_goodwill		= 0
 
 danger_friend_attack_goodwill		= -50
 danger_neutral_attack_goodwill		= -100 ;-50
-danger_enemy_attack_goodwill		= 0    ;  3
+danger_enemy_attack_goodwill		= 3
 
 free_friend_attack_reputation		= -100
 free_neutral_attack_reputation		= -100 ;-20
-free_enemy_attack_reputation		= 0 ;  5
+free_enemy_attack_reputation		= 5
 
 danger_friend_attack_reputation		= -20
 danger_neutral_attack_reputation	= -20 ;-10
@@ -163,8 +164,8 @@ danger_enemy_attack_reputation		= 0
 ;(работает аналогично и при помощи другим персонажам в бою)
 min_attack_delta_time = 3		
 
-friend_kill_goodwill		=  -1500 ;-400
-neutral_kill_goodwill		=  -750  ;-150
+friend_kill_goodwill		=  -6000 ;-400
+neutral_kill_goodwill		=  -3000 ;-150
 enemy_kill_goodwill		=  0
 community_member_kill_goodwill  =  -150
 
@@ -200,8 +201,8 @@ immunities_experienced_k	= 1.0
 visibility_novice_k		     = 1
 visibility_experienced_k	= 1
 
-dispersion_novice_k		     = 1.0
-dispersion_experienced_k	= 0.1
+dispersion_novice_k		     = 0.1 ;1.0
+dispersion_experienced_k	= 0.01 ;0.1
 
 
 ; диапазон изменения рангов при регистрации в новом смарт террейне
@@ -220,32 +221,33 @@ communities = actor, 255, human, 255, arena_monstr, 39, boar, 40, bloodsucker, 4
 
 [monster_relations]
 ; [1] друг, [0] нейтрал, [-1] враг, [-2] злейший враг
-;			actor, human, arena_monstr, boar, bloodsucker, flesh, dog, pseudodog, cat, chimera, giant, zombie, burer, controller, poltergeist, snork, fracture, bird, rat, tushkano, dogfrend, bibliofrend, deathclaw, zombi
+;			actor, human, arena_monstr, boar, bloodsucker, flesh, dog, pseudodog, cat, chimera, giant, zombie, burer, controller, poltergeist, snork, fracture, bird, rat, tushkano, dogfrend, bibliofrend, deathclaw, zombi, phantom
 ;=====================================================================================================
-actor		=	 1,    1,    -2,           -1,   -1,          -1,    -1,  -1,        -1,  -1,      -1,    -1,     -1,    -1,         -1,          -1,    -1,        0,    0,   0,        1,        0,          -1,        -1 
-human		= 	 0,    1,     0,           -1,   -1,          -1,    -1,  -1,        -1,  -1,      -1,    -1,     -1,    -1,         -1,          -1,    -2,        0,    0,   0,        1,        1,          -1,        -1
-arena_monstr	=	-2,    0,     0,           -1,    0,           0,     0,   0,         0,   0,       0,     0,      0,     0,          0,           0,     0,        0,     0,   0,        0,        0,           0,         0
-boar		=	-2,   -2,     0,            1,    0,           0,    -1,  -1,        -1,  -1,      -1,     0,     -1,     1,          1,          -1,     0,        0,    -2,  -2,        0,       -2,           0,         0
-bloodsucker	=	-1,   -1,     0,            0,    1,          -1,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-flesh		=	-2,   -2,     0,            1,   -1,           1,     0,   0,         0,  -1,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-dog			=	-1,   -1,     0,           -2,    0,           0,     1,   1,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-pseudodog  	=	-1,   -1,     0,           -2,    0,           0,     1,   1,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-cat			=	-1,   -1,     0,           -2,    0,           0,     0,   0,         1,   0,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-chimera		=	-1,   -2,     0,           -1,    0,          -1,     0,   0,         0,   1,      -1,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-giant		=	-1,   -2,     0,            0,    0,           0,     0,   0,         0,  -2,       1,     0,     -2,     1,          1,          -2,     0,        0,   -2,  -2,        0,       -2,           0,         0
-zombie		=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     1,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         1
-burer		=	-2,   -2,     0,            0,    0,           0,     0,   0,         0,   0,      -2,     0,      1,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-controller	=	-2,   -2,     0,            1,    1,           1,     1,   1,         1,   1,       1,     1,      1,     1,          1,           1,     1,        1,    1,   1,        0,       -2,           0,         0
-poltergeist	=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,   -2,  -2,        0,       -2,           0,         0
-snork		=	-2,   -2,     0,           -1,    0,           0,     0,   0,         0,   0,      -1,     0,      0,     1,          1,           1,     0,        0,   -2,  -2,        0,       -2,           0,         0
-fracture	=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     1,        0,   -2,  -2,        0,       -2,           0,         0
-bird		=	 0,    0,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        1,   -2,  -2,        0,        0,           0,         0
-rat			=	 0,    0,     0,           -2,   -2,          -2,    -2,  -2,        -2,  -2,      -2,    -2,     -2,     1,          1,          -2,    -2,        0,    1,  -2,        0,        0,          -2,         0
-tushkano	=	 0,    0,     0,           -2,   -2,          -2,    -2,  -2,        -2,  -2,      -2,    -2,     -2,     1,          1,          -2,    -2,        0,   -2,   1,        0,        0,          -2,         0
-dogfrend	=	 1,    1,     0,            0,    0,           0,     0,   0,        -1,  -1,       0,     0,      0,     0,          0,           0,     0,        0,    0,   1,        1,        0,           0,         0
-bibliofrend	=	 0,    1,    -2,           -2,   -2,          -2,    -2,  -2,        -2,  -2,      -2,    -2,     -2,    -2,         -2,          -2,    -2,        0,    0,   0,        0,        1,           0,        -2
-deathclaw	=	-2,   -2,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     0,          0,           0,     0,        0,    0,   0,        0,       -2,           0,         0
-zombi		=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     1,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         1
+actor		=	 1,    1,    -2,           -1,   -1,          -1,    -1,  -1,        -1,  -1,      -1,    -1,     -1,    -1,         -1,          -1,    -1,        0,   -1,  -1,        1,        0,          -1,        -1     -1
+human		= 	 0,    1,     0,           -1,   -1,          -1,    -1,  -1,        -1,  -1,      -1,    -1,     -1,    -1,          0,          -1,    -2,        0,    0,  -1,        1,        1,          -1,        -1     -1
+arena_monstr	=	-2,    0,     0,           -1,    0,           0,     0,   0,         0,   0,       0,     0,      0,     0,          0,           0,     0,        0,    0,   0,        0,        0,           0,         0      0
+boar		=	-2,   -2,     0,            1,    0,           0,    -1,  -1,        -1,  -1,      -1,     0,     -1,     1,          1,          -1,     0,        0,    0,   0,        0,       -2,           0,         0      0
+bloodsucker	=	-1,   -1,     0,            0,    1,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+flesh		=	-2,   -2,     0,            1,    0,           1,    -1,  -1,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+dog		=	-1,   -1,     0,           -1,    0,          -1,     1,   1,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+pseudodog  	=	-1,   -1,     0,           -1,    0,          -1,     1,   1,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+cat		=	-1,   -1,     0,           -1,    0,           0,     0,   0,         1,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,  -1,        0,       -2,           0,         0      0
+chimera		=	-1,   -2,     0,           -1,    0,           0,     0,   0,         0,   1,      -1,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+giant		=	-1,   -2,     0,            0,    0,           0,     0,   0,         0,  -1,       1,     0,     -1,     1,          1,          -1,     0,        0,    0,   0,        0,       -2,           0,         0      0
+zombie		=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     1,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         1      0
+burer		=	-2,   -2,     0,            0,    0,           0,     0,   0,         0,   0,      -1,     0,      1,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+controller	=	-2,   -2,     0,            1,    1,           1,     1,   1,         1,   1,       1,     1,      1,     1,          1,           1,     1,        1,    1,   1,        0,       -2,           0,         0      0
+poltergeist	=	-1,    0,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+snork		=	-2,   -2,     0,           -1,    0,           0,     0,   0,         0,   0,      -1,     0,      0,     1,          1,           1,     0,        0,    0,   0,        0,       -2,           0,         0      0
+fracture	=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     1,        0,    0,   0,        0,       -2,           0,         0      0
+bird		=	 0,    0,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        1,    0,   0,        0,        0,           0,         0      0
+rat		=	-2,    0,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     1,          1,           0,     0,        0,    1,   0,        0,        0,           0,         0      0
+tushkano	=	-2,   -1,     0,            0,    0,           0,     0,   0,        -1,   0,       0,     0,      0,     1,          1,           0,     0,        0,    0,   1,        0,        0,           0,         0      0
+dogfrend	=	 1,    1,     0,            0,    0,           0,     0,   0,        -1,  -1,       0,     0,      0,     0,          0,           0,     0,        0,    0,   1,        1,        0,           0,         0      0
+bibliofrend	=	 0,    1,    -2,           -2,   -2,          -2,    -2,  -2,        -2,  -2,      -2,    -2,     -2,    -2,         -2,          -2,    -2,        0,    0,   0,        0,        1,           0,        -2      0
+deathclaw	=	-2,   -2,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     0,          0,           0,     0,        0,    0,   0,        0,       -2,           0,         0      0
+zombi		=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     1,      0,     1,          1,           0,     0,        0,    0,   0,        0,       -2,           0,         1      0
+phantom		=	-1,   -1,     0,            0,    0,           0,     0,   0,         0,   0,       0,     0,      0,     0,          0,           0,     0,        0,    0,   0,        0,        0,           0,         0      0
 
 
 

@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; СР-3 «Вихрь М» ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;----------------------------------------------------------------------------------------------------------
-[wpn_sr3t]:identity_immunities,class_val
+[wpn_sr3t]:class_val
 GroupControlSection		= spawn_group
 discovery_dependency	= 
 $spawn              	= "weapons\sr3t"	; name and section in level editor
@@ -74,7 +74,6 @@ cam_max_angle				= 4.0	    	;максимальный угол отдачи
 cam_max_angle_horz			= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.25;1		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 5	    	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		      = 0.003	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -89,18 +88,9 @@ grenade_flame_particles		= weapons\generic_weapon01
 shell_point		 			= 0,0.216,0.114				; position (3rd person view) for shell to throw out
 shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.3
-PDM_disp_accel_factor 		= 1.3
-PDM_crouch	 			= 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	                  = 1.88
 rpm                      	= 900 	; max round per minute
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 1.0	
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
@@ -169,7 +159,7 @@ silencer_light_time 		= 0.2
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
  
-[wpn_sr3t_hud]
+[wpn_sr3t_hud]:hud_val
 allow_inertion				= true
 
 ;similar to corresponding params in weapon section but for 1st person view

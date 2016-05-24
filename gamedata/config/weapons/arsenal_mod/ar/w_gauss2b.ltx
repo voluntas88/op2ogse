@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Гаусс Изверга ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;----------------------------------------------------------------------------------
-[wpn_gauss2b]:identity_immunities,class_gauss_auto
+[wpn_gauss2b]:class_gauss_auto
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn                  = "weapons\gauss2b"	; option for Level Editor
@@ -42,7 +42,6 @@ cam_max_angle			= 1.0	;максимальный угол отдачи
 cam_max_angle_horz		= 1.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.15	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.0001 ;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------

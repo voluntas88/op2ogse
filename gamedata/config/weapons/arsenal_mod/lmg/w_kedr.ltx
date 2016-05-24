@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;; ПП-91 «Кедр» ;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------------------
-[wpn_kedr]:identity_immunities,class_smg
+[wpn_kedr]:class_smg
 GroupControlSection		= spawn_group
 discovery_dependency	= 
 $spawn              	= "weapons\acr"	; name and section in level editor
@@ -62,9 +62,6 @@ kill_msg_height		= 30
 ;Weapon recoil in the game also created by recoil effector. 
 ;
 ;-----------------------------------------------------------------------------------
-;params of weapon recoil
-fire_dispersion_base			= 0.18		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
-
 ;отдача
 cam_relax_speed         		= 12.5	;скорость возврата в исходное положение
 cam_dispersion          		= 0.25 ;0.1		;увеличения угла (в градусах) с каждым выстрелом
@@ -74,7 +71,6 @@ cam_max_angle				= 6.0 ;3.0		;максимальный угол отдачи
 cam_max_angle_horz			= 8.0 ;6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.12 ;0.25;1.1	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 5		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		      = 0.00035	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -89,20 +85,11 @@ grenade_flame_particles		      = weapons\generic_weapon01
 shell_point		 			= 0.00, 0.257, 0.075		; position (3rd person view) for shell to throw out
 shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
 
-PDM_disp_base 				= 1.0
-PDM_disp_vel_factor 			= 0.95
-PDM_disp_accel_factor 			= 0.95
-PDM_crouch	 			      = 1.0
-PDM_crouch_no_acc 			= 1.0
-
 ; ttc
 hit_rate	                  = 1.75
 fire_distance            	= 70		;maximum fire distance that bullet can fly
 bullet_speed			= 310		;starting bullet speed
 rpm                      	= 850		;max round per minute
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 1.0	
 
 silencer_hit_power       		= 0.64
 silencer_hit_impulse	 		= 52

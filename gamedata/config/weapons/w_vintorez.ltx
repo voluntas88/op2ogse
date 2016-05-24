@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;; Винтовка Специальная Снайперская ВСС "Винторез" (6П29) ;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------------------
-[wpn_vintorez]:identity_immunities,class_val,scope.8x
+[wpn_vintorez]:class_val,scope.8x
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
 $spawn 				= "weapons\vintorez"	; option for Level Editor
@@ -54,7 +54,6 @@ auto_spawn_ammo			= false
 
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
-dispersion_start		      = 0
 fire_dispersion_base		= 0.02		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 
 ;отдача
@@ -66,7 +65,6 @@ cam_max_angle			= 4.0		;максимальный угол отдачи
 cam_max_angle_horz		= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.35		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 3		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		= 0.005		;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.3
 ;-----------------------------------------------------------------------------------
@@ -79,20 +77,11 @@ shell_point			= 0.0, 0.127, 0.10
 shell_dir			= 0.0, 1.0, 0.0
 shell_particles	 	= weapons\arsenal_shells1
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.4
-PDM_disp_accel_factor 		= 1.6
-PDM_crouch	 		      = 0.8
-PDM_crouch_no_acc 		= 0.6
-
 ;;;;;;;  Для Народной солянки 2010
 hit_rate	            = 1.95
 rpm 				= 700
 rpm_empty_click 	 	= 400
 ; end ttc
-
-use_aim_bullet		= true			;Поддерживается ли первая супер пуля
-time_to_aim			= 1.0	
 
 hud 				= wpn_vintorez_hud
 normal 			= 0, 1, 0
@@ -149,7 +138,7 @@ silencer_light_time 		= 0.2
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
-[wpn_vintorez_hud]
+[wpn_vintorez_hud]:hud_val
 allow_inertion			= true
 
 shell_point          		= 0,-0.025,-0.85

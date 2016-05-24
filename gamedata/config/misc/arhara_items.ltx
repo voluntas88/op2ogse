@@ -158,6 +158,7 @@ animation_slot		= 4
 
 ;hud item
 hud = wpn_vodka_hud
+zvuki.eat_sound = zwuk\inv_food
 
 
 
@@ -207,6 +208,7 @@ animation_slot		= 4
 ;hud item
 hud = wpn_vodka_hud
 dsh_rukzak.override_game_type = mutant_part
+zvuki.eat_sound = zwuk\inv_food
 
 
 [disk_adren]:identity_immunities
@@ -1179,6 +1181,7 @@ animation_slot		= 4
 ;hud item
 hud = wpn_vodka_hud
 dsh_rukzak.override_game_type = medkit
+zvuki.eat_sound = zwuk\inv_pills
 
 
 [gonets_flash]:identity_immunities
@@ -2533,7 +2536,6 @@ fire_wound_immunity       = 1.0
 
 
 [anomal_pole]:af_base
-bind_det_arts.ignore = true
 GroupControlSection	= spawn_group
 $spawn				= "arhara_items\mincer blood"
 
@@ -2573,6 +2575,9 @@ power_restore_speed = 0.0
 bleeding_restore_speed = 0.0
 
 hit_absorbation_sect = anomal_pole_absorbation
+
+bind_det_arts.ignore = true
+watcher_act.bad_item = true
 
 [anomal_pole_absorbation]
 burn_immunity = 1.0				;коэффициенты иммунитета 
@@ -3220,7 +3225,6 @@ cost				     = 100
 
 
 [imitator_snezka]:af_base
-bind_det_arts.ignore = true
 GroupControlSection	= spawn_group
 $spawn				= "arhara_items\mincer blood"
 
@@ -3260,6 +3264,9 @@ bleeding_restore_speed    = 0.0
 
 hit_absorbation_sect      = imitator_snezka_absorbation
 
+bind_det_arts.ignore = true
+watcher_act.bad_item = true
+
 [imitator_snezka_absorbation]
 burn_immunity             = 1.0				;коэффициенты иммунитета 
 strike_immunity           = 1.0
@@ -3274,7 +3281,6 @@ fire_wound_immunity       = 1.0
 
 
 [imitator_holodez]:af_base
-bind_det_arts.ignore = true
 GroupControlSection	= spawn_group
 $spawn				= "arhara_items\mincer blood"
 
@@ -3311,6 +3317,9 @@ power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
 hit_absorbation_sect      = imitator_holodez_absorbation
+
+bind_det_arts.ignore = true
+watcher_act.bad_item = true
 
 [imitator_holodez_absorbation]
 burn_immunity             = 1.0				;коэффициенты иммунитета 
@@ -3377,7 +3386,6 @@ fire_wound_immunity             = 1.0
 
 
 [imitator_shar]:af_base
-bind_det_arts.ignore = true
 GroupControlSection	= spawn_group
 $spawn				= "arhara_items\mincer blood"
 
@@ -3415,6 +3423,9 @@ bleeding_restore_speed    = 0.0
 
 hit_absorbation_sect      = imitator_shar_absorbation
 
+bind_det_arts.ignore = true
+watcher_act.bad_item = true
+
 [imitator_shar_absorbation]
 burn_immunity             = 1.0				;коэффициенты иммунитета 
 strike_immunity           = 1.0
@@ -3428,7 +3439,6 @@ fire_wound_immunity       = 1.0
 
 
 [imitator_tele_final1]:af_base
-bind_det_arts.ignore = true
 GroupControlSection	= spawn_group
 $spawn				= "arhara_items\mincer blood"
 
@@ -3464,6 +3474,9 @@ power_restore_speed       = 0.0
 bleeding_restore_speed    = 0.0
 
 hit_absorbation_sect      = imitator_tele_final1_absorbation
+
+bind_det_arts.ignore = true
+watcher_act.bad_item = true
 
 [imitator_tele_final1_absorbation]
 burn_immunity             = 1.0				;коэффициенты иммунитета 
@@ -3519,7 +3532,7 @@ power_restore_speed              = 0.001
 bleeding_restore_speed           = 0.0
 
 hit_absorbation_sect             = af_babka_4_absorbation
-art_hit.art_hit = 0.7, 0.3, radiation
+art_hit.art_hit = 1.3, 0.3, radiation
 
 [af_babka_4_absorbation]
 burn_immunity                    = 1.0				;коэффициенты иммунитета 
@@ -3644,6 +3657,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 5.45x39_izomorf_absorbation
 
+bind_det_arts.level = 2
+
 [5.45x39_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -3694,6 +3709,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 5.45x39_izomorf_1_absorbation
 
+bind_det_arts.level = 2
+
 [5.45x39_izomorf_1_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -3741,6 +3758,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= rukzak_izomorf_absorbation
+
+bind_det_arts.level = 2
 
 [rukzak_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -3989,6 +4008,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izom_globus_absorbation
 
+bind_det_arts.level = 2
+
 [izom_globus_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4039,6 +4060,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= osnova_fotik_absorbation
+
+bind_det_arts.level = 2
 
 [osnova_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4117,6 +4140,9 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= linza_fotik_absorbation
 
+bind_det_arts.level = 2
+dsh_is_artefact     = true
+
 [linza_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4169,6 +4195,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= pushka_fotik_absorbation
 
+bind_det_arts.level = 2
+
 [pushka_fotik_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4217,6 +4245,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_kristal_absorbation
 
+bind_det_arts.level = 2
+
 [izomorf_kristal_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4264,6 +4294,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= psevdokristall_absorbation
+
+bind_det_arts.level = 2
 
 [psevdokristall_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4338,6 +4370,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= kaktus_izomorf_absorbation
+
+bind_det_arts.level = 2
 
 [kaktus_izomorf_absorbation]
 burn_immunity                   = 0.75		;коэффициенты иммунитета 
@@ -4415,6 +4449,8 @@ power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= 7.62x54_izomorf_absorbation
 
+bind_det_arts.level = 2
+
 [7.62x54_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
 strike_immunity                 = 1.0
@@ -4465,6 +4501,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= wa2000_izomorf_absorbation
+
+bind_det_arts.level = 2
 
 [wa2000_izomorf_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -4559,6 +4597,9 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0009
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_kompas_absorbation
+
+bind_det_arts.level = 2
+dsh_is_artefact     = true
 
 [izomorf_kompas_absorbation]
 burn_immunity                   = 0.95		;коэффициенты иммунитета 
@@ -4678,6 +4719,8 @@ satiety_restore_speed		= 0.0
 power_restore_speed		     = 0.0
 bleeding_restore_speed		= 0.0
 hit_absorbation_sect		= izomorf_plastilin_absorbation
+
+bind_det_arts.level = 2
 
 [izomorf_plastilin_absorbation]
 burn_immunity                   = 1.0		;коэффициенты иммунитета 
@@ -5017,6 +5060,7 @@ animation_slot		= 4
 
 ;hud item
 hud = wpn_vodka_hud
+zvuki.eat_sound = zwuk\inv_pills
 
 [lekar_batya_ari]:identity_immunities
 GroupControlSection	= spawn_group

@@ -738,9 +738,9 @@ function motivator_binder:before_hit_callback( p_s_hit, p_ignore_flags )
         end
       else
         if get_bool( obj:section(), "dsh.hit_who_is_actor", false ) then
-          write_memory_int(
-            db.actor:cast_game_object(), p_s_hit, hit_offset.who
-          )
+--          write_memory_int(
+--            db.actor:cast_game_object(), p_s_hit, hit_offset.who
+--          )
           write_memory_int16( db.actor:id(), p_s_hit, hit_offset.whoID )
           self.last_hit_data = read_hit_data( p_s_hit )
         end
@@ -763,7 +763,7 @@ function motivator_binder:hit_callback(obj, amount, local_direction, who, bone_i
 		stop_play_sound(self.object)
 	end
 	
-	if amount > 0.01 then
+	if self.object:alive() then
 		local chk_dist = self.object:position():distance_to(who:position())
 		local range = self.object:range()
 		if chk_dist > range then
@@ -1342,11 +1342,14 @@ end
 
 function timer_drop_weapon:condition()
   local item = level.object_by_id( self.item_id )
-  if item == nil then
+  local sobj = alife():object( self.item_id )
+  if item == nil or sobj == nil then
     self:stop()
-  elseif item:parent() == nil then
+  elseif item:parent() == nil or sobj.parent_id == 65535 then
     return true
-  elseif item:parent():id() ~= self.parent_id then
+  elseif
+    item:parent():id() ~= self.parent_id or sobj.parent_id ~= self.parent_id
+  then
     self:stop()
   end
   return false

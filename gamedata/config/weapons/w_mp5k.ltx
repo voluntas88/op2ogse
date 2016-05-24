@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; HK53А2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------------
-[wpn_mp5k]:identity_immunities,scope.1x,hud_wpn_fx.fn2000
+[wpn_mp5k]:class_ar,hud_wpn_fx.fn2000
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\mp5"					; option for Level Editor
@@ -10,12 +10,7 @@ $prefetch 		 		= 8
 scheduled               = off              ; option for ALife Simulator
 cform                   = skeleton
 class                   = WP_LR300
-min_radius              = 0
-max_radius              = 150
 description				= enc_weapons1_wpn-mp5k
-
-ef_main_weapon_type		= 2
-ef_weapon_type			= 6
 
 ;-----------------------------------------------------------------------------------
 holder_range_modifier	= 1.0		       ; во сколько раз увеличивается eye_range 
@@ -52,7 +47,6 @@ kill_msg_y			= 82
 kill_msg_width		= 56
 kill_msg_height		= 23
 
-slot 					= 2
 animation_slot			= 8		; 2
 
 ;-----------------------------------------------------------------------------------
@@ -69,10 +63,8 @@ cam_max_angle				= 4.0	;максимальный угол отдачи
 cam_max_angle_horz			= 6.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.35	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.003	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
-condition_shot_dec 			= 0.00012 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction               = 0, 0, 1
@@ -87,24 +79,12 @@ shell_particles	 		= weapons\arsenal_shells1   ;weapons\generic_shells
 
 rpm_empty_click 	 	      = 200
 
-PDM_disp_base 			= 4.0
-PDM_disp_vel_factor 		= 1.8
-PDM_disp_accel_factor 		= 1.2
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
-hit_power        	      = 0.7
-hit_impulse			= 63
-hit_type 			    = fire_wound
 hit_rate	            = 1.75
-fire_distance          	= 350
-bullet_speed		= 830
+fire_distance          	= 400 ;350
+bullet_speed		= 730 ;830
 rpm                     = 750
 ; end ttc
-
-use_aim_bullet				= true
-time_to_aim					= 1.0	
 
 hud                     = wpn_hk53_hud
 normal                  = 0, 1, 0
@@ -170,7 +150,7 @@ silencer_bullet_speed	 	= 760
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
 
-[wpn_hk53_hud]
+[wpn_hk53_hud]:hud_ar
 
 shell_point          	= -0.010, 0.01725, -0.42
 shell_dir		 	= 0.0, 0.0, 0.0
@@ -205,7 +185,6 @@ inv_name_short			= ars-hk53_a3
 inv_grid_x         = 5
 inv_grid_y         = 26
 
-hit_power        	      = 0.75
 silencer_hit_power      = 0.72
 silencer_name  				= wpn_addon_sil_545_ar
 silencer_x 					= 167

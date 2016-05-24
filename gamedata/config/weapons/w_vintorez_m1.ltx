@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;; ВСС (Винтовка Снайперская Специальная), Именной "Винторез" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;------------------------------------------------------------------------------------------------------------------
-[wpn_vintorez_m1]:identity_immunities,class_val,scope.8x
+[wpn_vintorez_m1]:class_val,scope.8x
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
 $spawn 				= "weapons\vintorez_m1"	; option for Level Editor
@@ -49,7 +49,6 @@ auto_spawn_ammo			= false
 
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
-dispersion_start		      = 0
 fire_dispersion_base		= 0.0011	;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 disp_rate = 1.8
 
@@ -62,7 +61,6 @@ cam_max_angle			= 4.0	;максимальный угол отдачи
 cam_max_angle_horz		= 5.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.15	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 4	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.00001	;0.00001 ;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.3
 ;-----------------------------------------------------------------------------------
@@ -78,20 +76,11 @@ shell_point		 			= 0,0.150,0.118				; position (3rd person view) for shell to th
 shell_dir		 			= 0.0, 1.0, 0.0
 shell_particles	 			= weapons\arsenal_shells1
 
-PDM_disp_base 			= 4.0
-PDM_disp_vel_factor 		= 1.2
-PDM_disp_accel_factor 		= 1.5
-PDM_crouch	 		      = 0.9
-PDM_crouch_no_acc 		= 0.8
-
 ; ttc
 hit_rate	      = 2.05
 rpm 				= 800
 rpm_empty_click 		= 400
 ; end ttc
-
-use_aim_bullet		= true			;Поддерживается ли первая суппер пуля
-time_to_aim			= 1.0	
 
 hud 				= wpn_vintorez_un_hud
 normal                  = 0, 1, 0
@@ -156,7 +145,7 @@ silencer_light_time 		= 0.2
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
-[wpn_vintorez_un_hud]
+[wpn_vintorez_un_hud]:hud_val
 shell_point          		= 0,-0.010,-0.85
 shell_dir			 	= 0.0, 1.0, 0.0
 

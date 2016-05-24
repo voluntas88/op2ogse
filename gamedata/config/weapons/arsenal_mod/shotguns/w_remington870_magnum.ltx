@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; REMINGTON 870 MARINE MAGNUM ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------------------------------------------------------
-[wpn_rem870_magnum]:identity_immunities,class_sg_long,hud_wpn_fx.wincheaster1300
+[wpn_rem870_magnum]:class_sg_long,hud_wpn_fx.wincheaster1300
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\wpn_rem870_magnum"
@@ -49,7 +49,6 @@ cam_dispertion_frac			= 1.0
 cam_max_angle				= 12
 cam_max_angle_horz	        = 7.2
 cam_step_angle_horz	        = 1.1
-fire_dispersion_condition_factor = 5
 misfire_probability 		   = 0.0015 
 misfire_condition_k			= 0.05
 ;----------------------------------------------
@@ -59,18 +58,10 @@ fire_point               	= 0.0, 0.242, 0.752
 ;flame_particles		   		= weapons\generic_weapon01
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	   		= 200
-PDM_disp_base 			= 2.0
-PDM_disp_vel_factor 		= 1.7
-PDM_disp_accel_factor 		= 1.7
-PDM_crouch	 		      = 4.5
-PDM_crouch_no_acc 		= 1.0
 
 ;;;;;;;  Для Народной солянки 2010
 hit_rate	                = 2.05
 rpm                         = 55	
-
-use_aim_bullet				= true		;Поддерживается ли первая супер пуля
-time_to_aim					= 1.0	
 
 hud                      	= wpn_rem870_magnum_hud
 normal                   	= 0, 1, 0

@@ -391,6 +391,17 @@ function se_smart_terrain:dsh_override_params()
       [ "getter" ] = function( ... ) return get_string( ... ) end,
       [ "setter" ] = function( v ) self.gparams.cond = v end,
     },
+    [ "stay" ] = {
+      [ "getter" ] = function( ... ) return get_numbers( ... ) end,
+      [ "setter" ] = function( v )
+        self.gparams.stay_min = v[ 1 ]
+        if table.getn( v ) > 1 then
+          self.gparams.stay_max = v[ 2 ]
+        else
+          self.gparams.stay_max = v[ 1 ]
+        end
+      end,
+    },
     [ "type" ] = {
       [ "getter" ] = function( ... ) return get_string( ... ) end,
       [ "setter" ] = function( v ) self.gparams.type = v end,
@@ -718,7 +729,7 @@ function se_smart_terrain:register_npc( obj )
     o_group   = obj:g_group(),
     o_squad   = obj:g_squad(),
     exclusive = self:obj_accepts_smart_terrain( obj ) == agreed_exclusive,
-    stay_end  = game.CTime()
+    stay_end  = game.get_game_time()
   }
   self:fill_npc_info( obj, npc_info )
 
@@ -741,12 +752,6 @@ function se_smart_terrain:register_npc( obj )
   self:update_obj_rank( obj )
   obj.was_in_smart_terrain = true
   self.npc_info[ obj.id ] = npc_info
-
-  t = self.npc_info[ obj.id ].stay_end
-  t:setHMSms(
-    math.random( self.gparams.stay_min, self.gparams.stay_max ), 0, 0, 0
-  )
-  t:add( game.get_game_time() )
 
   if not self.gulag_working then
     self:create_gulag()
@@ -1160,11 +1165,11 @@ function se_smart_terrain:stat()
 
   s = s .. pop .. " " .. cap .. " " .. self:stat_get_accepted_communities()
 
-  printf( s )
+  log1( s )
 
---  for id, npc_info in pairs( self.npc_info ) do
---    printf( "    %s", npc_info.name )
---  end
+  for id, npc_info in pairs( self.npc_info ) do
+    log2( "    %s", npc_info.name )
+  end
 
   return avail, pop, cap
 end
@@ -1259,13 +1264,12 @@ function on_death( obj_id )
   end
 end
 
------------------------
---' Удаляет объект из смарттеррейнов.
-function unregister_npc(npc)
-  local sim = alife()
 
+--' Удаляет объект из смарттеррейнов.
+function unregister_npc( npc )
+  local sim = alife()
   if sim then
-    local obj     = sim:object(npc.id)
+    local obj     = sim:object( npc.id )
     local strn_id = obj:smart_terrain_id()
 
     local free_logic_id = dsh.is_free_logic_mob( npc )
@@ -1274,22 +1278,17 @@ function unregister_npc(npc)
     end
 
     if strn_id ~= 65535 then
---[[
-	  if sim:object(strn_id) then
-        sim:object(strn_id):unregister_npc(obj)
+      -- обертка для фикса кривых smart_terrain
+      local strn = sim:object( strn_id )
+      if strn then
+        if strn:clsid() == clsid.smart_terrain then
+          strn:unregister_npc( obj )
+        else
+	  log2( "smart_terrain.unregister_npc: Обнаружена привязка к несуществующему smart_terrain: "..obj:name()..", smart_terrain_id: "..tostring(strn_id)..". Привязка удалена." )
+          obj:clear_smart_terrain()
+        end
       end
---]]
-		-- обертка для фикса кривых smart_terrain
-	    local strn = sim:object(strn_id)
-		if strn then
-			if strn:clsid() == clsid.smart_terrain then
-				strn:unregister_npc(obj)
-			else
-				--log1("load ~~~ smart_terrain.unregister_npc: Обнаружена привязка к несуществующему smart_terrain: "..obj:name()..", smart_terrain_id: "..tostring(strn_id)..". Привязка удалена.")
-				obj:clear_smart_terrain()
-			end
-		end
-	end
+    end
   end
 end
 

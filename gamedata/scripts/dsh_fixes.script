@@ -48,6 +48,17 @@ function on_first_update()
     this.fix_esc_bridge_pass_fire,
     this.respawn_gavr_and_co_2,
     this.fix_detector_suit,
+    this.fix_mil_tush1,
+    this.fix_grib_respawn,
+    this.fix_horrortime_begin,
+    this.fix_af_transform_cnt,
+    this.fix_trade_dialog_timers,
+    this.fix_trade_dialog_timers2,
+    this.fix_stalk_semetskiy,
+    this.fix_amk_anoms_generate_art,
+    this.fix_trade_dialog_timers3,
+    this.fix_kot_hos,
+    this.fix_esc_buldozer22,
   }
   local version = ogse.load_var( vname, 0 )
   if version < table.getn( fixes ) then
@@ -69,6 +80,12 @@ function on_first_update()
     },
     [ "village_after_razborka" ] = {
       this.free_village_gulag_big,
+    },
+    [ "vkluchit_generator_done" ] = {
+      this.free_generators_svoboda,
+    },
+    [ "spawn_kamen_udachy" ] = {
+      this.free_hospital_black,
     },
   }
   for k, v in pairs( fixes_on_info ) do
@@ -94,7 +111,10 @@ function on_spawn()
     processed_info[ k ] = true
   end
   fix_bar_barman()
+  fix_bar_angar_zoneguard()
+  fix_bar_zastava_guard_3()
   fix_marsh_barman()
+  fix_mil_physic_object0034()
 end
 
 
@@ -739,5 +759,147 @@ function fix_detector_suit()
   local obj = db.actor:object( "detector_suit" )
   if obj then
     alife():release( obj:id() )
+  end
+end
+
+
+function free_generators_svoboda()
+  free_smart_terrain( "generators_svoboda" );
+end
+
+
+function free_hospital_black()
+  free_smart_terrain( "hospital_black" );
+end
+
+
+function fix_mil_tush1()
+  local respawners = {
+    "av_peshera_rat1",
+    "av_peshera_rat2",
+    "av_peshera_rat3",
+    "av_peshera_rat4",
+    "av_peshera_rat5",
+    "esc_fracture",
+    "dv_sak_1monstr",
+    "mil_tush1",
+    "mil_himer_family",
+  }
+  for _, name in ipairs( respawners ) do
+    local resp = dsh_respawn.get_respawner( name )
+    if resp then
+      for _, v in ipairs( resp.spawned_obj ) do
+        resp:remove_spawned( v )
+      end
+    end
+  end
+end
+
+
+function fix_bar_angar_zoneguard()
+  local sobj = alife():object( "bar_angar_zoneguard" )
+  if not sobj then
+    log2( "dsh: bar_angar_zoneguard not found, respawning..." )
+    alife():create( 6759 )
+  end
+end
+
+
+-- пересоздать дверь в оружейку свободы
+function fix_mil_physic_object0034()
+  if level.name() == "l07_military" then
+    local sobj = alife():object( "mil_physic_object0034" )
+    if sobj then
+      alife():release( sobj )
+      alife():create( 7854 )
+    end
+  end
+end
+
+
+function fix_grib_respawn()
+  braad_test.grib_respawn()
+end
+
+
+function fix_horrortime_begin()
+  log2( "dsh: starting up horror time timer" )
+  meceniy_in_hell.horrortime_begin( true )
+end
+
+
+function fix_af_transform_cnt()
+  dsh.reset_af_transform_cnt()
+end
+
+
+function fix_trade_dialog_timers()
+  db.actor:disable_info_portion( "price_doktor" )
+  dsh.start_trade_dialog_timer( "sidor", 168, 10 )
+  dsh.start_trade_dialog_timer( "barman"   )
+  dsh.start_trade_dialog_timer( "petrenko" )
+  dsh.start_trade_dialog_timer( "skraga"   )
+  dsh.start_trade_dialog_timer( "sakharov" )
+  dsh.start_trade_dialog_timer( "sak"      )
+end
+
+
+function fix_trade_dialog_timers2()
+  dsh.start_trade_dialog_timer( "kuznezov", 168, 10 )
+  dsh.start_trade_dialog_timer( "jlob"     )
+  dsh.start_trade_dialog_timer( "sherstyk" )
+end
+
+
+function fix_stalk_semetskiy()
+  if db.actor:has_info( "odnonogiy_first_start" ) then
+    local sobj = alife():object( "stalk_semetskiy" )
+    if sobj then
+      log2( "dsh: found %s", sobj:name() )
+      alife():release( sobj )
+      log2( "dsh: ... removed" )
+    end
+  end
+end
+
+
+function fix_amk_anoms_generate_art()
+  ogse.delete_var( "amk_anoms.generate_art" )
+end
+
+
+function fix_trade_dialog_timers3()
+  dsh.start_trade_dialog_timer( "voron" )
+  dsh.start_trade_dialog_timer( "maks"  )
+end
+
+
+function fix_bar_zastava_guard_3()
+  local sobj = alife():story_object( story_ids.bar_zastava_commander ) -- 518
+  if not sobj then
+    log2( "dsh: bar_zastava_commander not found, respawning..." )
+    alife():create( alife():spawn_id( story_ids.bar_zastava_commander ) )
+  end
+end
+
+
+function fix_kot_hos()
+  if db.actor:has_info( "we_ne_chmuri" ) then
+    local sobj = alife():object( "kot_hos" )
+    if sobj then
+      log2( "dsh: found %s", sobj:name() )
+      alife():release( sobj )
+      log2( "dsh: ... removed" )
+    end
+  end
+end
+
+
+function fix_esc_buldozer22()
+  local sobj = alife():object( "esc_buldozer22" )
+  if sobj then
+    log2( "dsh: found %s", sobj:name() )
+    alife():release( sobj )
+    log2( "dsh: ... removed" )
   end
 end

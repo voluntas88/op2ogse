@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Штурмовая винтовка G36 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-----------------------------------------------------------------------------------
-[wpn_g36]:identity_immunities,scope.1x,hud_wpn_fx.fn2000
+[wpn_g36]:class_ar,class_m209,hud_wpn_fx.fn2000
 GroupControlSection			= spawn_group
 discovery_dependency		= 
 $spawn              		= "weapons\g36"		; option for Level Editor
@@ -10,12 +10,8 @@ $prefetch 					= 8
 scheduled					= off				; option for ALife Simulator
 cform               		= skeleton
 class               		= WP_AK74
-min_radius          		= 30
-max_radius          		= 100
 description			      = enc_weapons1_wpn-g36
 launch_speed				= 0
-ef_main_weapon_type			= 2
-ef_weapon_type				= 6
 
 ;-----------------------------------------------------------------------------------
 holder_range_modifier	= 1.85		       ; во сколько раз увеличивается eye_range 
@@ -33,14 +29,12 @@ ammo_elapsed			= 30
 	
 ammo_mag_size				= 30
 ammo_class					= ammo_5.56x45_ap, ammo_5.56x45_ss190, ammo_5.56x45_gd
-grenade_class				= ammo_m209
 fire_modes					= 1, 3, -1
 f_mode				= 2
 
 hand_dependence			= 1
 single_handed			= 0	
 
-slot 					= 2		; // secondary
 animation_slot			= 2		; type of the animation that will be used
 
 inv_name	        		= wpn-g36
@@ -63,7 +57,6 @@ fire_dispersion_base		= 0.14 	;угол (в градусах) базовой дисперсии оружия (оружи
 
 ;отдача
 cam_relax_speed         	= 8.5;0.2	;скорость возврата в исходное положение
-cam_relax_speed_ai      	= 360
 cam_dispersion          	= 0.15		;увеличения угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.12	;0.18		;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 0.25	;0.25	;0.000001	;0.85		;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -71,17 +64,9 @@ cam_max_angle			= 4.0		;максимальный угол отдачи
 cam_max_angle_horz		= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.16	;0.18		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 1.5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	         = 0.0015		;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.07
-condition_shot_dec 		= 0.0001 	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
-;parent dispersion modifiers
-PDM_disp_base 				= 1.0
-PDM_disp_vel_factor 		      = 1.4
-PDM_disp_accel_factor 		      = 1.4
-PDM_crouch	 				= 1.0
-PDM_crouch_no_acc 			= 1.0
 
 direction              	= 0, 0, 1
 fire_point              = 0.0, 0.200, 0.7450
@@ -98,17 +83,11 @@ shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
 rpm_empty_click 	 		= 200
 
 ;;;;;;;  Для Народной солянки 2010
-hit_power                	= 0.73		
-hit_impulse		        	= 62
-hit_type 					= fire_wound
 hit_rate	                  = 1.85
 fire_distance            	= 480
 bullet_speed			= 920	;начальная скорость пули
 rpm                      	= 750
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 0.5	
 
 silencer_hit_power       	= 0.69
 silencer_hit_impulse	 	= 51
@@ -182,7 +161,7 @@ silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
 silencer_light_time 		= 0.2
  
-[wpn_g36_hud]
+[wpn_g36_hud]:hud_ar
 
 shell_point		= 0.019,0.0005,-0.175
 shell_dir               = 0.0, 1.0, 0.0
@@ -246,8 +225,3 @@ grenade_zoom_rotate_y		= 0.027100
 grenade_normal_zoom_offset		= -0.123900,0.012450,-0.1377700
 grenade_normal_zoom_rotate_x		= 0.024750
 grenade_normal_zoom_rotate_y		= 0.001300
-
-;время поворота HUD (сек)
-zoom_rotate_time			= 0.25
-rotate_time				= 0.25
-

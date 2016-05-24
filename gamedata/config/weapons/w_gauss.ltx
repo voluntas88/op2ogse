@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Гаусс-винтовка ПЫСа ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-------------------------------------------------------------------------------------------
-[wpn_gauss]:identity_immunities,class_gauss
+[wpn_gauss]:class_gauss
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn                  = "weapons\gauss"
@@ -42,7 +42,6 @@ cam_max_angle			= 2.0	;максимальный угол отдачи
 cam_max_angle_horz		= 3.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.5	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 2	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.0001 ;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -73,12 +72,6 @@ flame_particles               = weapons\generic_weapon_gauss
 shell_point		 		= 0.00,0.12,0.174				; position (3rd person view) for shell to throw out
 ;smoke_particles	 		= weapons\generic_weapon07	; name of the particles for shells
 rpm_empty_click 		= 120
-
-PDM_disp_base 			= 5.0
-PDM_disp_vel_factor 		= 1.8
-PDM_disp_accel_factor 		= 1.0
-PDM_crouch	 		      = 1.8
-PDM_crouch_no_acc 		= 1.0
 
 ;;;;;;  Для Народной солянки 2010
 hit_rate	        = 1.95

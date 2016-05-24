@@ -2,6 +2,7 @@
 <game_dialogs>
 	<dialog id="dsh_trade_dialog_voron">
 		<precondition>wawka_dialog.trade_voron_enough</precondition>
+		<precondition>dsh.has_trade_dialog_voron</precondition>
 		<phrase_list>
 			<phrase id="0">
 				<text>trade_dialog_voron_0</text>
@@ -21,9 +22,9 @@
 				<next>41</next>
 			</phrase>
 			<phrase id="21">
-				<text>Могу предложить:\n\n1. Патроны 12-го;\n\n2. Патроны для "Грозы".</text>
+				<text>Могу предложить патроны 12-го калибра.</text>
 				<next>22</next>
-				<next>23</next>
+<!--				<next>23</next>-->
 				<next>88</next>
 			</phrase>
 			<phrase id="41">
@@ -37,13 +38,13 @@
 				<next>222</next>
 			</phrase>
 			<phrase id="222">
-				<text>За один артефакт первого уровня модификации:\n1. либо четыре пачки "Дроби";\n2. либо три пачки "Картечи";\n3. либо две пачки "Дротиков"...\nЧто выберешь?</text>
+				<text>За один артефакт первого уровня модификации:\n1. либо четыре пачки "Дроби";\n2. либо три пачки "Жеканов";\n3. либо две пачки "Дротиков"...\nЧто выберешь?</text>
 				<next>221</next>
 				<next>2211</next>
 				<next>2212</next>
 				<next>99</next>
 			</phrase>
-			<phrase id="23">
+<!--			<phrase id="23">
 				<text>trade_dialog_voron_23</text>
 				<next>232</next>
 			</phrase>
@@ -53,26 +54,29 @@
 				<next>2311</next>
 				<next>2312</next>
 				<next>99</next>
-			</phrase>
+			</phrase>-->
 			<phrase id="221">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_voron_221</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_12x70_buck</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="2211">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_voron_2211</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_12x76_zhekan</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="2212">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_voron_2212</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_12x76_dart</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
-			<phrase id="231">
+<!--			<phrase id="231">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_voron_231</text>
 				<action>dsh.actor_give_art_l1</action>
@@ -89,7 +93,7 @@
 				<text>trade_dialog_voron_2312</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_9x39_ap</action>
-			</phrase>
+			</phrase>-->
 			<phrase id="42">
 				<text>trade_dialog_voron_42</text>
 				<next>422</next>
@@ -119,48 +123,56 @@
 				<text>trade_dialog_voron_421</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_bizon</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4211">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4211</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_kriss</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4212">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4212</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_mp7</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="431">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_431</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_toz</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4311">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4311</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_ak47</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4312">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4312</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_saiga</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4313">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4313</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_desert_eagle</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="4314">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_voron_4314</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_wpn_bm16</action>
+				<action>dsh.on_trade_dialog_voron</action>
 			</phrase>
 			<phrase id="88">
 				<text>trade_dialog_voron_88</text>
@@ -172,6 +184,7 @@
 	</dialog>
 	<dialog id="dsh_trade_dialog_maks">
 		<precondition>wawka_dialog.trade_maks_enough</precondition>
+		<precondition>dsh.has_trade_dialog_maks</precondition>
 		<phrase_list>
 			<phrase id="0">
 				<text>trade_dialog_maks_0</text>
@@ -226,18 +239,21 @@
 				<text>trade_dialog_maks_221</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>wawka_dialog.add_ammo_flame</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="231">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_maks_231</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_amk_ballon</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="2311">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_maks_2311</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_amk_kanistra</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="32">
 				<text>trade_dialog_maks_32</text>
@@ -264,24 +280,28 @@
 				<text>trade_dialog_maks_321</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_svoboda_heavy_outfit</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="3211">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_maks_3211</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_dolg_scientific_outfit</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="331">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_maks_331</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_9x39_ap</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="3311">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_maks_3311</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>wawka_dialog.add_ammo_9x39_pab9</action>
+				<action>dsh.on_trade_dialog_maks</action>
 			</phrase>
 			<phrase id="88">
 				<text>trade_dialog_maks_88</text>
@@ -1667,11 +1687,13 @@
 	</dialog>
 	<dialog id="dsh_trade_dialog_sherstyk">
 		<precondition>sak_dialog.trade_sherstyk_enough</precondition>
+		<precondition>dsh.has_trade_dialog_sherstyk</precondition>
 		<phrase_list>
 			<phrase id="422_1">
 				<text>У меня тут больше, меняем на все</text>
-				<precondition>dsh.actor_has_vodka_ge_2</precondition>
-				<action>dsh.actor_change_1vodka_2medkit_army</action>
+				<precondition>dsh.actor_has_vodka_ge_4</precondition>
+				<action>dsh.actor_change_2vodka_1medkit_army</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="0">
 				<text>trade_dialog_sherstyk_0</text>
@@ -1726,18 +1748,21 @@
 				<text>trade_dialog_sherstyk_221</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_5ammo_5_45_fmj</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="2211">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_sherstyk_2211</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_3ammo_545x39_ap</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="231">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_sherstyk_231</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_ammo_f1</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="24">
 				<text>trade_dialog_sherstyk_24</text>
@@ -1753,6 +1778,7 @@
 				<text>trade_dialog_sherstyk_241</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>sak_dialog.add_ammo_762x54r</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="31">
 				<text>trade_dialog_sherstyk_31</text>
@@ -1773,7 +1799,7 @@
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<action>dsh.actor_give_art_l2</action>
 				<action>sak_dialog.add_wpn_abakan_m1</action>
-				<action>sak_dialog.trade_sherstyk_count</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="41">
 				<text>trade_dialog_sherstyk_41</text>
@@ -1791,10 +1817,11 @@
 				<next>666</next>
 			</phrase>
 			<phrase id="421">
-				<precondition>sak_dialog.have_vodka</precondition>
+				<precondition>sak_dialog.have_2vodka</precondition>
 				<text>trade_dialog_sherstyk_421</text>
-				<action>sak_dialog.give_vodka</action>
-				<action>sak_dialog.add_2medkit_army</action>
+				<action>sak_dialog.give_2vodka</action>
+				<action>sak_dialog.add_medkit_army</action>
+				<action>dsh.on_trade_dialog_sherstyk</action>
 			</phrase>
 			<phrase id="54">
 				<text>trade_dialog_sherstyk_54</text>
@@ -1806,26 +1833,31 @@
 	</dialog>
 	<dialog id="dsh_trade_dialog_jlob">
 		<precondition>sak_dialog.trade_jlob_enough</precondition>
+		<precondition>dsh.has_trade_dialog_jlob</precondition>
 		<phrase_list>
 			<phrase id="532_1">
 				<text>У меня много с собой, забирай все</text>
 				<precondition>dsh.actor_has_bread_ge_10</precondition>
 				<action>dsh.actor_change_5bread_1repair_item_weapon</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="522_1">
 				<text>У меня много с собой, забирай все</text>
 				<precondition>dsh.actor_has_energy_drink_ge_6</precondition>
 				<action>dsh.actor_change_3energy_drink_1repair_item_outfit</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="432_1">
 				<text>У меня много, забирай всё</text>
 				<precondition>dsh.actor_has_conserva_ge_4</precondition>
 				<action>dsh.actor_change_2conserva_1vodka</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="231_1">
 				<text>У меня много с собой, забирай все</text>
-				<precondition>dsh.actor_has_kolbasa_ge_4</precondition>
-				<action>dsh.actor_change_2kolbasa_1grenade_rgd</action>
+				<precondition>dsh.actor_has_kolbasa_ge_8</precondition>
+				<action>dsh.actor_change_4kolbasa_1grenade_rgd</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="0">
 				<text>trade_dialog_jlob_0</text>
@@ -1858,7 +1890,7 @@
 				<next>51</next>
 			</phrase>
 			<phrase id="21">
-				<text>Гранат не много:\n1. Гранаты РГД-5 - две колбасы штука;\n2. Граната ф-1 - пять батонов.</text>
+				<text>Гранат не много:\n1. Гранаты РГД-5 - четыре колбасы штука;\n2. Граната ф-1 - пять батонов.</text>
 				<next>23</next>
 				<next>25</next>
 				<next>54</next>
@@ -1874,9 +1906,9 @@
 				<next>666</next>
 			</phrase>
 			<phrase id="231">
-				<precondition>sak_dialog.kolbasa2_have</precondition>
+				<precondition>sak_dialog.kolbasa4_have</precondition>
 				<text>trade_dialog_jlob_231</text>
-				<action>sak_dialog.give_2kolbasa</action>
+				<action>sak_dialog.give_4kolbasa</action>
 				<action>sak_dialog.add_ammo_rgd1</action>
 			</phrase>
 			<phrase id="25">
@@ -1893,6 +1925,7 @@
 				<text>trade_dialog_jlob_251</text>
 				<action>sak_dialog.give_5bread</action>
 				<action>sak_dialog.add_ammo_f1</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="41">
 				<text>trade_dialog_jlob_41</text>
@@ -1924,12 +1957,14 @@
 				<text>trade_dialog_jlob_421</text>
 				<action>sak_dialog.give_kolbasa</action>
 				<action>sak_dialog.add_medkit</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="431">
 				<precondition>sak_dialog.conserva2_have</precondition>
 				<text>trade_dialog_jlob_431</text>
 				<action>sak_dialog.give_2conserva</action>
 				<action>sak_dialog.add_vodka</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="51">
 				<text>trade_dialog_jlob_51</text>
@@ -1965,12 +2000,14 @@
 				<text>trade_dialog_jlob_521</text>
 				<action>sak_dialog.give_3drink</action>
 				<action>sak.add_repair_item_outfit</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="531">
 				<precondition>sak_dialog.bread10_have</precondition>
 				<text>trade_dialog_jlob_531</text>
 				<action>sak_dialog.give_10bread</action>
 				<action>sak.add_repair_item_weapon</action>
+				<action>dsh.on_trade_dialog_jlob</action>
 			</phrase>
 			<phrase id="666">
 				<text>trade_dialog_jlob_666</text>
@@ -1980,12 +2017,14 @@
 	<dialog id="dsh_trade_dialog_kuznezov">
 		<precondition>dialogs.is_not_opp_wounded</precondition>
 		<precondition>sak_dialog.trade_kuznezov_enough</precondition>
+		<precondition>dsh.has_trade_dialog_kuznezov</precondition>
 		<has_info>esc_bridge_vodka_done</has_info>
 		<phrase_list>
 			<phrase id="422_1">
 				<text>У меня тут больше, меняем на все</text>
-				<precondition>dsh.actor_has_vodka_ge_2</precondition>
-				<action>dsh.actor_change_1vodka_2medkit_army</action>
+				<precondition>dsh.actor_has_vodka_ge_4</precondition>
+				<action>dsh.actor_change_2vodka_1medkit_army</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="0">
 				<text>trade_dialog_kuznezov_0</text>
@@ -2036,20 +2075,21 @@
 				<text>trade_dialog_kuznezov_221</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_5ammo_5_45_fmj</action>
-				<action>sak_dialog.trade_kuznezov_count</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="2211">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_kuznezov_2211</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_3ammo_545x39_ap</action>
-				<action>sak_dialog.trade_kuznezov_count</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="231">
 				<precondition>dsh.actor_has_art_l1</precondition>
 				<text>trade_dialog_kuznezov_231</text>
 				<action>dsh.actor_give_art_l1</action>
 				<action>sak_dialog.add_ammo_rgd2</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="24">
 				<text>trade_dialog_kuznezov_24</text>
@@ -2074,14 +2114,14 @@
 				<text>trade_dialog_kuznezov_241</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>sak_dialog.add_3ammo_9x18_pmm</action>
-				<action>sak_dialog.trade_kuznezov_count</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="251">
 				<precondition>dsh.actor_has_art_l2</precondition>
 				<text>trade_dialog_kuznezov_251</text>
 				<action>dsh.actor_give_art_l2</action>
 				<action>sak_dialog.add_ammo_7_62_ap</action>
-				<action>sak_dialog.trade_kuznezov_count</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="41">
 				<text>trade_dialog_kuznezov_41</text>
@@ -2099,10 +2139,11 @@
 				<next>666</next>
 			</phrase>
 			<phrase id="421">
-				<precondition>sak_dialog.have_vodka</precondition>
+				<precondition>sak_dialog.have_2vodka</precondition>
 				<text>trade_dialog_kuznezov_421</text>
-				<action>sak_dialog.give_vodka</action>
-				<action>sak_dialog.add_2medkit_army</action>
+				<action>sak_dialog.give_2vodka</action>
+				<action>sak_dialog.add_medkit_army</action>
+				<action>dsh.on_trade_dialog_kuznezov</action>
 			</phrase>
 			<phrase id="54">
 				<text>trade_dialog_kuznezov_54</text>

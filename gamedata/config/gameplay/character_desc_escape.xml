@@ -17,6 +17,9 @@
 			[spawn] \n
 			wpn_knife \n
 		</supplies>
+		<actor_dialog>sidor_capsule_dialog</actor_dialog>
+		<actor_dialog>sidor_capsule_have_dialog</actor_dialog>
+		<actor_dialog>sidor_capsule_already_dialog</actor_dialog>
 		<actor_dialog>sidor_need_doc</actor_dialog>
 		<actor_dialog>sidor_est_doc</actor_dialog>
 		<start_dialog>escape_trader_start_dialog</start_dialog>
@@ -26,7 +29,6 @@
 		<actor_dialog>about_life_heart_42_dialog</actor_dialog>
 		<actor_dialog>artmod_523_dialog</actor_dialog>
 		<actor_dialog>trade_dialog_sidor</actor_dialog>
-		<actor_dialog>dsh_trade_dialog_sidor</actor_dialog>
 		<actor_dialog>tm_trader_dialog</actor_dialog>
 		<actor_dialog>tm_trader_reward</actor_dialog>
 		<actor_dialog>escape_trader_done_blockpost_box</actor_dialog>
@@ -41,7 +43,7 @@
           <actor_dialog>sidor_amulet_vzyt</actor_dialog>
           <actor_dialog>sidor_amulet_prines</actor_dialog>
           <actor_dialog>sidor_razvod_raschet</actor_dialog>
-          <actor_dialog>tayniki_coll</actor_dialog>
+<!--          <actor_dialog>tayniki_coll</actor_dialog>-->
           <actor_dialog>coll_end</actor_dialog>
             <!---<Диктофоны Шахматиста>---->
           <actor_dialog>modern_talking_sidor</actor_dialog>
@@ -131,7 +133,6 @@
 		<actor_dialog>artmod_652_dialog</actor_dialog>
 		<actor_dialog>teleport_103_dialog</actor_dialog>
 		<actor_dialog>trade_dialog_sak</actor_dialog>
-		<actor_dialog>dsh_trade_dialog_sak</actor_dialog>
 		<!-- Akill begin -->
 		<actor_dialog>akill_sak</actor_dialog>
 		<actor_dialog>koloda_sak</actor_dialog>
@@ -189,8 +190,7 @@
 		<actor_dialog>teleport_112_dialog</actor_dialog>
 		<actor_dialog>teleport_12_dialog</actor_dialog>
 		<actor_dialog>teleport_122_dialog</actor_dialog>
-		<actor_dialog>trade_dialog_doktor</actor_dialog>
-		<actor_dialog>dsh_trade_dialog_doktor</actor_dialog>
+		<!--<actor_dialog>trade_dialog_doktor</actor_dialog>-->
 		<!--<actor_dialog>dm_cool_info_dialog</actor_dialog>--->
 		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
 		<!-- Akill begin -->
@@ -1674,7 +1674,7 @@
 		<!-- Akill end -->
         <actor_dialog>kostya_biznes1</actor_dialog>
         <actor_dialog>kostya_biznes1_done</actor_dialog>
-		<actor_dialog>kostya_taynik_pda1</actor_dialog>
+<!--		<actor_dialog>kostya_taynik_pda1</actor_dialog>-->
 		<actor_dialog>kostya_taynik_pda2</actor_dialog>
 		<actor_dialog>kostya_taynik_pda21</actor_dialog>
 		<actor_dialog>kostya_taynik_pda3</actor_dialog>

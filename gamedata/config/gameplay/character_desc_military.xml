@@ -363,7 +363,6 @@
 		<actor_dialog>teleport_072_dialog</actor_dialog>
 		<actor_dialog>teleport_skraga_dialog</actor_dialog>
 		<actor_dialog>trade_dialog_skraga</actor_dialog>
-		<actor_dialog>dsh_trade_dialog_skraga</actor_dialog>
 		<actor_dialog>mil_trader_dialog_story</actor_dialog>
 		<actor_dialog>mil_trader_dialog_story2</actor_dialog>
 		<!-- Akill begin -->
@@ -374,7 +373,7 @@
 		<!-- Akill end -->
         <actor_dialog>skraga_biznes1</actor_dialog>
         <actor_dialog>skraga_biznes1_done</actor_dialog>
-		<actor_dialog>emb_skraga1</actor_dialog>
+<!--		<actor_dialog>emb_skraga1</actor_dialog>-->
 
 #include "gameplay\character_dialogs.xml"
 	</specific_character>

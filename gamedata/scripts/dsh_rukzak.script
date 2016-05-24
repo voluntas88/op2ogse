@@ -93,20 +93,31 @@ end
 
 function load_rukzak( id )
   local prefix     = "dsh_rukzak." .. id
-  local sections   = ogse.load_var( prefix .. ".sections", {}, "array" )
-  local conds      = ogse.load_var( prefix .. ".conds",    {}, "array" )
-  local game_types = ogse.load_var( prefix .. ".types",    {}, "array" )
-  local counts     = ogse.load_var( prefix .. ".counts",   {}, "array" )
-  local infos      = ogse.load_var( prefix .. ".infos",    {}, "array" )
+  local conds      = ogse.load_var( prefix .. ".conds"     )
+  local counts     = ogse.load_var( prefix .. ".counts"    )
+  local game_types = ogse.load_var( prefix .. ".types"     )
+  local infos      = ogse.load_var( prefix .. ".infos"     )
+  local sections   = ogse.load_var( prefix .. ".sections"  )
+  local all_types  = ogse.load_var_safe( prefix .. ".all_types" )
+  local type_names = {}
+  if all_types then
+    for i, gt in ipairs( all_types ) do
+      type_names[ i ] = gt
+    end
+  end
   local data = {}
   for i, sect in ipairs( sections ) do
+    local gt = game_types[ i ]
+    if all_types then
+      gt = type_names[ gt ]
+    end
     local cond = conds[ i ]
     local info = infos[ i ] or ""
     local key  = sect .. ":" .. cond .. ":" .. info
     local item = {
       [ "section"   ] = sect,
       [ "condition" ] = tonumber( cond ),
-      [ "game_type" ] = ( override_game_type( sect ) or game_types[ i ] ),
+      [ "game_type" ] = ( override_game_type( sect ) or gt ),
       [ "count"     ] = tonumber( counts[ i ] ),
       [ "info"      ] = info,
       [ "key"       ] = key,
@@ -124,30 +135,39 @@ function save_rukzak( id, data )
   local game_types = {}
   local counts     = {}
   local infos      = {}
+  local all_types  = {}
+  local types_idx  = {}
   for _, item in ipairs( data ) do
     if item.count > 0 then
+      local gt = item.game_type or ""
+      if not types_idx[ gt ] then
+        table.insert( all_types, gt )
+        types_idx[ gt ] = table.getn( all_types )
+      end
       table.insert( sections,   item.section )
       table.insert( conds,      string.format( "%.2f", item.condition ) )
-      table.insert( game_types, ( item.game_type or "" ) )
+      table.insert( game_types, types_idx[ gt ] )
       table.insert( counts,     item.count   )
       table.insert( infos,      item.info    )
     end
   end
   if table.getn( sections ) > 0 then
-    ogse.save_var( prefix .. ".sections", sections,   "array" )
-    ogse.save_var( prefix .. ".conds",    conds,      "array" )
-    ogse.save_var( prefix .. ".types",    game_types, "array" )
-    ogse.save_var( prefix .. ".counts",   counts,     "array" )
-    ogse.save_var( prefix .. ".infos",    infos,      "array" )
+    ogse.save_var( prefix .. ".all_types", all_types,  "array" )
+    ogse.save_var( prefix .. ".conds",     conds,      "array", "float" )
+    ogse.save_var( prefix .. ".counts",    counts,     "array", "u32"   )
+    ogse.save_var( prefix .. ".infos",     infos,      "array" )
+    ogse.save_var( prefix .. ".sections",  sections,   "array" )
+    ogse.save_var( prefix .. ".types",     game_types, "array", "u8"    )
   else
-    ogse.delete_var( prefix .. ".sections" )
-    ogse.delete_var( prefix .. ".conds"    )
-    ogse.delete_var( prefix .. ".inv_drop" )
-    ogse.delete_var( prefix .. ".types"    )
-    ogse.delete_var( prefix .. ".counts"   )
-    ogse.delete_var( prefix .. ".infos"    )
-    ogse.delete_var( prefix .. ".zamok"    )
-    ogse.delete_var( prefix .. ".metka"    )
+    ogse.delete_var( prefix .. ".all_types" )
+    ogse.delete_var( prefix .. ".conds"     )
+    ogse.delete_var( prefix .. ".counts"    )
+    ogse.delete_var( prefix .. ".infos"     )
+    ogse.delete_var( prefix .. ".inv_drop"  )
+    ogse.delete_var( prefix .. ".metka"     )
+    ogse.delete_var( prefix .. ".sections"  )
+    ogse.delete_var( prefix .. ".types"     )
+    ogse.delete_var( prefix .. ".zamok"     )
   end
 end
 
@@ -155,7 +175,7 @@ end
 function get_item_info( obj )
   local sect = obj:section()
   local info
-  if string.find( sect, "arc_art_box_" ) then
+  if string.find( sect, "arc_art_box_" ) or dsh.is_artefact( sect ) then
     local sobj = alife():object( obj:id() )
     local data = m_net_utils.get_item_data( sobj )
     info = data.custom or ""
@@ -1065,7 +1085,10 @@ function ui_rukzak:move_from_other( ui_item )
     else
       sobj = spawn_item_in_inv( item.section )
     end
-    if string.find( item.section, "arc_art_box_" ) then
+    if
+      string.find( item.section, "arc_art_box_" )
+      or dsh.is_artefact( item.section )
+    then
       local data  = m_net_utils.get_item_data( sobj )
       data.custom = item.info or ""
       m_net_utils.set_item_data( data, sobj )
@@ -1562,6 +1585,35 @@ function ui_rukzak:get_item_description( item )
         text = af_text .. "\\n%c[default]" .. text
       end
     end
+  elseif sect == "amk_metka" then
+    if self.tab:GetActiveIndex() == 0 then
+      local last_metka = ogse.load_var_safe(
+        "dsh_rukzak." .. self.owner_id .. ".metka"
+      )
+      if last_metka then
+        text = text .. "\\n%c[default]Текущая метка:\\n• " .. last_metka
+      end
+    end
+  end
+  if dsh.is_artefact( sect ) then
+    local handmade = true
+    if item.info then
+      local ini = create_ini_file( item.info )
+      if ini:section_exist( "dsh" ) then
+        handmade = ( get_bool( "dsh", "handmade", nil, ini ) ~= false )
+      end
+    end
+    local cost
+    if handmade then
+      cost = dsh.get_handmade_cost( sect )
+      text = text .. "\\n%c[default]Похоже, этот артефакт дорого не продать."
+    else
+      cost = get_u32( sect, "cost" )
+      text = text .. "\\n%c[default]Пожалуй, этот артефакт имеет некоторую ценность."
+    end
+    if cost then
+      text = text .. string.format( "\\n• Предполагаемая цена: %.0f", cost )
+    end
   end
   return text
 end
@@ -1569,7 +1621,7 @@ end
 
 function ui_rukzak:get_art_box_content( item )
   local content = split_comma_separated_list( item.info )
-  local slots   = table.getn( content ) / 2
+  local slots   = get_u32( item.section, "container_slots" )
   local names   = {}
   for i = 1, slots do
     local sect = content[ i ] or "_"

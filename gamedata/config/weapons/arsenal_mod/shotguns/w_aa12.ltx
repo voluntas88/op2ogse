@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;; √ладкоствольное ружье (автоматический карабин) AA-12 ;;;;;;;;;;;;;;;;;;;;;;
 ;------------------------------------------------------------------------------------------------
-[wpn_aa12]:identity_immunities,class_sg_hi_rpm,scope.4x,hud_wpn_fx.saiga
+[wpn_aa12]:class_sg_hi_rpm,scope.4x,hud_wpn_fx.saiga
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\aa12"					; option for Level Editor
@@ -52,7 +52,6 @@ animation_slot			= 2		; type of the animation that will be used
 
 ;отдача
 cam_relax_speed         	= 8.5		;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 120.75
 cam_dispersion          	= 0.3		;увеличени€ угла (в градусах) с каждым выстрелом
 cam_dispersion_inc			= 0.3		;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac			= 0.9		;ствол будет подыматьс€ на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -60,7 +59,6 @@ cam_max_angle				= 6.0	    	;максимальный угол отдачи
 cam_max_angle_horz			= 8.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.67;1		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 6		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.0005	;веро€тность осечки при максимальном износе 
 misfire_condition_k		= 0.05
 ;-----------------------------------------------------------------------------------
@@ -78,17 +76,8 @@ shell_dir		 		= 0.0, 1.0, 0.0
 
 rpm_empty_click 	 	= 200
 
-PDM_disp_base 			= 2.25
-PDM_disp_vel_factor 		= 0.8
-PDM_disp_accel_factor 		= 0.8
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 hit_rate	                  = 1.95
 rpm                      	= 300		; max round per minute
-
-use_aim_bullet			      = true		;ѕоддерживаетс€ ли перва€ суппер пул€
-time_to_aim					= 0.5
 
 silencer_hit_power       	= 0.7
 silencer_hit_impulse	 	= 67
@@ -155,7 +144,7 @@ snd_reload					= weapons\usas12\aa12_reload, 0.7
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;----------------------------------------------------------------------------- 
-[wpn_aa12_hud]
+[wpn_aa12_hud]:hud_sg
 shell_point		 			= 0,0,-0.6
 shell_dir				 	= 0.0, 0.0, 0.0
 
@@ -174,7 +163,6 @@ anim_shoot					= shoot
 anim_idle_sprint			      = idle_sprint
 
 zoom_hide_crosshair			= true
-zoom_rotate_time		= 0.30
 zoom_offset			= -0.114910,0.048000,-0.099100
 zoom_rotate_x		= 0.049776
 zoom_rotate_y		= 0.028300

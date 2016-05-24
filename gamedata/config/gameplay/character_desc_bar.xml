@@ -25,6 +25,9 @@
     </supplies>
           
     <start_dialog>bar_bar_barmen_start</start_dialog>
+	<actor_dialog>barman_capsule_dialog</actor_dialog>
+	<actor_dialog>barman_capsule_already_dialog</actor_dialog>
+	<actor_dialog>barman_capsule_have_dialog</actor_dialog>
 	<actor_dialog>transaction_bartender</actor_dialog>
       <actor_dialog>transaction_bartender_registered</actor_dialog>
 	<actor_dialog>kostya_barmen</actor_dialog>
@@ -48,7 +51,6 @@
 	<actor_dialog>volna_barmen_done</actor_dialog>
 	<!-- Akill end -->
 	<actor_dialog>trade_dialog_barman</actor_dialog>
-	<actor_dialog>dsh_trade_dialog_barman</actor_dialog>
     <!--actor_dialog>bar_bar_barmen_jobs</actor_dialog-->
     <!--actor_dialog>bar_bar_barmen_jobs_room</actor_dialog-->
     <actor_dialog>bar_bar_barman_ecolog_flash_done</actor_dialog>
@@ -433,7 +435,7 @@
 <actor_dialog>informator_beret_pda</actor_dialog>
 <actor_dialog>informator_buy_pda</actor_dialog>
 <actor_dialog>zonedocs_sell</actor_dialog>
-<actor_dialog>map_hideouts</actor_dialog>
+<!--<actor_dialog>map_hideouts</actor_dialog>-->
 <actor_dialog>snp_osvedomitel1</actor_dialog>
 	<!-- Akill begin -->
 	<actor_dialog>adres_chertez_start</actor_dialog>
@@ -757,7 +759,7 @@
 	<actor_dialog>strike_back_start</actor_dialog>
 	<actor_dialog>strike_back_done</actor_dialog>
 	<!-- Akill end -->
-    <actor_dialog>voronin_docs1_start</actor_dialog>
+<!--    <actor_dialog>voronin_docs1_start</actor_dialog>-->
     <actor_dialog>voronin_docs1</actor_dialog>
     <actor_dialog>voronin_docs1_end</actor_dialog>
   </specific_character>
@@ -798,7 +800,6 @@
 	<actor_dialog>artmod_662_dialog</actor_dialog>
     <actor_dialog>bad_gungauss_dialog</actor_dialog>
 	<actor_dialog>trade_dialog_petrenko</actor_dialog>
-	<actor_dialog>dsh_trade_dialog_petrenko</actor_dialog>
 <!--    <actor_dialog>tm_petrenko_dialog</actor_dialog>
     <actor_dialog>tm_petrenko_reward</actor_dialog>-->
 	<start_dialog>bar_dolg_petrenko_start</start_dialog>
@@ -1153,7 +1154,6 @@
       wpn_m16a2_sk1 \n
       ammo_5.56x45_ap \n
       ammo_11.43x23_fmj \n
-      fake_wpn_crowbar \n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
     </supplies>

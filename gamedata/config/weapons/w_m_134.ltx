@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; Ручной вариант шестиствольного пулемета "миниган" ХМ-134 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;---------------------------------------------------------------------------------------------------------------------
-[wpn_m_134]:identity_immunities,class_lmg_heavy
+[wpn_m_134]:class_lmg_heavy
 GroupControlSection		 	= spawn_group
 discovery_dependency 	 	= 
 $spawn                   	= "weapons\m_134"					; option for Level Editor
@@ -66,7 +66,6 @@ cam_max_angle			= 12.0	;максимальный угол отдачи
 cam_max_angle_horz		= 15.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 4.5 ;4.3	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 7	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.0003	;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
 ;-----------------------------------------------------------------------------------
@@ -85,20 +84,11 @@ shell_particles	 			= weapons\generic_shells
 
 rpm_empty_click 	     	= 400
 
-PDM_disp_base 			= 2.0
-PDM_disp_vel_factor 		= 1.2
-PDM_disp_accel_factor 		= 1.2
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ;;;;;;  Для Народной солянки 2010
 hit_power        			= 0.8
 hit_rate	                  = 1.85
 fire_distance           	= 150
 rpm                     	= 1000
-
-use_aim_bullet				= false		;Поддерживается ли первая суппер пуля
-time_to_aim					= 2.0	
 
 hud                      	= wpn_m_134_hud
 normal                   	= 0, 0, 0

@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;; Винторез с автозахватом ;;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------
-[wpn_20w_vintorez]:identity_immunities,class_val,scope.10x
+[wpn_20w_vintorez]:class_val,scope.10x
 GroupControlSection		 	= spawn_group
 discovery_dependency 	 	= 
 $spawn                   	= "weapons\vintorez"					; option for Level Editor
@@ -61,7 +61,6 @@ cam_max_angle			= 4.0	;максимальный угол отдачи
 cam_max_angle_horz		= 4.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.12;0.3	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	         = 0.0025	;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
 ;-----------------------------------------------------------------------------------
@@ -78,19 +77,10 @@ shell_particles	 			= weapons\arsenal_shells1
 
 rpm_empty_click 	     	= 200
 
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.2
-PDM_disp_accel_factor 		= 1.2
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 ; ttc
 hit_rate	          = 2.05
 rpm                   = 600
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 0.5	
 
 hud                      	= wpn_20w_vintorez_hud
 normal                   	= 0, 1, 0
@@ -138,7 +128,7 @@ vis_frame_speed			= 6			; скорость, с которой наводится рамка на цель
 vis_frame_color			= 0.7,0.7,0.7,1.0	; цвет рамки RGBA (A) Не учитывается
 found_snd				= detectors\DA-2_beep1
 
-[wpn_20w_vintorez_hud]
+[wpn_20w_vintorez_hud]:hud_val
 
 shell_point          	 = 0.0, 0.0, -0.150 
 shell_dir			 = 0.0, 1.0, 0.0

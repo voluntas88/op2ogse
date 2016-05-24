@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;; Штурмовая винтовка FN2000 «Десантник» ;;;;;;;;;;;;;;;;;;;;;
 ;----------------------------------------------------------------------------------
-[wpn_fn2000_paratrooper]:identity_immunities,class_val,scope.8x,hud_wpn_fx.groza
+[wpn_fn2000_paratrooper]:class_val,class_m209,scope.8x,hud_wpn_fx.groza
 GroupControlSection		= spawn_group
 discovery_dependency		= 
 $spawn				= "weapons\fn2000_paratrooper"	; name and section in level editor
@@ -30,7 +30,6 @@ hand_dependence			= 1
 single_handed			= 0
 
 ammo_class			= ammo_9x39_sp5, ammo_9x39_ap, ammo_9x39_izomorf, ammo_9x39_pab9 
-grenade_class		= ammo_m209, ammo_20x85, ammo_kumul_82
 fire_modes			= 1, 3, -1
 launch_speed			= 0
 
@@ -67,10 +66,8 @@ cam_max_angle			= 5.0	      ;максимальный угол отдачи
 cam_max_angle_horz		= 0.15	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.25	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 0.0005	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability		= 0.0005	;вероятность осечки при максимальном износе
 misfire_condition_k		= 0.05 
-condition_shot_dec		= 0.00015 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
 direction			= 0, 0, 1
@@ -86,18 +83,9 @@ shell_dir			= 0.0, 1.0, 0.0
 shell_particles	 		= weapons\arsenal_shells1  ;weapons\generic_shells
 rpm_empty_click			= 200
 
-PDM_disp_base			= 1.0
-PDM_disp_vel_factor		= 1.05
-PDM_disp_accel_factor		= 1.05
-PDM_crouch			      = 1.0
-PDM_crouch_no_acc		      = 1.0
-
 ;;;;;;;  Для ОП-2
 hit_rate	            = 2.65
 rpm                     = 950
-
-use_aim_bullet		= true			;Поддерживается ли первая суппер пуля
-time_to_aim			= 0.5	
 
 hud				= wpn_fn2000_paratrooper_hud
 normal			= 0, 1, 0
@@ -174,7 +162,7 @@ silencer_light_time		= 0.2
 grenade_vel			= 120
 
 
-[wpn_fn2000_paratrooper_hud]
+[wpn_fn2000_paratrooper_hud]:hud_val
 shell_point			= 0.1500,0.0405,-0.2380
 shell_dir			= 0.0, 1.0, 0.0
 

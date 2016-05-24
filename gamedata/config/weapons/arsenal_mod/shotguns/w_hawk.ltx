@@ -1,6 +1,6 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;; Hawk ;;;;;;;;;;;;;;;;;;;;;;;
-[wpn_hawk]:identity_immunities,class_sg,hud_wpn_fx.wincheaster1300
+[wpn_hawk]:class_sg,hud_wpn_fx.wincheaster1300
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\winchester1300"					; option for Level Editor
@@ -40,7 +40,6 @@ cam_max_angle		= 12	;максимальный угол отдачи
 cam_max_angle_horz	= 9.0	;(degree) maximum shot horizontal degree 
 cam_step_angle_horz	= 1.0	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		   = 0.005	    ;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -71,12 +70,6 @@ fire_point               	= 0.0, 0.238, 0.635
 flame_particles		   		= weapons\generic_weapon05
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	   		= 200
-
-PDM_disp_base 			= 1.0
-PDM_disp_vel_factor 		= 1.7
-PDM_disp_accel_factor 		= 1.7
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
 
 ; ttc
 hit_rate	                  = 2.0
@@ -123,7 +116,7 @@ snd_empty					= weapons\generic_empty
 snd_reload					= weapons\rem870\hawk_reload
 snd_close					= weapons\generic_holster
 
-[wpn_hawk_hud]
+[wpn_hawk_hud]:hud_sg
 allow_inertion	= true
 shell_point       = -0.008, 0.0125, -0.80 
 shell_dir         = 0.0, 0.0, 0.0
@@ -156,8 +149,3 @@ zoom_offset           = -0.12285,0.0577,-0.033
 zoom_rotate_x         = 0.03655      
 zoom_rotate_y         = 0.04775
 zoom_hide_crosshair	= true			
-;время поворота HUD (сек)
-;zoom_rotate_time			= 0.7
-
-
-

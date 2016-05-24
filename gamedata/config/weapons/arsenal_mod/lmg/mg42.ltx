@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;; Ручной трофейный немецкий пулемёт Maschinengewehr 42 (MG-42) ;;;;;;;;;;;;;;;;
 ;--------------------------------------------------------------------------------------------- 
-[wpn_mg42]:identity_immunities,class_lmg
+[wpn_mg42]:class_lmg
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\mg42"					; option for Level Editor
@@ -54,7 +54,6 @@ fire_dispersion_base			= 0.25		;угол (в градусах) базовой дисперсии оружия (оруж
 
 ;отдача
 cam_relax_speed         		= 8.25		;скорость возврата в исходное положение
-cam_relax_speed_ai                  = 360
 cam_dispersion          		= 0.20		;увеличения угла (в градусах) с каждым выстрелом
 cam_dispersion_inc			= 0.08		;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac			= 0.25		;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -62,7 +61,6 @@ cam_max_angle				= 6.0	    	;максимальный угол отдачи
 cam_max_angle_horz			= 8.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz			= 0.4		;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 5	    	;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 		      = 0.001	;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 ;-----------------------------------------------------------------------------------
@@ -77,12 +75,6 @@ shell_point		 		= 0.0, 0.129, 0.192
 shell_dir		 		= 0.0, 0.0, 0.4
 
 rpm_empty_click 	 	= 200
-
-PDM_disp_base 			= 6.0
-PDM_disp_vel_factor 		= 0.8
-PDM_disp_accel_factor 		= 0.8
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
 
 ; ttc
 hit_rate	            = 2.15
@@ -105,9 +97,6 @@ weapon_min_queue_interval_close = 300
 weapon_max_queue_interval_close = 500
 
 ; end ttc
-
-use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 1.0
 
 silencer_hit_power       	= 0.96
 silencer_hit_impulse	 	= 88

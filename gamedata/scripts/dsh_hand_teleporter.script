@@ -239,7 +239,9 @@ function use_arts( t, test )
     local objs = inventory.on_belt_obj( k )
     if objs and table.getn( objs ) >= n then
       for i = 1, n do
-        table.insert( use_arts, objs[ i ] )
+        if dsh.is_zone_bio_art( objs[ i ] ) then
+          table.insert( use_arts, objs[ i ] )
+        end
       end
     end
   end
@@ -255,8 +257,8 @@ function use_arts( t, test )
   dsh.say_blin()
   news_manager.send_tip(
     db.actor,
-    "Эта шарманка без артефактов на поясе не работает.",
-    nil, "nano", 20000
+    "Эта шарманка без нужных артефактов на поясе не работает.",
+    nil, "nano", 5000
   )
   return false
 end
@@ -353,9 +355,9 @@ function randomize_position( npc, radius )
   local new_gv   = 0
   local min_dist = 100000
   for a = gvn, gvx do
-    g1 = game_graph():vertex( a ):game_point()
-    if g1:distance_to( pos ) < min_dist then
-      min_dist = g1:distance_to( pos )
+    local tmp = game_graph():vertex( a ):level_point()
+    if tmp:distance_to( pos ) < min_dist then
+      min_dist = tmp:distance_to( pos )
       new_gv   = a
     end
   end

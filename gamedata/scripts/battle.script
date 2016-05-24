@@ -637,25 +637,31 @@ local battles = {
 -- Опасные связи
 		[35] = {
 			[1]	= {
+				any_level = true,
 				timeout = 5
 			},
 			[2]	= {
+				any_level = true,
 				timeout = 12,
 				func = "akill.kontrik_vodka_sms()"
 			},
 			[3]	= {
+				any_level = true,
 				timeout = 12,
 				func = "akill.kontrik_vodka_zvuk()"
 			},
 			[4]	= {
+				any_level = true,
 				timeout = 15,
 				func = "akill.kontrik_vodka_start()"
 			},
 			[5]	= {
+				any_level = true,
 				timeout = 6,
 				info = "kontrik_vodka_start"
 			},
 			[6]	= {
+				any_level = true,
 				tip = "%c[255,160,160,160]".."МЕЧЕНЫЙ:".."\\n".."%c[255,255,128,128]Что это было со мной? Будто кто-то в голову залез! Надо скорей выполнить просьбу и отвалить. Ну его на фиг, связываться с этой тайной Зоны...".."".."\n"
 			}
 		},
@@ -969,8 +975,8 @@ local battles = {
 			},
 			[2]	= {
 				timeout = 6,
-				tip = "%c[255,160,160,160]".."МЕЧЕНЫЙ:".."\\n".."%c[255,255,128,128]Надо бы подслушать разговоры военных.".."".."\n",
-				func = "akill.stop_actor()"
+--				tip = "%c[255,160,160,160]".."МЕЧЕНЫЙ:".."\\n".."%c[255,255,128,128]Надо бы подслушать разговоры военных.".."".."\n",
+--				func = "akill.stop_actor()"
 			},
 			[3]	= {
 				timeout = 15,
@@ -986,7 +992,7 @@ local battles = {
 			},
 			[6]	= {
 				timeout = 2,
-				tip = "%c[255,160,160,160]".."МЕЧЕНЫЙ:".."\\n".."%c[255,255,128,128]Вот это поворот! Пора сматываться!".."".."\n"
+--				tip = "%c[255,160,160,160]".."МЕЧЕНЫЙ:".."\\n".."%c[255,255,128,128]Вот это поворот! Пора сматываться!".."".."\n"
 			},
 			[7]	= {
 				func = "akill.zasada_puzir_spawn()"
@@ -5198,17 +5204,27 @@ local battles = {
 }
 
 -- Основной обработчик. Вызывает сам себя через таймер. И первый запуск нужно делать тоже через таймер.
-function show_must_go_on(params_string)
-	local data = amk.unpack_array_from_string(params_string)
-	local lvl, btl, wave = data[1], tonumber(data[2]), tonumber(data[3])
+function show_must_go_on( params_string )
+  local data = amk.unpack_array_from_string( params_string )
+  local lvl, btl, wave = data[ 1 ], tonumber( data[ 2 ] ), tonumber( data[ 3 ] )
+  show_must_go_on_real( lvl, btl, wave )
+end
+
+function show_must_go_on_delayed( lvl, btl, wave )
+  show_must_go_on_real( lvl, tonumber( btl ), tonumber( wave ) )
+end
+
+function show_must_go_on_real( lvl, btl, wave )
 	local cur_wave = battles[lvl][btl][wave]
 	local pos, lv, sector
 	--get_console():execute("load ~~~ lvl: "..lvl..", btl: "..tostring(btl)..", wave: "..tostring(wave))
 	
 	-- сменили локу - битва закончена
-    if level.name() ~= lvl then 
-		show_off()
-		return
+	if not cur_wave.any_level then
+	  if level.name() ~= lvl then 
+	    show_off()
+	    return
+	  end
 	end
 
 	sector = get_sector()
@@ -5216,12 +5232,12 @@ function show_must_go_on(params_string)
 
 	-- проверяем, не заныкался ли где гг в закутке - можно ли заспавнить на нормальном расстоянии от него
 	if cur_wave.dist then
-		pos, lv = get_pos(cur_wave.dist, sector)
-		if pos:distance_to(db.actor:position()) < min_good_distance then
-			-- заныкался - откладываем спавн, пока гг не выйдет из укрытия
-			amk.start_timer("battle", min_good_distance_timeout, {lvl, btl, wave})
-			return
-		end
+          pos, lv = get_pos( cur_wave.dist, sector )
+          if pos:distance_to( db.actor:position() ) < min_good_distance then
+            -- заныкался - откладываем спавн, пока гг не выйдет из укрытия
+            battle_timer( min_good_distance_timeout, lvl, btl, wave )
+            return
+          end
 	end
 	
 	-- спавн монстров/неписей
@@ -5236,16 +5252,17 @@ function show_must_go_on(params_string)
 	end
 
 	if cur_wave.rest then
-		-- есть перерыв
-
-		if cur_wave.rukzak then
-			-- есть тайник - спавним
-			amk.start_timer("battle_rest", math.random(cur_wave.timeout*0.8, cur_wave.timeout*1.2), {lvl, btl, wave, monster_cnt})
-		end
-
-		-- даем передышку
-		cur_wave.timeout = cur_wave.timeout+rest_timeout
-		monster_cnt = 0
+          -- есть перерыв
+          if cur_wave.rukzak then
+            -- есть тайник - спавним
+            reinforcement_timer(
+              math.random( cur_wave.timeout * 0.8, cur_wave.timeout * 1.2 ),
+              lvl, btl, wave, monster_cnt
+            )
+          end
+          -- даем передышку
+          cur_wave.timeout = cur_wave.timeout + rest_timeout
+          monster_cnt = 0
 	end
 
 	if cur_wave.info then
@@ -5258,26 +5275,33 @@ function show_must_go_on(params_string)
 	end
 	if cur_wave.tip then
 		-- выдаем смс
-		news_manager.send_tip(db.actor, cur_wave.tip, nil, nil, 15000)
+		news_manager.send_tip(db.actor, cur_wave.tip, nil, nil, 5000)
 	end
 
 	-- следующая волна
 	wave = wave+1
 	if battles[lvl][btl][wave] then
-		-- есть следующая волна - запускаем
-		--get_console():execute("load ~~~ lvl: "..lvl..", btl: "..tostring(btl)..", wave: "..tostring(wave))
-		amk.start_timer("battle", math.random(cur_wave.timeout*0.8, cur_wave.timeout*1.2), {lvl, btl, wave})
+          -- есть следующая волна - запускаем
+          battle_timer(
+            math.random( cur_wave.timeout * 0.8, cur_wave.timeout * 1.2 ),
+            lvl, btl, wave
+          )
 	else
-		-- конец битвы
-		show_off()
+          -- конец битвы
+          show_off()
 	end
 end
 
 -- подкрепление в виде рюкзака
 -- текущая волна должна идти параметром приватно, т.к. наверху уже следующая волна на очереди
-function reinforcement(params_string)
+function reinforcement_delayed( lvl, btl, wave, last_monster_cnt )
+  reinforcement(
+    lvl, tonumber( btl ), tonumber( wave ), tonumber( last_monster_cnt )
+  )
+end
+
+function reinforcement( lvl, btl, wave, last_monster_cnt )
 	local data = amk.unpack_array_from_string(params_string)
-	local lvl, btl, wave, last_monster_cnt = data[1], tonumber(data[2]), tonumber(data[3]), tonumber(data[4])
 	local cur_wave = battles[lvl][btl][wave]
 	local pos, lv
 
@@ -5460,4 +5484,20 @@ end
 function no_anomaly_in(pos)
 	local anom_id,anom_pos,anom_radius,dist = amk_anoms.get_nearest_anomaly_for_pos(pos)
 	return not anom_id or dist-anom_radius > 5
+end
+
+
+function battle_timer( time, ... )
+  return ogse_st_mgr.delayed_fun_start( script_name() .. ".battle_timer" )
+    :set_delay( time )
+    :init( script_name() .. ".show_must_go_on_delayed", ... )
+    :start( true )
+end
+
+
+function reinforcement_timer( time, ... )
+  return ogse_st_mgr.delayed_fun_start( script_name() .. ".reinforcement_timer" )
+    :set_delay( time )
+    :init( script_name() .. ".reinforcement_delayed", ... )
+    :start( true )
 end

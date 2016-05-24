@@ -1,7 +1,7 @@
 ; -*- mode: conf-windows; coding: windows-1251-dos -*-
 ;;;;;;;;;;;;;;;;;;;;;;;; Автоматический гладкоствольный карабин Сайга12К ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;-----------------------------------------------------------------------------------------------------
-[wpn_sayga12_sk1]:identity_immunities,class_sg_hi_rpm,hud_wpn_fx.saiga
+[wpn_sayga12_sk1]:class_sg_hi_rpm,hud_wpn_fx.saiga
 GroupControlSection		= spawn_group
 discovery_dependency 	= 
 $spawn                  = "weapons\sayga12_sk1"					; option for Level Editor
@@ -53,7 +53,6 @@ animation_slot			= 2		; type of the animation that will be used
 
 ;отдача
 cam_relax_speed         	= 15.5		;скорость возврата в исходное положение
-cam_relax_speed_ai         	= 360
 cam_dispersion          	= 0.25	;увеличения угла (в градусах) с каждым выстрелом
 cam_dispersion_inc		= 0.1		;увеличениe cam_dispersion с каждым выстрелом
 cam_dispertion_frac		= 0.12	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
@@ -61,7 +60,6 @@ cam_max_angle			= 4	    	;максимальный угол отдачи
 cam_max_angle_horz		= 6.0		;(degree) maximum shot horizontal degree 
 cam_step_angle_horz		= 0.2;1	;(degree) size of step camera moved in horizontal position while shooting
 
-fire_dispersion_condition_factor 	= 6		;увеличение дисперсии в процентах при максимальном износе 
 misfire_probability 	      = 0.00015	;вероятность осечки при максимальном износе 
 misfire_condition_k		= 0.05
 ;-----------------------------------------------------------------------------------
@@ -79,18 +77,9 @@ shell_dir		 		= 0.0, 1.0, 0.0
 
 rpm_empty_click 	 	= 200
 
-PDM_disp_base 			= 2.25
-PDM_disp_vel_factor 		= 0.8
-PDM_disp_accel_factor 		= 0.8
-PDM_crouch	 		      = 1.0
-PDM_crouch_no_acc 		= 1.0
-
 grenade_vel			= 120
 
 rpm                      	= 850		; max round per minute
-
-use_aim_bullet			= true		;Поддерживается ли первая суппер пуля
-time_to_aim					= 1.0
 
 silencer_hit_power       	= 0.72
 silencer_hit_impulse	 	= 25
