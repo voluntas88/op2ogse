@@ -221,7 +221,7 @@ level_vertexes={
 }
 level_anoms={
   l01_escape = {
-    90, 120, 400,
+    50, 75, 400,
     {
       buzz          =  0,
       electra       = 12,
@@ -237,7 +237,7 @@ level_anoms={
     }
   },
   l02_garbage = {
-    90, 120, 400,
+    50, 75, 400,
     {
       buzz          = 12,
       electra       = 15,
@@ -253,7 +253,7 @@ level_anoms={
     }
   },
   l03_agroprom = {
-    90, 120, 100,
+    20, 28, 100,
     {
       buzz          =  5, --12,
       electra       =  0,
@@ -269,7 +269,7 @@ level_anoms={
     }
   },
   l04_darkvalley = {
-    90, 120, 100,
+    22, 30, 100,
     {
       buzz          = 10,
       electra       =  0,
@@ -303,7 +303,7 @@ level_anoms={
     }
   },
   l06_rostok = {
-    20, 30, 300,
+    10, 50, 300,
     {
       buzz          = 10,
       electra       =  2,
@@ -320,7 +320,7 @@ level_anoms={
     }
   },
   l08_yantar = {
-    80, 120, 400,
+    80, 110, 400,
     {
       buzz          =   8,
       electra       =   2,
@@ -337,7 +337,7 @@ level_anoms={
     }
   },
   l07_military = {
-    80, 120, 400,
+    80, 110, 400,
     {
       buzz          = 10,
       electra       = 12,
@@ -354,7 +354,7 @@ level_anoms={
     }
   },
   l10_radar = {
-    90, 120, 100,
+    24, 28, 100,
     {
       buzz          = 10,
       electra       =  2,
@@ -371,7 +371,7 @@ level_anoms={
     }
   },
   l11_pripyat = {
-    90, 120, 90,
+    11, 15, 90,
     {
       buzz          = 10,
       electra       = 10,
@@ -388,7 +388,7 @@ level_anoms={
     }
   },
   l12_stancia = {
-    50, 90, 700,
+    70, 90, 700,
     {
       buzz          = 10,
       electra       =  0,
@@ -439,7 +439,7 @@ level_anoms={
     }
   },
   marsh = {
-    120, 180, 100,
+    20, 40, 100,
     {
       buzz          = 15,
       electra       =  0,
@@ -456,7 +456,7 @@ level_anoms={
     }
   },
   limansk = {
-    15, 25, 30,
+    5, 6, 30,
     {
       buzz          = 10,
       electra       =  0,
@@ -489,7 +489,7 @@ level_anoms={
     }
   },
   red_forest = {
-    90, 120, 40,
+    22, 30, 40,
     {
       buzz          = 10,
       electra       =  3,
@@ -506,7 +506,7 @@ level_anoms={
     }
   },
   lost_village = {
-    20, 30, 25,
+    8, 10, 25,
     {
       buzz          =  5,
       electra       = 10,
@@ -540,7 +540,7 @@ level_anoms={
     }
   },
   atp_for_test22 = {
-    150, 170, 450,
+    32, 36, 40,
     {
       buzz          = 20,
       electra       = 15,
@@ -557,7 +557,7 @@ level_anoms={
     }
   },
   dead_city = {
-    130, 180, 90,
+    22, 30, 90,
     {
       buzz          = 10,
       electra       = 10,
@@ -607,7 +607,7 @@ level_anoms={
     }
   },
   pripyat = {
-    90, 120, 100,
+    28, 32, 100,
     {
       buzz          = 15,
       electra       = 15,
@@ -1998,6 +1998,10 @@ function randomize_arts()
           and not dsh.is_handmade_artefact( sobj )
         then
           local orig_dist = sobj.position:distance_to( db.actor:position() )
+          log2(
+            "dsh: [%s]: found %s: dist to actor = %s",
+            script_name(), sobj:name(), orig_dist
+          )
           local cur_lv  = sobj.m_level_vertex_id
           local cur_pos = sobj.position
           if is_relocating then
@@ -2012,6 +2016,12 @@ function randomize_arts()
                 end
               )
               if pos then
+                log2(
+                  "dsh: [%s]: [%s] found new pos: dist to actor = %s, dist to old = %s",
+                  script_name(), i,
+                  pos:distance_to( db.actor:position() ),
+                  pos:distance_to( cur_pos )
+                )
                 alife():teleport_object( "", pos, new_lv, new_gv, sobj.id )
                 cur_lv  = new_lv
                 cur_pos = pos
