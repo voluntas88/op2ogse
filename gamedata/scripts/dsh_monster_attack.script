@@ -20,10 +20,17 @@ end
 
 
 function on_update( obj )
+  if not (
+    has_alife_info( "volna_goodwill" ) or has_alife_info( "peshera_go" )
+  ) then
+    if obj:clsid() == clsid.boar_s then
+      boar_body_attack( obj )
+    end
+  end
   if obj:alive() then
-    -- все эффекты отключаем
-    --   в Волне
-    --   во время сна в Пещере
+    -- ana yooaeou ioee??aai
+    --   a Aieia
+    --   ai a?aiy nia a Iaua?a
     if not (
       has_alife_info( "volna_goodwill" ) or has_alife_info( "peshera_go" )
     ) then
@@ -31,10 +38,15 @@ function on_update( obj )
         bloodsucker_attack( obj )
       elseif obj:clsid() == clsid.cat_s then
         cat_attack( obj )
+      elseif obj:clsid() == clsid.chimera_s then
+        chimera_attack( obj )
       elseif obj:clsid() == clsid.dog_s then
         dog_attack( obj )
+        dog_attack_phantom( obj )
       elseif obj:clsid() == clsid.poltergeist_s then
         poltergeist_attack( obj )
+      elseif obj:clsid() == clsid.pseudodog_s then
+        pseudodog_attack( obj )
       elseif obj:clsid() == clsid.tushkano_s then
         tushkano_attack( obj )
       elseif obj:clsid() == clsid.zombie_s then
@@ -64,7 +76,7 @@ end
 
 function bloodsucker_attack( obj )
   if obj.health < 0.05 then return end
-  local enemy = obj:get_enemy()
+  local enemy = obj:best_enemy()
   if
     not (
       enemy and enemy:id() == db.actor:id() and obj:see( enemy )
@@ -73,10 +85,11 @@ function bloodsucker_attack( obj )
     return
   end
   local binder = obj:binded_object()
+  set_custom_panic( obj, binder, enemy )
   if binder.attack2_t and binder.attack2_t > time_global() then return end
-  local distance = obj:position():distance_to( enemy:position() )
-  local attack_dist = 15
-  binder.attack2_t  = time_global() + 1000
+  binder.attack2_t   = time_global() + 1000
+  local distance     = obj:position():distance_to( enemy:position() )
+  local attack_dist  = 15
   local need_phantom = false
   if distance < attack_dist then
     if math.random() < 0.5 then
@@ -95,24 +108,25 @@ function bloodsucker_attack( obj )
       enemy:hit( h )
     end
   else
-    if binder.attack_t and binder.attack_t > time_global() then return end
     if
       obj:section() == "bloodsucker_strong"
       or obj:section() == "bloodsucker_effector"
     then
-      if
-        not (
-          binder.phantom_spawned_id
-          and level.object_by_id( binder.phantom_spawned_id )
-        )
-      then
-        binder.phantom_spawned_id = nil
-        if math.random() < 0.4 then
-          need_phantom = false
+      if ( not binder.attack_t ) or binder.attack_t <= time_global() then
+        if
+          not (
+            binder.phantom_spawned_id
+            and level.object_by_id( binder.phantom_spawned_id )
+          )
+        then
+          binder.phantom_spawned_id = nil
+          if math.random() < 0.4 then
+            need_phantom = true
+          end
         end
+        binder.attack_t = time_global() + 5000
       end
     end
-    binder.attack_t = time_global() + 5000
   end
   if need_phantom then
     local sobj = alife():create(
@@ -122,7 +136,6 @@ function bloodsucker_attack( obj )
     )
     binder.phantom_spawned_id = sobj.id
   end
-  set_custom_panic( obj, binder, enemy )
 end
 
 
@@ -136,14 +149,35 @@ function boar_body_attack( obj )
   )
   if ( not binder.attack_step ) or binder.attack_step == 1 then
     if dist < attack_dist then
-      local h = hit()
-      h.type      = hit.radiation
-      h.power     = 0.0005 + 0.0002 * level.get_game_difficulty()
-        + 0.008 * dsh.get_this_level_difficulty()
-      h.impulse   = 0.0
-      h.draftsman = obj
-      h.direction = obj:direction()
-      db.actor:hit( h )
+      local belt_rs = inventory.on_belt_restore_speed(
+        "radiation_restore_speed"
+      )
+      if belt_rs > 0 then
+        belt_rs    = 0
+      elseif belt_rs < 0 then
+        if binder.attack_pt then
+          local previous_check_time = game.CTime()
+          previous_check_time:set( unpack( binder.attack_pt ) )
+          local current_time        = game.get_game_time()
+          local dt = current_time:diffSec( previous_check_time )
+          belt_rs  = 0 - belt_rs * dt
+        else
+          belt_rs  = 0
+        end
+      end
+      db.actor.radiation = 0.0005 + 0.0002 * level.get_game_difficulty()
+        + 0.008 * dsh.get_this_level_difficulty() + belt_rs
+      binder.attack_pt   = { game.get_game_time():get() }
+      if dsh_hud_fx.has_detector() then
+        local snd_obj = sound_object(
+          "detectors\\geiger_" .. math.random( 4 )
+        )
+        snd_obj:play_no_feedback(
+          db.actor, sound_object.s2d, 0, vector(), 0.5
+        )
+      end
+    else
+      binder.attack_pt = nil
     end
     binder.attack_step = 2
   else
@@ -154,7 +188,7 @@ end
 
 function cat_attack( obj )
   if obj.health < 0.05 then return end
-  local enemy = obj:get_enemy()
+  local enemy = obj:best_enemy()
   if
     not (
       enemy and enemy:id() == db.actor:id() and obj:see( enemy )
@@ -164,67 +198,100 @@ function cat_attack( obj )
   end
   local binder = obj:binded_object()
   set_custom_panic( obj, binder, enemy )
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  binder.attack_t  = time_global() + 500
+  if math.random() < 0.15 + ( 0.05 * level.get_game_difficulty() ) then
+    level.add_pp_effector( "black_cats.ppe", 2015, false )
+    dsh_sleep.zevota()
+    dsh_sleep.test_for_need_sleep( 17 )
+  end
+end
+
+
+function chimera_attack( obj )
+  if obj.health < 0.5 then return end
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  local dist = obj:position():distance_to( db.actor:position() )
+  local attack_dist = 15
+  binder.attack_t   = time_global() + 500
+  if dist < attack_dist and math.random() < 0.5 then
+    local snd_obj = sound_object( "monsters\\chimera\\attack_2" )
+    snd_obj:play_no_feedback( db.actor, sound_object.s2d, 0, vector(), 5.0 )
+    db.actor.power = -0.05
+  end
 end
 
 
 function dog_attack( obj )
+  local binder = obj:binded_object()
+  if binder.attack_t and binder.attack_t > time_global() then return end
+  binder.attack_t = time_global() + 1513
   if obj.health < 0.05 then return end
-  local enemy = obj:get_enemy()
+  local enemy = obj:best_enemy()
   if not (
     enemy and enemy:id() == db.actor:id() and obj:see( enemy )
   ) then
     return
   end
-  local binder = obj:binded_object()
-  if binder.attack_t and binder.attack_t > time_global() then return end
   local dist = obj:position():distance_to( enemy:position() )
-  if dist > 20 then return end
-  local need_phantom, need_telepatic_hit = false, false
-  if
+  if dist > 8 then return end
+  if math.random() > dsh.get_this_level_difficulty() then return end
+  level.add_pp_effector( "radiation.ppe", 2012, false )
+  local h = hit()
+  h.type      = hit.telepatic
+  h.power     = 0.01 + 0.01 * master_koef() * dsh.get_this_level_difficulty()
+  h.impulse   = 0.0
+  h:bone( "bip01_spine" ) -- ?oiau o?eouaaeanu a?iiy
+  h.draftsman = obj
+  h.direction = obj:direction()
+  db.actor:hit( h )
+  local dog_shield = inventory.on_belt( "af_idol_monolita" ) and 0 or 1
+  local drop       = (
+    0.05 + ( 0.03 * level.get_game_difficulty() )
+  ) * dog_shield
+  if math.random() < drop then
+    local active_slot = db.actor:active_slot()
+    if active_slot and ( active_slot == 1 or active_slot == 2 ) then
+      db.actor:drop_item( db.actor:active_item() )
+      archievements.acv_count_event( "acv_drop", 10, "Iaoa-?anoa?yoa" )
+    end
+  end
+end
+
+
+function dog_attack_phantom( obj )
+  if not (
     obj:section() == "dog_strong" or obj:section() == "dog_habaruch"
-  then
-    if not (
-      binder.phantom_spawned_id
-      and level.object_by_id( binder.phantom_spawned_id )
-    ) then
-      binder.phantom_spawned_id = nil
-      local distance = obj:position():distance_to( enemy:position() )
-      if distance > 2 and math.random() < 0.3 then
-        need_phantom       = false
-      else
-        need_telepatic_hit = true
-      end
-    end
-  else
-    need_telepatic_hit = true
+  ) then
+    return
   end
-  if need_phantom then
-    local sobj = alife():create(
-      "phantom_dog_" .. math.random( 2 ),
-      obj:position(),
-      enemy:level_vertex_id(), enemy:game_vertex_id()
-    )
-    binder.phantom_spawned_id = sobj.id
+  local binder = obj:binded_object()
+  if binder.attack_t2 and binder.attack_t2 > time_global() then return end
+  binder.attack_t2 = time_global() + 5000
+  if obj.health < 0.05 then return end
+  local enemy = obj:best_enemy()
+  if not (
+    enemy and enemy:id() == db.actor:id() and obj:see( enemy )
+  ) then
+    return
   end
-  if need_telepatic_hit then
-    level.add_pp_effector( "radiation.ppe", 2012, false )
-    local h = hit()
-    h.type      = hit.telepatic
-    h.power     = 0.02 + math.random() * 0.05 * master_koef()
-    h.impulse   = 0.0
-    h:bone( "bip01_spine" ) -- чтобы учитывалась броня
-    h.draftsman = obj
-    h.direction = obj:direction()
-    db.actor:hit( h )
-    if math.random() < 0.02 and not inventory.on_belt( "af_idol_monolita" ) then
-      local active_slot = db.actor:active_slot()
-      if active_slot and ( active_slot == 1 or active_slot == 2 ) then
-        db.actor:drop_item( db.actor:active_item() )
-        archievements.acv_count_event( "acv_drop", 10, "Маша-растеряша" )
-      end
+  local dist = obj:position():distance_to( enemy:position() )
+  if dist < 8 then return end
+  if not (
+    binder.phantom_spawned_id
+    and level.object_by_id( binder.phantom_spawned_id )
+  ) then
+    binder.phantom_spawned_id = nil
+    if math.random() < 0.3 then
+      local sobj = alife():create(
+        "phantom_dog_" .. math.random( 2 ),
+        obj:position(),
+        enemy:level_vertex_id(), enemy:game_vertex_id()
+      )
+      binder.phantom_spawned_id = sobj.id
     end
   end
-  binder.attack_t = time_global() + 5000
 end
 
 
@@ -243,12 +310,78 @@ function poltergeist_attack( obj )
 end
 
 
+function pseudodog_attack( obj )
+  if obj:section() == "volkodav" then return end
+  local enemy = obj:best_enemy()
+  if not (
+    enemy and enemy:id() == db.actor:id()
+    and obj:see( enemy ) and enemy:see( obj )
+  ) then
+    return
+  end
+  local binder = obj:binded_object()
+  local time_next_attack = 2500
+  local time_cam_effect  = 700
+  if ( not binder.attack_t ) or binder.attack_t < time_global() then
+    local v1 = obj:direction()
+    local v2 = db.actor:direction()
+    if
+      ( v1.x * v2.x ) + ( v1.z * v2.z ) < -0.6
+      and obj:position():distance_to( db.actor:position() ) < 20
+    then
+      binder.attack_n = true
+      for _, n in ipairs({ 1, 2 }) do
+        level.add_cam_effector(
+          "build_1935_pseudodog_effect_" .. n .. ".anm", 990 + n, false,
+          ""
+        )
+      end
+      level.add_pp_effector ( "psy_antenna.ppe", 395, false )
+      local h = hit()
+      h.draftsman = obj
+      h.type      = hit.telepatic
+      h.direction = vector():set( 0, 0, 0 )
+      h:bone( "bip01_spine" ) --/ aey o?aoa 'a?iie'
+      h.power     = 0.05 * master_koef()
+      h.impulse   = 0.0
+      db.actor:hit( h )
+      local snd = xr_sound.get_safe_sound_object(
+        "monsters\\pseudodog\\psy_affect_0", sound_object.s2d
+      )
+      snd:play_at_pos( db.actor, db.actor:position() )
+      local dog_shield = inventory.on_belt( "af_idol_monolita" ) and 0 or 1
+      local drop       = (
+        0.05 + ( 0.03 * level.get_game_difficulty() )
+      ) * dog_shield
+      if math.random() < drop then
+        local active_slot = db.actor:active_slot()
+        if active_slot and ( active_slot == 1 or active_slot == 2 ) then
+          db.actor:drop_item( db.actor:active_item() )
+          archievements.acv_count_event( "acv_drop", 10, "Iaoa-?anoa?yoa" )
+        end
+      end
+      binder.attack_t = time_global()
+        + time_next_attack * ( 1 + math.random( -0.2, 0.2 ) )
+        + time_cam_effect
+    end
+  elseif
+    binder.attack_n
+    and binder.attack_t < time_global() + time_next_attack
+  then
+    level.remove_pp_effector( 395 )
+    for _, n in pairs({ 1, 2 }) do
+      level.remove_cam_effector( 990 + n )
+    end
+    binder.attack_n = false
+  end
+end
+
+
 function set_custom_panic( obj, binder, enemy )
-  if binder.panic_t and binder.panic_t > time_global() then return end
   local dist = obj:position():distance_to( enemy:position() )
   local panic_dist = 6
   binder.panic_t   = time_global() + (
-    dist < ( panic_dist * 2 ) and 0 or 1000
+    dist < ( panic_dist * 3 ) and 0 or 1000
   )
   if enemy:active_slot() == 0 and enemy:see( obj ) and dist < panic_dist then
     obj:set_custom_panic_threshold( 1 )
@@ -270,20 +403,24 @@ function tushkano_attack( obj )
     dist < ( attack_dist * 2 ) and 0 or 1000
   )
   if dist > attack_dist then return end
-  if math.random() > 0.25 then return end
-  local h = hit()
-  h.type      = hit.chemical_burn
-  h.direction = vector():set( 0, 0, 0 )
-  h.power     = 0.03 + 0.015 * level.get_game_difficulty()
-  h.impulse   = 0
-  h.draftsman = enemy
-  enemy:hit( h )
+  if obj:section() == "electro_tushkano_normal" then
+    charge_tushkano( obj, enemy )
+  else
+    if math.random() > 0.25 then return end
+    local h = hit()
+    h.type      = hit.chemical_burn
+    h.direction = vector():set( 0, 0, 0 )
+    h.power     = 0.03 + 0.015 * level.get_game_difficulty()
+    h.impulse   = 0
+    h.draftsman = enemy
+    enemy:hit( h )
+  end
 end
 
 
 function zombie_attack( obj )
   if obj.health < 0.05 then return end
-  local enemy = obj:get_enemy()
+  local enemy = obj:best_enemy()
   if
     not (
       enemy and enemy:id() == db.actor:id() and obj:see( enemy )

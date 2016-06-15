@@ -93,11 +93,11 @@ end
 
 function load_rukzak( id )
   local prefix     = "dsh_rukzak." .. id
-  local conds      = ogse.load_var( prefix .. ".conds"     )
-  local counts     = ogse.load_var( prefix .. ".counts"    )
-  local game_types = ogse.load_var( prefix .. ".types"     )
-  local infos      = ogse.load_var( prefix .. ".infos"     )
-  local sections   = ogse.load_var( prefix .. ".sections"  )
+  local conds      = ogse.load_var_safe( prefix .. ".conds"     ) or {}
+  local counts     = ogse.load_var_safe( prefix .. ".counts"    ) or {}
+  local game_types = ogse.load_var_safe( prefix .. ".types"     ) or {}
+  local infos      = ogse.load_var_safe( prefix .. ".infos"     ) or {}
+  local sections   = ogse.load_var_safe( prefix .. ".sections"  ) or {}
   local all_types  = ogse.load_var_safe( prefix .. ".all_types" )
   local type_names = {}
   if all_types then
@@ -105,24 +105,29 @@ function load_rukzak( id )
       type_names[ i ] = gt
     end
   end
-  local data = {}
+  local data, index = {}, {}
   for i, sect in ipairs( sections ) do
     local gt = game_types[ i ]
     if all_types then
       gt = type_names[ gt ]
     end
-    local cond = conds[ i ]
+    local cond = tonumber( conds[ i ] )
     local info = infos[ i ] or ""
-    local key  = sect .. ":" .. cond .. ":" .. info
+    local key  = sect .. ":" .. string.format( "%.2f", cond ) .. ":" .. info
     local item = {
       [ "section"   ] = sect,
-      [ "condition" ] = tonumber( cond ),
+      [ "condition" ] = tonumber( string.format( "%.2f", cond ) ),
       [ "game_type" ] = ( override_game_type( sect ) or gt ),
       [ "count"     ] = tonumber( counts[ i ] ),
       [ "info"      ] = info,
       [ "key"       ] = key,
     }
-    table.insert( data, item )
+    if index[ key ] then
+      index[ key ].count = index[ key ].count + item.count
+    else
+      table.insert( data, item )
+      index[ key ] = item
+    end
   end
   return data
 end
@@ -382,7 +387,7 @@ function blowout_modif_arts()
               else
                 added[ key ] = {
                   [ "section"   ] = item.section,
-                  [ "condition" ] = cond,
+                  [ "condition" ] = tonumber( string.format( "%.2f", cond ) ),
                   [ "game_type" ] = "artefact",
                   [ "count"     ] = 1,
                   [ "info"      ] = "",

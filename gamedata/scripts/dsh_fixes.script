@@ -59,6 +59,8 @@ function on_first_update()
     this.fix_trade_dialog_timers3,
     this.fix_kot_hos,
     this.fix_esc_buldozer22,
+    this.fix_gg_need_sleep,
+    this.fix_val_zapis,
   }
   local version = ogse.load_var( vname, 0 )
   if version < table.getn( fixes ) then
@@ -758,7 +760,10 @@ end
 function fix_detector_suit()
   local obj = db.actor:object( "detector_suit" )
   if obj then
-    alife():release( obj:id() )
+    local sobj = alife():object( obj:id() )
+    if sobj then
+      alife():release( sobj )
+    end
   end
 end
 
@@ -901,5 +906,22 @@ function fix_esc_buldozer22()
     log2( "dsh: found %s", sobj:name() )
     alife():release( sobj )
     log2( "dsh: ... removed" )
+  end
+end
+
+
+function fix_gg_need_sleep()
+  log2( "dsh: starting gg_need_sleep timer ..." )
+  dsh_sleep.run_gg_need_sleep_timer()
+end
+
+
+function fix_val_zapis()
+  for i = 1, 65535 do
+    local sobj = alife():object( i )
+    if sobj and string.find( sobj:section_name(), "^val_zapis_" ) then
+      log2( "dsh: found %s, removing ...", sobj:name() )
+      alife():release( sobj )
+    end
   end
 end

@@ -17,7 +17,7 @@ local our_hits = {              -- какие типы хита будут обрабатываться
   [ hit.fire_wound ] = {
     [ "max"  ] = 10,
     [ "sect" ] = "fire_wound_immunity",
-    [ "ignored_outfit_protection" ] = true,
+    [ "ignored_outfit_protection" ] = false,
   },
   [ hit.strike ] = {
     [ "max"  ] = 10,
@@ -306,6 +306,7 @@ function on_use( obj, sobj )
     else
       psy_block_t = time_global() + 60000
     end
+    dsh_sleep.change_gg_need_sleep( 30 )
   end
 end
 
