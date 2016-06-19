@@ -60,6 +60,8 @@ function on_first_update()
     this.fix_kot_hos,
     this.fix_esc_buldozer22,
     this.fix_gg_need_sleep,
+    this.fix_dead_military_esc,
+    this.fix_yantar_arhara_mine1,
   }
   local version = ogse.load_var( vname, 0 )
   if version < table.getn( fixes ) then
@@ -912,4 +914,29 @@ end
 function fix_gg_need_sleep()
   log2( "dsh: starting gg_need_sleep timer ..." )
   dsh_sleep.run_gg_need_sleep_timer()
+end
+
+
+function fix_dead_military_esc()
+  if db.actor:dont_has_info( "snp_borov1_start" ) then
+    local sobj = alife():object( "dead_military_esc" )
+    if sobj then
+      log2( "dsh: found %s, spawning: snp_pda1", sobj:name() )
+      alife():create(
+        "snp_pda1",
+        sobj.position, sobj.m_level_vertex_id, sobj.m_game_vertex_id,
+        sobj.id
+      )
+    end
+  end
+end
+
+
+function fix_yantar_arhara_mine1()
+  local sobj = alife():object( "yantar_arhara_mine1" )
+  if sobj then
+    log2( "dsh: found %s", sobj:name() )
+    alife():release( sobj )
+    log2( "dsh: ... removed" )
+  end
 end

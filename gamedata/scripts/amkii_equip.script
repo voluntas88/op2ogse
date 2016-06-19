@@ -1,0 +1,180 @@
+-- -*- mode: lua; coding: windows-1251-dos -*-
+--[=[
+Developed by AMK-Team
+File:  amkII_equip.script
+Copyright:  ©  AMK-Team 2009
+Author: Refresh
+
+Opimized for OGSE 0.6.9.3 by KamikaZze
+
+Since: 07.02.2009 20:15
+        -- Заготовка.
+Since: 08.02.2009 1:08
+        -- Написан класс.
+        -- Неписи переодеваются.
+Since: 08.02.2009 16:42
+        -- Модуль переодевания добавлен в схему gatherer и убран из апдейта. (оптимизация)      
+Since: 09.02.2009 1:28
+        -- Теперь нпс, надеваю экзу или научный костюм, выбирают подходящий под клан цвет.
+        -- Убрана итерация по инвентарю, айтим теперь передает тоже gatherer. (оптимизация)
+--]=]
+
+
+local needs_refit      = {}
+local excluded_npcs    = amkii_equip_data.excluded_npcs
+local armor_levels     = amkii_equip_data.armor_levels
+local suits_to_visuals = amkii_equip_data.suits_to_visuals
+local vis_to_sect      = amkii_equip_data.vis_to_sect
+local vis_find_to_sect = amkii_equip_data.vis_find_to_sect
+
+
+--[=[
+--      amkDel(oItem)
+--      Удаляем обьект из симуляции.
+--      @param  object  oItem           Обьект.
+--]=]
+function amkDel( oItem )
+  local item = alife():object( oItem:id() )
+  if item then
+    alife():release( item, true )
+  end
+end
+
+
+function can_refit( oNpc )
+  if
+    ( not oNpc ) or ( not oNpc:alive() ) or oNpc:wounded()
+    or excluded_npcs[ oNpc:name() ]
+    or excluded_npcs[ oNpc:section() ]
+    or excluded_npcs[ oNpc:profile_name() ]
+    or ogse.is_quest_npc( oNpc )
+  then
+    return false
+  end
+  return true
+end
+
+
+local info_by_visual = {}
+function get_npc_current_visual( npc )
+  local vis = table.remove(
+    amk.str_explode( "\\", npc:get_visual_name() )
+  )
+  if not info_by_visual[ vis ] then
+    local sect = vis_to_sect[ vis ]
+    if not sect then
+      for _,v in ipairs( vis_find_to_sect ) do
+        if string.find( vis, v[ 1 ] ) then
+          sect = v[ 2 ]
+          break
+        end
+      end
+    end
+    ASSERT( sect, "section for %s not found", vis )
+    info_by_visual[ vis ] = { 0, sect }
+    local vis_suit = get_string( sect, "visual" )
+    if vis_suit then
+      vis_suit = xrs_utils.str_explode( "\\", vis_suit )
+      if vis_suit[ 2 ] then
+        vis_suit = xrs_utils.str_explode( ".", vis_suit[ 2 ] )
+      end
+      vis_suit = vis_suit[ 1 ]
+      if armor_levels[ vis_suit ] then
+        info_by_visual[ vis ][ 1 ] = armor_levels[ vis_suit ]
+      end
+    end
+  end
+  return unpack( info_by_visual[ vis ] )
+end
+
+
+class "CAmkDisguise"
+function CAmkDisguise:__init()
+end
+
+
+--[=[
+--      Update(oBinder)
+--      Апдейтим сталкера на предмет крутого костюмо в инвентаре.
+--      И если костюм есть и его визуал круче чем текущий, то переодеваем нпс.
+--      @param  object  oBinder         Биндер сталкера.
+--]=]
+function CAmkDisguise:Update( oNpc, oItem )
+  if not can_refit( oNpc ) then return end
+  local com = oNpc:character_community()
+  local vis = table.remove(
+    amk.str_explode( "\\", oItem:get_visual_name() )
+  )
+  local avail = suits_to_visuals[ com ][ vis ]
+  if avail then
+    local cur_armor_l, cur_armor_sect = get_npc_current_visual( oNpc )
+    if cur_armor_l < armor_levels[ vis ] then
+      local sobj = alife():object( oNpc:id() )
+      local pk   = xs_netpk.stalker( sobj )
+      if pk and pk:isOk() then
+        local data = pk:get()
+        local cost = get_float( cur_armor_sect, "cost" )
+        data.money = data.money + math.floor( cost / 20 )
+        data.visual_name = "actors\\"
+          .. avail[ math.random( table.getn( avail ) ) ]
+        pk:set( data )
+        sobj:set_rank( 270 * armor_levels[ vis ] + math.random( 50 ) )
+        needs_refit[ oNpc:id() ] = true
+        amkDel( oItem )
+      end
+    end
+  end
+end
+
+
+------------------------------
+-- переодевание
+------------------------------
+function refit_npc( npc, npc_id )
+  local s_npc = alife():object( npc_id )
+  s_npc.force_offline = true
+  go_offline_watch_timer( npc_id ):start()
+end
+
+
+-- служебный таймер, ждущий ухода в оффлайн
+class "go_offline_watch_timer" ( ogse_qt.quick_timer )
+function go_offline_watch_timer:__init( npc_id ) super()
+  self.npc_id = npc_id          -- запоминаем в таймере id непися
+end
+
+function go_offline_watch_timer:condition()
+  -- ждём исчезновения клиентского объекта
+  return ( not level.object_by_id( self.npc_id ) )
+end
+
+function go_offline_watch_timer:action()
+  local s_npc = alife():object( self.npc_id )
+  if s_npc then
+    s_npc.force_offline = nil   -- отправляем обратно в онлайн
+  end
+end
+
+
+------------------------------
+-- периодическая перепроверка
+------------------------------
+function CAmkDisguise:PeriodicalUpdate( oNpc )
+  if not can_refit( oNpc ) then return end
+  if needs_refit[ oNpc:id() ] then
+    if not xrs_battle_ai.actor_see( oNpc ) and not oNpc:is_talking() then
+      oNpc:clear_animations()
+      needs_refit[ oNpc:id() ] = nil
+      refit_npc( oNpc, oNpc:id() )
+      return
+    end
+  end
+  oNpc:iterate_inventory( check_armor, oNpc )
+end
+
+
+function check_armor( npc, item )
+  if npc and item and item:is_outfit() then
+    CAmkDisguise():Update( npc, item )
+  end
+end
