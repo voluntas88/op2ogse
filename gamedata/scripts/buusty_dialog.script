@@ -379,24 +379,7 @@ end
 --спавним живность в Пещере рестриктором
 function koshmar_peshera()
 if has_alife_info("arhara_shaxter_start") then return end
-	dsh.create_free_monster("gigant_virus_strong",vector():set(-137.2899017,-2.0594966,-27.8519477),6719,2867)
-	dsh.create_free_monster("bloodsucker_effector",vector():set(-137.2899018,-2.0594966,-27.8519477),6719,2867)
-	dsh.create_free_monster("fracture_strong",vector():set(-137.2899016,-2.0594966,-27.8519477),6719,2867)
-	dsh.create_free_monster("carlic",vector():set(-137.2899019,-2.0594966,-27.8519477),6719,2867)
-	dsh.create_free_monster("fracture_karlik",vector():set(-137.2899019,-2.0594966,-27.8519477),6719,2867)
-	dsh.create_free_monster("zombie_hell5",vector():set(-95.0097579,2.6900234,20.4258975),17644,2870)
-	dsh.create_free_monster("zombie_hell2",vector():set(-95.0097577,2.6900234,20.4258975),17644,2870)
-	dsh.create_free_monster("zombie_hell1",vector():set(-95.0097576,2.6900234,20.4258975),17644,2870)
-	dsh.create_free_monster("zombie_hell15",vector():set(-95.0097576,2.6900234,20.4258975),17644,2870)
-	dsh.create_free_monster("zombie_hell3",vector():set(-112.9257202,2.4988799,14.2081127),12358,2870)
-	dsh.create_free_monster("zombie_hell4",vector():set(-112.9257203,2.4988799,14.2081127),12358,2870)
-	dsh.create_free_monster("zombie_hell6",vector():set(-112.9257204,2.4988799,14.2081127),12358,2870)
-	dsh.create_free_monster("zombie_weak",vector():set(-112.9257205,2.4988799,14.2081127),12358,2870)
-	dsh.create_free_monster("zombie_hell8",vector():set(-87.1891021,2.6976146,2.2002675),19625,2870)
-	dsh.create_free_monster("zombie_hell7",vector():set(-87.1891022,2.6976146,2.2002675),19625,2870)
-	dsh.create_free_monster("zombie_immortal",vector():set(-87.1891023,2.6976146,2.2002675),19625,2870)
-	dsh.create_free_monster("zombie_trup2",vector():set(-87.1891024,2.6976146,2.2002675),19625,2870)
-		amk.start_timer("koshmar_peshera2", 20.0, "")
+
 end
 
 function koshmar_peshera2()
