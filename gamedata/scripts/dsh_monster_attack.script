@@ -156,7 +156,7 @@ function bloodsucker_attack( obj )
   if binder.attack2_t and binder.attack2_t > time_global() then return end
   binder.attack2_t   = time_global() + 1000
   local distance     = obj:position():distance_to( enemy:position() )
-  local attack_dist  = 15
+  local attack_dist  = 2.5
   local need_phantom = false
   if distance < attack_dist then
     if math.random() < 0.5 then
@@ -269,7 +269,7 @@ function boar_body_attack( obj )
         belt_rs  = 0
       end
     end
-    db.actor.radiation = 0.0005 + 0.0002 * level.get_game_difficulty()
+    db.actor.radiation = 0.00005 + 0.00002 * level.get_game_difficulty()
       + 0.008 * dsh.get_this_level_difficulty() + belt_rs
     binder.attack_pt   = { game.get_game_time():get() }
     if dsh_hud_fx.has_detector() then
@@ -355,7 +355,7 @@ function chimera_attack( obj )
   local binder = obj:binded_object()
   if binder.attack_t and binder.attack_t > time_global() then return end
   local dist = obj:position():distance_to( db.actor:position() )
-  local attack_dist = 15
+  local attack_dist = 5
   binder.attack_t   = time_global() + 500
   if dist < attack_dist and math.random() < 0.5 then
     local snd_obj = sound_object( "monsters\\chimera\\attack_2" )
@@ -628,7 +628,7 @@ function zombie_attack( obj )
   local binder = obj:binded_object()
   if binder.attack_t and binder.attack_t > time_global() then return end
   local dist = obj:position():distance_to( enemy:position() )
-  local attack_dist = 35
+  local attack_dist = 5
   binder.attack_t   = time_global() + 1000
   if dist > attack_dist then return end
   if math.random() < 0.2 + 0.1 * level.get_game_difficulty() then
@@ -654,7 +654,7 @@ function zombie_plague_attack( obj )
   local binder = obj:binded_object()
   if binder.attack_t and binder.attack_t > time_global() then return end
   local dist = obj:position():distance_to( db.actor:position() )
-  local attack_dist = 10
+  local attack_dist = 2
   binder.attack_t   = time_global() + (
     dist < ( attack_dist * 2 ) and 100 or 1000
   )
@@ -699,7 +699,7 @@ function zombie_plague_komar_attack( obj )
   local binder = obj:binded_object()
   if binder.attack_t and binder.attack_t > time_global() then return end
   local dist = obj:position():distance_to( db.actor:position() )
-  local attack_dist = 12
+  local attack_dist = 2
   binder.attack_t   = time_global() + (
     dist < ( attack_dist * 2 ) and 100 or 1000
   )
