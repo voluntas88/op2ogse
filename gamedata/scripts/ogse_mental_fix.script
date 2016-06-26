@@ -33,6 +33,7 @@ end
 local panic_freezers = {}
 
 function check_mental( obj )
+  ogse_signals.get_mgr():reschedule( 5000 )
   local storage = db.storage[ obj:id() ].state_mgr
   if not storage then return end
   local mental = state_lib.states[ storage.target_state ].mental
@@ -46,12 +47,13 @@ function check_mental( obj )
         .. " is in panic - will check it for freezing."
       )
       panic_freezers[ obj:id() ] = time_global()
-    end	
+    end
   end
 end
 
 
 function check_freezers()
+  ogse_signals.get_mgr():reschedule( 5000 )
   for k, v in pairs( panic_freezers ) do
     if v and v + 25000 < time_global() then
       log1(

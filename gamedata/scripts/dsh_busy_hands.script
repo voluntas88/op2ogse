@@ -20,11 +20,7 @@ end
 
 
 local info_radius
-local knives = {}
 function on_spawn()
-  for _, k in ipairs( monster_parts.knives ) do
-    knives[ k ] = true
-  end
   info_radius = math.pow( db.actor:get_actor_take_dist() + 1, 2 )
 end
 
@@ -94,13 +90,11 @@ function on_monster_update( obj )
   if monsters_like_npc[ obj:section() ] then
     return on_npc_update( obj )
   end
+  ogse_signals.get_mgr():reschedule( 5000 )
   if db.actor then
-    local binder = obj:binded_object()
-    if binder.dsh_busy_hands_t and binder.dsh_busy_hands_t > time_global() then
-      return
-    end
     local dist = obj:position():distance_to_sqr( db.actor:position() )
     if dist < info_radius then
+      local binder = obj:binded_object()
       if actor_has_knife() or GetShift() then
         if binder.dsh_busy_hands_nonusable then
           obj:set_tip_text_default()
@@ -115,16 +109,17 @@ function on_monster_update( obj )
         end
       end
     end
-    binder.dsh_busy_hands_t = time_global() + (
-      dist < info_radius * 2 and freq or 1000
+    ogse_signals.get_mgr():reschedule(
+      ( dist < info_radius * 2 and freq )
+      or ( dist < info_radius * 10 and 1000 )
+      or 5000
     )
   end
 end
 
 
 function actor_has_knife()
-  --local active_item = db.actor:active_item()
-  return true --( active_item and knives[ active_item:section() ] )
+  return true
 end
 
 
@@ -134,13 +129,11 @@ end
 
 
 function process_npc( obj, tip_text_def )
+  ogse_signals.get_mgr():reschedule( 5000 )
   if db.actor then
-    local binder = obj:binded_object()
-    if binder.dsh_busy_hands_t and binder.dsh_busy_hands_t > time_global() then
-      return
-    end
     local dist = obj:position():distance_to_sqr( db.actor:position() )
     if dist < info_radius then
+      local binder = obj:binded_object()
       if actor_has_free_hands() then
         if binder.dsh_busy_hands_nonusable then
           if binder.dsh_tip_text then
@@ -161,18 +154,16 @@ function process_npc( obj, tip_text_def )
         end
       end
     end
-    binder.dsh_busy_hands_t = time_global() + (
-      dist < info_radius * 2 and freq or 1000
+    ogse_signals.get_mgr():reschedule(
+      ( dist < info_radius * 2 and freq )
+      or ( dist < info_radius * 10 and 1000 )
+      or 5000
     )
   end
 end
 
 
 function actor_has_free_hands()
-  --local active_item = db.actor:active_item()
-  return true --(
-    --( active_item and string.find( active_item:section(), "wpn_fist_" ) )
-    --or
-    --( not active_item )
-  --)
+
+  return true
 end

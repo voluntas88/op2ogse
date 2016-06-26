@@ -9,17 +9,11 @@
 
 local warn_check_timer = {}
 local snd_check_timer  = {}
-local armor_check      = {}
 
 local exclude_check_sound_gulag = {
   -- костёр на Кордоне, где Шустрый сидит, недалеко от насыпи
   [ "esc2_bandit_les" ] = true,
 }
-
-
-function protected_loot( object, who)
-  death_manager.drop_manager( object:id(), who:id() ):create_release_item()
-end
 
 
 function look_to_shot( object, who )
@@ -351,56 +345,9 @@ function check_sound( self, who, sound_type, sound_position, sound_power )
 end
 
 
-function check_art_weapon( npc )
-  ------------------------------
-  -- Изредка движок сглюкивает, назначая неписю в слот артефакт этого
-  -- следует избежать, так как такие неписи застревают на попытке
-  -- применения арта как оружия
-  ------------------------------
-  local item_in_slot = npc:item_in_slot( 1 )
-  local act_item     = npc:active_item()
-  if act_item and item_in_slot and act_item:id() == item_in_slot:id() then
-    local item_in_slot_sec = act_item:section()
-    local item_in_slot_id  = act_item:id()
-    if
-      item_in_slot_sec and item_in_slot_id
-      and string.find( item_in_slot_sec, "af_" )
-    then
-      -- Если непись получил арт в слот по ошибке при загрузке игры,
-      -- мы просто обновим ему оружие в руках и всё. Иначе, если он
-      -- взял арт в руки и отказывается его убирать, а лучшее оружие
-      -- получить не удаётся, придётся арт выбросить, отрелизить и
-      -- вернуть ему в рюкзак.
-      local bw = npc:best_weapon()
-      local be = npc:best_enemy()
-      local rem_id = npc:active_item():id()
-      npc:drop_item( npc:active_item() )
-      local s_obj = alife():object( rem_id )
-      if s_obj then
-        alife():release( s_obj, true )
-        alife():create(
-          item_in_slot_sec,
-          npc:position(), npc:level_vertex_id(), npc:game_vertex_id(), npc:id()
-        )
-      end
-      if bw and string.find( bw:section(), "wpn_" ) then
-        if be then
-          npc:set_item( object.fire1, bw )
-          return
-        else
-          npc:set_item( object.idle, bw )
-          return
-        end
-      end
-    end
-  end
-end
-
-
 class "motivator_binder" ( object_binder )
 function motivator_binder:__init( obj ) super( obj )
   self.loaded             = false
-  self.last_update        = 0
   self.first_update       = false
   self.treasure_processed = false
   self.rot_time           = 65535
@@ -576,9 +523,6 @@ function motivator_binder:net_spawn( sobject )
     )
   end
 
-  --' загрузка озвучки
-  xr_sound.load_sound( self.object )
-
   --// xr_companion
   if xr_companion.is_companion( self.object:id() ) then
     local gulag = xr_gulag.get_npc_gulag( self.object )
@@ -640,65 +584,27 @@ end
 
 function motivator_binder:subscribe_updaters()
   -- выполнять по одному за апдейт
-  self.updaters = {
-    [ "list" ] = {
+  local s_name = "on_npc_update." .. self.object:id()
+  if self.object:alive() then
+    self.updaters = {
       {
-        [ "alive" ] = self.check_light,
-      },
-      {
-        [ "alive" ] = self.trade_manager_update,
-      },
-      {
-        [ "alive" ] = self.xrs_ai_npc_update,
-      },
-      {
-        [ "alive" ] = self.rx_ai_npc_update,
-      },
-      {
-        [ "alive" ] = self.check_art_weapon,
-      },
-      {
-        [ "alive" ] = self.amkii_equip,
-      },
-    },
-    [ "subscribed" ] = {
-      [ "alive" ] = {},
-      [ "dead"  ] = {},
-    }
-  }
-  for _, item in ipairs( self.updaters.list ) do
-    local fun, subscribed
-    if self.object:alive() then
-      fun        = item.alive
-      subscribed = self.updaters.subscribed.alive
-    else
-      fun        = item.dead
-      subscribed = self.updaters.subscribed.dead
-    end
-    if fun then
-      if item.pre_check then
-        if not item.pre_check( self ) then
-          fun = nil
-        end
-      end
-    end
-    if fun then
-      local t = {
-        [ "signal" ] = "on_npc_update." .. self.object:id(),
+        [ "signal" ] = s_name,
         [ "self"   ] = self,
-        [ "fun"    ] = fun,
+        [ "fun"    ] = self.rx_ai_npc_update,
         [ "queued" ] = true,
-      }
-      table.insert( subscribed, t )
-      self.am:subscribe( t )
-    end
+      },
+    }
+  else
+    self.updaters = {}
+  end
+  for _, s in ipairs( self.updaters ) do
+    self.am:subscribe( s )
   end
 end
 
 
 function motivator_binder:net_destroy()
   xr_logic.save_logic_online( self.object )
-  if xrs_ai then xrs_ai.npc_net_destroy( self.object ) end
   if rx_ai  then rx_ai.npc_switch_offline( self.object ) end
   local st = db.storage[ self.object:id() ]
   if st.active_scheme then
@@ -893,15 +799,6 @@ function motivator_binder:hit_callback( obj, amount, local_direction, who, bone_
     end
   end
 
-  if amount > 0.01 then
-    local hit_info = {
-      timer = time_global() + 7000,
-      id    = who:id(),
-      dist  = self.object:position():distance_to( who:position() )
-    }
-    ogse_night.being_hit[ self.object:id() ] = hit_info
-  end
-
   self.am:call(
     "on_npc_hit", self.object, amount, local_direction, who, bone_index
   )
@@ -949,18 +846,6 @@ function motivator_binder:death_callback(victim, who)
     self.object = victim
   end
 
-  local drop, err_msg = pcall( sr_light.check_light, obj )
-  if not drop then
-    log1( "ERROR: XR_M sr_light.check_light pcall FAIL "..victim:id().." reason: "..tostring(err_msg) )
-    db.actor:give_game_news( "ВНИМАНИЕ! Произошёл сбой при обработке света фонаря после смерти! В лог поступило диагностическое сообщение - сохранитесь, выйдите из игры и скиньте лог KamikaZze!", "ui\\ui_iconsTotal", Frect():set(498,47,83,47),7000, 20000 )
-  end
-
-  local drop, err_msg = pcall( protected_loot, self.object, who )
-  if not drop then
-    log1( "ERROR: XR_M protected_loot pcall FAIL "..victim:id().." reason: "..tostring(err_msg) )
-    db.actor:give_game_news( "ВНИМАНИЕ! Произошёл сбой при генерации лута после смерти! В лог поступило диагностическое сообщение - сохранитесь, выйдите из игры и скиньте лог KamikaZze!", "ui\\ui_iconsTotal", Frect():set(498,47,83,47),7000, 20000 )
-  end
-
   rx_ai.npc_death( self.object,who )
 
   -- added by xStream for AMK miniSDK
@@ -993,10 +878,10 @@ function motivator_binder:death_callback(victim, who)
   --// xr_companion
   xr_companion.companion_death( self.object )
 
-  for _, s in ipairs( self.updaters.subscribed.alive ) do
+  for _, s in ipairs( self.updaters ) do
     self.am:unsubscribe( s )
   end
-  self.updaters.subscribed.alive = {}
+  self.updaters = {}
 
   self.am:call( "on_npc_death", self.object, who )
   event( "npc_death" ):trigger({ victim = self.object, who = who })
@@ -1061,19 +946,6 @@ function motivator_binder:update( delta )
   local self_object_id = self.object:id()
   db.storage[ self_object_id ].us = 99
 
-  if self.first_update == false then
-    --спавн друпа если не был произведен
-    if self.object:alive() == false then
-      local obj = level.object_by_id( self.object:id() )
-      if obj and IsStalker( obj ) then
-        death_manager.drop_manager( self.object:id() ):create_release_item()
-        self.am:call( "on_npc_update", self.object, delta )
-        return
-      end
-    end
-    self.first_update = true
-  end
-
   --' Апдейт менеджера состояний тела
   if self.st.state_mgr then
     if self.object:alive() then
@@ -1125,54 +997,18 @@ function motivator_binder:update( delta )
 
   db.storage[ self_object_id ].us =  0
 
+  if not self.first_update then
+    self.first_update = true
+    self.am:call( "on_npc_first_update", self.object, delta )
+  end
   self.am:call( "on_npc_update", self.object, delta )
   self.am:call( "on_npc_update." .. self.object:id(), self.object, delta )
-end
-
-
--- Апдейт включения/выключения фонарика
-function motivator_binder:check_light()
-  if time_global() - self.last_update > 1000 then
-    sr_light.check_light( self.object )
-    self.last_update = time_global()
-  end
-end
-
-
--- Апдейт торговли
-function motivator_binder:trade_manager_update()
-  trade_manager.update( self.object )
-end
-
-
--- Обновление схем гранатометания, медика и переодевания
-function motivator_binder:xrs_ai_npc_update()
-  if xrs_ai then xrs_ai.npc_update( self ) end
 end
 
 
 -- Обновление оружейного менеджера
 function motivator_binder:rx_ai_npc_update()
   if rx_ai then rx_ai.npc_update( self.object, self.st ) end
-end
-
-
--- Проверка артефакта в руках
-function motivator_binder:check_art_weapon()
-  check_art_weapon( self.object )
-end
-
-
--- Проверка брони
-function motivator_binder:amkii_equip()
-  if
-    ( not armor_check[ self.object:id() ] )
-    or time_global() > armor_check[ self.object:id() ]
-  then
-    armor_check[ self.object:id() ] = time_global()
-      + math.random( 10000, 30000 )
-    amkii_equip.CAmkDisguise():PeriodicalUpdate( self.object )
-  end
 end
 
 
