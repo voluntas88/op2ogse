@@ -76,7 +76,7 @@
           <actor_dialog>vzn_12nobox</actor_dialog>
           <actor_dialog>vzn_restart</actor_dialog>
 		<!-- Akill begin -->
-<!--		<actor_dialog>ugon_baggi_start</actor_dialog>-->
+		<actor_dialog>ugon_baggi_start</actor_dialog>
 		<actor_dialog>ugon_baggi_done</actor_dialog>
 		<actor_dialog>plov_sidor</actor_dialog>
 		<actor_dialog>liker_sidor</actor_dialog>
